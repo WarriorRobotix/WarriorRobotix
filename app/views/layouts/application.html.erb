@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WarriorRobotix</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<nav>
+<% if member_signed_in? %>
+  <%= current_member.full_name %>
+<% else %>
+  <%= link_to "Sign in", signin_path(from: request.fullpath == '/' ? nil : request.fullpath) %>
+<% end %>
+</nav>
+<hr/>
+
+<%= yield %>
+
+</body>
+</html>

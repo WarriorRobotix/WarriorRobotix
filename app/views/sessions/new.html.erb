@@ -1,0 +1,16 @@
+<h1>Login</h1>
+<%= form_tag signin_path(from: params[:from]) do %>
+<div class="field">
+  <%= label_tag :identifier, "Student Number or Email" %><br>
+  <%= text_field_tag :identifier %>
+</div>
+
+<div class="field">
+  <%= label_tag :password %><br>
+  <%= password_field_tag :password %>
+</div>
+
+<div class="actions">
+  <%= submit_tag "Log in" %>
+</div>
+<% end %>

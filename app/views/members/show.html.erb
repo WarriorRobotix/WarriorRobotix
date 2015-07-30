@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Full Name</th>
+      <th>Title</th>
+      <th>Email</th>
+      <th>Grade</th>
+      <th>Student Number</th>
+      <th>Admin</th>
+      <th>Accepted</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= @member.full_name %></td>
+      <td><%= @member.title %></td>
+      <td><%= @member.email %></td>
+      <td><%= @member.grade %></td>
+      <td><%= @member.student_number %></td>
+      <td><%= @member.admin %></td>
+      <td><%= @member.accepted %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_member_path(@member) %> |
+<%= link_to 'Back', members_path %>

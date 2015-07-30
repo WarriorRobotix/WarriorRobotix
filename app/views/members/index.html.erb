@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Members</h1>
+
+<% @member_groups.each do |group| %>
+<hr>
+<h3><%= group[0] %></h3>
+<table>
+  <thead>
+    <tr>
+      <th>Full Name</th>
+      <th>Title</th>
+      <th>Email</th>
+      <th>Grade</th>
+      <th>Student Number</th>
+      <th>Admin</th>
+      <th>Accepted</th>
+      <th>Year of Graduation</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% group[1].each do |member| %>
+      <tr>
+        <td><%= member.full_name %></td>
+        <td><%= member.title %></td>
+        <td><%= member.email %></td>
+        <td><%= member.grade %></td>
+        <td><%= member.student_number %></td>
+        <td><%= member.admin %></td>
+        <td><%= member.accepted %></td>
+        <td><%= member.year_of_graduation %></td>
+        <td><%= link_to 'Show', member %></td>
+        <td><%= link_to 'Edit', edit_member_path(member) %></td>
+        <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+<br>
+
+<%= link_to 'New Member', new_member_path %>

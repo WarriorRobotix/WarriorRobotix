@@ -1,0 +1,60 @@
+<%= form_for(@member) do |f| %>
+  <% if @member.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
+
+      <ul>
+      <% @member.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :full_name %><br>
+    <%= f.text_field :full_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :student_number %><br>
+    <%= f.text_field :student_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :year_of_graduation %><br>
+    <%= radio_button_tag "member[graduated]","0", @member.year_of_graduation.nil? %>
+    <%= label_tag "member_graduated_0","Active" %>
+    <%= radio_button_tag "member[graduated]","1", !@member.year_of_graduation.nil? %>
+    <%= f.text_field :year_of_graduation, for: "member_graduated_1" %>
+  </div>
+
+  <div class="field">
+    <%= f.check_box :admin %>
+    <%= f.label :admin %><br>
+  </div>
+
+  <div class="field">
+    <%= f.check_box :accepted %>
+    <%= f.label :accepted %><br>
+  </div>
+
+  <div class="field">
+    <%= f.label :grade %>
+    <%= collection_radio_buttons(:member, :grade, (9..12).to_a, :to_s, :to_s) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
