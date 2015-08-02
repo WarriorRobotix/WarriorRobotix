@@ -3,6 +3,6 @@ class PagesController < ApplicationController
   def home
   end
   def test
-    render plain: "OK"
+    render plain: "OK, #{current_member.first_name} #{current_member.last_name}"
   end
 end

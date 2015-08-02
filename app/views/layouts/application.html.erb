@@ -9,9 +9,9 @@
 <body>
 <nav>
 <% if member_signed_in? %>
-  <%= current_member.full_name %>
+  Hi, <%= current_member.first_name %> <%= current_member.last_name %> <%= "(admin) " if member_is_admin? %>| <%= link_to "sign out", signout_path(return_to_info), method: :delete %>
 <% else %>
-  <%= link_to "Sign in", signin_path(from: request.fullpath == '/' ? nil : request.fullpath) %>
+  <%= link_to "sign in", signin_path(from: request.fullpath == '/' ? nil : request.fullpath) %>
 <% end %>
 </nav>
 <hr/>

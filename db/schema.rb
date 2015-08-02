@@ -14,17 +14,16 @@
 ActiveRecord::Schema.define(version: 20150725202812) do
 
   create_table "attendances", force: :cascade do |t|
-    t.integer  "member_id",              null: false
-    t.integer  "club_id",                null: false
+    t.integer  "member_id",                    null: false
     t.integer  "event_id"
-    t.integer  "status",     default: 0, null: false
+    t.integer  "status",           default: 0, null: false
     t.datetime "start_at"
     t.datetime "end_at"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "minutes_duration"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
-  add_index "attendances", ["club_id"], name: "index_attendances_on_club_id"
   add_index "attendances", ["event_id"], name: "index_attendances_on_event_id"
   add_index "attendances", ["member_id"], name: "index_attendances_on_member_id"
 
@@ -43,20 +42,21 @@ ActiveRecord::Schema.define(version: 20150725202812) do
   create_table "members", force: :cascade do |t|
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.string   "full_name",                            null: false
+    t.string   "first_name",                            null: false
+    t.string   "last_name",                             null: false
     t.string   "title"
     t.string   "team"
-    t.string   "email",                                null: false
+    t.string   "email",                                 null: false
     t.string   "student_number"
     t.integer  "grade"
-    t.boolean  "accepted",              default: true, null: false
-    t.boolean  "admin",                 default: true, null: false
-    t.integer  "year_of_graduation"
+    t.boolean  "accepted",              default: true,  null: false
+    t.boolean  "admin",                 default: false, null: false
+    t.integer  "graduated_year"
     t.string   "extra_info"
     t.string   "reset_password_digest"
     t.datetime "reset_password_at"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true

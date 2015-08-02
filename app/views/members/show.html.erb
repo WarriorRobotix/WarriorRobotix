@@ -1,30 +1,48 @@
 <p id="notice"><%= notice %></p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Full Name</th>
-      <th>Title</th>
-      <th>Email</th>
-      <th>Grade</th>
-      <th>Student Number</th>
-      <th>Admin</th>
-      <th>Accepted</th>
-    </tr>
-  </thead>
+<p>
+  <strong>First Name:</strong>
+  <%= @member.first_name %>
+</p>
 
-  <tbody>
-    <tr>
-      <td><%= @member.full_name %></td>
-      <td><%= @member.title %></td>
-      <td><%= @member.email %></td>
-      <td><%= @member.grade %></td>
-      <td><%= @member.student_number %></td>
-      <td><%= @member.admin %></td>
-      <td><%= @member.accepted %></td>
-    </tr>
-  </tbody>
-</table>
+<p>
+  <strong>Last Name:</strong>
+  <%= @member.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @member.email %>
+</p>
+
+<p>
+  <strong>Grade:</strong>
+  <%= @member.grade %>
+</p>
+
+<p>
+  <strong>Student Number:</strong>
+  <%= @member.student_number %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @member.admin %>
+</p>
+
+<p>
+  <strong>Accepted:</strong>
+  <%= @member.accepted %>
+</p>
+
+<p>
+  <strong>Accepted:</strong>
+  <% if @member.graduated_year.nil? %>
+  Active
+  <% else %>
+  <%= @member.graduated_year %>
+  <% end %>
+</p>
 
 <%= link_to 'Edit', edit_member_path(@member) %> |
 <%= link_to 'Back', members_path %>

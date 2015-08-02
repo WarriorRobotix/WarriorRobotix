@@ -4,7 +4,8 @@ class CreateMembers < ActiveRecord::Migration
       t.string   :password_digest
       t.string   :remember_digest
 
-      t.string   :full_name, null: false
+      t.string   :first_name, null: false
+      t.string   :last_name, null: false
       t.string   :title
       t.string   :team
       t.string   :email, null: false
@@ -13,7 +14,7 @@ class CreateMembers < ActiveRecord::Migration
 
       t.boolean  :accepted, default: true, null: false
       t.boolean  :admin, default: false, null: false
-      t.integer  :year_of_graduation
+      t.integer  :graduated_year
       t.string   :extra_info
 
       t.string   :reset_password_digest

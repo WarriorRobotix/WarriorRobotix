@@ -33,6 +33,14 @@ module SessionsHelper
     !current_member.nil? && current_member.admin
   end
 
+  alias_method :member_is_admin?, :is_member_admin?
+
+  def is_member_accepted?
+    !current_member.nil? && current_member.accepted
+  end
+
+  alias_method :member_is_accepted?, :is_member_accepted?
+
   def signout_member
     session[:member_id] = @current_member = nil
   end
@@ -42,9 +50,5 @@ module SessionsHelper
       #flash[:notice] = "You need a display name to join groups."
       redirect_to signin_path(from: request.fullpath)
     end
-  end
-
-  def is_member_accepted?
-    !current_member.nil? && current_member.accepted
   end
 end

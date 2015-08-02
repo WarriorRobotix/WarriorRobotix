@@ -12,8 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :full_name %><br>
-    <%= f.text_field :full_name %>
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
   </div>
 
   <div class="field">
@@ -32,11 +37,11 @@
   </div>
 
   <div class="field">
-    <%= f.label :year_of_graduation %><br>
-    <%= radio_button_tag "member[graduated]","0", @member.year_of_graduation.nil? %>
+    <%= f.label :graduated_year %><br>
+    <%= radio_button_tag "member[graduated]","0", @member.graduated_year.nil? %>
     <%= label_tag "member_graduated_0","Active" %>
-    <%= radio_button_tag "member[graduated]","1", !@member.year_of_graduation.nil? %>
-    <%= f.text_field :year_of_graduation, for: "member_graduated_1" %>
+    <%= radio_button_tag "member[graduated]","1", !@member.graduated_year.nil? %>
+    <%= f.text_field :graduated_year, for: "member_graduated_1" %>
   </div>
 
   <div class="field">

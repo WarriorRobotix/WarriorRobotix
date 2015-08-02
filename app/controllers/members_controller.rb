@@ -6,15 +6,21 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @member_groups = [["Current Members", []], ["Pending Members", Member.where(accepted: false).to_a]]
-    accepted_members = Member.where(accepted: true).order(year_of_graduation: :DESC, full_name: :ASC)
+    @member_groups = [["Current Members", []]]
+
+    if member_is_admin?
+      pending_members = Member.where(accepted: false).to_a
+      @member_groups << ["Pending Members", pending_members] if pending_members.present?
+    end
+
+    accepted_members = Member.where(accepted: true).order(graduated_year: :DESC, first_name: :ASC, last_name: :ASC)
     year = nil
     accepted_members.each do |member|
-      if member.year_of_graduation.nil?
+      if member.graduated_year.nil?
         @member_groups[0][1] << member
       else
-        if year != member.year_of_graduation
-          year = member.year_of_graduation
+        if year != member.graduated_year
+          year = member.graduated_year
           @member_groups << [year.to_s,[]]
         end
         @member_groups[-1][1] << member
@@ -100,8 +106,8 @@ class MembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      m_params = params[:member].permit(:full_name, :email, :student_number, :grade, :title, :admin, :accepted, :year_of_graduation, :graduated)
-      m_params[:year_of_graduation] = 0 unless (m_params.delete(:graduated).to_i == 1)
+      m_params = params[:member].permit(:first_name, :last_name, :email, :student_number, :grade, :title, :admin, :accepted, :graduated_year, :graduated)
+      m_params[:graduated_year] = 0 unless (m_params.delete(:graduated).to_i == 1)
       m_params
     end
 end

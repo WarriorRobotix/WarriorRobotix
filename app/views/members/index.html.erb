@@ -8,37 +8,45 @@
 <table>
   <thead>
     <tr>
-      <th>Full Name</th>
+      <th>First Name</th>
+      <th>Last Name</th>
       <th>Title</th>
-      <th>Email</th>
       <th>Grade</th>
+      <% if member_is_admin? %>
+      <th>Email</th>
       <th>Student Number</th>
       <th>Admin</th>
       <th>Accepted</th>
-      <th>Year of Graduation</th>
+      <th>Graduated Year</th>
       <th colspan="3"></th>
+      <% end %>
     </tr>
   </thead>
 
   <tbody>
     <% group[1].each do |member| %>
       <tr>
-        <td><%= member.full_name %></td>
+        <td><%= member.first_name %></td>
+        <td><%= member.last_name %></td>
         <td><%= member.title %></td>
-        <td><%= member.email %></td>
         <td><%= member.grade %></td>
+        <% if member_is_admin? %>
+        <td><%= member.email %></td>
         <td><%= member.student_number %></td>
         <td><%= member.admin %></td>
         <td><%= member.accepted %></td>
-        <td><%= member.year_of_graduation %></td>
+        <td><%= member.graduated_year %></td>
         <td><%= link_to 'Show', member %></td>
         <td><%= link_to 'Edit', edit_member_path(member) %></td>
         <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 <% end %>
+<% if member_is_admin? %>
 <br>
 
 <%= link_to 'New Member', new_member_path %>
+<% end %>

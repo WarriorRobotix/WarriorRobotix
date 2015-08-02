@@ -2,9 +2,13 @@ class Member < ActiveRecord::Base
   has_secure_password
   before_validation :set_default_password, on: :create
 
-  before_save :set_invalid_year_of_graduation_to_nil
+  before_save :set_invalid_graduated_year_to_nil, :titleize_names
 
-  validates :full_name, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
+  validates :grade, presence: true
+
   validates :email, presence: true, uniqueness: true
 
   def reset_password
@@ -45,7 +49,12 @@ class Member < ActiveRecord::Base
     self.password ||= SecureRandom.base64(40)
   end
 
-  def set_invalid_year_of_graduation_to_nil
-    self.year_of_graduation = nil if !self.year_of_graduation.nil? && (self.year_of_graduation < 1900)
+  def set_invalid_graduated_year_to_nil
+    self.graduated_year = nil if !self.graduated_year.nil? && (self.graduated_year < 1900)
+  end
+
+  def titleize_names
+    self.first_name.capitalize!
+    self.last_name.capitalize!
   end
 end

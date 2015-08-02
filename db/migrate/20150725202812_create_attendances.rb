@@ -2,7 +2,6 @@ class CreateAttendances < ActiveRecord::Migration
   def change
     create_table :attendances do |t|
       t.belongs_to :member, index: true, null: false
-      t.belongs_to :club, index: true, null: false
 
       t.belongs_to :event, index: true
 
