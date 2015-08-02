@@ -4,9 +4,10 @@ class CreatePosts < ActiveRecord::Migration
       t.string :title
       t.text :description
 
-      t.integer :content_type
-      
-      t.integer :restriction_level, default: 0
+      t.integer :attachment_type
+      t.integer :attachment_id
+
+      t.integer :restriction, default: 0
 
       t.belongs_to :member
 

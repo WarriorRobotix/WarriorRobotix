@@ -3,7 +3,6 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.string :location
 
-      t.belongs_to :post, index: true
       t.integer :restriction_level, default: 0
 
       t.datetime :start_at

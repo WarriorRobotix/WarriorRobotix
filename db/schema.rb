@@ -14,14 +14,13 @@
 ActiveRecord::Schema.define(version: 20150725202812) do
 
   create_table "attendances", force: :cascade do |t|
-    t.integer  "member_id",                    null: false
+    t.integer  "member_id",              null: false
     t.integer  "event_id"
-    t.integer  "status",           default: 0, null: false
+    t.integer  "status",     default: 0, null: false
     t.datetime "start_at"
     t.datetime "end_at"
-    t.integer  "minutes_duration"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "attendances", ["event_id"], name: "index_attendances_on_event_id"
@@ -29,15 +28,12 @@ ActiveRecord::Schema.define(version: 20150725202812) do
 
   create_table "events", force: :cascade do |t|
     t.string   "location"
-    t.integer  "post_id"
     t.integer  "restriction_level", default: 0
     t.datetime "start_at"
     t.datetime "end_at"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end
-
-  add_index "events", ["post_id"], name: "index_events_on_post_id"
 
   create_table "members", force: :cascade do |t|
     t.string   "password_digest"
@@ -65,11 +61,12 @@ ActiveRecord::Schema.define(version: 20150725202812) do
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.integer  "content_type"
-    t.integer  "restriction_level", default: 0
+    t.integer  "attachment_type"
+    t.integer  "attachment_id"
+    t.integer  "restriction",     default: 0
     t.integer  "member_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
 end
