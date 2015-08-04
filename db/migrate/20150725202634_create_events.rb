@@ -3,8 +3,6 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.string :location
 
-      t.integer :restriction_level, default: 0
-
       t.datetime :start_at
       t.datetime :end_at
 

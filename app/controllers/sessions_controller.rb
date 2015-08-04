@@ -27,4 +27,9 @@ class SessionsController < ApplicationController
       redirect_to root_path
     end
   end
+
+  private
+  def is_identifier_email?(identifier)
+    (identifier =~ /.+@.+/).present?
+  end
 end

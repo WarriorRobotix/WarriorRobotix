@@ -37,6 +37,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :password, "Set Password (DEBUG ONLY)" %><br>
+    <%= f.text_field :password %>
+  </div>
+
+  <div class="field">
     <%= f.label :graduated_year %><br>
     <%= radio_button_tag "member[graduated]","0", @member.graduated_year.nil? %>
     <%= label_tag "member_graduated_0","Active" %>

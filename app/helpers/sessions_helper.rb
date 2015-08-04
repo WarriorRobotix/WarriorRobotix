@@ -49,6 +49,24 @@ module SessionsHelper
     unless member_signed_in?
       #flash[:notice] = "You need a display name to join groups."
       redirect_to signin_path(from: request.fullpath)
+      return false
+    end
+    true
+  end
+
+  def authenticate_admin!
+    if authenticate_member!
+      raise Forbidden  unless member_is_admin?
+    end
+  end
+
+  def max_restriction
+    if current_member.nil?
+      0
+    elsif current_member.admin
+      2
+    else
+      1
     end
   end
 end

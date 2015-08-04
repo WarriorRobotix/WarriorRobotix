@@ -4,10 +4,9 @@ class CreatePosts < ActiveRecord::Migration
       t.string :title
       t.text :description
 
-      t.integer :attachment_type
-      t.integer :attachment_id
+      t.references :attachment, polymorphic: true, index: true
 
-      t.integer :restriction, default: 0
+      t.integer :restriction, default: 0, null: false
 
       t.belongs_to :member
 

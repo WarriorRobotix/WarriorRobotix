@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
 
-  before_action :authenticate_member!, except: [:index]
+  before_action :authenticate_admin!, except: [:index]
 
   # GET /members
   # GET /members.json
@@ -13,7 +13,7 @@ class MembersController < ApplicationController
       @member_groups << ["Pending Members", pending_members] if pending_members.present?
     end
 
-    accepted_members = Member.where(accepted: true).order(graduated_year: :DESC, first_name: :ASC, last_name: :ASC)
+    accepted_members = Member.where(accepted: true).order(graduated_year: :desc, first_name: :ASC, last_name: :ASC)
     year = nil
     accepted_members.each do |member|
       if member.graduated_year.nil?
@@ -62,6 +62,7 @@ class MembersController < ApplicationController
   # PATCH/PUT /members/1.json
   def update
     respond_to do |format|
+      byebug
       if @member.update(member_params)
         format.html { redirect_to @member, notice: 'Member was successfully updated.' }
         format.json { render :show, status: :ok, location: @member }
@@ -106,7 +107,7 @@ class MembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      m_params = params[:member].permit(:first_name, :last_name, :email, :student_number, :grade, :title, :admin, :accepted, :graduated_year, :graduated)
+      m_params = params[:member].permit(:first_name, :last_name, :email, :student_number, :grade, :title, :admin, :accepted, :graduated_year, :graduated, :password)
       m_params[:graduated_year] = 0 unless (m_params.delete(:graduated).to_i == 1)
       m_params
     end
