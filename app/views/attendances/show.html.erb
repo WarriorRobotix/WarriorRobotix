@@ -10,5 +10,10 @@
   <%= @attendance.end_at %>
 </p>
 
-<%= link_to 'Edit', edit_attendance_path(@attendance) %> |
-<%= link_to 'Back', attendances_path %>
+<p>
+  <strong>Status:</strong>
+  <%= @attendance.status %>
+</p>
+
+<%= link_to 'Edit', edit_member_attendance_path(member_id: @member.id, id: @attendance.id) %> |
+<%= link_to 'Back', member_attendances_path(@member) %>

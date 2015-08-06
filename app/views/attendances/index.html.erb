@@ -7,6 +7,7 @@
     <tr>
       <th>Start at</th>
       <th>End at</th>
+      <th>Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,11 +15,12 @@
   <tbody>
     <% @attendances.each do |attendance| %>
       <tr>
-        <td><%= attendance.start_at %></td>
-        <td><%= attendance.end_at %></td>
-        <td><%= link_to 'Show', attendance %></td>
-        <td><%= link_to 'Edit', edit_attendance_path(attendance) %></td>
-        <td><%= link_to 'Destroy', attendance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= attendance.start_at.try(:strftime, "%a, %e %b %Y %H:%M") %></td>
+        <td><%= attendance.end_at.try(:strftime, "%a, %e %b %Y %H:%M") %></td>
+        <td><%= attendance.status.capitalize %></td>
+        <td><%= link_to 'Show', [@member, attendance] %></td>
+        <td><%= link_to 'Edit', edit_member_attendance_path(member_id: @member.id, id: attendance.id) %></td>
+        <td><%= link_to 'Destroy', [@member, attendance], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Attendance', new_attendance_path %>
+<%= link_to 'New Attendance', new_member_attendance_path(@member) %>

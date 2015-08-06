@@ -18,7 +18,7 @@
       <th>Admin</th>
       <th>Accepted</th>
       <th>Graduated Year</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
       <% end %>
     </tr>
   </thead>
@@ -36,6 +36,7 @@
         <td><%= member.admin %></td>
         <td><%= member.accepted %></td>
         <td><%= member.graduated_year %></td>
+        <td><%= link_to 'Attendances', member_attendances_path(member) %></td>
         <td><%= link_to 'Show', member %></td>
         <td><%= link_to 'Edit', edit_member_path(member) %></td>
         <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>

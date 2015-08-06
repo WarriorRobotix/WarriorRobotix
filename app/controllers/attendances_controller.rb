@@ -1,34 +1,38 @@
 class AttendancesController < ApplicationController
   before_action :set_attendance, only: [:show, :edit, :update, :destroy]
+  before_action :set_member
 
-  # GET /attendances
-  # GET /attendances.json
+  # GET members/1/attendances
+  # GET members/1/attendances.json
   def index
-    @attendances = Attendance.all
+    @attendances = @member.attendances.all
   end
 
-  # GET /attendances/1
-  # GET /attendances/1.json
+  # GET members/1/attendances/1
+  # GET members/1/attendances/1.json
   def show
   end
 
-  # GET /attendances/new
+  # GET members/1/attendances/new
   def new
     @attendance = Attendance.new
+    @attendance.status = :attended
   end
 
-  # GET /attendances/1/edit
+  # GET members/1/attendances/1/edit
   def edit
   end
 
-  # POST /attendances
-  # POST /attendances.json
+  # POST members/1/attendances
+  # POST members/1/attendances.json
   def create
     @attendance = Attendance.new(attendance_params)
+    @attendance.member = @member
+
 
     respond_to do |format|
       if @attendance.save
-        format.html { redirect_to @attendance, notice: 'Attendance was successfully created.' }
+        format.html { redirect_to [@member, @attendance], notice: 'Attendance was successfully created.' }
         format.json { render :show, status: :created, location: @attendance }
       else
         format.html { render :new }
@@ -37,12 +41,12 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /attendances/1
-  # PATCH/PUT /attendances/1.json
+  # PATCH/PUT members/1/attendances/1
+  # PATCH/PUT members/1/attendances/1.json
   def update
     respond_to do |format|
       if @attendance.update(attendance_params)
-        format.html { redirect_to @attendance, notice: 'Attendance was successfully updated.' }
+        format.html { redirect_to [@member, @attendance], notice: 'Attendance was successfully updated.' }
         format.json { render :show, status: :ok, location: @attendance }
       else
         format.html { render :edit }
@@ -51,12 +55,12 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # DELETE /attendances/1
-  # DELETE /attendances/1.json
+  # DELETE members/1/attendances/1
+  # DELETE members/1/attendances/1.json
   def destroy
     @attendance.destroy
     respond_to do |format|
-      format.html { redirect_to attendances_url, notice: 'Attendance was successfully destroyed.' }
+      format.html { redirect_to member_attendances_url(@member), notice: 'Attendance was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +71,12 @@ class AttendancesController < ApplicationController
       @attendance = Attendance.find(params[:id])
     end
 
+    def set_member
+      @member = Member.find(params[:member_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def attendance_params
-      params.require(:attendance).permit(:start_at, :end_at)
+      a_params = params.require(:attendance).permit(:start_at, :end_at, :status, :skip_end_at)
     end
 end

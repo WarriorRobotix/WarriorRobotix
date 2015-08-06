@@ -1,4 +1,4 @@
-<%= form_for(@attendance) do |f| %>
+<%= form_for([@member, @attendance]) do |f| %>
   <% if @attendance.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
@@ -17,8 +17,15 @@
   </div>
   <div class="field">
     <%= f.label :end_at %><br>
+    <%= f.check_box :skip_end_at %>
+    <%= f.label :skip_end_at, "Blank End At" %><br>
     <%= f.datetime_select :end_at %>
   </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.select :status, Attendance.statuses.map { |k,v| [k.capitalize, k] } %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

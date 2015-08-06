@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  resources :members
+  resources :members do
+    resources :attendances
+  end
 
   resources :posts
 

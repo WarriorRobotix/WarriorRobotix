@@ -13,7 +13,7 @@ class Member < ActiveRecord::Base
 
   validates :student_number, format: { without: /.+@.+/, message: "format is invalid" }
 
-
+  has_many :attendances
 
   def reset_password
     self.reset_password_at = Time.zone.now
