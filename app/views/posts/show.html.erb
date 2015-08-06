@@ -5,10 +5,10 @@
   <%= @post.title %>
 </p>
 
-<p>
+<div>
   <strong>Description:</strong>
-  <%= @post.description %>
-</p>
+  <div class="markdown"><%= markdown(@post.description) %></div>
+</div>
 
 <p>
   <strong>Restriction:</strong>
