@@ -3,7 +3,7 @@
 This is a temporary solution, may not available in production mode
 
 1. Start server
-2. Go to [localhost:3000/members/new](localhost:3000/members/new)
+2. Go to <http://localhost:3000/members/new>
 3. Follow instructions
 
 ----
