@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Posts</h1>
+<% if member_is_admin? %>
 <%= link_to 'New Post', new_post_path %>
-
+<% end %>
 <% @posts.each do |post| %>
   <div class="post-box">
     <div class="heading">
