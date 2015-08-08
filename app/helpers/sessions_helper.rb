@@ -61,12 +61,6 @@ module SessionsHelper
   end
 
   def max_restriction
-    if current_member.nil?
-      0
-    elsif current_member.admin
-      2
-    else
-      1
-    end
+    current_member.try(:max_restriction) || 0
   end
 end

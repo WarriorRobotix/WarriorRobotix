@@ -1,0 +1,14 @@
+<div class="attachment">
+  Start At: <%= post.start_at.strftime("%a, %e %b %Y %H:%M") %>
+  <br>
+  End At: <%= post.end_at.strftime("%a, %e %b %Y %H:%M") %>
+  <div>
+  <% reply = post.reply_from(current_member) %>
+  <% first = true %>
+  <% ({'yes' => 'confirmed', 'maybe' => 'maybe', 'no' => 'declined' }).each do |key, value| %>
+    <%= '|' unless first %> <% name = (reply == value) ? "#{key.capitalize} (Chosen)(#{post.send(value).count})" : "#{key.capitalize} (#{post.send(value).count})" %>
+    <%= link_to name, send("event_#{key}_path", post, return_to_info) %>
+    <% first = false %>
+  <% end %>
+  </div>
+</div>

@@ -1,12 +1,19 @@
 Rails.application.routes.draw do
 
-  root 'posts#index'
+  root 'posts#index', type: 'Post'
 
   resources :members do
     resources :attendances
   end
 
-  resources :posts
+  resources :posts, type: 'Post'
+  resources :events, controller: :posts, type: 'Event'
+
+  resources :events do
+    get '/yes' => 'events#confirm'
+    get '/maybe' => 'events#maybe'
+    get '/no' => 'events#decline'
+  end
 
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'

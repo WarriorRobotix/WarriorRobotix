@@ -8,11 +8,7 @@ class SessionsController < ApplicationController
     if identifier.present? && password.present?
       if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", identifier, identifier).take.try(:authenticate, password)
         signin_member(member)
-        if params[:from].present?
-          redirect_to params[:from]
-        else
-          redirect_to root_path
-        end
+        redirect_back
         return
       end
     end
@@ -21,11 +17,7 @@ class SessionsController < ApplicationController
 
   def destroy
     signout_member
-    if params[:from].present?
-      redirect_to params[:from]
-    else
-      redirect_to root_path
-    end
+    redirect_back
   end
 
   private

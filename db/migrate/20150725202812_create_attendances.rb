@@ -6,6 +6,7 @@ class CreateAttendances < ActiveRecord::Migration
       t.belongs_to :event, index: true
 
       t.integer :status, default: 0, null: false
+      t.integer :reply, default: 0, null: false
 
       t.datetime :start_at
       t.datetime :end_at

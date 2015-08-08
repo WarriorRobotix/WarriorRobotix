@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
 
-  before_action :authenticate_admin!, except: [:index]
+  before_action :authenticate_admin!, except: [:index, :new, :create]
 
   # GET /members
   # GET /members.json
@@ -62,7 +62,6 @@ class MembersController < ApplicationController
   # PATCH/PUT /members/1.json
   def update
     respond_to do |format|
-      byebug
       if @member.update(member_params)
         format.html { redirect_to @member, notice: 'Member was successfully updated.' }
         format.json { render :show, status: :ok, location: @member }

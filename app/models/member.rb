@@ -14,6 +14,7 @@ class Member < ActiveRecord::Base
   validates :student_number, allow_blank: true, format: { without: /.+@.+/, message: "format is invalid" }
 
   has_many :attendances
+  has_many :posts
 
   def reset_password
     self.reset_password_at = Time.zone.now
@@ -77,6 +78,10 @@ class Member < ActiveRecord::Base
       admin.errors.full_messages.each {|msg| puts msg}
       admin
     end
+  end
+
+  def max_restriction
+    admin ? 2 : 1
   end
 
   private

@@ -1,5 +1,6 @@
 class Attendance < ActiveRecord::Base
-  enum status: [:invited, :confirmed, :maybe, :declined, :attending, :attended, :skipped]
+  enum status: [:invited, :attending, :attended, :skipped]
+  enum reply: [:no_reply, :confirmed, :maybe, :declined]
 
   validate :end_at_after_start_at
   validate :attended_requirements
@@ -10,6 +11,7 @@ class Attendance < ActiveRecord::Base
   before_validation :set_skipped_end_at_nil
 
   belongs_to :member
+  belongs_to :event
 
   private
   def set_skip_end_at

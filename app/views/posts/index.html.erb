@@ -1,17 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Posts</h1>
+<h1>Listing <%= params[:type].pluralize %></h1>
 <%= link_to 'New Post', new_post_path %>
+<%= link_to 'New Event', new_event_path %>
 
 <% @posts.each do |post| %>
   <div class="post-box">
     <div class="heading">
       <span class="title"><%= post.title %></span><br>
-      <%= post.created_at.strftime("%a, %e %b %Y %H:%M") %> | from <%= post.member.try(:full_name) %> to <%= post.restriction == "everyone" ? post.restriction : post.restriction.pluralize %>
+      <%= post.model_name.human %> | <%= post.created_at.strftime("%a, %e %b %Y %H:%M") %> | from <%= post.author.try(:full_name) %> to <%= post.restriction == "everyone" ? post.restriction : post.restriction.pluralize %>
     </div>
 
     <div class="body markdown"><%= markdown(post.description) %></div>
 
+    <%= render(partial: post.type.downcase, locals: {post: post}) unless post.type.nil? %>
     <div>
       <%= link_to 'Show', post %>
       <% if member_is_admin? %>

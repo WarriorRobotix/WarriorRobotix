@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20150725202812) do
     t.integer  "member_id",              null: false
     t.integer  "event_id"
     t.integer  "status",     default: 0, null: false
+    t.integer  "reply",      default: 0, null: false
     t.datetime "start_at"
     t.datetime "end_at"
     t.datetime "created_at",             null: false
@@ -25,14 +26,6 @@ ActiveRecord::Schema.define(version: 20150725202812) do
 
   add_index "attendances", ["event_id"], name: "index_attendances_on_event_id"
   add_index "attendances", ["member_id"], name: "index_attendances_on_member_id"
-
-  create_table "events", force: :cascade do |t|
-    t.string   "location"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "members", force: :cascade do |t|
     t.string   "password_digest"
@@ -58,16 +51,17 @@ ActiveRecord::Schema.define(version: 20150725202812) do
   add_index "members", ["student_number"], name: "index_members_on_student_number"
 
   create_table "posts", force: :cascade do |t|
+    t.string   "type"
     t.string   "title"
     t.text     "description"
-    t.integer  "attachment_id"
-    t.string   "attachment_type"
-    t.integer  "restriction",     default: 0, null: false
-    t.integer  "member_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "start_at"
+    t.integer  "status",      default: 0, null: false
+    t.string   "options"
+    t.datetime "end_at"
+    t.integer  "restriction", default: 0, null: false
+    t.integer  "author_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
-
-  add_index "posts", ["attachment_type", "attachment_id"], name: "index_posts_on_attachment_type_and_attachment_id"
 
 end

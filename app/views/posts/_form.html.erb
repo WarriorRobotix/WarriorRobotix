@@ -11,10 +11,10 @@
     </div>
   <% end %>
 
-  <% unless @post.member.nil? %>
+  <% unless @post.author.nil? %>
   <div class="field">
     Original Author:
-    <%= @post.member.full_name %>
+    <%= @post.author.full_name %>
   </div>
   <% end %>
 
@@ -30,7 +30,11 @@
     <%= f.label :restriction %><br>
     <%= f.select :restriction, Post.restrictions.map { |k,v| [k.capitalize, k] } %>
   </div>
-
+  <div id="attachment">
+  <% unless @post.type.nil? %>
+    <%= render(partial: 'event_form', locals: { f: f }) if  @post.type = "Event" %>
+  <% end %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
