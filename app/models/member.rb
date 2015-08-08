@@ -11,7 +11,7 @@ class Member < ActiveRecord::Base
 
   validates :email, presence: true, uniqueness: true, format: { with: /.+@.+/, message: "format is invalid" }
 
-  validates :student_number, format: { without: /.+@.+/, message: "format is invalid" }
+  validates :student_number, allow_blank: true, format: { without: /.+@.+/, message: "format is invalid" }
 
   has_many :attendances
 
@@ -50,6 +50,33 @@ class Member < ActiveRecord::Base
 
   def full_name
     "#{self.first_name} #{self.last_name}"
+  end
+
+  def self.create_admin
+    admin = Member.new(admin: true, accepted: true)
+    puts "Create an admin..."
+    puts "First Name:"
+    admin.first_name = gets.chomp
+    puts "Last Name:"
+    admin.last_name = gets.chomp
+    puts "Email:"
+    admin.email = gets.chomp
+    puts "Grade:"
+    admin.grade = gets.chomp
+    puts "Student Number:"
+    admin.student_number = gets.chomp
+    admin.student_number = nil if admin.student_number.blank?
+    puts "Password:"
+    admin.password = gets.chomp
+
+    if admin.save
+      puts "Admin #{admin.full_name} has successfully created"
+      admin
+    else
+      puts "#{admin.errors.count} #{admin.errors.count == 1 ? "error" : "errors"} prohibited this admin account from being saved:"
+      admin.errors.full_messages.each {|msg| puts msg}
+      admin
+    end
   end
 
   private
