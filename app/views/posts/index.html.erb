@@ -1,8 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing <%= params[:type].pluralize %></h1>
+<% if member_is_admin? %>
 <%= link_to 'New Post', new_post_path %>
 <%= link_to 'New Event', new_event_path %>
+<% end %>
 
 <% @posts.each do |post| %>
   <div class="post-box">
