@@ -9,7 +9,11 @@
 <body>
 <nav>
   <%= link_to "WarriorRobotix", root_path %>
-  <%= white_spaces(8) %>
+  <%= white_spaces(4) %>
+  <%= link_to "Posts", posts_path %>
+  <%= white_spaces(2) %>
+  <%= link_to "Members", members_path %>
+  <%= white_spaces(4) %>
 <% if member_signed_in? %>
   Hi, <%= current_member.first_name %> <%= current_member.last_name %> <%= "(admin)" if member_is_admin? %> <%= link_to "Sign out", signout_path(return_to_info), method: :delete %>
 <% else %>
