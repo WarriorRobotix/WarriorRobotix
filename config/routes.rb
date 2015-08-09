@@ -10,9 +10,7 @@ Rails.application.routes.draw do
   resources :events, controller: :posts, type: 'Event'
 
   resources :events do
-    get '/yes' => 'events#confirm'
-    get '/maybe' => 'events#maybe'
-    get '/no' => 'events#decline'
+    post '/reply' => 'events#reply'
   end
 
   get 'signin' => 'sessions#new'

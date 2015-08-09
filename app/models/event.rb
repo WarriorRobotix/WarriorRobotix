@@ -23,15 +23,18 @@ class Event < Post
     end
   end
 
-  def confirmed
-    attendances.where(reply: 1)
-  end
-
-  def maybe
-    attendances.where(reply: 2)
-  end
-
-  def declined
-    attendances.where(reply: 3)
+  def replyers_description(reply)
+    reply_id = Attendance.replies[reply]
+    reply_count = self.attendances.where(reply: reply_id).count
+    names = Member.joins(:attendances).where(attendances: {event_id: self.id, reply: reply_id }).limit(4).pluck(:first_name, :last_name).map {|names| names.join(' ')}
+    if reply_count == 0
+      "0 members"
+    elsif reply_count == 1
+      "1 member - #{names[0]}"
+    elsif reply_count <= 4
+      "#{reply_count} members - #{names.join(', ')}"
+    else
+      "#{reply_count} members - #{names[0..2].join(', ')} and others"
+    end
   end
 end

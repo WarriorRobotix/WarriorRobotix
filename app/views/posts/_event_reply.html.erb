@@ -1,0 +1,12 @@
+<%= form_tag event_reply_path(post), remote: true  do %>
+<% reply = post.reply_from(current_member) %>
+<table class="unselectable" data-row-trigger-input>
+<% ({'yes' => 'confirmed', 'maybe' => 'maybe', 'no' => 'declined' }).each do |key, value| %>
+  <tr>
+    <td><%= radio_button_tag 'reply', value, reply == value, class: "stop-propagation", data: {"trigger-form" => "1"} %></td>
+    <td><%= label_tag "reply_#{value}", key.capitalize %></td>
+    <td><%= post.replyers_description(value) %></td>
+  </tr>
+<% end %>
+</table>
+<% end %>

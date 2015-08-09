@@ -1,0 +1,1 @@
+$('#post<%= @event.id %> form').first().replaceWith('<%= escape_javascript render(partial: "posts/event_reply", locals: {post: @event}) %>');
