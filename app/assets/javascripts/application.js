@@ -11,28 +11,27 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
 
-$(function(){
-  $('input[type=text][for]').click(function(){
-    $(['input[id="',$(this).attr('for'),'"]'].join('')).click();
-  });
+$(document).on('click', 'input[type=text][for]',function(){
+  $(['input[id="',$(this).attr('for'),'"]'].join('')).click();
+});
 
-  $('table[data-row-trigger-input] tr').click(function(){
-    $(this).find('input[type=radio],input[type=checkbox]').first().click();
-  });
+$(document).on('click', 'table[data-row-trigger-input] tr', function(){
+  $(this).find('input[type=radio],input[type=checkbox]').first().click();
+});
 
-  $('.stop-propagation').click(function(event){
-    event.stopPropagation();
-  });
+$(document).on('click', '.stop-propagation', function(event){
+  event.stopPropagation();
+});
 
-  $('input[data-trigger-form]').click(function(event){
-    event.preventDefault();
-    $(this).prop('checked',true);
-    form = $(this.form);
-    form.addClass('no-pointer-events');
-    form.submit();
-  });
-})
+$(document).on('click', 'input[data-trigger-form]', function(event){
+  event.preventDefault();
+  $(this).prop('checked',true);
+  form = $(this.form);
+  form.addClass('no-pointer-events');
+  form.submit();
+});
