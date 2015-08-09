@@ -7,3 +7,22 @@
     max-width: 100%;
   }
 }
+
+table[data-row-trigger-input] tr td{
+  input[type="radio"], input[type="checkbox"]{
+    pointer-events: none;
+  }
+}
+
+.unselectable {
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   cursor: default;
+}
+
+.no-pointer-events{
+  pointer-events: none;
+}
