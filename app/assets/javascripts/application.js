@@ -15,8 +15,24 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).on('ready page:load', function(){
+$(function(){
   $('input[type=text][for]').click(function(){
     $(['input[id="',$(this).attr('for'),'"]'].join('')).click();
+  });
+
+  $('table[data-row-trigger-input] tr').click(function(){
+    $(this).find('input[type=radio],input[type=checkbox]').first().click();
+  });
+
+  $('.stop-propagation').click(function(event){
+    event.stopPropagation();
+  });
+
+  $('input[data-trigger-form]').click(function(event){
+    event.preventDefault();
+    $(this).prop('checked',true);
+    form = $(this.form);
+    form.addClass('no-pointer-events');
+    form.submit();
   });
 })
