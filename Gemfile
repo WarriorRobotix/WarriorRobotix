@@ -31,6 +31,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Use redcarpet renders Markdown syntax
 gem 'redcarpet'
 
+# Use cocoon for nested form
+gem 'cocoon'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

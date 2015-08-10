@@ -8,10 +8,17 @@ Rails.application.routes.draw do
 
   resources :posts, type: 'Post'
   resources :events, controller: :posts, type: 'Event'
+  resources :polls, controller: :posts, type: 'Poll'
 
-  resources :events do
+  resources :events, only: [] do
     post '/reply' => 'events#reply'
   end
+
+  resources :polls, only: [] do
+    post '/reply' => 'polls#reply'
+  end
+
+  post '/options/append' => 'polls#append_option', as: :append_option
 
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'

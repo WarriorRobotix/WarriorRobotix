@@ -4,6 +4,7 @@
 <% if member_is_admin? %>
 <%= link_to 'New Post', new_post_path %>
 <%= link_to 'New Event', new_event_path %>
+<%= link_to 'New Poll', new_poll_path %>
 <% end %>
 
 <% @posts.each do |post| %>

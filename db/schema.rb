@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150725202812) do
+ActiveRecord::Schema.define(version: 20150810005015) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id",              null: false
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20150725202812) do
 
   add_index "attendances", ["event_id"], name: "index_attendances_on_event_id"
   add_index "attendances", ["member_id"], name: "index_attendances_on_member_id"
+
+  create_table "ballots", force: :cascade do |t|
+    t.integer  "member_id"
+    t.integer  "option_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "ballots", ["option_id"], name: "index_ballots_on_option_id"
 
   create_table "members", force: :cascade do |t|
     t.string   "password_digest"
@@ -50,18 +59,29 @@ ActiveRecord::Schema.define(version: 20150725202812) do
   add_index "members", ["email"], name: "index_members_on_email", unique: true
   add_index "members", ["student_number"], name: "index_members_on_student_number"
 
+  create_table "options", force: :cascade do |t|
+    t.integer  "poll_id"
+    t.integer  "ballots_count"
+    t.string   "description"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string   "type"
     t.string   "title"
     t.text     "description"
     t.datetime "start_at"
-    t.integer  "status",      default: 0, null: false
-    t.string   "options"
+    t.integer  "status",             default: 0,     null: false
+    t.boolean  "multiple_choices",   default: false, null: false
+    t.boolean  "ballots_changeable", default: false, null: false
+    t.integer  "maximum_choices"
+    t.integer  "ballots_privacy",    default: 0,     null: false
     t.datetime "end_at"
-    t.integer  "restriction", default: 0, null: false
+    t.integer  "restriction",        default: 0,     null: false
     t.integer  "author_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
 end

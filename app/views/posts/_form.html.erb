@@ -32,7 +32,8 @@
   </div>
   <div id="attachment">
   <% unless @post.type.nil? %>
-    <%= render(partial: 'event_form', locals: { f: f }) if  @post.type = "Event" %>
+    <%= render(partial: 'event_form', locals: { f: f }) if  @post.type == "Event" %>
+    <%= render(partial: 'poll_form', locals: { f: f }) if  @post.type == "Poll" %>
   <% end %>
   </div>
   <div class="actions">

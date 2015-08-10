@@ -11,7 +11,10 @@ class CreatePosts < ActiveRecord::Migration
       t.integer :status, default: 0, null: false
 
       # Poll
-      t.string :options
+      t.boolean :multiple_choices, default: false, null: false
+      t.boolean :ballots_changeable, default: false, null: false
+      t.integer :maximum_choices
+      t.integer :ballots_privacy, default: 0, null: false
 
       # Event/Poll
       t.datetime :end_at

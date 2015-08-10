@@ -1,0 +1,15 @@
+<%= form_tag poll_reply_path(post), remote: true  do %>
+<% ballots = post.ballots_from(current_member) %>
+<table class="unselectable" data-row-trigger-input>
+<% post.options.each do |option| %>
+  <tr>
+    <% if post.multiple_choices %>
+    <td><%= check_box_tag 'reply', option.id, ballots.include?(option.id), class: "stop-propagation" %></td>
+    <% else %>
+    <td><%= radio_button_tag 'reply', option.id, ballots.include?(option.id), class: "stop-propagation" %></td>
+    <% end %>
+    <td><%= label_tag "reply_#{option.id}", option.description %></td>
+  </tr>
+<% end %>
+</table>
+<% end %>

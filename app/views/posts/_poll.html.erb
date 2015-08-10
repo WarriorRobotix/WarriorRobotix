@@ -1,0 +1,7 @@
+<div class="attachment">
+  <%= post.multiple_choices ? 'multiple' : 'single' %> |
+  <%= post.ballots_changeable ? 'changeable' : 'unchageable' %></br>
+  <div class="event-reply">
+  <%= render partial: "poll_reply", locals: {post: post} %>
+  </div>
+</div>
