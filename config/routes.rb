@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  root 'posts#index', type: 'Post'
+  #root 'posts#index', type: 'Post'
+  root 'pages#home'
 
   resources :members do
     resources :attendances
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
   resources :events do
     post '/reply' => 'events#reply'
   end
+
+  get 'home' => 'pages#home'
 
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'
