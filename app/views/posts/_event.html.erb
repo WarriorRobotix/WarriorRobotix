@@ -1,8 +1,0 @@
-<div class="attachment">
-  Start At: <%= post.start_at.strftime("%a, %e %b %Y %H:%M") %>
-  <br>
-  End At: <%= post.end_at.strftime("%a, %e %b %Y %H:%M") %>
-  <div class="event-reply">
-  <%= render partial: "event_reply", locals: {post: post} %>
-  </div>
-</div>

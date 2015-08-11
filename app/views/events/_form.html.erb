@@ -1,0 +1,17 @@
+<%= form_for(@event) do |f| %>
+  <%= errors_for f.object %>
+
+  <%= render partial: "posts/post_fields", locals: {f: f} %>
+  <div class="field">
+    <%= f.label :start_at %><br>
+    <%= f.datetime_select :start_at %>
+  </div>
+  <div class="field">
+    <%= f.label :end_at %><br>
+    <%= f.datetime_select :end_at %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

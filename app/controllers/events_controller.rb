@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:reply]
+  before_action :set_event, only: [:reply, :edit, :update]
 
   before_action :authenticate_member!
 
@@ -9,6 +9,6 @@ class EventsController < ApplicationController
 
   private
   def set_event
-    @event = Event.find(params[:event_id])
+    @event = Event.find(params[:event_id] || params[:id])
   end
 end

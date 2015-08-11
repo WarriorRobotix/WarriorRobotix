@@ -1,0 +1,27 @@
+<%= form_for(@poll) do |f| %>
+  <%= errors_for f.object %>
+
+  <%= render partial: "posts/post_fields", locals: {f: f} %>
+  <div class="field">
+    <%= f.check_box :multiple_choices %>
+    <%= f.label :multiple_choices %>
+  </div>
+  <div class="field">
+    <%= f.check_box :ballots_changeable %>
+    <%= f.label :ballots_changeable %>
+  </div>
+  <div class="field">
+    <%= f.label :ballots_privacy %>
+    <%= f.select :ballots_privacy, Poll.ballots_privacies.map { |k,v| [k.titleize, k] } %>
+  </div>
+  <div>
+  <%= f.fields_for :options do |option_form| %>
+    <%= render partial: 'option_fields', locals: { f: option_form } %>
+  <% end %>
+  <%= link_to_add_association 'add option', f, :options %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
