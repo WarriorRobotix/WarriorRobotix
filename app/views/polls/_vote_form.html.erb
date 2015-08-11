@@ -20,5 +20,5 @@
   </tr>
 <% end %>
 </table>
-<%= submit_tag(ballots.empty? ? 'submit' : 'update') unless disabled  %>
+<%= submit_tag(ballots.empty? ? 'submit' : 'update', class: "btn") unless disabled %>
 <% end %>
