@@ -34,7 +34,6 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    case params[:type]
     @post=  Post.new(post_params)
     @post.author = current_member
 
