@@ -7,16 +7,16 @@ Rails.application.routes.draw do
 
   resources :posts, type: "Post"
 
-  resources :events, only: [:new, :create, :edit, :update] do
+  resources :events, only: [:new, :create, :edit, :update, :show] do
     post '/reply' => 'events#reply', :constraints => {:format => :js}
   end
 
-  resources :polls, only: [:new, :create, :edit, :update] do
+  resources :polls, only: [:new, :create, :edit, :update, :show] do
     post '/vote' => 'polls#vote', :constraints => {:format => :js}
   end
 
-  resources :events, only: [:index, :show, :destroy], controller: :posts, type: "Event"
-  resources :polls, except: [:index, :show, :destroy], controller: :posts, type: "Poll"
+  resources :events, only: [:index, :destroy], controller: :posts, type: "Event"
+  resources :polls, only: [:index, :destroy], controller: :posts, type: "Poll"
 
 
   get 'signin' => 'sessions#new'

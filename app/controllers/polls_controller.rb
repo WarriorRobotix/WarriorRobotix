@@ -1,5 +1,5 @@
 class PollsController < ApplicationController
-  before_action :set_poll, only: [:vote, :edit, :update]
+  before_action :set_poll, only: [:vote, :edit, :update, :show]
   before_action :authenticate_member!
 
   # GET /polls/new
@@ -72,19 +72,18 @@ class PollsController < ApplicationController
       remove_ballots = voted_ballots - common
       Ballot.where(member: current_member, option_id: remove_ballots.to_a).destroy_all
     else
-      new_ballot = params[:vote]
+      new_ballot = params[:vote].to_i
       old_ballot = voted_ballots[0]
 
       unless vaild_option_ids.include?(new_ballot)
         @error = "Invalid ballot"
         return
       end
-
+      
       unless old_ballot.nil?
-        ballout = Ballout.new(member: current_member)
-      else
-        ballout = Ballout.where(member: current_member, option_id: old_ballot).take
+        ballout = Ballot.where(member: current_member, option_id: old_ballot).take
       end
+      ballout ||= Ballot.new(member: current_member)
       ballout.option_id = new_ballot
       ballout.save
     end

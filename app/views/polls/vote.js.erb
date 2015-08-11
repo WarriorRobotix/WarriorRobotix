@@ -1,1 +1,1 @@
-$('#post<%= @poll.id %> form').first().replaceWith('<%= escape_javascript render(partial: "posts/poll_reply", locals: {post: @poll, error: @error}) %>');
+$('#post<%= @poll.id %> form').first().replaceWith('<%= escape_javascript render(partial: "vote_form", locals: {poll: @poll, error: @error}) %>');

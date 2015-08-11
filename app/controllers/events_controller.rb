@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:reply, :edit, :update]
+  before_action :set_event, only: [:reply, :edit, :update, :show]
 
   before_action :authenticate_member!
 
