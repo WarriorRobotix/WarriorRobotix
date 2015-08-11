@@ -18,8 +18,6 @@ Rails.application.routes.draw do
     post '/reply' => 'polls#reply', :constraints => {:format => :js}
   end
 
-  post '/options/append' => 'polls#append_option', as: :append_option
-
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'
   delete 'signout' => 'sessions#destroy'
