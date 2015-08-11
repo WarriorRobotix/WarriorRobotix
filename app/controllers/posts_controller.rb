@@ -24,14 +24,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    case params[:type]
-    when "Event"
-      @post = Event.new
-    when "Poll"
-      @post = Poll.new
-    else
-      @post = Post.new
-    end
+    @post = Post.new
   end
 
   # GET /posts/1/edit
@@ -42,13 +35,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     case params[:type]
-    when "Event"
-      @post = Event.new(post_params)
-    when "Poll"
-      @post = Poll.new(post_params)
-    else
-      @post = Post.new(post_params)
-    end
+    @post=  Post.new(post_params)
     @post.author = current_member
 
     respond_to do |format|
@@ -87,20 +74,11 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def post_params(type=nil)
-    case (type.try(:to_s).try(:capitalize) || params[:type] || "Post")
-    when "Event"
-      params.require(:event).permit(:title, :description, :start_at, :end_at, :restriction)
-    when "Poll"
-      params.require(:poll).permit(:title, :description, :restriction, :multiple_choices, :maximum_choices, :ballots_changeable, :ballots_privacy, options_attributes: [:id, :description, :_destroy])
-    else
-      params.require(:post).permit(:title, :description, :restriction)
-    end
+  def post_params(type)
+    params.require(:post).permit(:title, :description, :restriction)
   end
 end

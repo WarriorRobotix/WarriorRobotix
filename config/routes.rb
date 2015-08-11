@@ -1,13 +1,11 @@
 Rails.application.routes.draw do
-
-  #root 'posts#index', type: 'Post'
   root 'pages#home'
 
   resources :members do
     resources :attendances
   end
 
-  resources :posts, type: 'Post'
+  resources :posts, type: "Post"
 
   resources :events, only: [:new, :create, :edit, :update] do
     post '/reply' => 'events#reply', :constraints => {:format => :js}
@@ -17,15 +15,13 @@ Rails.application.routes.draw do
     post '/vote' => 'polls#vote', :constraints => {:format => :js}
   end
 
-  resources :events, except: [:new, :create, :edit, :update], controller: :posts, type: 'Event'
-  resources :polls, except: [:new, :create, :edit, :update], controller: :posts, type: 'Poll'
+  resources :events, only: [:index, :show, :destroy], controller: :posts, type: "Event"
+  resources :polls, except: [:index, :show, :destroy], controller: :posts, type: "Poll"
 
 
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'
   delete 'signout' => 'sessions#destroy'
-
-  get 'test' => 'pages#test'
 
   get 'email' => 'members#email_edit'
   post 'email' => 'members#email_update'
