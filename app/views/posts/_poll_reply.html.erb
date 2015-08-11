@@ -1,7 +1,7 @@
 <%= form_tag poll_reply_path(post), remote: true  do %>
 <%= error unless local_assigns[:error].blank? %>
 <% ballots = post.ballots_from(current_member) %>
-<% disabled = !(ballots.empty? || post.ballots_changeable) %>
+<% disabled = !is_member_accepted? || !(ballots.empty? || post.ballots_changeable) %>
 <% multi = post.multiple_choices %>
 <table class="unselectable" data-row-trigger-input>
 <% post.options.each do |option| %>
