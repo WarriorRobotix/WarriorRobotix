@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
@@ -30,6 +31,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use redcarpet renders Markdown syntax
 gem 'redcarpet'
+
+# Use cocoon for nested form
+gem 'cocoon'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

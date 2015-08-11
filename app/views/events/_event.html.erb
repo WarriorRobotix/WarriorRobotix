@@ -1,0 +1,10 @@
+<%= render layout: 'posts/post_wrap', locals: {post: event} do %>
+  <div class="attachment">
+    Start At: <%= event.start_at.strftime("%a, %e %b %Y %H:%M") %>
+    <br>
+    End At: <%= event.end_at.strftime("%a, %e %b %Y %H:%M") %>
+    <div class="event-reply">
+    <%= render partial: "events/reply_from", locals: {event: event} %>
+    </div>
+  </div>
+<% end %>

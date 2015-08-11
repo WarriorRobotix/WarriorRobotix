@@ -1,0 +1,17 @@
+<div class="post-box" id="post<%= post.id %>">
+  <div class="heading">
+    <span class="title"><%= post.title %></span><br>
+    <%= post.model_name.human %> | <%= post.created_at.strftime("%a, %e %b %Y %H:%M") %> | from <%= post.author.try(:full_name) %> to <%= post.restriction == "everyone" ? post.restriction : post.restriction.pluralize %>
+  </div>
+
+  <div class="body markdown"><%= markdown(post.description) %></div>
+
+  <%= yield %>
+  <div>
+    <%= link_to 'Show', post %>
+    <% if member_is_admin? %>
+    | <%= link_to 'Edit', send("edit_#{post.model_name.element}_path",post) %>
+    | <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  </div>
+</div>

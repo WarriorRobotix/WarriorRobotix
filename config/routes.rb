@@ -8,13 +8,18 @@ Rails.application.routes.draw do
   end
 
   resources :posts, type: 'Post'
-  resources :events, controller: :posts, type: 'Event'
 
-  resources :events do
-    post '/reply' => 'events#reply'
+  resources :events, only: [:new, :create, :edit, :update] do
+    post '/reply' => 'events#reply', :constraints => {:format => :js}
   end
 
-  get 'home' => 'pages#home'
+  resources :polls, only: [:new, :create, :edit, :update] do
+    post '/vote' => 'polls#vote', :constraints => {:format => :js}
+  end
+
+  resources :events, except: [:new, :create, :edit, :update], controller: :posts, type: 'Event'
+  resources :polls, except: [:new, :create, :edit, :update], controller: :posts, type: 'Poll'
+
 
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'

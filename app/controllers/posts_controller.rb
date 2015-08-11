@@ -9,6 +9,8 @@ class PostsController < ApplicationController
     case params[:type]
     when "Event"
       scope = Event
+    when "Poll"
+      scope = Poll
     else
       scope = Post
     end
@@ -25,6 +27,8 @@ class PostsController < ApplicationController
     case params[:type]
     when "Event"
       @post = Event.new
+    when "Poll"
+      @post = Poll.new
     else
       @post = Post.new
     end
@@ -40,6 +44,8 @@ class PostsController < ApplicationController
     case params[:type]
     when "Event"
       @post = Event.new(post_params)
+    when "Poll"
+      @post = Poll.new(post_params)
     else
       @post = Post.new(post_params)
     end
@@ -88,11 +94,11 @@ class PostsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params(type=nil)
-    type = type.try(:to_s).try(:capitalize)
-    k = type || params[:type] || "Post"
-    case (type || params[:type] || "Post")
+    case (type.try(:to_s).try(:capitalize) || params[:type] || "Post")
     when "Event"
       params.require(:event).permit(:title, :description, :start_at, :end_at, :restriction)
+    when "Poll"
+      params.require(:poll).permit(:title, :description, :restriction, :multiple_choices, :maximum_choices, :ballots_changeable, :ballots_privacy, options_attributes: [:id, :description, :_destroy])
     else
       params.require(:post).permit(:title, :description, :restriction)
     end

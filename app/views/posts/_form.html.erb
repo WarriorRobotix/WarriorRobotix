@@ -1,38 +1,10 @@
 <%= form_for(@post) do |f| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+  <%= errors_for f.object %>
 
-      <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <% unless @post.author.nil? %>
-  <div class="field">
-    Original Author:
-    <%= @post.author.full_name %>
-  </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :restriction %><br>
-    <%= f.select :restriction, Post.restrictions.map { |k,v| [k.capitalize, k] } %>
-  </div>
+  <%= render partial: "posts/post_fields", locals: {f: f} %>
   <div id="attachment">
   <% unless @post.type.nil? %>
-    <%= render(partial: 'event_form', locals: { f: f }) if  @post.type = "Event" %>
+    <%= render(partial: 'event_form', locals: { f: f }) if  @post.type == "Event" %>
   <% end %>
   </div>
   <div class="actions">

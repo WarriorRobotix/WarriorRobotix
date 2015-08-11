@@ -20,8 +20,14 @@
   .attachment{
     border: 1px solid black;
     padding: 5px 20px 10px 20px;
-    
+
     font-size: 18px;
     margin-bottom: 10px;
+  }
+}
+
+.deleted-option{
+  label{
+    text-decoration: line-through;
   }
 }

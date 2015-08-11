@@ -1,0 +1,24 @@
+<%= form_tag poll_vote_path(poll), remote: true  do %>
+<%= error unless local_assigns[:error].blank? %>
+<% ballots = poll.ballots_from(current_member) %>
+<% disabled = !is_member_accepted? || !(ballots.empty? || poll.ballots_changeable) %>
+<% multi = poll.multiple_choices %>
+<table class="unselectable" data-row-trigger-input>
+<% poll.options.each do |option| %>
+  <tr>
+    <% if multi %>
+    <td><%= check_box_tag "vote[#{option.id}]", "1", ballots.include?(option.id), disabled: disabled, class: "stop-propagation" %></td>
+    <% else %>
+    <td><%= radio_button_tag 'vote', option.id, ballots.include?(option.id), disabled: disabled, class: "stop-propagation" %></td>
+    <% end %>
+    <td><%= label_tag "vote_#{option.id}", option.description, class: "prevent-default" %></td>
+    <% if poll.ballots_privacy == "voters_viewable" %>
+    <td><%= pluralize(option.members.count,"member") %><%= " - #{option.members.pluck(:first_name, :last_name).map{|n| n.join(" ")}.join(", ")}" if (option.members.count > 0)  %></td>
+    <% else %>
+    <td><%= pluralize(option.members.count,"member") %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+<%= submit_tag(ballots.empty? ? 'submit' : 'update') unless disabled  %>
+<% end %>
