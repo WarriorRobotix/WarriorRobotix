@@ -11,11 +11,11 @@ Rails.application.routes.draw do
   resources :polls, controller: :posts, type: 'Poll'
 
   resources :events, only: [] do
-    post '/reply' => 'events#reply'
+    post '/reply' => 'events#reply', :constraints => {:format => :js}
   end
 
   resources :polls, only: [] do
-    post '/reply' => 'polls#reply'
+    post '/reply' => 'polls#reply', :constraints => {:format => :js}
   end
 
   post '/options/append' => 'polls#append_option', as: :append_option
