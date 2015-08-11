@@ -8,12 +8,6 @@
   }
 }
 
-table[data-row-trigger-input] tr td{
-  input[type="radio"], input[type="checkbox"]{
-    pointer-events: none;
-  }
-}
-
 .unselectable {
    -moz-user-select: -moz-none;
    -khtml-user-select: none;

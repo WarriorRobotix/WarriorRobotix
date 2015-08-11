@@ -16,7 +16,10 @@ nav {
 nav a:hover{
   color: $secondary-color;
 }
-body{background-color: $background-color;}
+body{
+  background-color: $background-color;
+  padding-bottom: 100px;
+}
 input[type="button"], .btn, button{background-color: $secondary-color;}
 input[type="button"]:hover, .btn:hover, button:hover{background-color: $secondary-color-darker;}
 a{color: $link-color;}
@@ -25,3 +28,9 @@ a:hover{color:$link-color-darker;}
 label.dark {
   color: black;
 }
+
+.actions *{
+  float: right;
+}
+
+@import "*"
