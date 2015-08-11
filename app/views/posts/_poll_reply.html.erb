@@ -1,15 +1,19 @@
 <%= form_tag poll_reply_path(post), remote: true  do %>
+<%= error unless local_assigns[:error].blank? %>
 <% ballots = post.ballots_from(current_member) %>
+<% disabled = !(ballots.empty? || post.ballots_changeable) %>
+<% multi = post.multiple_choices %>
 <table class="unselectable" data-row-trigger-input>
 <% post.options.each do |option| %>
   <tr>
-    <% if post.multiple_choices %>
-    <td><%= check_box_tag 'reply', option.id, ballots.include?(option.id), class: "stop-propagation" %></td>
+    <% if multi %>
+    <td><%= check_box_tag "reply[#{option.id}]", "1", ballots.include?(option.id), disabled: disabled, class: "stop-propagation" %></td>
     <% else %>
-    <td><%= radio_button_tag 'reply', option.id, ballots.include?(option.id), class: "stop-propagation" %></td>
+    <td><%= radio_button_tag 'reply', option.id, ballots.include?(option.id), disabled: disabled, class: "stop-propagation" %></td>
     <% end %>
-    <td><%= label_tag "reply_#{option.id}", option.description %></td>
+    <td><%= label_tag "reply_#{option.id}", option.description, class: "prevent-default" %></td>
   </tr>
 <% end %>
 </table>
+<%= submit_tag(ballots.empty? ? 'submit' : 'update') unless disabled  %>
 <% end %>

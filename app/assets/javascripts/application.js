@@ -36,6 +36,10 @@ $(document).on('click', '.stop-propagation', function(event){
   event.stopPropagation();
 });
 
+$(document).on('click', '.prevent-default', function(event){
+  event.preventDefault();
+});
+
 $(document).on('click', 'input[data-trigger-form]', function(event){
   event.preventDefault();
   $(this).prop('checked',true);
