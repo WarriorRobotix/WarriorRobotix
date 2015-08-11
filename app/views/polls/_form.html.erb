@@ -3,7 +3,7 @@
 
   <%= render partial: "posts/post_fields", locals: {f: f} %>
   <div class="field">
-    <%= f.check_box :multiple_choices %>
+    <%= f.check_box :multiple_choices, disabled: f.object.active? %>
     <%= f.label :multiple_choices %>
   </div>
   <div class="field">

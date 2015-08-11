@@ -2,11 +2,7 @@
   <%= errors_for f.object %>
 
   <%= render partial: "posts/post_fields", locals: {f: f} %>
-  <div id="attachment">
-  <% unless @post.type.nil? %>
-    <%= render(partial: 'event_form', locals: { f: f }) if  @post.type == "Event" %>
-  <% end %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

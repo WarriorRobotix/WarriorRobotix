@@ -13,7 +13,8 @@ class Member < ActiveRecord::Base
 
   validates :student_number, allow_blank: true, format: { without: /.+@.+/, message: "format is invalid" }
 
-  has_many :attendances
+  has_many :attendances, dependent: :destroy
+  has_many :ballots, dependent: :destroy
   has_many :posts
 
   def reset_password
