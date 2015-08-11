@@ -1,3 +1,13 @@
 // Place all the styles related to the Events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.datetime.field{
+  input[type=date]{
+    width: calc(100% - 140px);
+  }
+  input[type=number]{
+    width: 60px;
+    height: 2.95rem;
+    text-align: center;
+  }
+}

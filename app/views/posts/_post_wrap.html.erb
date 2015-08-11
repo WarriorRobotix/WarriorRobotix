@@ -1,4 +1,4 @@
-<div class="post-box" id="post<%= post.id %>">
+<div class="post-box card-panel" id="post<%= post.id %>">
   <div class="heading">
     <span class="title"><%= post.title %></span><br>
     <%= post.model_name.human %> | <%= post.created_at.strftime("%a, %e %b %Y %H:%M") %> | from <%= post.author.try(:full_name) %> to <%= post.restriction == "everyone" ? post.restriction : post.restriction.pluralize %>

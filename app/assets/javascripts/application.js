@@ -14,22 +14,26 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require materialize-sprockets
 //= require cocoon
 //= require_tree .
 
 $(function(){
-  //window.capturedElements.refresh();
+  $('.datepicker').pickadate({
+   selectMonths: false,
+   selectYears: false,
+   format: 'dddd, mmmm d, yyyy'
+  });
+
+  var userAgent = window.navigator.userAgent;
+  if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+    $('select:not(.browser-default)').addClass('browser-default');
+  }
+  $('select:not(.browser-default)').material_select();
 });
 
 $(document).on('click', 'input[type=text][for]',function(){
   $(['input[id="',$(this).attr('for'),'"]'].join('')).click();
-});
-
-$(document).on('click', 'table[data-row-trigger-input] tr', function(){
-  inp = $(this).find('input:radio,input:checkbox').first();
-  if (inp.hasClass('stop-propagation')){
-    inp.click();
-  }
 });
 
 $(document).on('click', '.stop-propagation', function(event){

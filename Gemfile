@@ -35,6 +35,9 @@ gem 'redcarpet'
 # Use cocoon for nested form
 gem 'cocoon'
 
+# Implement Material Design
+gem 'materialize-sass'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
