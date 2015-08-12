@@ -1,17 +1,43 @@
 <nav>
-  <span>
+  <div class="nav-wrapper">
+  <span class="brand-logo flow-text" style="font-size:132%">
   <%= link_to "WarriorRobotix", root_path %>
-  <%= white_spaces(4) %>
   </span>
-  <span style="float:right;">
-  <%= link_to "Posts", posts_path %>
-  <%= white_spaces(2) %>
-  <%= link_to "Members", members_path %>
-  <%= white_spaces(4) %>
-<% if member_signed_in? %>
-  Hi, <%= current_member.first_name %> <%= current_member.last_name %> <%= "(admin)" if member_is_admin? %> <%= link_to "Sign out", signout_path(return_to_info), method: :delete %>
-<% else %>
-  <%= link_to "Sign in", signin_path(return_to_info) %>
-<% end %>
-</span>
+  <ul class="flow-text right hide-on-med-and-down" style="font-size:100%;">
+    <li>
+      <%= link_to "Posts", posts_path %>
+    </li>
+    <li>
+      <%= link_to "Members", members_path %>
+    </li>
+    <li style="padding-right:10px;padding-left:10px;">
+      Hi, <%= current_member.first_name %> <%= current_member.last_name %> <%= "(admin)" if member_is_admin? %>
+    </li>
+    <li>
+      <% if member_signed_in? %>
+        <%= link_to "Sign out", signout_path(return_to_info), method: :delete %>
+      <% else %>
+        <%= link_to "Sign in", signin_path(return_to_info) %>
+      <% end %>
+    </li>
+  </ul>
+  <ul id="slide-out" class="side-nav flow-text">
+    <li>
+      <%= link_to "Posts", posts_path %>
+    </li>
+    <li>
+      <%= link_to "Members", members_path %>
+    </li>
+    <li>
+      <% if member_signed_in? %>
+        <%= link_to "Sign out", signout_path(return_to_info), method: :delete %>
+      <% else %>
+        <%= link_to "Sign in", signin_path(return_to_info) %>
+      <% end %>
+    </li>
+  </ul>
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+  </div>
 </nav>
+
+<script> $(".button-collapse").sideNav();</script>
