@@ -25,6 +25,10 @@ module WarriorRobotix
 
     config.action_dispatch.rescue_responses.merge!('Forbidden' => :forbidden)
 
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+      html_tag
+    }
+
     config.autoload_paths += %W["#{config.root}/app/objects/"]
   end
 end

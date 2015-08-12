@@ -1,7 +1,7 @@
 <%= render layout: 'posts/post_wrap', locals: {post: poll} do %>
   <div class="attachment">
-    <%= poll.multiple_choices ? 'multiple' : 'single' %> |
-    <%= poll.ballots_changeable ? 'changeable' : 'unchageable' %></br>
+    <%= poll.multiple_choices ? 'Multiple' : 'Single' %> |
+    <%= poll.ballots_changeable ? 'Changeable' : 'Unchageable' %></br>
     <div class="event-reply">
     <%= render partial: "polls/vote_form", locals: {poll: poll} %>
     </div>

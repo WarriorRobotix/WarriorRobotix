@@ -3,7 +3,7 @@
 <% ballots = poll.ballots_from(current_member) %>
 <% disabled = !is_member_accepted? || !(ballots.empty? || poll.ballots_changeable) %>
 <% multi = poll.multiple_choices %>
-<table>
+<table class="bordered">
 <% poll.options.each do |option| %>
   <tr>
     <td>
@@ -22,5 +22,6 @@
   </tr>
 <% end %>
 </table>
+<br>
 <%= submit_tag(ballots.empty? ? 'submit' : 'update', class: "btn") unless disabled %>
 <% end %>

@@ -77,7 +77,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  def post_params(type)
+  def post_params
     params.require(:post).permit(:title, :description, :restriction)
   end
 end

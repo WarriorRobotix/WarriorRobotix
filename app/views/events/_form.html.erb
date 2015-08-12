@@ -13,20 +13,8 @@
       </div>
     </div>
   </div>-->
-  <div class="row">
-    <div class="col s12 m6 l6">
-      <label for="event_end_at_date">End At</label>
-      <input type="date" class="datepicker" name="event[end_at][date]" id="event_end_at_date" data-value="<%= Date.current.strftime('%Y/%-m/%-d') %>">
-    </div>
-    <div class="input-field col s6 m3 l3">
-      <label for="event_end_at_hour">Hour</label>
-      <input type="number" name="event[end_at][hour]" id="event_end_at_hour" min="0" max="24" value="24">
-    </div>
-    <div class="input-field col s6 m3 l3">
-      <label for="event_end_at_minute">Minute</label>
-      <input type="number" name="event[end_at][minute]" id="event_end_at_minute" min="0" max="60" value="00">
-    </div>
-  </div>
+  <%= render partial: "event_datetime", locals: {f: f, method: :start_at} %>
+  <%= render partial: "event_datetime", locals: {f: f, method: :end_at} %>
   <div class="row">
     <div class="actions col s12">
       <%= f.submit class: 'btn' %>

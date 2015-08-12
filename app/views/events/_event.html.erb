@@ -4,7 +4,7 @@
     <br>
     End At: <%= event.end_at.strftime("%a, %e %b %Y %H:%M") %>
     <div class="event-reply">
-    <%= render partial: "events/reply_from", locals: {event: event} %>
+    <%= render partial: "events/reply_form", locals: {event: event} %>
     </div>
   </div>
 <% end %>

@@ -18,8 +18,16 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.author = current_member
 
+    if start_at_params = params[:event][:start_at]
+      @event.start_at = "#{start_at_params[:date]} #{start_at_params[:hour]}:#{start_at_params[:minute]}"
+    end
+
+    if end_at_params = params[:event][:end_at]
+      @event.end_at = "#{end_at_params[:date]} #{end_at_params[:hour]}:#{end_at_params[:minute]}"
+    end
+
     respond_to do |format|
-      if @evnet.save
+      if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -32,6 +40,15 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+
+    if start_at_params = params[:event][:start_at]
+      @event.start_at = "#{start_at_params[:date]} #{start_at_params[:hour]}:#{start_at_params[:minute]}"
+    end
+
+    if end_at_params = params[:event][:end_at]
+      @event.end_at = "#{end_at_params[:date]} #{end_at_params[:hour]}:#{end_at_params[:minute]}"
+    end
+
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
@@ -53,6 +70,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :description, :start_at, :end_at, :restriction)
+    params.require(:event).permit(:title, :description, :restriction)
   end
 end

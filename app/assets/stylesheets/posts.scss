@@ -1,9 +1,11 @@
-.post-box {
-  padding: 5px 20px 10px 20px;
-  margin: 10px 0px;
+.max8{
+  margin: 30px auto;
+  max-width: 800px;
+}
 
-  width: 80%;
-  max-width: 700px;
+.post-box {
+  @extend .max8;
+  padding: 5px 20px 10px 20px;
 
   .heading{
     .title{
@@ -17,7 +19,6 @@
   }
 
   .attachment{
-    border: 1px solid black;
     padding: 5px 20px 10px 20px;
 
     font-size: 18px;
@@ -28,5 +29,35 @@
 .deleted-option{
   label{
     text-decoration: line-through;
+  }
+}
+
+.quick-create{
+  padding-top: 20px;
+  padding-bottom: 0px;
+
+  .actions{
+    height: 4rem;
+    button{
+      margin-left: 20px;
+    }
+  }
+
+  .input-field{
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .row{
+    margin-bottom: 5px;
+  }
+}
+
+.quick-links{
+  a:not(:first-of-type){
+    margin-top: 20px;
+  }
+  .row{
+    margin-bottom: 0px;
   }
 }

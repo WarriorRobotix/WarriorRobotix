@@ -7,4 +7,8 @@ class Post < ActiveRecord::Base
 
   validates :title, presence: true
   validates :description, presence: true
+
+  def self.valid_restrictions
+    restrictions
+  end
 end

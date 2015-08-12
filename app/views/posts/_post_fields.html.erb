@@ -18,7 +18,7 @@
 </div>
 <div class="row">
   <div class="input-field col s12 m8 l4">
-    <%= f.select :restriction, Post.restrictions.map { |k,v| [k.capitalize, k] }, {} %>
+    <%= f.select :restriction, f.object.class.valid_restrictions.map { |k,v| [k.capitalize, k] }, {} %>
     <%= f.label :restriction %>
   </div>
 </div>

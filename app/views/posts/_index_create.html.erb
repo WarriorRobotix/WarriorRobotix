@@ -1,0 +1,41 @@
+<div class="max8 quick-create card-panel hide-on-small-only">
+  <%= form_for(Post.new) do |f| %>
+    <%= hidden_field_tag "quick_submit", "1" %>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.label :title %>
+        <%= f.text_field :title, placeholder: "A title plz" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.text_area :description, class: "materialize-textarea", placeholder: "Something funny" %>
+        <%= f.label :description %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 m6 l3">
+        <%= f.select :restriction, f.object.class.valid_restrictions.map { |k,v| [k.capitalize, k] }, {} %>
+        <%= f.label :restriction %>
+      </div>
+      <div class="col s12 m12 l9 actions">
+        <button type="button" class="btn" data-submit="<%= new_post_path %>"><i class="material-icons right">send</i>Post</button>
+        <button type="button" class="btn" data-submit="<%= events_path %>"><i class="material-icons right">today</i>Event</button>
+        <button type="button" class="btn" data-submit="<%= polls_path %>"><i class="material-icons right">equalizer</i>Poll</button>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="quick-links card-panel hide-on-med-and-up max8">
+  <div class="row">
+    <%= link_to new_post_path, class: "btn col s12" do %>
+    <i class="material-icons right">send</i>Create Post
+    <% end %>
+    <%= link_to new_event_path, class: "btn col s12" do %>
+    <i class="material-icons right">today</i>Create Event
+    <% end %>
+    <%= link_to new_poll_path, class: "btn col s12" do %>
+    <i class="material-icons right">equalizer</i>Create Poll
+    <% end %>
+  </div>
+</div>
