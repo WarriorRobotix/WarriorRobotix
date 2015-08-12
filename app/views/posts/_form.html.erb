@@ -2,8 +2,10 @@
   <%= errors_for f.object %>
 
   <%= render partial: "posts/post_fields", locals: {f: f} %>
-
-  <div class="actions">
-    <%= f.submit class: "btn" %>
+  <div class="row">
+    <div class="actions col s12">
+      <%= f.submit class: 'btn' %>
+      <%= link_to 'Back', posts_path, class: 'btn-flat' %>
+    </div>
   </div>
 <% end %>

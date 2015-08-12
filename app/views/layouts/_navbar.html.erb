@@ -11,7 +11,9 @@
       <%= link_to "Members", members_path %>
     </li>
     <li style="padding-right:10px;padding-left:10px;">
-      Hi, <%= current_member.first_name %> <%= current_member.last_name %> <%= "(admin)" if member_is_admin? %>
+      <% if member_signed_in? %>
+        Hi, <%= current_member.first_name %> <%= current_member.last_name %> <%= "(admin)" if member_is_admin? %>
+      <% end %>
     </li>
     <li>
       <% if member_signed_in? %>
