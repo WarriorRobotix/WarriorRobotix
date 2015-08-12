@@ -1,41 +1,30 @@
-<div class="max8 quick-create card-panel hide-on-small-only">
-  <%= form_for(Post.new) do |f| %>
-    <%= hidden_field_tag "quick_submit", "1" %>
-    <div class="row">
-      <div class="input-field col s12">
-        <%= f.label :title %>
-        <%= f.text_field :title, placeholder: "A title plz" %>
-      </div>
+<div class="card-panel max8 hide-on-small-only quick-create">
+  <div class="row no-margin-bottom">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a class="active" href="#post_form_wrap"><i class="tiny material-icons">chat_bubble_outline</i>Post</a></li>
+        <li class="tab col s3"><a href="#event_form_wrap"><i class="tiny material-icons">today</i>Event</a></li>
+        <li class="tab col s3"><a href="#poll_form_wrap"><i class="tiny material-icons">equalizer</i>Poll</a></li>
+      </ul>
     </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <%= f.text_area :description, class: "materialize-textarea", placeholder: "Something funny" %>
-        <%= f.label :description %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12 m6 l3">
-        <%= f.select :restriction, f.object.class.valid_restrictions.map { |k,v| [k.capitalize, k] }, {} %>
-        <%= f.label :restriction %>
-      </div>
-      <div class="col s12 m12 l9 actions">
-        <button type="button" class="btn" data-submit="<%= new_post_path %>"><i class="material-icons right">send</i>Post</button>
-        <button type="button" class="btn" data-submit="<%= events_path %>"><i class="material-icons right">today</i>Event</button>
-        <button type="button" class="btn" data-submit="<%= polls_path %>"><i class="material-icons right">equalizer</i>Poll</button>
-      </div>
-    </div>
-  <% end %>
+    <%= render "posts/compact_form", post: Post.new, from: request_path %>
+    <%= render "events/compact_form", event: Event.new, from: request_path %>
+    <%= render "polls/compact_form", poll: Poll.new, from: request_path %>
+  </div>
+  <div class="preloader-container">
+    <%= render "components/spinner", color: "yellow" %>
+  </div>
 </div>
 <div class="quick-links card-panel hide-on-med-and-up max8">
   <div class="row">
     <%= link_to new_post_path, class: "btn col s12" do %>
-    <i class="material-icons right">send</i>Create Post
+    <i class="material-icons left">chat_bubble_outline</i>Create Post
     <% end %>
     <%= link_to new_event_path, class: "btn col s12" do %>
-    <i class="material-icons right">today</i>Create Event
+    <i class="material-icons left">today</i>Create Event
     <% end %>
     <%= link_to new_poll_path, class: "btn col s12" do %>
-    <i class="material-icons right">equalizer</i>Create Poll
+    <i class="material-icons left">equalizer</i>Create Poll
     <% end %>
   </div>
 </div>

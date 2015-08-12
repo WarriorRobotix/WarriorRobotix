@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="input-field col s9">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="input-field col s3">
+    <%= f.select :restriction, f.object.class.valid_restrictions.map { |k,v| [k.capitalize, k] }, {} %>
+    <%= f.label :restriction %>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s12">
+    <%= f.text_area :description, class: "materialize-textarea" %>
+    <%= f.label :description %>
+  </div>
+</div>

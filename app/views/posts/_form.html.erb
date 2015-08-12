@@ -4,7 +4,7 @@
   <%= render partial: "posts/post_fields", locals: {f: f} %>
   <div class="row">
     <div class="actions col s12">
-      <%= f.submit class: 'btn' %>
+      <%= f.submit class: 'btn', data: { disable_with: nil } %>
       <%= link_to 'Back', posts_path, class: 'btn-flat' %>
     </div>
   </div>

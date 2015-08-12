@@ -1,0 +1,9 @@
+<div id="post_form_wrap" class="col s12  compact-form-wrap">
+  <%= form_for(post) do |f| %>
+    <%= hidden_field_tag :from, from if local_assigns[:from].present? %>
+    <%= render "compact_post_fields", f: f %>
+    <div>
+      <%= f.submit class: 'btn right', data: { disable_with: nil } %>
+    </div>
+  <% end %>
+</div>

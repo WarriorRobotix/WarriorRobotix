@@ -1,0 +1,11 @@
+<div id="event_form_wrap" class="col s12 compact-form-wrap">
+  <%= form_for(event) do |f| %>
+    <%= hidden_field_tag :from, from if local_assigns[:from].present? %>
+    <%= render "posts/compact_post_fields", f: f %>
+    <%= render partial: "events/event_datetime", locals: {f: f, method: :start_at} %>
+    <%= render partial: "events/event_datetime", locals: {f: f, method: :end_at} %>
+    <div>
+      <%= f.submit class: 'btn right', data: { disable_with: nil } %>
+    </div>
+  <% end %>
+</div>
