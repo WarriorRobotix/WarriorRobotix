@@ -33,6 +33,8 @@
 }
 
 .quick-create{
+  position: relative;
+  /*
   padding-top: 20px;
   padding-bottom: 0px;
 
@@ -51,6 +53,7 @@
   .row{
     margin-bottom: 5px;
   }
+  */
 }
 
 .quick-links{
@@ -60,4 +63,40 @@
   .row{
     margin-bottom: 0px;
   }
+}
+
+.compact-form-wrap{
+  &.col{
+    padding-top: 15px;
+    padding-bottom: 10px;
+  }
+  .row{
+    margin-bottom: 0px;
+    &.large-margin{
+      @media #{$medium-and-down} {
+        margin-bottom: 36px;
+      }
+    }
+  }
+}
+
+.preloader-container{
+  display: none;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, .6);
+
+  .preloader-wrapper{
+    position: absolute;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
+  }
+}
+
+.quick-create[data-preloading="true"]{
+  display: none;
 }

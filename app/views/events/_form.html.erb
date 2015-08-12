@@ -2,22 +2,11 @@
   <%= errors_for f.object %>
 
   <%= render partial: "posts/post_fields", locals: {f: f} %>
-  <!--
-  <div class="row">
-    <div class="datetime input-field s12 m8 l6">
-      <label for="event_start_at_date">Start At</label>
-      <div>
-      <input type="date" class="datepicker" name="event[start_at][date]" id="event_start_at_date" data-value="<%= Date.current.strftime('%Y/%-m/%-d') %>">
-      <input type="number" name="event[start_at][hour]" min="0" max="24" value="24">
-      <input type="number" name="event[start_at][minute]" min="0" max="60" value="00">
-      </div>
-    </div>
-  </div>-->
   <%= render partial: "event_datetime", locals: {f: f, method: :start_at} %>
   <%= render partial: "event_datetime", locals: {f: f, method: :end_at} %>
   <div class="row">
     <div class="actions col s12">
-      <%= f.submit class: 'btn' %>
+      <%= f.submit class: 'btn', data: { disable_with: nil } %>
       <%= link_to 'Back', posts_path, class: 'btn-flat' %>
     </div>
   </div>

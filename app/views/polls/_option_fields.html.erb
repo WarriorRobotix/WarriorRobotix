@@ -1,5 +1,9 @@
-<div class="field nested-fields">
-  <%= f.label :description, "Option" %>
-  <%= f.text_field :description %>
-  <%= link_to_remove_association "remove", f %>
+<div class="row nested-fields">
+  <div class="input-field col s8 m9 l10">
+    <%= f.label :description, "Option", class: "option-label" %>
+    <%= f.text_field :description %>
+  </div>
+  <div class="remove col s4 m3 l2">
+    <%= link_to_remove_association "remove", f, class: 'btn-border right' %>
+  </div>
 </div>

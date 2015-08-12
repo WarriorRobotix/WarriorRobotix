@@ -27,7 +27,11 @@ module ApplicationHelper
   end
 
   def return_to_info
-    { from: request.fullpath == '/' ? nil : request.fullpath }
+    { from:  request_path}
+  end
+
+  def request_path
+    request.fullpath == '/' ? nil : request.fullpath
   end
 
   def white_spaces(n=1)
