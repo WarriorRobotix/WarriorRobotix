@@ -31,4 +31,7 @@ Rails.application.routes.draw do
 
   get 'reset/:record_hex/:reset_token' => 'members#reset_password_edit'
   post 'reset/:record_hex/:reset_token' => 'members#reset_password_update'
+
+  get '/attend' => 'pages#attend'
+
 end

@@ -1,5 +1,5 @@
 class Attendance < ActiveRecord::Base
-  enum status: [:invited, :attending, :attended, :skipped]
+  enum status: [:invited, :attending, :attended]
   enum reply: [:no_reply, :confirmed, :maybe, :declined]
 
   validate :end_at_after_start_at

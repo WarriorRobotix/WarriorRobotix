@@ -4,16 +4,21 @@
   <%= link_to "WarriorRobotix", root_path %>
   </span>
   <ul class="flow-text right hide-on-med-and-down" style="font-size:100%;">
+    <% if member_signed_in? %>
+    <li style="padding-right:15px;padding-left:15px;">
+        Hi, <%= current_member.first_name %> <%= current_member.last_name %> <%= "(admin)" if member_is_admin? %>
+    </li>
+    <% end %>
+    <% if member_is_admin? %>
+    <li>
+      <%= link_to "Attendance", '/attend' %>
+    </li>
+    <% end %>
     <li>
       <%= link_to "Posts", posts_path %>
     </li>
     <li>
       <%= link_to "Members", members_path %>
-    </li>
-    <li style="padding-right:10px;padding-left:10px;">
-      <% if member_signed_in? %>
-        Hi, <%= current_member.first_name %> <%= current_member.last_name %> <%= "(admin)" if member_is_admin? %>
-      <% end %>
     </li>
     <li>
       <% if member_signed_in? %>

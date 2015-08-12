@@ -1,11 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Members</h1>
-
-<% @member_groups.each do |group| %>
+<h1 class="flow-text">Listing Members</h1>
 <hr>
-<h3><%= group[0] %></h3>
-<table>
+<% @member_groups.each do |group| %>
+<h3 class="flow-text"><%= group[0] %></h3>
+<div class="card-panel" style="padding:10px;">
+<table class="flow-text" style="font-size:100%;">
   <thead>
     <tr>
       <th>First Name</th>
@@ -45,9 +45,11 @@
     <% end %>
   </tbody>
 </table>
+</div>
 <% end %>
 <% if member_is_admin? %>
 <br>
-
+<p class="flow-text" style="font-size:100%;">
 <%= link_to 'New Member', new_member_path %>
+</p>
 <% end %>
