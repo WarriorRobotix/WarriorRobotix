@@ -52,6 +52,12 @@ $(document).on('click', 'input[data-trigger-form]', function(event){
   form.submit();
 });
 
+$(document).on('click', 'form button[data-submit]', function(){
+  $t = $(this);
+  $f = $t.closest('form');
+  $f.submit();
+});
+
 function deletePoll(ele,event) {
   event.preventDefault();
   $t = $(ele);
