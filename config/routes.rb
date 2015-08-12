@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     post '/vote' => 'polls#vote', :constraints => {:format => :js}
   end
 
+  get '/events', to: redirect('/posts')
+  get '/polls', to: redirect('/posts')
+
   resources :events, only: [:index, :destroy], controller: :posts, type: "Event"
   resources :polls, only: [:index, :destroy], controller: :posts, type: "Poll"
 
