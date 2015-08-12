@@ -1,0 +1,6 @@
+<div id="options">
+<%= f.fields_for :options do |option_form| %>
+  <%= render 'polls/option_fields', f: option_form %>
+<% end %>
+<%= link_to_add_association 'add option', f, :options, partial: 'polls/option_fields', class: 'btn-text' %>
+</div>

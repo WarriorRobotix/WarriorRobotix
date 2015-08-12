@@ -19,7 +19,13 @@ class PollsController < ApplicationController
 
     respond_to do |format|
       if @poll.save
-        format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
+        format.html do
+          if params[:from].nil?
+            redirect_to @poll, notice: 'Poll was successfully created.'
+          else
+            redirect_back
+          end
+        end
         format.json { render :show, status: :created, location: @poll }
       else
         format.html { render :new }
@@ -79,7 +85,7 @@ class PollsController < ApplicationController
         @error = "Invalid ballot"
         return
       end
-      
+
       unless old_ballot.nil?
         ballout = Ballot.where(member: current_member, option_id: old_ballot).take
       end

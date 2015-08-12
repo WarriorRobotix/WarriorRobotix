@@ -30,6 +30,10 @@ $(function(){
     $('select:not(.browser-default)').addClass('browser-default');
   }
   $('select:not(.browser-default)').material_select();
+
+  $('ul.tabs').tabs();
+
+  replceNullDisableWith();
 });
 
 $(document).on('click', 'input[type=text][for]',function(){
@@ -52,12 +56,6 @@ $(document).on('click', 'input[data-trigger-form]', function(event){
   form.submit();
 });
 
-$(document).on('click', 'form button[data-submit]', function(){
-  $t = $(this);
-  $f = $t.closest('form');
-  $f.submit();
-});
-
 function deletePoll(ele,event) {
   event.preventDefault();
   $t = $(ele);
@@ -71,4 +69,11 @@ function deletePoll(ele,event) {
     parent.removeClass('deleted-option')
     parent.children('input:hidden').first().value('0')
   }
+}
+
+function replceNullDisableWith(){
+  $('input[data-disable-with="null"]').each(function(){
+    var t = $(this);
+    t.attr('data-disable-with',t.val());
+  });
 }
