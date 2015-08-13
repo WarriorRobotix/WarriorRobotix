@@ -1,11 +1,59 @@
-<div style="display:inline-block;">
+
+<nav style="background-color:white;margin-top:20px;">
+<div class="nav-wrapper">
 <%= form_tag '/search', method:'get', class:'form-inline float-right', role:'form' do %>
-<a href="/"><span class="glyphicon glyphicon-arrow-left"></span></a>
-&nbsp;&nbsp;
-<div class="input-group">
-<%= text_field_tag :text, params[:text], class:'input-field', placeholder:'Enter Student Number...' %>
-<span class="input-group-btn">
-  <%= submit_tag 'Go!', class:'btn btn-default' %>
-</span>
+<div class="input-field">
+  <input id="search" name="text" type="search" placeholder="Enter Student Number..." required>
+  <label class="hide-on-small-only" for="search"><i style="color:#ffab00;" class="material-icons">search</i></label>
+</div>
 <% end %>
+</div>
+</nav>
+
+<p id="notice"><%= @message %></p>
+
+<h1 class="flow-text">Checked In</h1>
+<div class="card-panel">
+  <table>
+    <thead>
+      <th>Name</th>
+      <th class="hide-on-small-only">Student Number</th>
+      <th>Check In</th>
+    </thead>
+    <tbody>
+      <% @checkedin.each do |f| %>
+        <% if !f.nil? %>
+          <tr>
+            <td><%= Member.find(f.member_id).full_name %></td>
+            <td class="hide-on-small-only"><%= Member.find(f.member_id).student_number %></td>
+            <td><%= f.start_at.strftime('%l:%M %p') %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<h1 class="flow-text">Checked Out</h1>
+<div class="card-panel">
+  <table>
+    <thead>
+      <th>Name</th>
+      <th class="hide-on-small-only">Student Number</th>
+      <th>Check In</th>
+      <th>Check Out</th>
+    </thead>
+    <tbody>
+      <% @checkedout.each do |f| %>
+        <% if !f.nil? %>
+          <tr>
+            <td><%= Member.find(f.member_id).full_name %></td>
+            <td class="hide-on-small-only"><%= Member.find(f.member_id).student_number %></td>
+            <td><%= f.start_at.strftime('%l:%M %p') %></td>
+            <td><%=f.end_at.strftime('%l:%M %p') %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
