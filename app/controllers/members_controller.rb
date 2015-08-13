@@ -54,7 +54,7 @@ class MembersController < ApplicationController
     end
     if @checked == false
       if @checkedin_today == false
-        @attendance = Attendance.create(:member_id => @member.id, :start_at => DateTime.now)
+        @attendance = Attendance.create(:member_id => @member.id, :start_at => DateTime.now, :status => :attending)
         @respond = 1
       else
         @respond = 3

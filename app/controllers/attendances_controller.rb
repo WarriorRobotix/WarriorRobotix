@@ -16,7 +16,7 @@ class AttendancesController < ApplicationController
   # GET members/1/attendances/new
   def new
     @attendance = Attendance.new
-    @attendance.status = :attended
+    @attendance.status = :attending
   end
 
   # GET members/1/attendances/1/edit
