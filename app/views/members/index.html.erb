@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<h1 class="flow-text">Listing Members</h1>
-<hr>
 <% @member_groups.each do |group| %>
 <h3 class="flow-text"><%= group[0] %></h3>
 <div class="mobile-only">
@@ -32,7 +30,6 @@
       <% if member_is_admin? %>
       <th>Email</th>
       <th>Student Number</th>
-      <th>Admin</th>
       <% end %>
     </tr>
   </thead>
@@ -46,12 +43,11 @@
         <% if member_is_admin? %>
         <td><%= member.email %></td>
         <td><%= member.student_number %></td>
-        <td><%= member.admin %></td>
         <% end %>
       </tr>
       <% if member_is_admin? %>
       <tr>
-        <td colspan="6">
+        <td colspan="5">
           <%= link_to member_attendances_path(member) do %>
             <i class="small material-icons inline">today</i> Attendances
           <% end %> |
