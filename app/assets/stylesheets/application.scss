@@ -66,22 +66,6 @@ label.dark {
   }
 }
 
-.screen-only {
-  display: block;
-}
-.mobile-only {
-  display: none;
-}
-
-@media screen and (max-width: 850px) {
-  .screen-only {
-    display: none;
-  }
-  .mobile-only {
-    display: block;
-  }
-}
-
 .no-margin-bottom{
   margin-bottom: 0;
 }
