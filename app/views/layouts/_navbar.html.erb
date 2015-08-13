@@ -29,6 +29,11 @@
     </li>
   </ul>
   <ul id="slide-out" class="side-nav flow-text">
+    <% if member_is_admin? %>
+    <li>
+      <%= link_to "Attendance", '/attend' %>
+    </li>
+    <% end %>
     <li>
       <%= link_to "Posts", posts_path %>
     </li>
