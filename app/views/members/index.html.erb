@@ -3,48 +3,48 @@
 <% @member_groups.each do |group| %>
 <h3 class="flow-text"><%= group[0] %></h3>
 <div class="card-panel" style="padding:10px;">
-<table class="flow-text" style="font-size:100%;">
-  <thead>
-    <tr>
-      <th>Full Name (<i class="small material-icons inline">supervisor_account</i> admin)</th>
-      <th>Title</th>
-      <th class="hide-on-small-only">Grade</th>
-      <% if member_is_admin? %>
-      <th class="hide-on-med-and-down">Email</th>
-      <th class="hide-on-med-and-down">Student Number</th>
-      <% end %>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% group[1].each do |member| %>
+  <table class="less-bordered except-last">
+    <thead>
       <tr>
-        <td><%= raw('<i class="small material-icons inline">supervisor_account</i> ') if member.admin? && member_is_admin? %><%= link_to member.full_name, member %></td>
-        <td><%= member.title %></td>
-        <td class="hide-on-small-only"><%= member.grade %></td>
+        <th>Full Name<%= raw(' (<i class="small material-icons inline">supervisor_account</i> admin)') if member_is_admin? %></th>
+        <th>Title</th>
+        <th class="hide-on-small-only">Grade</th>
         <% if member_is_admin? %>
-        <td class="hide-on-med-and-down"><%= member.email %></td>
-        <td class="hide-on-med-and-down"><%= member.student_number %></td>
+        <th class="hide-on-med-and-down">Email</th>
+        <th class="hide-on-med-and-down">Student Number</th>
         <% end %>
       </tr>
-      <% if member_is_admin? %>
-      <tr class="hide-on-small-only">
-        <td colspan="5">
-          <%= link_to member_attendances_path(member) do %>
-            <i class="small material-icons inline">today</i> Attendances
-          <% end %> |
-          <%= link_to edit_member_path(member) do %>
-            <i class="small material-icons inline">create</i> Edit
-          <% end %> |
-          <%= link_to member, method: :delete, data: { confirm: 'Are you sure?' } do %>
-            <i class="small material-icons inline">delete</i> Delete
+    </thead>
+
+    <tbody>
+      <% group[1].each do |member| %>
+        <tr>
+          <td><%= raw('<i class="small material-icons inline">supervisor_account</i> ') if member.admin? && member_is_admin? %><%= link_to member.full_name, member %></td>
+          <td><%= member.title %></td>
+          <td class="hide-on-small-only"><%= member.grade %></td>
+          <% if member_is_admin? %>
+          <td class="hide-on-med-and-down"><%= member.email %></td>
+          <td class="hide-on-med-and-down"><%= member.student_number %></td>
           <% end %>
-        </td>
-      </tr>
+        </tr>
+        <% if member_is_admin? %>
+        <tr class="hide-on-small-only">
+          <td colspan="5">
+            <%= link_to member_attendances_path(member) do %>
+              <i class="small material-icons inline">today</i> Attendances
+            <% end %> |
+            <%= link_to edit_member_path(member) do %>
+              <i class="small material-icons inline">create</i> Edit
+            <% end %> |
+            <%= link_to member, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class="small material-icons inline">delete</i> Delete
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 </div>
 <% end %>
 
