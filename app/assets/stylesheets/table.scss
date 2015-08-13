@@ -1,0 +1,23 @@
+table {
+  vertical-align: middle;
+
+  &.less-bordered > thead > tr,
+  &.less-bordered > tbody > tr:nth-child(even) {
+    border-bottom: 1px solid $table-border-color;
+  }
+
+  &.less-bordered.except-last > tbody > tr:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media #{$medium-and-down} {
+  table.responsive-table {
+    &.less-bordered {
+      th { border-bottom: 0; border-left: 0; }
+      td { border-left: 0; border-right: 0; border-bottom: 0; }
+      tr { border: 0; }
+      tbody tr { border-right: 1px solid $table-border-color; }
+    }
+  }
+}
