@@ -28,6 +28,39 @@ class MembersController < ApplicationController
     end
   end
 
+  def search
+    @student_number = params[:text]
+    @member = Member.find_by(:student_number => @student_number)
+    #Check if user is already checked-in
+    @checked = false
+    @checkedin_today = false
+    @message = ""
+
+    @member.attendances.each do |f|
+      if !f.start_at.nil?
+        attendance_date = f.start_at.to_datetime
+        current_date = DateTime.now
+        if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
+          @checkedin_today = true
+        end
+        if f.end_at.nil? && @checkedin_today == true
+          f.update_attribute(:end_at, DateTime.now)
+          f.update_attribute(:status, :attended)
+          @checked = true
+          @message = "You have been Checked In..."
+        end
+      end
+    end
+    if @checked == false
+      if @checkedin_today == false
+        @attendance = Attendance.create(:member_id => @member.id, :start_at => DateTime.now)
+        @message = "You have been Checked Out"
+      else
+        @message = "You have already Checked In and Out Today!"
+      end
+    end
+  end
+
   # GET /members/1
   # GET /members/1.json
   def show

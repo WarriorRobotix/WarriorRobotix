@@ -4,7 +4,25 @@
 <hr>
 <% @member_groups.each do |group| %>
 <h3 class="flow-text"><%= group[0] %></h3>
-<div class="card-panel" style="padding:10px;">
+<div class="mobile-only">
+    <div class="card-panel">
+      <table class="flow-text" style="font-size:100%">
+      <thead>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Student Number</th>
+      </thead>
+      <% group[1].each do |member| %>
+        <tr>
+        <td><%= link_to "#{member.first_name} #{member.last_name}", "/members/#{member.id}" %></td>
+        <td><%= member.title %></td>
+        <td><%= member.student_number %></td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+</div>
+<div class="card-panel screen-only" style="padding:10px;">
 <table class="flow-text" style="font-size:100%;">
   <thead>
     <tr>
@@ -18,7 +36,7 @@
       <th>Admin</th>
       <th>Accepted</th>
       <th>Graduated Year</th>
-      <th colspan="4"></th>
+      <th colspan="4">Options</th>
       <% end %>
     </tr>
   </thead>
@@ -36,10 +54,9 @@
         <td><%= member.admin %></td>
         <td><%= member.accepted %></td>
         <td><%= member.graduated_year %></td>
-        <td><%= link_to 'Attendances', member_attendances_path(member) %></td>
-        <td><%= link_to 'Show', member %></td>
-        <td><%= link_to 'Edit', edit_member_path(member) %></td>
-        <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'visibility', member, class: "material-icons" %></td>
+        <td><%= link_to 'create', edit_member_path(member),class: "material-icons" %></td>
+        <td><%= link_to 'delete', member, method: :delete, data: { confirm: 'Are you sure?' }, class: "material-icons" %></td>
         <% end %>
       </tr>
     <% end %>
@@ -47,6 +64,7 @@
 </table>
 </div>
 <% end %>
+
 <% if member_is_admin? %>
 <br>
 <p class="flow-text" style="font-size:100%;">

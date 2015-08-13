@@ -1,0 +1,8 @@
+<% if !@member.nil? %>
+<%= @member.first_name %>
+<%= @member.last_name %>
+<br>
+<%= @message %>
+<% else %>
+Sorry no one with that student number found.
+<% end %>

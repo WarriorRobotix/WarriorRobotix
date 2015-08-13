@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   post 'signin' => 'sessions#create'
   delete 'signout' => 'sessions#destroy'
 
+
   get 'email' => 'members#email_edit'
   post 'email' => 'members#email_update'
 
@@ -33,5 +34,6 @@ Rails.application.routes.draw do
   post 'reset/:record_hex/:reset_token' => 'members#reset_password_update'
 
   get '/attend' => 'pages#attend'
+  get '/search' => 'members#search'
 
 end
