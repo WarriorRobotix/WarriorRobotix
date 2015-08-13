@@ -8,17 +8,13 @@
 <table class="flow-text" style="font-size:100%;">
   <thead>
     <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
+      <th>Full Name</th>
       <th>Title</th>
       <th>Grade</th>
       <% if member_is_admin? %>
       <th>Email</th>
       <th>Student Number</th>
       <th>Admin</th>
-      <th>Accepted</th>
-      <th>Graduated Year</th>
-      <th colspan="4"></th>
       <% end %>
     </tr>
   </thead>
@@ -26,22 +22,24 @@
   <tbody>
     <% group[1].each do |member| %>
       <tr>
-        <td><%= member.first_name %></td>
-        <td><%= member.last_name %></td>
+        <td><%= raw('<i class="small material-icons inline">supervisor_account</i>') if member.admin? && member_is_admin? %><%= link_to member.full_name, member %></td>
         <td><%= member.title %></td>
         <td><%= member.grade %></td>
         <% if member_is_admin? %>
         <td><%= member.email %></td>
         <td><%= member.student_number %></td>
         <td><%= member.admin %></td>
-        <td><%= member.accepted %></td>
-        <td><%= member.graduated_year %></td>
-        <td><%= link_to 'Attendances', member_attendances_path(member) %></td>
-        <td><%= link_to 'Show', member %></td>
-        <td><%= link_to 'Edit', edit_member_path(member) %></td>
-        <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
+      <% if member_is_admin? %>
+      <tr>
+        <td colspan="6" style="text-align:justify;">
+          <%= link_to 'Attendances', member_attendances_path(member) %> |
+          <%= link_to 'Edit', edit_member_path(member) %> |
+          <%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
