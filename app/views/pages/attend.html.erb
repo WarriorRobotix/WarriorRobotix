@@ -1,0 +1,11 @@
+<div style="display:inline-block;">
+<%= form_tag '/search', method:'get', class:'form-inline float-right', role:'form' do %>
+<a href="/"><span class="glyphicon glyphicon-arrow-left"></span></a>
+&nbsp;&nbsp;
+<div class="input-group">
+<%= text_field_tag :text, params[:text], class:'input-field', placeholder:'Enter Student Number...' %>
+<span class="input-group-btn">
+  <%= submit_tag 'Go!', class:'btn btn-default' %>
+</span>
+<% end %>
+</div>

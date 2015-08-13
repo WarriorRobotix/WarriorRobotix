@@ -4,7 +4,25 @@
 <hr>
 <% @member_groups.each do |group| %>
 <h3 class="flow-text"><%= group[0] %></h3>
-<div class="card-panel" style="padding:10px;">
+<div class="mobile-only">
+    <div class="card-panel">
+      <table class="flow-text" style="font-size:100%">
+      <thead>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Student Number</th>
+      </thead>
+      <% group[1].each do |member| %>
+        <tr>
+        <td><%= link_to "#{member.first_name} #{member.last_name}", "/members/#{member.id}" %></td>
+        <td><%= member.title %></td>
+        <td><%= member.student_number %></td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+</div>
+<div class="card-panel screen-only" style="padding:10px;">
 <table class="flow-text" style="font-size:100%;">
   <thead>
     <tr>
@@ -22,7 +40,7 @@
   <tbody>
     <% group[1].each do |member| %>
       <tr>
-        <td><%= raw('<i class="small material-icons inline">supervisor_account</i>') if member.admin? && member_is_admin? %><%= link_to member.full_name, member %></td>
+        <td><%= raw('<i class="small material-icons inline">supervisor_account</i> ') if member.admin? && member_is_admin? %><%= link_to member.full_name, member %></td>
         <td><%= member.title %></td>
         <td><%= member.grade %></td>
         <% if member_is_admin? %>
@@ -33,10 +51,16 @@
       </tr>
       <% if member_is_admin? %>
       <tr>
-        <td colspan="6" style="text-align:justify;">
-          <%= link_to 'Attendances', member_attendances_path(member) %> |
-          <%= link_to 'Edit', edit_member_path(member) %> |
-          <%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <td colspan="6">
+          <%= link_to member_attendances_path(member) do %>
+            <i class="small material-icons inline">today</i> Attendances
+          <% end %> |
+          <%= link_to edit_member_path(member) do %>
+            <i class="small material-icons inline">create</i> Edit
+          <% end %> |
+          <%= link_to member, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <i class="small material-icons inline">delete</i> Delete
+          <% end %>
         </td>
       </tr>
       <% end %>
@@ -45,6 +69,7 @@
 </table>
 </div>
 <% end %>
+
 <% if member_is_admin? %>
 <br>
 <p class="flow-text" style="font-size:100%;">
