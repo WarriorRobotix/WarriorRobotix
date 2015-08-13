@@ -70,4 +70,11 @@ label.dark {
   margin-bottom: 0;
 }
 
+.material-icons.inline{
+  position: relative;
+  &.small{
+    top: 9px;
+  }
+}
+
 @import "*"
