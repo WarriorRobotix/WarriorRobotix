@@ -47,7 +47,6 @@ class MembersController < ApplicationController
         if f.end_at.nil? && @checkedin_today == true
           f.update_attribute(:end_at, DateTime.now)
           f.update_attribute(:status, :attended)
-          f.update_attribute(:duration, f.end_at - f.start_at)
           @checked = true
           @respond = 2
         end
