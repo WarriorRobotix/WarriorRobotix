@@ -1,6 +1,7 @@
 <%= form_for(@event) do |f| %>
   <%= errors_for f.object %>
 
+  <%= hidden_field_tag :from, params[:from] if params[:from].present? %>
   <%= render partial: "posts/post_fields", locals: {f: f} %>
   <%= render partial: "event_datetime", locals: {f: f, method: :start_at} %>
   <%= render partial: "event_datetime", locals: {f: f, method: :end_at} %>

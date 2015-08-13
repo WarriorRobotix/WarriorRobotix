@@ -3,7 +3,7 @@
     <span class="title"><%= link_to "#{post.title}", post, class: "flow-text" %></span>
     <div style="float:right;margin-top:2%;">
       <% if member_is_admin? %>
-      <%= link_to 'create', send("edit_#{post.model_name.element}_path",post), class: "material-icons" %>
+      <%= link_to 'create', send("edit_#{post.model_name.element}_path",post, from: request_path), class: "material-icons" %>
       <%= link_to 'delete', post, class: "material-icons", method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
     </div>

@@ -1,6 +1,7 @@
 <%= form_for(@poll) do |f| %>
   <%= errors_for f.object %>
 
+  <%= hidden_field_tag :from, params[:from] if params[:from].present? %>
   <%= render partial: "posts/post_fields", locals: {f: f} %>
   <div class="field">
     <%= f.check_box :multiple_choices, disabled: f.object.active? %>

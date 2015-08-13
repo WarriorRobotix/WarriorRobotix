@@ -7,8 +7,12 @@ class ApplicationController < ActionController::Base
   def redirect_back
     if params[:from].present?
       redirect_to params[:from]
+    elsif block_given?
+      yield
     else
       redirect_to root_path
     end
   end
+
+  alias_method :try_redirect_back, :redirect_back
 end
