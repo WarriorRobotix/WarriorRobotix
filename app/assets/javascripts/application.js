@@ -34,6 +34,8 @@ $(function(){
   $('ul.tabs').tabs();
 
   replceNullDisableWith();
+
+  $('#notice').delay(4000).fadeOut('slow');
 });
 
 $(document).on('click', 'input[type=text][for]',function(){
