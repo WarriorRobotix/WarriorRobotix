@@ -19,16 +19,14 @@
 //= require_tree .
 
 $(function(){
+  if (window.is_ios()) { window.ios_ready(); }
+
   $('.datepicker').pickadate({
    selectMonths: false,
    selectYears: false,
    format: 'dddd, mmmm d, yyyy'
   });
 
-  var userAgent = window.navigator.userAgent;
-  if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
-    $('select:not(.browser-default)').addClass('browser-default');
-  }
   $('select:not(.browser-default)').material_select();
 
   $('ul.tabs').tabs();

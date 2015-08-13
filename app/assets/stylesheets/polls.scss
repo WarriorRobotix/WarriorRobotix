@@ -1,14 +1,24 @@
 // Place all the styles related to the polls controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-form.new_poll{
+form[id*="poll"]{
   counter-reset: options-counter;
   .option-label::after{
     counter-increment: options-counter;
     content:" " counter(options-counter);
   }
-  .nested-fields .remove a{
-    position: relative;
-    top: 20px;
+  .nested-fields{
+    .remove a{
+      position: relative;
+      top: 20px;
+    }
+
+    .col.text{
+      width: calc(100% - 150px);
+      @media #{$small-and-down} {
+        width: 100%;
+      }
+    }
+
   }
 }

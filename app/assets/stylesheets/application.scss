@@ -77,4 +77,22 @@ label.dark {
   }
 }
 
+.row.large-bottom-margin{
+  @media #{$medium-and-down} {
+    margin-bottom: 36px;
+  }
+}
+
+.row.large-margin,.large-margin-sm{
+  @media #{$medium-and-down} {
+    margin-top: 36px;
+    margin-bottom: 36px;
+  }
+}
+
+.margin-center{
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @import "*"
