@@ -36,6 +36,8 @@ $(function(){
   replceNullDisableWith();
 
   $('#notice').delay(4000).fadeOut('slow');
+
+  $(".button-collapse").sideNav();
 });
 
 $(document).on('click', 'input[type=text][for]',function(){

@@ -6,7 +6,7 @@
   <ul class="flow-text right hide-on-med-and-down" style="font-size:100%;">
     <% if member_signed_in? %>
     <li style="padding-right:15px;padding-left:15px;">
-        Hi, <%= current_member.first_name %> <%= current_member.last_name %> <%= "(admin)" if member_is_admin? %>
+        Hi, <%= current_member.full_name %> <%= "(admin)" if member_is_admin? %>
     </li>
     <% end %>
     <% if member_is_admin? %>
@@ -51,5 +51,3 @@
   <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
   </div>
 </nav>
-
-<script> $(".button-collapse").sideNav();</script>
