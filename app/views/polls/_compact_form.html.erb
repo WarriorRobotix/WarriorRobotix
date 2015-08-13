@@ -1,8 +1,9 @@
+<% 2.times { poll.options.build } if poll.new_record? %>
 <div id="poll_form_wrap" class="col s12 compact-form-wrap">
   <%= form_for(poll) do |f| %>
     <%= hidden_field_tag :from, from if local_assigns[:from].present? %>
     <%= render "posts/compact_post_fields", f: f %>
-    <div class="row large-margin">
+    <div class="row large-bottom-margin">
       <div class="input-field col s12 m12 l4">
         <%= f.select :ballots_privacy, Poll.ballots_privacies.map { |k,v| [k.titleize, k] } %>
         <%= f.label :ballots_privacy %>

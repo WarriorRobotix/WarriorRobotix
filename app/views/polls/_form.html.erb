@@ -1,19 +1,22 @@
+<% 2.times { @poll.options.build } if @poll.new_record? %>
 <%= form_for(@poll) do |f| %>
   <%= errors_for f.object %>
 
   <%= hidden_field_tag :from, params[:from] if params[:from].present? %>
   <%= render partial: "posts/post_fields", locals: {f: f} %>
-  <div class="field">
-    <%= f.check_box :multiple_choices, disabled: f.object.active? %>
-    <%= f.label :multiple_choices %>
-  </div>
-  <div class="field">
-    <%= f.check_box :ballots_changeable %>
-    <%= f.label :ballots_changeable %>
-  </div>
-  <div class="field">
-    <%= f.label :ballots_privacy %>
-    <%= f.select :ballots_privacy, Poll.ballots_privacies.map { |k,v| [k.titleize, k] } %>
+  <div class="row large-bottom-margin">
+    <div class="input-field col s12 m12 l4">
+      <%= f.select :ballots_privacy, Poll.ballots_privacies.map { |k,v| [k.titleize, k] } %>
+      <%= f.label :ballots_privacy %>
+    </div>
+    <div class="input-field col s12 m6 l4">
+      <%= f.check_box :multiple_choices, disabled: f.object.active? %>
+      <%= f.label :multiple_choices %>
+    </div>
+    <div class="input-field col s12 m6 l4">
+      <%= f.check_box :ballots_changeable %>
+      <%= f.label :ballots_changeable %>
+    </div>
   </div>
   <%= render "polls/options_form", f: f %>
 

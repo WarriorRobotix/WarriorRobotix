@@ -22,7 +22,13 @@
     padding: 5px 20px 10px 20px;
 
     font-size: 18px;
-    margin-bottom: 10px;
+  }
+
+  @media #{$small-and-down} {
+    padding: 5px 10px;
+    .attachment{
+      padding: 0;
+    }
   }
 }
 
@@ -34,26 +40,6 @@
 
 .quick-create{
   position: relative;
-  /*
-  padding-top: 20px;
-  padding-bottom: 0px;
-
-  .actions{
-    height: 4rem;
-    button{
-      margin-left: 20px;
-    }
-  }
-
-  .input-field{
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-
-  .row{
-    margin-bottom: 5px;
-  }
-  */
 }
 
 .quick-links{
@@ -72,11 +58,6 @@
   }
   .row{
     margin-bottom: 0px;
-    &.large-margin{
-      @media #{$medium-and-down} {
-        margin-bottom: 36px;
-      }
-    }
   }
 }
 

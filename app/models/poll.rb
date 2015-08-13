@@ -1,7 +1,7 @@
 class Poll < Post
   enum ballots_privacy: [:voters_viewable, :counts_viewable]
   has_many :options, dependent: :destroy
-  accepts_nested_attributes_for :options, allow_destroy: true
+  accepts_nested_attributes_for :options, allow_destroy: true, reject_if: :invalid_option
   validate :immutable_active_poll_attributes
   validate :min_restriction
 
@@ -36,5 +36,9 @@ class Poll < Post
 
   def min_restriction
     errors.add(:restriction, 'should higher than viewable to everyone') if restriction == "everyone"
+  end
+
+  def invalid_option(attributed)
+    attributed['description'].blank?
   end
 end

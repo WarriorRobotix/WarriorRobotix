@@ -1,24 +1,8 @@
-<% unless f.object.author.nil? %>
-<div class="field">
+<% if f.object.author.present? %>
+<div class="field grey-text">
   Original Author:
   <%= f.object.author.full_name %>
 </div>
+<br>
 <% end %>
-<div class="row">
-  <div class="input-field col s12">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-</div>
-<div class="row">
-  <div class="input-field col s12">
-    <%= f.text_area :description, class: "materialize-textarea" %>
-    <%= f.label :description %>
-  </div>
-</div>
-<div class="row">
-  <div class="input-field col s12 m8 l4">
-    <%= f.select :restriction, f.object.class.valid_restrictions.map { |k,v| [k.capitalize, k] }, {} %>
-    <%= f.label :restriction %>
-  </div>
-</div>
+<%= render 'posts/compact_post_fields', f: f %>
