@@ -90,11 +90,7 @@ class RegistrationField < ActiveRecord::Base
   end
 
   def select_tag_extra_info
-    if extra_info.nil?
-      errors.add(:options, 'should have at least 2 lines')
-    elsif extra_info.length < 2
-      errors.add(:options, 'should have at least 2 lines')
-    end
+    errors.add(:options, 'should have at least 2 lines') if (self.extra_info.nil? || self.extra_info.length < 2)
   end
 
   def uniq_map_to
