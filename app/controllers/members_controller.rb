@@ -3,7 +3,7 @@ class MembersController < ApplicationController
 
   before_action :authenticate_admin!, except: [:index, :new, :create]
   before_action :authenticate_member!, only: [:index]
-  
+
   # GET /members
   # GET /members.json
   def index
@@ -143,7 +143,7 @@ class MembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      m_params = params[:member].permit(:first_name, :last_name, :email, :student_number, :grade, :title, :admin, :accepted, :graduated_year, :graduated, :password)
+      m_params = params[:member].permit(:first_name, :last_name, :email, :student_number, :grade, :title, :admin, :accepted, :graduated_year, :graduated, :password, :team)
       m_params[:graduated_year] = 0 unless (m_params.delete(:graduated).to_i == 1)
       m_params
     end

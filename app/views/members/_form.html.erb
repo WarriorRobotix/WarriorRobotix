@@ -10,61 +10,74 @@
       </ul>
     </div>
   <% end %>
+  <div class="row">
+    <div class="input-field col s12 m6">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+    </div>
 
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
+    <div class="input-field col s12 m6">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+    </div>
+
+    <div class="input-field col s12 m6">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+
+    <div class="input-field col s12 m6">
+      <%= f.label :student_number %>
+      <%= f.text_field :student_number %>
+    </div>
+
+    <div class="input-field col s12 m6">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="input-field col s12 m6">
+      <%= f.label :team %>
+      <%= f.text_field :team %>
+    </div>
+
+    <div class="input-field col s12 m6">
+      <%= f.label :password, "Set Password (DEBUG ONLY)" %>
+      <%= f.text_field :password, value: "" %>
+    </div>
+
+    <div class="col s12">
+      <%= f.label :graduated_year %><br>
+      <%= radio_button_tag "member[graduated]","0", @member.graduated_year.nil? %>
+      <%= label_tag "member_graduated_0","Active" %>
+      <%= radio_button_tag "member[graduated]","1", !@member.graduated_year.nil? %>
+      <%= f.text_field :graduated_year, for: "member_graduated_1" %>
+    </div>
+    <div class="row" style="margin-top: 30px">
+    <div class="input-field col s6">
+      <%= f.check_box :admin %>
+      <%= f.label :admin %>
+    </div>
+
+    <div class="input-field col s6">
+      <%= f.check_box :accepted %>
+      <%= f.label :accepted %>
+    </div>
+    </div>
+    <div class="row" style="margin-top: 30px">
+    <% (9..12).each do |i| %>
+      <div class="input-field col s6 m3">
+        <%= radio_button_tag("member[grade]", i, f.object.grade == i) %>
+        <%= label_tag "member[grade][#{i}]", "Grade #{i}" %>
+      </div>
+    <% end %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :student_number %><br>
-    <%= f.text_field :student_number %>
-  </div>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password, "Set Password (DEBUG ONLY)" %><br>
-    <%= f.text_field :password, value: "" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :graduated_year %><br>
-    <%= radio_button_tag "member[graduated]","0", @member.graduated_year.nil? %>
-    <%= label_tag "member_graduated_0","Active" %>
-    <%= radio_button_tag "member[graduated]","1", !@member.graduated_year.nil? %>
-    <%= f.text_field :graduated_year, for: "member_graduated_1" %>
-  </div>
-
-  <div class="field">
-    <%= f.check_box :admin %>
-    <%= f.label :admin %><br>
-  </div>
-
-  <div class="field">
-    <%= f.check_box :accepted %>
-    <%= f.label :accepted %><br>
-  </div>
-
-  <div class="field">
-    <%= f.label :grade %>
-    <%= collection_radio_buttons(:member, :grade, (9..12).to_a, :to_s, :to_s) %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit data: { disable_with: nil } %>
+  <div class="row">
+    <div class="actions col s12">
+      <%= f.submit class: 'btn', data: { disable_with: nil } %>
+      <%= link_to 'Back', members_path, class: 'btn-flat' %>
+    </div>
   </div>
 <% end %>
