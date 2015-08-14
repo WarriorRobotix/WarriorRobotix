@@ -1,13 +1,12 @@
 <p id="notice"><%= notice %></p>
-
-<%= render 'registration_fields/table' if member_is_admin? %>
 <% if member_is_admin? %>
+<%= render 'registration_fields/table' %>
 <%= link_to 'Create Member Account', new_member_path, class: "btn-bordered" %>
 <% end %>
 <% @member_groups.each do |group| %>
 <h3 class="flow-text"><%= group[0] %></h3>
 <div class="card-panel" style="padding:10px;">
-  <table class="less-bordered except-last">
+  <table class="<%= 'less-bordered' if member_is_admin? %> except-last">
     <thead>
       <tr>
         <th style="padding-bottom:27px;">Full Name<%= raw(' (<i class="small material-icons inline">supervisor_account</i> admin)') if member_is_admin? %></th>
