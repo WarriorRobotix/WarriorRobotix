@@ -39,4 +39,12 @@ Rails.application.routes.draw do
   get '/attend' => 'pages#attend'
   get '/search' => 'members#search'
 
+  get '/register' => 'registrations#form'
+  post '/register' => 'registrations#submit'
+
+  get '/r' => 'registrations#form'
+  post '/r' => 'registrations#submit'
+
+  post 'registration/toggle' => 'registrations#toggle'
+
 end

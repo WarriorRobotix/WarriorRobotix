@@ -1,0 +1,31 @@
+<h1 class="flow-text">Warrior Robotix Registration</h1>
+
+<div class="card-panel" style="padding-bottom:15px;padding-top:10px;">
+  <%= form_tag do %>
+    <%= errors_for(@member) unless @member.nil? %>
+    <div class="row">
+    <% RegistrationField.order(order: :ASC, id: :ASC).all.each do |field| %>
+    <% name = field.title %>
+    <% title = field.optional ? "#{field.title} (optional)" : field.title %>
+    <% case field.input_type.to_sym %>
+    <% when :text_field %>
+      <div class="input-field col s12 m12 l6">
+        <%= label_tag "form_#{name}", title %>
+        <%= text_field_tag "form[#{name}]", @form[name] %>
+      </div>
+    <% when :text_area %>
+      <div class="input-field col s12 m12 l12">
+        <%= text_area_tag "form[#{name}]", @form[name], class: "materialize-textarea" %>
+        <%= label_tag "form_#{name}", title %>
+      </div>
+    <% when :select_tag %>
+      <div class="input-field col s12 m12 l6">
+        <%= select :form, name, field.extra_info, { selected: @form[name], include_blank: field.optional } %>
+        <%= label_tag "form_#{name}", title %>
+      </div>
+    <% end %>
+    <% end %>
+    </div>
+    <%= submit_tag "Submit", class: 'btn', data: { disable_with: "Please Wait..." } %>
+  <% end %>
+</div>
