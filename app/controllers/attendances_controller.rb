@@ -16,7 +16,7 @@ class AttendancesController < ApplicationController
   # GET members/1/attendances/new
   def new
     @attendance = Attendance.new
-    @attendance.status = :attended
+    @attendance.status = :attending
   end
 
   # GET members/1/attendances/1/edit
@@ -77,6 +77,6 @@ class AttendancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attendance_params
-      a_params = params.require(:attendance).permit(:start_at, :end_at, :status, :skip_end_at)
+      a_params = params.require(:attendance).permit(:start_at, :end_at, :status, :duration, :skip_end_at)
     end
 end

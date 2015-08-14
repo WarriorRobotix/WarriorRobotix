@@ -11,6 +11,11 @@ table {
   }
 }
 
+th{
+  padding-top: auto;
+  padding-bottom: auto;
+}
+
 @media #{$medium-and-down} {
   table.responsive-table {
     &.less-bordered {
