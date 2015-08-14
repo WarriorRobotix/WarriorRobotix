@@ -43,7 +43,7 @@ class RegistrationField < ActiveRecord::Base
     @options = val
     unless @options.nil?
       if input_type == "select_tag"
-        extra_info = @options.lines.map(&:chomp)
+        self.extra_info = @options.lines.map(&:chomp)
       end
     end
   end
@@ -74,7 +74,7 @@ class RegistrationField < ActiveRecord::Base
     if value.blank?
       self.optional
     elsif select_tag?
-      extra_info.include?(value.to_s)
+      self.extra_info.include?(value.to_s)
     else
       true
     end
