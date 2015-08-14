@@ -11,7 +11,7 @@ class Attendance < ActiveRecord::Base
   before_validation :set_skipped_end_at_nil
 
   belongs_to :member
-  belongs_to :event
+  belongs_to :event, touch: true
 
   private
   def set_skip_end_at
