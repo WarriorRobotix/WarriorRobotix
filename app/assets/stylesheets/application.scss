@@ -96,4 +96,11 @@ label.dark {
   margin-right: auto;
 }
 
+/// FOR MINI PROFILER
+.profiler-results{
+  @media #{$medium-and-down} {
+    display: none;
+  }
+}
+///
 @import "*"
