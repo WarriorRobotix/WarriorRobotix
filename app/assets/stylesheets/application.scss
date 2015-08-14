@@ -14,7 +14,7 @@ $link-color-darker: color("blue", "darken-4");
   color: $secondary-color;
 }
 
-.btn-border{
+.btn-bordered{
   @extend .btn-text;
   border: 1px solid $secondary-color;
   &:hover, &:active{
