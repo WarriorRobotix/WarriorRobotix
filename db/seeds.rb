@@ -1,8 +1,8 @@
 admins = []
 admin = Member.new(admin: true)
 admin.first_name = 'Shalin'
-admin.last_name = 'Petal'
-admin.email = 'shalin.petal@example.com'
+admin.last_name = 'Patel'
+admin.email = 'shalin.patel@example.com'
 admin.grade = 12
 admin.student_number = '111'
 admin.password = '123456'

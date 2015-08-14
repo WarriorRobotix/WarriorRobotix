@@ -52,7 +52,7 @@
             <% f.update_attribute(:duration, Time.at(time_diff.to_i.abs).utc.strftime("%H:%M")) %>
             <td><a href="/members/<%= Member.find(f.member_id).id %>/attendances"><%= Member.find(f.member_id).full_name %></a></td>
             <td class="hide-on-small-only"><%= Member.find(f.member_id).student_number %></td>
-            <td><%= f.duration.strftime('%H:%M') %></td>
+            <td><%= distance_of_time_in_words(Time.parse("0:0"), Time.parse(f.duration)) %></td>
             <td><%= f.start_at.strftime('%l:%M %p') %></td>
             <td><%=f.end_at.strftime('%l:%M %p') %></td>
           </tr>
