@@ -6,7 +6,7 @@ table {
     border-bottom: 1px solid $table-border-color;
   }
 
-  &.less-bordered.except-last > tbody > tr:last-child {
+  &.except-last > tbody > tr:last-child {
     border-bottom: 0;
   }
 }
