@@ -1,5 +1,6 @@
 class Member < ActiveRecord::Base
   has_secure_password
+  serialize :extra_info
   before_validation :set_default_password, on: :create
 
   before_validation :set_invalid_graduated_year_to_nil, :titleize_names
@@ -9,9 +10,11 @@ class Member < ActiveRecord::Base
 
   validates :grade, presence: true
 
-  validates :email, presence: true, uniqueness: true, format: { with: /.+@.+/, message: "format is invalid" }
+  validates :email, presence: true, uniqueness: true, format: { with: /.+@.+\..+/, message: "format is invalid" }
 
   validates :student_number, allow_blank: true, format: { without: /.+@.+/, message: "format is invalid" }
+
+  validate :extra_info_fields
 
   has_many :attendances, dependent: :destroy
   has_many :ballots, dependent: :destroy
@@ -85,6 +88,24 @@ class Member < ActiveRecord::Base
     admin ? 2 : 1
   end
 
+  def self.mappable_attributes
+    @mappable_attributes ||= {
+      "first_name" => { :type => :text_field, :optional => false },
+      "last_name" => { :type => :text_field, :optional => false },
+      "email" => { :type => :text_field, :optional => false },
+      "student_number" => { :type => :text_field },
+      "grade" => { :type => :select_tag, :extra_info => ('9'..'12').to_a, :optional => false }
+    }
+  end
+
+  def extra_info
+    super || {}
+  end
+
+  def add_extra_info_field_error(err)
+    (@extra_info_field_errors ||= []) << err
+  end
+
   private
   def set_default_password
     self.password ||= SecureRandom.base64(40)
@@ -95,7 +116,11 @@ class Member < ActiveRecord::Base
   end
 
   def titleize_names
-    self.first_name.capitalize!
-    self.last_name.capitalize!
+    self.first_name.try(:capitalize!)
+    self.last_name.try(:capitalize!)
+  end
+
+  def extra_info_fields
+    errors[:base].concat(@extra_info_field_errors) unless @extra_info_field_errors.blank?
   end
 end

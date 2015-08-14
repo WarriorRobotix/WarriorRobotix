@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<%= render 'registration_fields/table' if member_is_admin? %>
+<% if member_is_admin? %>
+<%= link_to 'Create Member Account', new_member_path, class: "btn-bordered" %>
+<% end %>
 <% @member_groups.each do |group| %>
 <h3 class="flow-text"><%= group[0] %></h3>
 <div class="card-panel" style="padding:10px;">
@@ -46,11 +50,4 @@
     </tbody>
   </table>
 </div>
-<% end %>
-
-<% if member_is_admin? %>
-<br>
-<p class="flow-text" style="font-size:100%;">
-<%= link_to 'New Member', new_member_path %>
-</p>
 <% end %>

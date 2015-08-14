@@ -1,0 +1,29 @@
+<%= form_for(@registration_field) do |f| %>
+  <%= errors_for @registration_field %>
+
+  <div class="row large-bottom-margin">
+    <div class="input-field col s12 m12 l12">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="input-field col s12 m8 l6">
+      <%= f.select :input_type, RegistrationField.input_type_for_select %>
+      <%= f.label :input_type %>
+    </div>
+    <div class="input-field col s12 m4 l4 check-box-field">
+      <%= f.check_box :optional %>
+      <%= f.label :optional %>
+    </div>
+    <div class="input-field col s12">
+      <%= f.text_area :options, class: "materialize-textarea" %>
+      <%= f.label :options, 'Options for Selcet Tag Input Type' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="actions col s12">
+      <%= f.submit class: 'btn', data: { disable_with: nil } %>
+      <%= link_to 'Back', posts_path, class: 'btn-flat' %>
+    </div>
+  </div>
+<% end %>

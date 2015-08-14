@@ -44,6 +44,11 @@
   <% end %>
 </p>
 
+<p>
+  <strong>Extra Info:</strong>
+  <%= @member.extra_info.inspect %>
+</p>
+
 <%= link_to 'Attendances', member_attendances_path(@member) %> |
 <%= link_to 'Edit', edit_member_path(@member) %> |
 <%= link_to 'Back', members_path %>

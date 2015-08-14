@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810005015) do
+ActiveRecord::Schema.define(version: 20150813143629) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id",              null: false
@@ -82,6 +82,17 @@ ActiveRecord::Schema.define(version: 20150810005015) do
     t.integer  "author_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+  end
+
+  create_table "registration_fields", force: :cascade do |t|
+    t.string   "title",                     null: false
+    t.string   "extra_info"
+    t.integer  "input_type", default: 0,    null: false
+    t.boolean  "optional",   default: true, null: false
+    t.integer  "order",      default: 0,    null: false
+    t.string   "map_to"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
 end

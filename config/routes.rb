@@ -21,7 +21,6 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :destroy], controller: :posts, type: "Event"
   resources :polls, only: [:index, :destroy], controller: :posts, type: "Poll"
 
-
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'
   delete 'signout' => 'sessions#destroy'
@@ -46,5 +45,14 @@ Rails.application.routes.draw do
   post '/r' => 'registrations#submit'
 
   post 'registration/toggle' => 'registrations#toggle'
+
+  get '/registration_fields', to: redirect('/members')
+  resources :registration_fields, except: [:index, :show] do
+    collection do
+      post '/fix' => 'registration_fields#fix'
+    end
+    post '/up' => 'registration_fields#up'
+    post '/down' => 'registration_fields#down'
+  end
 
 end

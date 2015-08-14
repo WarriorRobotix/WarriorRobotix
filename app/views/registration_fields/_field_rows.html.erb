@@ -1,0 +1,24 @@
+<% RegistrationField.order(order: :ASC, id: :ASC).each do |field| %>
+<tr>
+  <td><%= field.order + 1 %></td>
+  <td><%= field.title %></td>
+  <td><%= field.input_type.titleize %><%= " (#{field.extra_info_for_human})" if field.extra_info.present? %></td>
+  <td><%= field.optional ? 'optional' : '✓' %></td>
+  <td><%= link_to 'Up', registration_field_up_path(field), method: :post, remote: true, data: { disable_with: nil } %></td>
+  <td><%= link_to 'Down', registration_field_down_path(field), method: :post, remote: true, data: { disable_with: nil } %></td>
+  <td><%= link_to 'Edit', edit_registration_field_path(field) %></td>
+  <td><%= link_to 'Delete', field, method: :delete, remote: true, data: { disable_with: nil, confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+<tr>
+  <td class="hide-on-med-and-down" colspan="9"><%= link_to 'New Registration Field', new_registration_field_path %></td>
+</tr>
+<tr>
+  <td class="hide-on-med-and-down" colspan="9">
+    <% if RegistrationField.valid_member_fields?  %>
+    <%= link_to r_url, r_url %> or <%= link_to register_url, register_url %>
+    <% else %>
+    Invalid form: Require first name, last name, email, and grade fields <%= link_to 'Quick FIX', fix_registration_fields_path, method: :post, remote: true, data: { disable_with: nil } %>
+    <% end %>
+  </td>
+</tr>
