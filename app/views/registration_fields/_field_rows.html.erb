@@ -1,4 +1,5 @@
 <% RegistrationField.order(order: :ASC, id: :ASC).each do |field| %>
+<% cache(field) do %>
 <tr>
   <td><%= field.order + 1 %></td>
   <td><%= field.title %></td>
@@ -9,6 +10,7 @@
   <td><%= link_to 'Edit', edit_registration_field_path(field) %></td>
   <td><%= link_to 'Delete', field, method: :delete, remote: true, data: { disable_with: nil, confirm: 'Are you sure?' } %></td>
 </tr>
+<% end %>
 <% end %>
 <tr>
   <td class="hide-on-med-and-down" colspan="9"><%= link_to 'New Registration Field', new_registration_field_path %></td>
