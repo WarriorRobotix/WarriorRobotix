@@ -12,7 +12,7 @@ class Member < ActiveRecord::Base
 
   validates :email, presence: true, uniqueness: true, format: { with: /.+@.+\..+/, message: "format is invalid" }
 
-  validates :student_number, allow_blank: true, format: { without: /.+@.+/, message: "format is invalid" }
+  validates :student_number, presence: true, uniqueness: true, format: { without: /.+@.+/, message: "format is invalid" }, numericality: { only_integer: true }
 
   validate :extra_info_fields
 
