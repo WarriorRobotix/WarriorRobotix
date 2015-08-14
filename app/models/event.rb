@@ -1,6 +1,10 @@
 class Event < Post
   has_many :attendances
 
+  validates :start_at, presence: true
+  validates :end_at, presence: true
+  validate :end_after_start
+
   def update_reply(member, reply)
     reply = reply.to_s.downcase
 
@@ -35,6 +39,12 @@ class Event < Post
       "#{reply_count} members - #{names.join(', ')}"
     else
       "#{reply_count} members - #{names[0..2].join(', ')} and others"
+    end
+  end
+
+  def end_after_start
+    if start_at.present? && end_at.present? && (start_at > end_at)
+      errors.add(:end_at, "must after start at")
     end
   end
 end

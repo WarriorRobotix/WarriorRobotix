@@ -43,7 +43,7 @@ class RegistrationField < ActiveRecord::Base
     @options = val
     unless @options.nil?
       if input_type == "select_tag"
-        extra_info = @options.lines.map(&:chomp)
+        self.extra_info = @options.lines.map(&:chomp)
       end
     end
   end
@@ -74,7 +74,7 @@ class RegistrationField < ActiveRecord::Base
     if value.blank?
       self.optional
     elsif select_tag?
-      extra_info.include?(value.to_s)
+      self.extra_info.include?(value.to_s)
     else
       true
     end
@@ -90,11 +90,7 @@ class RegistrationField < ActiveRecord::Base
   end
 
   def select_tag_extra_info
-    if extra_info.nil?
-      errors.add(:options, 'should have at least 2 lines')
-    elsif extra_info.length < 2
-      errors.add(:options, 'should have at least 2 lines')
-    end
+    errors.add(:options, 'should have at least 2 lines') if (self.extra_info.nil? || self.extra_info.length < 2)
   end
 
   def uniq_map_to
