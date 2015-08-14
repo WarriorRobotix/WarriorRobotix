@@ -11,7 +11,7 @@
     <thead>
       <tr>
         <th style="padding-bottom:27px;">Full Name<%= raw(' (<i class="small material-icons inline">supervisor_account</i> admin)') if member_is_admin? %></th>
-        <th>Title</th>
+        <th>Team</th>
         <th class="hide-on-small-only">Grade</th>
         <% if member_is_admin? %>
         <th class="hide-on-med-and-down">Email</th>
@@ -24,7 +24,7 @@
       <% group[1].each do |member| %>
         <tr>
           <td style="padding-bottom:25px;"><%= raw('<i class="small material-icons inline">supervisor_account</i> ') if member.admin? && member_is_admin? %><%= link_to member.full_name, member %></td>
-          <td><%= member.title %></td>
+          <td><%= member.team %></td>
           <td class="hide-on-small-only"><%= member.grade %></td>
           <% if member_is_admin? %>
           <td class="hide-on-med-and-down"><%= member.email %></td>
