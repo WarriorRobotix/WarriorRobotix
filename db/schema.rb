@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20150813170003) do
     t.datetime "end_at"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.time     "duration"
+    t.string   "duration"
   end
 
   add_index "attendances", ["event_id"], name: "index_attendances_on_event_id"
