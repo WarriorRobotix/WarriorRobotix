@@ -67,7 +67,7 @@ class RegistrationField < ActiveRecord::Base
   end
 
   def self.valid_member_fields?
-    where(map_to: [:first_name, :last_name, :email, :grade]).count == 4
+    where(map_to: [:first_name, :last_name, :email, :grade, :student_number]).count == 5
   end
 
   def input_value_valid?(value)
