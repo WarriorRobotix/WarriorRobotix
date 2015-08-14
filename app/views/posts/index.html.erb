@@ -2,7 +2,8 @@
 
 <h1 class="max8 flow-text">Listing Posts</h1>
 
-<%= render "index_create" if member_is_admin? %>
+<%= render(partial: "index_create", cache: true) if member_is_admin? %>
+
 <% @posts.each do |post| %>
   <%= render post %>
 <% end %>
