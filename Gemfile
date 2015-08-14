@@ -38,6 +38,9 @@ gem 'cocoon'
 # Implement Material Design
 gem 'materialize-sass'
 
+# Profiling rails with rack-mini-profiler
+gem 'rack-mini-profiler'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
