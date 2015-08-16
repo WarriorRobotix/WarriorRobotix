@@ -1,6 +1,9 @@
 class RegistrationFieldsController < ApplicationController
   before_action :set_registration_field, only: [:edit, :update, :destroy, :up, :down]
 
+  def index
+  end
+
   def new
     @registration_field = RegistrationField.new
   end
