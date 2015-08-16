@@ -6,7 +6,7 @@
 <% @member_groups.each do |group| %>
 <h3 class="flow-text"><%= group[0] %></h3>
 <div class="card-panel" style="padding:10px;">
-  <table class="<%= 'less-bordered' if member_is_admin? %> except-last">
+  <table class="centered except-last">
     <thead>
       <tr>
         <th style="padding-bottom:27px;">Full Name<%= raw(' (<i class="small material-icons inline">supervisor_account</i> admin)') if member_is_admin? %></th>
@@ -15,6 +15,8 @@
         <% if member_is_admin? %>
         <th class="hide-on-med-and-down">Email</th>
         <th class="hide-on-med-and-down">Student Number</th>
+        <th></th>
+        <th colspan="2" class="hide-on-med-and-down"></th>
         <% end %>
       </tr>
     </thead>
@@ -28,23 +30,11 @@
           <% if member_is_admin? %>
           <td class="hide-on-med-and-down"><%= member.email %></td>
           <td class="hide-on-med-and-down"><%= member.student_number %></td>
+          <td><%= link_to 'today', member_attendances_path(member), class: 'material-icons' %></td>
+          <td class="hide-on-med-and-down"><%= link_to 'create', edit_member_path(member), class: 'material-icons' %></td>
+          <td class="hide-on-med-and-down"><%= link_to 'delete', member, method: :delete, class: 'material-icons', data: { confirm: 'Are you sure?' } %></td>
           <% end %>
         </tr>
-        <% if member_is_admin? %>
-        <tr class="hide-on-small-only">
-          <td style="padding:none;" colspan="5">
-            <%= link_to member_attendances_path(member) do %>
-              <i class="small material-icons inline">today</i> Attendances
-            <% end %>&nbsp;|&nbsp;
-            <%= link_to edit_member_path(member) do %>
-              <i class="small material-icons inline">create</i> Edit
-            <% end %>&nbsp;|&nbsp;
-            <%= link_to member, method: :delete, data: { confirm: 'Are you sure?' } do %>
-              <i class="small material-icons inline">delete</i> Delete
-            <% end %>
-          </td>
-        </tr>
-        <% end %>
       <% end %>
     </tbody>
   </table>
