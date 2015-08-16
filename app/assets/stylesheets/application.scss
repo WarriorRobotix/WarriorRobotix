@@ -96,6 +96,11 @@ label.dark {
   margin-right: auto;
 }
 
+.max6{
+  margin: 30px auto;
+  max-width: 600px;
+}
+
 /// FOR MINI PROFILER
 .profiler-results{
   @media #{$medium-and-down} {
