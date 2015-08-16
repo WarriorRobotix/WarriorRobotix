@@ -42,7 +42,6 @@ class RegistrationFieldsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to registration_fields_url, notice: 'Registration field was successfully destroyed.' }
       format.json { head :no_content }
-      format.js { render :update_table }
     end
   end
 
@@ -50,7 +49,6 @@ class RegistrationFieldsController < ApplicationController
     RegistrationField.create([{ title: "First name" }, { title: "Last name" }, { title: "Email" }, { title: "Grade" }, { title: "Student number" }])
     respond_to do |format|
       format.html { redirect_to registration_fields_url, notice: 'Registration fields\' issues were successfully fixed.' }
-      format.js { render :update_table }
     end
   end
 

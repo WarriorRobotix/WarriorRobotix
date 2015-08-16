@@ -8,7 +8,7 @@
   <td><%= link_to 'Up', registration_field_up_path(field), method: :post, remote: true, data: { disable_with: nil } %></td>
   <td><%= link_to 'Down', registration_field_down_path(field), method: :post, remote: true, data: { disable_with: nil } %></td>
   <td><%= link_to 'Edit', edit_registration_field_path(field) %></td>
-  <td><%= link_to 'Delete', field, method: :delete, remote: true, data: { disable_with: nil, confirm: 'Are you sure?' } %></td>
+  <td><%= link_to 'Delete', field, method: :delete, data: { disable_with: nil, confirm: 'Are you sure?' } %></td>
 </tr>
 <% end %>
 <% end %>
