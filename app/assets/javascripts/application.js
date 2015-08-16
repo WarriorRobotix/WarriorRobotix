@@ -33,8 +33,6 @@ $(function(){
 
   replceNullDisableWith();
 
-  $('#notice').delay(4000).fadeOut('slow');
-
   $(".button-collapse").sideNav();
 });
 

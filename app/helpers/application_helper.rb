@@ -26,6 +26,26 @@ module ApplicationHelper
     end
   end
 
+  def flash_toasts
+    "<script type=\"text/javascript\" data-turbolinks-eval=\"always\">#{toasts_script}</script>" if flash.any?
+  end
+
+  def toasts_script
+    "#{flash.map{|k,v| toast_for_flash(k,v)}.join(';')};" if flash.any?
+  end
+
+  def toast_for_flash(name,msg)
+    case name
+    when 'notice'
+      css_class = 'toast-notice'
+    when 'alert'
+      css_class = 'toast-alert'
+    else
+      css_class = 'toast-base'
+    end
+    "Materialize.toast('#{msg}', '4000', '#{css_class}')"
+  end
+
   def return_to_info
     { from:  request_path}
   end
