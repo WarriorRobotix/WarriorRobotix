@@ -1,0 +1,41 @@
+<%= form_for(@sponsor) do |f| %>
+  <% if @sponsor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sponsor.errors.count, "error") %> prohibited this sponsor from being saved:</h2>
+
+      <ul>
+      <% @sponsor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :image_link %><br>
+    <%= f.text_field :image_link %>
+  </div>
+  <div class="field">
+    <%= f.label :facebook_link %><br>
+    <%= f.text_field :facebook_link %>
+  </div>
+  <div class="field">
+    <%= f.label :twitter_link %><br>
+    <%= f.text_field :twitter_link %>
+  </div>
+  <div class="field">
+    <%= f.label :website_link %><br>
+    <%= f.text_field :website_link %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
