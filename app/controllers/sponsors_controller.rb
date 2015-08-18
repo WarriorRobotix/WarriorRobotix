@@ -29,8 +29,8 @@ class SponsorsController < ApplicationController
 
     respond_to do |format|
       if @sponsor.save
-        format.html { redirect_to @sponsor, notice: 'Sponsor was successfully created.' }
-        format.json { render :show, status: :created, location: @sponsor }
+        format.html { redirect_to sponsors_path, notice: 'Sponsor was successfully created.' }
+        format.json { render :show, status: :created, location: sponsors_path }
       else
         format.html { render :new }
         format.json { render json: @sponsor.errors, status: :unprocessable_entity }
@@ -57,7 +57,7 @@ class SponsorsController < ApplicationController
   def destroy
     @sponsor.destroy
     respond_to do |format|
-      format.html { redirect_to sponsors_url, notice: 'Sponsor was successfully destroyed.' }
+      format.html { redirect_to sponsors_url, notice: 'Sponsor was successfully removed.' }
       format.json { head :no_content }
     end
   end
