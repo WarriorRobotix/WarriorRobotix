@@ -1,41 +1,35 @@
 <%= form_for(@sponsor) do |f| %>
-  <% if @sponsor.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@sponsor.errors.count, "error") %> prohibited this sponsor from being saved:</h2>
-
-      <ul>
-      <% @sponsor.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <%= errors_for @sponsor %>
+  <div class="row">
+    <div class="input-field col s12">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <div class="input-field col s12">
+      <%= f.text_area :description, class: 'materialize-textarea' %>
+      <%= f.label :description %>
+    </div>
+    <div class="input-field col s12 l6">
+      <%= f.label :image_link %>
+      <%= f.text_field :image_link %>
+    </div>
+    <div class="input-field col s12 l6">
+      <%= f.label :facebook_link %>
+      <%= f.text_field :facebook_link %>
+    </div>
+    <div class="input-field col s12 l6">
+      <%= f.label :twitter_link %>
+      <%= f.text_field :twitter_link %>
+    </div>
+    <div class="input-field col s12 l6">
+      <%= f.label :website_link %>
+      <%= f.text_field :website_link %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :image_link %><br>
-    <%= f.text_field :image_link %>
-  </div>
-  <div class="field">
-    <%= f.label :facebook_link %><br>
-    <%= f.text_field :facebook_link %>
-  </div>
-  <div class="field">
-    <%= f.label :twitter_link %><br>
-    <%= f.text_field :twitter_link %>
-  </div>
-  <div class="field">
-    <%= f.label :website_link %><br>
-    <%= f.text_field :website_link %>
-  </div>
-  <div class="actions">
-    <%= f.submit class: "btn" %>
+  <div class="row">
+    <div class="actions col s12">
+      <%= f.submit class: 'btn', data: { disable_with: nil } %>
+      <%= link_to 'Back', sponsors_path, class: 'btn-flat' %>
+    </div>
   </div>
 <% end %>
