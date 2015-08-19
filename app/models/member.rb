@@ -15,6 +15,7 @@ class Member < ActiveRecord::Base
   validates :student_number, presence: true, uniqueness: true, format: { without: /.+@.+/, message: "format is invalid" }, numericality: { only_integer: true }
 
   validate :extra_info_fields
+  validate :admin_must_accpeted
 
   has_many :attendances, dependent: :destroy
   has_many :ballots, dependent: :destroy
@@ -106,6 +107,16 @@ class Member < ActiveRecord::Base
     (@extra_info_field_errors ||= []) << err
   end
 
+  def member_type
+    if admin
+      "Admin"
+    elsif accepted
+      "Member"
+    else
+      "Pending Member"
+    end
+  end
+
   private
   def set_default_password
     self.password ||= SecureRandom.base64(40)
@@ -122,5 +133,9 @@ class Member < ActiveRecord::Base
 
   def extra_info_fields
     errors[:base].concat(@extra_info_field_errors) unless @extra_info_field_errors.blank?
+  end
+
+  def admin_must_accpeted
+    errors.add(:accepted, 'must be true for an admin account') if (admin && !accepted)
   end
 end
