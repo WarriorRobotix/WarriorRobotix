@@ -35,7 +35,6 @@ class MembersController < ApplicationController
     #Check if user is already checked-in
     @checked = false
     @checkedin_today = false
-    @respond = 0
 
     if !@member.nil?
     @member.attendances.each do |f|
@@ -49,20 +48,23 @@ class MembersController < ApplicationController
           f.update_attribute(:end_at, DateTime.now)
           f.update_attribute(:status, :attended)
           @checked = true
-          @respond = 2
+          flash[:notice] = "You have been Checked Out"
         end
       end
     end
     if @checked == false
       if @checkedin_today == false
         @attendance = Attendance.create(:member_id => @member.id, :start_at => DateTime.now, :status => :attending)
-        @respond = 1
+        flash[:notice] = "You have been Checked In"
       else
-        @respond = 3
+        flash[:alert] = "You have already Checked In and Out Today!"
       end
     end
+    redirect_to attend_path
+    else
+      redirect_to attend_path
+      flash[:alert] = "Can not find anyone with that Student Number"
     end
-    redirect_to attend_path(message: @respond)
   end
 
   # GET /members/1

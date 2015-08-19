@@ -22,16 +22,5 @@ class PagesController < ApplicationController
         end
       end
     end
-    @recieveMessage = params[:message]
-    @message = ""
-    if @recieveMessage == 0
-      @message = "Can not find anyone with the given Student Number!"
-    elsif @recieveMessage == 1
-      @message = "You have been Checked In..."
-    elsif @recieveMessage == 2
-      @message = "You have been Checked Out..."
-    elsif @recieveMessage == 3
-      @message = "You have already Checked In and Out Today!"
-    end
   end
 end

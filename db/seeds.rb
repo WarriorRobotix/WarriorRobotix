@@ -84,3 +84,21 @@ poll = Poll.create!({
     { description: "quia" },
   ]
 })
+
+Sponsor.create!({
+  name: "Boston Pizza",
+  description: "Boston Pizza is Canada’s No. 1 casual dining brand with more than 365 restaurants in Canada serving more than 100 unique and delicious menu items such as gourmet pizzas and pastas, juicy burgers and our famous BP wings. Annually, Boston Pizza serves more than 40 million guests, and in 2014 achieved system-wide sales that surpassed $1 billion. Boston Pizza has proudly been recognized as a Platinum Member of Canada’s 50 Best Managed Companies for 21 consecutive years.",
+  website_link: "https://bostonpizza.com/en",
+  facebook_link: "https://www.facebook.com/BostonPizza",
+  twitter_link: "https://twitter.com/bostonpizza",
+  image_link: "https://upload.wikimedia.org/wikipedia/en/thumb/2/20/Boston_Pizza.svg/1024px-Boston_Pizza.svg.png"
+})
+
+Sponsor.create!({
+  name: "NASA",
+  description: "The National Aeronautics and Space Administration (NASA) is the United States government agency responsible for the civilian space program as well as aeronautics and aerospace research.",
+  website_link: "http://www.nasa.gov/",
+  facebook_link: "https://www.facebook.com/NASA",
+  twitter_link: "https://twitter.com/nasa",
+  image_link: "http://www.nasa.gov/sites/default/files/images/nasaLogo-570x450.png"
+})
