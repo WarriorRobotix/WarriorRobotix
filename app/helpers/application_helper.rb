@@ -27,10 +27,6 @@ module ApplicationHelper
   end
 
   def flash_toasts
-    "<script type=\"text/javascript\" data-turbolinks-eval=\"always\">#{toasts_script}</script>" if flash.any?
-  end
-
-  def toasts_script
     "#{flash.map{|k,v| toast_for_flash(k,v)}.join(';')};" if flash.any?
   end
 
