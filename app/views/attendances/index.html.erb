@@ -1,24 +1,26 @@
-<h1>Listing Attendances</h1>
+<h1 class="flow-text">Listing Attendances</h1>
 
+<div class="card-panel">
 <table>
   <thead>
     <tr>
-      <th>Start at</th>
-      <th>End at</th>
-      <th>Status</th>
-      <th colspan="3"></th>
+      <th>Date</th>
+      <th>Check In</th>
+      <th>Check Out</th>
+      <th class="hide-on-med-and-down">Status</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @attendances.each do |attendance| %>
       <tr>
-        <td><%= attendance.start_at.try(:strftime, "%a, %e %b %Y %H:%M") %></td>
-        <td><%= attendance.end_at.try(:strftime, "%a, %e %b %Y %H:%M") %></td>
-        <td><%= attendance.status.capitalize %></td>
-        <td><%= link_to 'Show', [@member, attendance] %></td>
-        <td><%= link_to 'Edit', edit_member_attendance_path(member_id: @member.id, id: attendance.id) %></td>
-        <td><%= link_to 'Destroy', [@member, attendance], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "#{attendance.start_at.try(:strftime, "%a, %e %b %Y")}", [@member, attendance] %></td>
+        <td><%= attendance.start_at.try(:strftime, "%H:%M %p") %></td>
+        <td><%= attendance.end_at.try(:strftime, "%H:%M %p") %></td>
+        <td class="hide-on-med-and-down"><%= attendance.status.capitalize %></td>
+        <td><%= link_to 'create', edit_member_attendance_path(member_id: @member.id, id: attendance.id), class: "material-icons" %></td>
+        <td><%= link_to 'delete', [@member, attendance], method: :delete, data: { confirm: 'Are you sure?' }, class: "material-icons" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +28,5 @@
 
 <br>
 
-<%= link_to 'New Attendance', new_member_attendance_path(@member) %>
+<%= link_to 'Add Attendance', new_member_attendance_path(@member), class: "btn-bordered" %>
+</div>

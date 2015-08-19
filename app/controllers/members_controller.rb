@@ -63,7 +63,7 @@ class MembersController < ApplicationController
     redirect_to attend_path
     else
       redirect_to attend_path
-      flash[:alert] = "Can not find anyone with that Student Number"
+      flash[:alert] = "Can not find anyone with that Student Number!"
     end
   end
 

@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="row">
-        <table class="left-align col s12 m6 right-bordered-on-med-and-up">
+        <table class="left-align col s12 m6">
           <tr>
             <td><strong>Email</strong></td>
             <td><%= @member.email %></td>
@@ -31,9 +31,6 @@
             <td><strong>Type</strong></td>
             <td><%= @member.member_type %></td>
           </tr>
-        </table>
-
-        <table class="align-left col s12 m6 hide-on-small-only">
           <tr>
             <td><strong>Graduated Year</strong></td>
             <td><%= @member.graduated_year || "Active" %></td>
