@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if identifier.present? && password.present?
       if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", identifier, identifier).take.try(:authenticate, password)
         signin_member(member)
-        redirect_back
+        redirect_back notice: "You have successfully signed in"
         return
       end
     end
