@@ -20,6 +20,7 @@
 
 $(function(){
   if (window.is_ios()) { window.ios_ready(); }
+  window.hash_modal.refresh();
 
   $('.datepicker').pickadate({
    selectMonths: false,
@@ -34,6 +35,10 @@ $(function(){
   replceNullDisableWith();
 
   $(".button-collapse").sideNav();
+});
+
+$(window).on('hashchange', function(){
+  window.hash_modal.hashchange();
 });
 
 $(document).on('click', 'input[type=text][for]',function(){

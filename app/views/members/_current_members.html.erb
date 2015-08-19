@@ -1,0 +1,39 @@
+<h3 class="flow-text"><%= local_assigns[:group_name] || "Members" %></h3>
+<div class="card-panel" style="padding:10px;">
+  <table class="centered except-last">
+    <thead>
+      <tr>
+        <th style="padding-bottom:27px;">Full Name<%= raw(' (<i class="small material-icons inline">supervisor_account</i> admin)') if member_is_admin? %></th>
+        <th>Team</th>
+        <th class="hide-on-small-only">Grade</th>
+        <% if member_is_admin? %>
+        <th class="hide-on-med-and-down">Email</th>
+        <th class="hide-on-med-and-down">Student Number</th>
+        <th></th>
+        <th colspan="2" class="hide-on-med-and-down"></th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% members.each do |member| %>
+        <tr>
+          <% if member_is_admin? %>
+          <td style="padding-bottom:25px;"><%= raw('<i class="small material-icons inline">supervisor_account</i> ') if member.admin? %><%= link_to member.full_name, "#m-#{member.id}" %></td>
+          <% else %>
+          <td style="padding-bottom:25px;"><%= member.full_name %></td>
+          <% end %>
+          <td><%= member.team %></td>
+          <td class="hide-on-small-only"><%= member.grade %></td>
+          <% if member_is_admin? %>
+          <td class="hide-on-med-and-down"><%= member.email %></td>
+          <td class="hide-on-med-and-down"><%= member.student_number %></td>
+          <td><%= link_to 'today', member_attendances_path(member), class: 'material-icons' %></td>
+          <td class="hide-on-med-and-down"><%= link_to 'create', edit_member_path(member), class: 'material-icons' %></td>
+          <td class="hide-on-med-and-down"><%= link_to 'delete', member, method: :delete, class: 'material-icons', data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

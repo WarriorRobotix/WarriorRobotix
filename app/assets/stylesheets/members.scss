@@ -1,0 +1,23 @@
+.right-bordered-on-med-and-up{
+  @media #{$medium-and-up} {
+    border-right: 1px solid #D0D0D0;
+  }
+}
+
+@media #{$small-and-down} {
+  .modal {
+      width: 100%;
+  }
+  .modal.modal-fixed-footer{
+    height: 80%;
+    max-height: 80%;
+  }
+  .member.modal{
+    .modal-content *{
+      max-width: 100%;
+    }
+    .modal-content table td{
+      text-wrap: break-word;
+    }
+  }
+}

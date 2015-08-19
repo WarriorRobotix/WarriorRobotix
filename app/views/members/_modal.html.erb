@@ -1,0 +1,65 @@
+<div id="m-<%= @member.id %>" class="member modal modal-fixed-footer">
+    <div class="modal-content">
+      <div class="row no-margin-bottom">
+        <h4 class="col s12 m6"><%= @member.full_name %></h4>
+        <div class="col offset-s4 s4 m3 center-align">
+          <%= link_to 'Edit', edit_member_path(@member), class: "btn-text" %>
+        </div>
+        <div class="col s4 m3 center-align">
+          <%= link_to 'Delete', member_path(@member), class: "btn-text", method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+      <div class="row">
+        <table class="left-align col s12 m6 right-bordered-on-med-and-up">
+          <tr>
+            <td><strong>Email</strong></td>
+            <td><%= @member.email %></td>
+          </tr>
+          <tr>
+            <td><strong>Grade</strong></td>
+            <td><%= @member.grade %></td>
+          </tr>
+          <tr>
+            <td><strong>Student Number</strong></td>
+            <td><%= @member.student_number %></td>
+          </tr>
+          <tr class="hide-on-med-and-up">
+            <td><strong>Graduated Year</strong></td>
+            <td><%= @member.graduated_year || "Active" %></td>
+          </tr>
+          <tr class="hide-on-med-and-up">
+            <td><strong>Type</strong></td>
+            <td><%= @member.member_type %></td>
+          </tr>
+        </table>
+
+        <table class="align-left col s12 m6 hide-on-small-only">
+          <tr>
+            <td><strong>Graduated Year</strong></td>
+            <td><%= @member.graduated_year || "Active" %></td>
+          </tr>
+          <tr>
+            <td><strong>Type</strong></td>
+            <td><%= @member.member_type %></td>
+          </tr>
+        </table>
+
+        <% if @member.extra_info.any? %>
+        <div class="col s12">
+          <strong>Extra Info</strong>
+        </div>
+        <% @member.extra_info do |question,answer| %>
+        <div class="col s12 m6 l6">
+          <strong><%= question %></strong>
+          <%= answer %>
+        </div>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <%= link_to 'Attendances', member_attendances_path(@member), class: "modal-action waves-effect waves-green btn-flat left hide-on-small-only" %>
+      <%= link_to 'Attendances', member_attendances_path(@member), class: "modal-action left btn-narrow-flat hide-on-med-and-up" %>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+    </div>
+  </div>

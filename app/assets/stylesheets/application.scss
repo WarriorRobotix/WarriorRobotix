@@ -110,6 +110,10 @@ label.dark {
   text-align: left;
 }
 
+.hash-modal{
+  display: none;
+}
+
 /// FOR MINI PROFILER
 .profiler-results{
   @media #{$medium-and-down} {

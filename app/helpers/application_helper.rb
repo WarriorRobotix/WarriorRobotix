@@ -58,4 +58,9 @@ module ApplicationHelper
     @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(escape_html: true, hard_wrap: true ), autolink: true, strikethrough: true, tables: true, underline: true)
     raw(@markdown.render(text))
   end
+
+  def hash_modal(prefix, url_format, options={})
+    options = options.merge(class: 'hash-modal', id: "hm-#{prefix}", remote: true)
+    link_to prefix, url_format, options
+  end
 end
