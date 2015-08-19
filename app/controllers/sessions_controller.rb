@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    redirect_back if member_signed_in?
   end
 
   def create
