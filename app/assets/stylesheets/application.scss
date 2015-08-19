@@ -14,6 +14,11 @@ $link-color-darker: color("blue", "darken-4");
   color: $secondary-color;
 }
 
+.btn-narrow-flat{
+  @extend  .btn-flat;
+  padding: 0 .5rem;
+}
+
 .btn-bordered{
   @extend .btn-text;
   border: 1px solid $secondary-color;
@@ -99,6 +104,10 @@ label.dark {
 .max6{
   margin: 30px auto;
   max-width: 600px;
+}
+
+.centered.row{
+  text-align: left;
 }
 
 /// FOR MINI PROFILER
