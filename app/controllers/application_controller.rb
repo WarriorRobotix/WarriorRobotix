@@ -4,13 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
-  def redirect_back
+  def redirect_back(options={})
     if params[:from].present?
-      redirect_to params[:from]
+      redirect_to params[:from], options
     elsif block_given?
       yield
     else
-      redirect_to root_path
+      redirect_to root_path, options
     end
   end
 
