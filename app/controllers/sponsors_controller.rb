@@ -1,16 +1,11 @@
 class SponsorsController < ApplicationController
-  before_action :set_sponsor, only: [:show, :edit, :update, :destroy]
+  before_action :set_sponsor, only: [:edit, :update, :destroy]
   before_action :authenticate_admin!, except: [:index]
 
   # GET /sponsors
   # GET /sponsors.json
   def index
     @sponsors = Sponsor.all
-  end
-
-  # GET /sponsors/1
-  # GET /sponsors/1.json
-  def show
   end
 
   # GET /sponsors/new

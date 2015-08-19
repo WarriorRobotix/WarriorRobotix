@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :sponsors
   root 'pages#home'
 
   resources :members do
@@ -21,6 +20,8 @@ Rails.application.routes.draw do
 
   resources :events, only: [:index, :destroy], controller: :posts, type: "Event"
   resources :polls, only: [:index, :destroy], controller: :posts, type: "Poll"
+
+  resources :sponsors, except: [:show]
 
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'
