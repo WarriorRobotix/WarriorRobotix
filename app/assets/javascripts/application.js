@@ -35,6 +35,11 @@ $(function(){
   replceNullDisableWith();
 
   $(".button-collapse").sideNav();
+
+  $('.sponsor-wrapper .valign-wrapper').each(function(){
+    $t = $(this);
+    $t.height($t.width());
+  })
 });
 
 $(window).on('hashchange', function(){
