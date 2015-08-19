@@ -1,4 +1,4 @@
-<nav>
+<nav style="position:fixed;top:0;bottom:0;z-index:9999;">
   <div class="nav-wrapper">
   <span class="brand-logo flow-text prevent-default" style="font-size:132%">
   <%= link_to "WarriorRobotix", root_path %>
@@ -21,6 +21,9 @@
       <%= link_to "Members", members_path %>
     </li>
     <li>
+      <%= link_to "Sponsors", sponsors_path %>
+    </li>
+    <li>
       <% if member_signed_in? %>
         <%= link_to "Sign out", signout_path(return_to_info), method: :delete %>
       <% else %>
@@ -39,6 +42,9 @@
     </li>
     <li>
       <%= link_to "Members", members_path %>
+    </li>
+    <li>
+      <%= link_to "Sponsors", sponsors_path %>
     </li>
     <li>
       <% if member_signed_in? %>

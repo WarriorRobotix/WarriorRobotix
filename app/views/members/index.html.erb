@@ -3,6 +3,8 @@
 <%= render 'current_members', members: group[1], group_name: group[0] %>
 <% end %>
 <% if member_is_admin? %>
-<%= link_to 'Registration Fields Configuration', registration_fields_path, class: "btn-bordered" %>
+<div class="center">
 <%= link_to 'Create Member Account', new_member_path, class: "btn-bordered" %>
+<%= link_to 'Update Registration Form', registration_fields_path, class: "btn-bordered" %>
+</div>
 <% end %>

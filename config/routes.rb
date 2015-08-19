@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :sponsors
   root 'pages#home'
 
   resources :members do

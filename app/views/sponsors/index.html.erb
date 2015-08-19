@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+<center>
+<% if member_is_admin? %>
+<%= link_to 'New Sponsor', new_sponsor_path, class: "btn-bordered" %>
+<% end %>
+<h1 class="flow-text">Listing Sponsors</h1>
+
+<% @sponsors.each do |sponsor| %>
+<div class="card" style="max-width:50%;padding:10px;height:auto;">
+  <div class="card-image waves-effect waves-block waves-light">
+    <img class="activator" src="<%= sponsor.image_link %>">
+  </div>
+  <div class="card-content">
+    <span class="card-title activator grey-text text-darken-4">
+      <div style="float:left;">
+        <% if !sponsor.facebook_link.empty? %><a href="<%= sponsor.facebook_link %>"><img style="max-width:32px;height:auto;" src="<%= asset_path 'fb_icon.gif' %>"></a><% end %>
+        <% if !sponsor.twitter_link.empty? %><a href="<%= sponsor.twitter_link %>"><img style="max-width:32px;height:auto;" src="<%= asset_path 'twitter_icon.png' %>"></a><% end %>
+    </div>
+    <div class="hide-on-med-and-down">
+    <a href="<%= sponsor.website_link %>"><%= sponsor.name %></a><i class="material-icons right">more_vert</i>
+  </div>
+    </span>
+  </div>
+  <div class="card-reveal">
+    <span class="card-title grey-text text-darken-4"><%= sponsor.name %><i class="material-icons right">close</i></span>
+    <p><%= sponsor.description %></p>
+    <% if !sponsor.facebook_link.empty? %><p><a href="<%= sponsor.facebook_link %>">Facebook</a></p><% end %>
+    <% if !sponsor.twitter_link.empty? %><p><a href="<%= sponsor.twitter_link %>">Twitter</a></p><% end %>
+    <% if member_is_admin? %>
+    <p><%= link_to 'Show', sponsor %> | <%= link_to 'Edit', edit_sponsor_path(sponsor) %> | <%= link_to 'Delete', sponsor, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+</center>
