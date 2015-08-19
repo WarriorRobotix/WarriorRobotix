@@ -21,6 +21,8 @@ class Member < ActiveRecord::Base
   has_many :ballots, dependent: :destroy
   has_many :posts
 
+  default_scope { where(accepted: true) }
+
   def reset_password
     self.reset_password_at = Time.zone.now
 
