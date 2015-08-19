@@ -46,8 +46,7 @@ Rails.application.routes.draw do
 
   post 'registration/toggle' => 'registrations#toggle'
 
-  get '/registration_fields', to: redirect('/members')
-  resources :registration_fields, except: [:index, :show] do
+  resources :registration_fields, except: [:show] do
     collection do
       post '/fix' => 'registration_fields#fix'
     end
