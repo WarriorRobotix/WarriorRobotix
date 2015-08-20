@@ -53,9 +53,13 @@ class RegistrationFieldsController < ApplicationController
   end
 
   def up
-    RegistrationField.where(order: @registration_field.order - 1).update_all('"order" = "order" + 1')
-    @registration_field.order -= 1
-    @registration_field.save
+    unless @registration_field.order == 0
+      @swap_field = RegistrationField.find_by(order: @registration_field.order - 1)
+      @swap_field.order += 1
+      @swap_field.save
+      @registration_field.order -= 1
+      @registration_field.save
+    end
 
     respond_to do |format|
       format.html { redirect_to registration_fields_url }
@@ -65,9 +69,13 @@ class RegistrationFieldsController < ApplicationController
   end
 
   def down
-    RegistrationField.where(order: @registration_field.order + 1).update_all('"order" = "order" - 1')
-    @registration_field.order += 1
-    @registration_field.save
+    unless @registration_field.order == (RegistrationField.count - 1)
+      @swap_field = RegistrationField.find_by(order: @registration_field.order + 1)
+      @swap_field.order -= 1
+      @swap_field.save
+      @registration_field.order += 1
+      @registration_field.save
+    end
 
     respond_to do |format|
       format.html { redirect_to registration_fields_url }
@@ -79,7 +87,7 @@ class RegistrationFieldsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_registration_field
-      @registration_field = RegistrationField.find(params[:registration_field_id], params[:id])
+      @registration_field = RegistrationField.find(params[:registration_field_id] || params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

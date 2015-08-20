@@ -96,7 +96,7 @@ class Member < ActiveRecord::Base
       "first_name" => { :type => :text_field, :optional => false },
       "last_name" => { :type => :text_field, :optional => false },
       "email" => { :type => :text_field, :optional => false },
-      "student_number" => { :type => :text_field },
+      "student_number" => { :type => :text_field, :optional => false },
       "grade" => { :type => :select_tag, :extra_info => ('9'..'12').to_a, :optional => false }
     }
   end

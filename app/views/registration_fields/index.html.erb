@@ -1,6 +1,6 @@
 <h3 class="flow-text">Registration Form Fields</h3>
 <div id="registration_fields_table" class="card-panel" style="padding:10px;">
-  <table class="flow-text centered bordered except-last responsive-table" style="font-size:100%;">
+  <table class="flow-text centered bordered responsive-table" style="font-size:100%;">
     <thead>
       <tr>
         <th></th>
@@ -16,29 +16,9 @@
     </thead>
     <tbody>
       <%= render 'registration_fields/field_rows' %>
-      <tr>
-        <td class="hide-on-med-and-down" colspan="9"><%= link_to 'New Registration Field', new_registration_field_path %></td>
-      </tr>
-      <tr>
-        <td class="hide-on-med-and-down" colspan="9">
-          <% valid_member_fields = RegistrationField.valid_member_fields? %>
-          <% if valid_member_fields  %>
-          <%= link_to r_url, r_url %> or <%= link_to register_url, register_url %>
-          <% else %>
-          Invalid form: Require first name, last name, email, and grade fields <%= link_to 'Quick FIX', fix_registration_fields_path, method: :post, data: { disable_with: nil } %>
-          <% end %>
-        </td>
-      </tr>
     </tbody>
   </table>
-  <div class="center-align hide-on-large-only">
-    <br>
-    <%= link_to 'New Registration Field', new_registration_field_path %>
-    <br><br>
-    <% if valid_member_fields %>
-    <%= link_to r_url, r_url %> or <%= link_to register_url, register_url %>
-    <% else %>
-    Invalid form: Require first name, last name, email, and grade fields <%= link_to 'Quick FIX', fix_registration_fields_path, method: :post, data: { disable_with: nil } %>
-    <% end %>
+  <div class="center-align" style="margin-top:30px;">
+    <%= link_to 'New Registration Field', new_registration_field_path, class: 'btn' %>
   </div>
 </div>
