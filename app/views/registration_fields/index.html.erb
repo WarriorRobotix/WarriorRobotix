@@ -25,7 +25,7 @@
           <% if valid_member_fields  %>
           <%= link_to r_url, r_url %> or <%= link_to register_url, register_url %>
           <% else %>
-          Invalid form: Require first name, last name, email, and grade fields <%= link_to 'Quick FIX', fix_registration_fields_path, method: :post, remote: true, data: { disable_with: nil } %>
+          Invalid form: Require first name, last name, email, and grade fields <%= link_to 'Quick FIX', fix_registration_fields_path, method: :post, data: { disable_with: nil } %>
           <% end %>
         </td>
       </tr>
