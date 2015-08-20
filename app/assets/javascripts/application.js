@@ -36,7 +36,7 @@ $(function(){
 
   $(".button-collapse").sideNav();
 
-  $('.sponsor-wrapper .valign-wrapper').each(function(){
+  $('.sponsor-card .valign-wrapper').each(function(){
     $t = $(this);
     $t.height($t.width());
   })

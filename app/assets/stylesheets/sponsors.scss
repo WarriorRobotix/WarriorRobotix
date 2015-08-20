@@ -1,3 +1,33 @@
-// Place all the styles related to the sponsors controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.sponsor-card.card {
+  padding: 10px;
+  .card-title {
+    @extend .grey-text, .text-darken-4;
+  }
+  .card-content .card-title {
+    height:48px;
+    line-height:48px;
+    vertical-align:middle;
+    .sponsor-social{
+      float: left;
+      img{
+        height:28px;
+        margin-top:10px;
+        margin-right:10px;
+      }
+    }
+    .sponsor-more {
+      height:28px;
+      margin-top:10px;
+    }
+    .sponsor-link-w{
+      display: inline-block;
+      .sponsor-link {
+        @extend .truncate;
+        @media #{$small-and-down} {
+          width: 100px;
+        }
+      }
+    }
+  }
+
+}
