@@ -1,0 +1,25 @@
+<h3 class="flow-text">Pending Members</h3>
+<div class="card-panel" style="padding:10px;">
+  <table class="centered except-last">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th class="hide-on-small-only">Grade</th>
+        <th class="hide-on-med-and-down">Email</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% members.each do |member| %>
+      <tr>
+        <th><%= member.full_name %></th>
+        <th class="hide-on-small-only"><%= member.grade %></th>
+        <th class="hide-on-med-and-down"><%= member.email %></th>
+        <th><%= link_to 'check', member_approve_path(member), method: :post, class: 'material-icons' %></th>
+        <th><%= link_to 'close', member_reject_path(member), method: :post, class: 'material-icons' %></th>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

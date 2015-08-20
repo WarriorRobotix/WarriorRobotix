@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   resources :members do
     resources :attendances
+    post '/reject' => 'members#reject'
+    post '/approve'  => 'members#approve'
   end
 
   resources :posts, type: "Post"

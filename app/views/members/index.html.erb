@@ -1,7 +1,7 @@
 <%= hash_modal 'm-', member_path(id: '$') if member_is_admin? %>
-<% @member_groups.each do |group| %>
-<%= render 'current_members', members: group[1], group_name: group[0] %>
-<% end %>
+<%= render('members_table', members: @current_members, title: 'Current Members') %>
+<%= render('pending_members_table', members: @pending_members, title: 'Pending Members') if @pending_members.present? %>
+<%= render('members_table', members: @graduated_members, title: 'Graduated Members') if @graduated_members.present? %>
 <% if member_is_admin? %>
 <div class="center">
 <%= link_to 'Create Member Account', new_member_path, class: "btn-bordered" %>

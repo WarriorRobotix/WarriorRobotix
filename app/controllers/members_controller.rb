@@ -7,25 +7,10 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @member_groups = [["Current Members", []]]
-
+    @current_members = Member.where(graduated_year: nil).order(first_name: :ASC, last_name: :ASC).all.to_a
     if member_is_admin?
-      pending_members = Member.where(accepted: false).to_a
-      @member_groups << ["Pending Members", pending_members] if pending_members.present?
-    end
-
-    accepted_members = Member.where(accepted: true).order(graduated_year: :desc, first_name: :ASC, last_name: :ASC)
-    year = nil
-    accepted_members.each do |member|
-      if member.graduated_year.nil?
-        @member_groups[0][1] << member
-      else
-        if year != member.graduated_year
-          year = member.graduated_year
-          @member_groups << [year.to_s,[]]
-        end
-        @member_groups[-1][1] << member
-      end
+      @pending_members = Member.where(accepted: false).all.to_a
+      @graduated_members = Member.where.not(graduated_year: nil).order(graduated_year: :DESC).all.to_a
     end
   end
 
