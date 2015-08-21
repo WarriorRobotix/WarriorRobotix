@@ -24,6 +24,7 @@ RegistrationField.create!([
   {title: "Last Name"},
   {title: "Email"},
   {title: "Grade"},
+  {title: "Student Number"},
   {title: "What robots do you want to make?", input_type: :text_area, optional: true}
 ])
 
