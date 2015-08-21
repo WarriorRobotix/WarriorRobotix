@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :set_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_member, only: [:show, :edit, :update, :destroy, :reject, :approve]
 
   before_action :authenticate_admin!, except: [:index, :new, :create]
   before_action :authenticate_member!, only: [:index]
@@ -9,7 +9,7 @@ class MembersController < ApplicationController
   def index
     @current_members = Member.where(graduated_year: nil).order(first_name: :ASC, last_name: :ASC).all.to_a
     if member_is_admin?
-      @pending_members = Member.where(accepted: false).all.to_a
+      @pending_members = Member.unscoped.where(accepted: false).all.to_a
       @graduated_members = Member.where.not(graduated_year: nil).order(graduated_year: :DESC).all.to_a
     end
   end
@@ -123,10 +123,24 @@ class MembersController < ApplicationController
 
   end
 
+  def approve
+    @member.update(accepted: true)
+    respond_to do |format|
+      format.html { redirect_to members_url, notice: "#{@member.full_name} was successfully became a member." }
+    end
+  end
+
+  def reject
+    @member.destroy
+    respond_to do |format|
+      format.html { redirect_to members_url, notice: "#{@member.full_name} was successfully rejected." }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_member
-      @member = Member.find(params[:member_id] || params[:id])
+      @member = Member.unscoped.find(params[:member_id] || params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

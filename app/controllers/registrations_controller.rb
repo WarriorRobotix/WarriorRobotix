@@ -1,7 +1,7 @@
 class RegistrationsController < ApplicationController
   def form
     @form = Hash.new
-    unless RegistrationField.valid_member_fields?
+    unless RegistrationField.valid_member_fields? && RegistrationForm.open?
       render :error
     end
   end
@@ -27,5 +27,9 @@ class RegistrationsController < ApplicationController
       @form = params[:form].to_unsafe_h
       render :form
     end
+  end
+
+  def toggle
+    RegistrationForm.toggle(params[:closed].nil? || params[:closed] != '1')
   end
 end

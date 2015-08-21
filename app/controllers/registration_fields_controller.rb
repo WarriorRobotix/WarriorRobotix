@@ -48,7 +48,7 @@ class RegistrationFieldsController < ApplicationController
   def fix
     RegistrationField.create([{ title: "First name" }, { title: "Last name" }, { title: "Email" }, { title: "Grade" }, { title: "Student number" }])
     respond_to do |format|
-      format.html { redirect_to registration_fields_url, notice: 'Registration fields\' issues were successfully fixed.' }
+      format.html { try_redirect_back { redirect_to registration_fields_url, notice: 'Registration fields\' issues were successfully fixed.' } }
     end
   end
 

@@ -1,0 +1,29 @@
+<div class="card-panel hide-on-small-only quick-members-panel">
+  <div class="row no-margin-bottom">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a class="active" href="#general_tab_wrap"><i class="tiny material-icons">dashboard</i>General</a></li>
+        <li class="tab col s3"><a href="#registration_wrap"><i class="tiny material-icons">assignment</i>Registration</a></li>
+      </ul>
+    </div>
+    <div id="general_tab_wrap" class="col s12 compact-form-wrap center-align">
+      <%= link_to new_member_path, class: "btn-flat" do %>
+      <i class="material-icons left">person add</i>Create Member
+      <% end %>
+    </div>
+    <%= render 'registration_menu' %>
+  </div>
+  <div class="preloader-container">
+    <%= render "components/spinner", color: "yellow" %>
+  </div>
+</div>
+<div class="quick-links card-panel hide-on-med-and-up">
+  <div class="row">
+    <%= link_to new_post_path, class: "btn col s12" do %>
+    <i class="material-icons left">person add</i>Create Member
+    <% end %>
+    <%= link_to new_event_path, class: "btn col s12" do %>
+    <i class="material-icons left">assignment</i>Registration Form
+    <% end %>
+  </div>
+</div>

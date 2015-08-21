@@ -1,0 +1,10 @@
+<%= form_tag registration_toggle_path, id: 'registration_toggle_form', remote: true do %>
+  <div class="switch">
+    <label>
+      Closed
+      <%= check_box_tag :closed, '1', valid_fields && RegistrationForm.open?, disabled: !valid_fields, data: { trigger_form: '1' } %>
+      <span class="lever"></span>
+      Open
+    </label>
+  </div>
+<% end %>
