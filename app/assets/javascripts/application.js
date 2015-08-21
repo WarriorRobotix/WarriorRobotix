@@ -60,7 +60,13 @@ $(document).on('click', '.prevent-default', function(event){
 
 $(document).on('click', 'input[data-trigger-form]', function(event){
   event.preventDefault();
-  $(this).prop('checked',true);
+  $t = $(this);
+  if ($t.attr('type') == 'checkbox') {
+    console.log($t.prop('checked') == true);
+    $t.prop('checked',!$t.prop('checked'));
+  } else {
+    $t.prop('checked',true);
+  }
   form = $(this.form);
   form.addClass('no-pointer-events');
   form.submit();
