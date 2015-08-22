@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820215208) do
+ActiveRecord::Schema.define(version: 20150822004804) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id",              null: false
@@ -75,6 +75,30 @@ ActiveRecord::Schema.define(version: 20150820215208) do
     t.string   "description"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+  end
+
+  create_table "photo_locations", force: :cascade do |t|
+    t.string   "page",                           null: false
+    t.string   "location",                       null: false
+    t.integer  "photo_id"
+    t.integer  "processed_photo_id"
+    t.integer  "dimension_type",     default: 0, null: false
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "photo_locations", ["page"], name: "index_photo_locations_on_page"
+  add_index "photo_locations", ["photo_id"], name: "index_photo_locations_on_photo_id"
+  add_index "photo_locations", ["processed_photo_id"], name: "index_photo_locations_on_processed_photo_id"
+
+  create_table "photos", force: :cascade do |t|
+    t.string   "name"
+    t.string   "file"
+    t.string   "external_link"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "posts", force: :cascade do |t|
