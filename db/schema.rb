@@ -78,15 +78,16 @@ ActiveRecord::Schema.define(version: 20150822004804) do
   end
 
   create_table "photo_locations", force: :cascade do |t|
-    t.string   "page",                           null: false
-    t.string   "location",                       null: false
+    t.string   "page",                                  null: false
+    t.string   "location",                              null: false
+    t.boolean  "prefered_local",        default: false, null: false
     t.integer  "photo_id"
     t.integer  "processed_photo_id"
-    t.integer  "dimension_type",     default: 0, null: false
+    t.integer  "dimension_restriction", default: 0,     null: false
     t.integer  "width"
     t.integer  "height"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   add_index "photo_locations", ["page"], name: "index_photo_locations_on_page"
