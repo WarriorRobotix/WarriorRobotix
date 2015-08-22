@@ -115,6 +115,23 @@ label.dark {
   display: none;
 }
 
+.square-wrapper{
+  position: relative;
+  width: 100%;
+  &:before{
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+  .square{
+    position:  absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
+
 /// FOR MINI PROFILER
 .profiler-results{
   @media #{$medium-and-down} {
