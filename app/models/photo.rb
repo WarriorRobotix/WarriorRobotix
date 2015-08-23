@@ -6,6 +6,14 @@ class Photo < ActiveRecord::Base
 
   validate :at_least_one_source
 
+  def path
+    if file.present?
+      file.url
+    elsif external_link.present?
+      external_link
+    end
+  end
+
   private
   def at_least_one_source
     errors.add(:base, 'At least one source must be provided') unless self.file.present? || self.external_link.present?
@@ -21,7 +29,7 @@ class Photo < ActiveRecord::Base
   def set_default_name
     if name.nil?
       if file.present?
-        name ||= file.original_name.replace(/\.[^/.]+$/, "")
+        name ||= file.original_name.replace(/\.[^\.]+$/, "")
       elsif external_link.present?
         name ||= /\/([^\/\.]+)\..[^\.]+(?:\?[^\?]+)?$/.match(file.original_name)[1]
       end
