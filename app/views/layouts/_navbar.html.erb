@@ -13,6 +13,9 @@
     <li>
       <%= link_to "Attendance", '/attend' %>
     </li>
+    <li>
+      <%= link_to "Photos", photos_path %>
+    </li>
     <% end %>
     <li>
       <%= link_to "Posts", posts_path %>
@@ -35,6 +38,9 @@
     <% if member_is_admin? %>
     <li>
       <%= link_to "Attendance", '/attend' %>
+    </li>
+    <li>
+      <%= link_to "Photos", photos_path %>
     </li>
     <% end %>
     <li>
