@@ -36,11 +36,6 @@ $(function(){
 
   $(".button-collapse").sideNav();
 
-  $('.sponsor-card .valign-wrapper').each(function(){
-    $t = $(this);
-    $t.height($t.width());
-  });
-  
   $('.materialboxed').materialbox();
 });
 

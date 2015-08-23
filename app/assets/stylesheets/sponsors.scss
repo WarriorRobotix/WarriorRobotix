@@ -24,7 +24,7 @@
       .sponsor-link {
         @extend .truncate;
         @media #{$small-and-down} {
-          width: 100px;
+          max-width: 170px;
         }
       }
     }

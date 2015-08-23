@@ -5,22 +5,24 @@
 
 <div class="row">
   <% @sponsors.each do |sponsor| %>
-  <div class="col s12 l6">
+  <div class="col s12 m6 l6">
     <div class="sponsor-card card">
       <div class="card-image waves-effect waves-block waves-light">
-        <div class="valign-wrapper">
+        <div class="square-wrapper">
+          <div class="square valign-wrapper">
           <img class="activator valign" src="<%= sponsor.image_link %>">
+          </div>
         </div>
       </div>
       <div class="card-content">
         <div class="card-title activator">
           <% if !sponsor.facebook_link.empty? %>
-          <a href="<%= sponsor.facebook_link %>" class="sponsor-social">
+          <a href="<%= sponsor.facebook_link %>" class="sponsor-social hide-on-med-and-down">
             <img src="<%= asset_path 'fb_icon.gif' %>">
           </a>
           <% end %>
           <% if !sponsor.twitter_link.empty? %>
-          <a href="<%= sponsor.twitter_link %>" class="sponsor-social">
+          <a href="<%= sponsor.twitter_link %>" class="sponsor-social hide-on-med-and-down">
             <img src="<%= asset_path 'twitter_icon.png' %>">
           </a>
           <% end %>
