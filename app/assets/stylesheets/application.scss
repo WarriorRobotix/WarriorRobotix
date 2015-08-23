@@ -115,21 +115,30 @@ label.dark {
   display: none;
 }
 
-.square-wrapper{
+.square-wrapper, .ratio-4-3-wrapper{
   position: relative;
   width: 100%;
-  &:before{
+
+  &::before{
     content: "";
     display: block;
-    padding-top: 100%;
   }
-  .square{
+
+  .ratio-content, .square{
     position:  absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
   }
+}
+
+.square-wrapper::before{
+  padding-top: 100%;
+}
+
+.ratio-4-3-wrapper::before{
+  padding-top: 75%;
 }
 
 /// FOR MINI PROFILER

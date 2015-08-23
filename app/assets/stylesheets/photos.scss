@@ -2,6 +2,41 @@
   padding: 0;
 
   img{
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .photo-content{
     width: 100%;
+    position: relative;
+
+    height: 3rem;
+    font-size: 1.5rem;
+    line-height: 3rem;
+
+    .photo-name, .photo-action {
+      padding-left: 5px;
+      padding-right: 5px;
+      height: 3rem;
+      border-top: 1px solid rgba(160, 160, 160, 0.2);
+      box-sizing: border-box;
+      float: left;
+    }
+
+    .photo-name{
+      border-left: 1px solid rgba(160, 160, 160, 0.2);
+      border-right: 1px solid rgba(160, 160, 160, 0.2);
+      width: calc(100% - 160px);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      float: left;
+    }
+
+    .photo-action{
+      width: 80px;
+      text-align: center;
+    }
   }
 }

@@ -1,7 +1,20 @@
 <div class="col s12 m12 l6">
   <div class="card-panel photo-box">
-    <div>
-      <img class="materialboxed" src="<%= photo.path %>">
+    <div class="ratio-4-3-wrapper">
+      <div class="ratio-content valign-wrapper">
+        <img class="valign" src="<%= photo.path %>">
+      </div>
+    </div>
+    <div class="photo-content">
+      <div class="photo-action">
+        <%= link_to 'Edit', edit_photo_path(photo) %>
+      </div>
+      <div class="photo-name">
+        <%= photo.name || photo.path %>
+      </div>
+      <div class="photo-action">
+        <%= link_to 'Delete', photo, method: :delete %>
+      </div>
     </div>
   </div>
 </div>
