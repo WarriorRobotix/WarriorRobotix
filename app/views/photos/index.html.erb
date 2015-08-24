@@ -1,0 +1,9 @@
+<h1>Listing Photos</h1>
+
+<div class="row">
+<% @photos.each do |photo| %>
+  <%= render photo %>
+<% end %>
+</div>
+
+<%= link_to 'New Photo', new_photo_path %>

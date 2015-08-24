@@ -1,0 +1,37 @@
+<%= form_for(@photo) do |f| %>
+  <%= errors_for @photo %>
+
+  <% if @photo.path.present? %>
+  <div class="photo-wrapper">
+    <img src="<%= @photo.path %>">
+  </div>
+  <% end %>
+
+  <div class="row large-margin-bottom">
+    <div class="input-field col s12 m12 l12">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="file-field input-field col s12 m12 l6">
+      <div class="btn">
+        <span>File</span>
+        <%= f.file_field :file, accept: 'image/png,image/gif,image/jpg,image/jpeg', data: {photo_name_target: '#photo_name'} %>
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path" type="text">
+      </div>
+    </div>
+    <p class="center-align hide-on-large-only">OR<p>
+    <div class="input-field col s12 m12 l6">
+      <%= f.label :external_link %>
+      <%= f.text_field :external_link %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="actions col s12">
+      <%= f.submit class: 'btn', data: { disable_with: nil } %>
+      <%= link_to 'Back', posts_path, class: 'btn-flat' %>
+    </div>
+  </div>
+<% end %>
