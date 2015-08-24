@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   resources :sponsors, except: [:show]
 
-  resources :photos
+  resources :photos, except: [:show]
 
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'
