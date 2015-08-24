@@ -32,7 +32,7 @@ class Photo < ActiveRecord::Base
       if self.file.present? && self.original_filename.present?
         self.name = self.original_filename.gsub(/\.[^\.]+$/, "")
       elsif self.external_link.present?
-        self.name = /\/([^\/\.]+)(?:\..[^\.\/]+)?(?:\?[^\?\/]+)?$/.match(self.external_link)[1]
+        self.name = /\/([^\/\.]+)(?:\.[^\.\/]+)?(?:\?[^\?\/]+)?$/.match(self.external_link)[1]
       end
     end
   end
