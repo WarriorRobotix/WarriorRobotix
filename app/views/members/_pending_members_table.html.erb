@@ -14,7 +14,7 @@
     <tbody>
       <% members.each do |member| %>
       <tr>
-        <td><%= member.full_name %></td>
+        <td><%= link_to member.full_name, "#m-#{member.id}" %></td>
         <td class="hide-on-small-only"><%= member.grade %></td>
         <td class="hide-on-med-and-down"><%= member.email %></td>
         <td class="hide-on-med-and-down"><%= member.student_number %></td>

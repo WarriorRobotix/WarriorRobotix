@@ -23,14 +23,6 @@
             <td><strong>Student Number</strong></td>
             <td><%= @member.student_number %></td>
           </tr>
-          <tr class="hide-on-med-and-up">
-            <td><strong>Graduated Year</strong></td>
-            <td><%= @member.graduated_year || "Active" %></td>
-          </tr>
-          <tr class="hide-on-med-and-up">
-            <td><strong>Type</strong></td>
-            <td><%= @member.member_type %></td>
-          </tr>
           <tr>
             <td><strong>Graduated Year</strong></td>
             <td><%= @member.graduated_year || "Active" %></td>
@@ -39,19 +31,25 @@
             <td><strong>Type</strong></td>
             <td><%= @member.member_type %></td>
           </tr>
+          <% @member.extra_info.each do |question,answer| %>
+          <tr class="hide-on-med-and-up">
+            <td><strong><%= question %></strong></td>
+            <td><%= answer.blank? ? 'N/A' : answer %></td>
+          </tr>
+          <% end %>
         </table>
 
         <% if @member.extra_info.any? %>
-        <div class="col s12">
-          <strong>Extra Info</strong>
-        </div>
-        <% @member.extra_info do |question,answer| %>
-        <div class="col s12 m6 l6">
-          <strong><%= question %></strong>
-          <%= answer %>
-        </div>
+        <table class="left-align col m6 hide-on-small-only">
+          <% @member.extra_info.each do |question,answer| %>
+          <tr>
+            <td><strong><%= question %></strong></td>
+            <td><%= answer.blank? ? 'N/A' : answer %></td>
+          </tr>
+          <% end %>
+        </table>
         <% end %>
-        <% end %>
+
       </div>
     </div>
     <div class="modal-footer">
