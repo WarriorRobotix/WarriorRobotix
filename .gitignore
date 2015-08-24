@@ -54,3 +54,4 @@ Temporary Items
 
 # Warrior Robotix specific gitignore
 /public/photos
+/public/uploads
