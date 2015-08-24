@@ -24,7 +24,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
+        format.html { redirect_to photos_path, notice: "#{@photo.name || 'Photo'} was successfully created." }
         format.json { render :show, status: :created, location: @photo }
       else
         format.html { render :new }
@@ -38,7 +38,7 @@ class PhotosController < ApplicationController
   def update
     respond_to do |format|
       if @photo.update(photo_params)
-        format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
+        format.html { redirect_to photos_path, notice: "#{@photo.name || 'Photo'} was successfully updated." }
         format.json { render :show, status: :ok, location: @photo }
       else
         format.html { render :edit }
