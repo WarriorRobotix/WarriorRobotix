@@ -1,6 +1,12 @@
 <%= form_for(@photo) do |f| %>
   <%= errors_for @photo %>
 
+  <% if @photo.path.present? %>
+  <div class="photo-wrapper">
+    <img src="<%= @photo.path %>">
+  </div>
+  <% end %>
+
   <div class="row large-margin-bottom">
     <div class="input-field col s12 m12 l12">
       <%= f.label :name %>
@@ -9,7 +15,7 @@
     <div class="file-field input-field col s12 m12 l6">
       <div class="btn">
         <span>File</span>
-        <%= f.file_field :file, accept: 'image/png,image/gif,image/jpg,image/jpeg', data: {name_target: '#photo_name'} %>
+        <%= f.file_field :file, accept: 'image/png,image/gif,image/jpg,image/jpeg', data: {photo_name_target: '#photo_name'} %>
       </div>
       <div class="file-path-wrapper">
         <input class="file-path" type="text">

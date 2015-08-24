@@ -19,14 +19,11 @@
       padding-left: 5px;
       padding-right: 5px;
       height: 3rem;
-      border-top: 1px solid rgba(160, 160, 160, 0.2);
       box-sizing: border-box;
       float: left;
     }
 
     .photo-name{
-      border-left: 1px solid rgba(160, 160, 160, 0.2);
-      border-right: 1px solid rgba(160, 160, 160, 0.2);
       width: calc(100% - 160px);
       overflow: hidden;
       white-space: nowrap;
@@ -38,5 +35,15 @@
       width: 80px;
       text-align: center;
     }
+  }
+}
+
+.photo-wrapper {
+  width: 100%;
+  text-align: center;
+  padding-top: 10px;
+  img {
+    max-width: 100%;
+    max-height: 50vh;
   }
 }

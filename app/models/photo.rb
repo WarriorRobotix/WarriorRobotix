@@ -1,5 +1,6 @@
 class Photo < ActiveRecord::Base
   mount_uploader :file, PhotoUploader
+  attr_accessor :original_filename
 
   has_many :photo_locations, inverse_of: [:photo, :processed_photo]
   before_create :set_default_name
@@ -27,11 +28,11 @@ class Photo < ActiveRecord::Base
   end
 
   def set_default_name
-    if name.nil?
-      if file.present?
-        name ||= file.original_name.replace(/\.[^\.]+$/, "")
-      elsif external_link.present?
-        name ||= /\/([^\/\.]+)\..[^\.]+(?:\?[^\?]+)?$/.match(file.original_name)[1]
+    if self.name.blank?
+      if self.file.present? && self.original_filename.present?
+        self.name = self.original_filename.gsub(/\.[^\.]+$/, "")
+      elsif self.external_link.present?
+        self.name = /\/([^\/\.]+)(?:\..[^\.\/]+)?(?:\?[^\?\/]+)?$/.match(self.external_link)[1]
       end
     end
   end

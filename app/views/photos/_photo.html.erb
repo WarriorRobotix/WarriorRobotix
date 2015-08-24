@@ -13,7 +13,7 @@
         <%= photo.name || photo.path %>
       </div>
       <div class="photo-action">
-        <%= link_to 'Delete', photo, method: :delete %>
+        <%= link_to 'Delete', photo, method: :delete, data: { confirm: 'Are you sure?' } %>
       </div>
     </div>
   </div>
