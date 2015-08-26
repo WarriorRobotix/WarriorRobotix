@@ -39,7 +39,7 @@ module ApplicationHelper
     else
       css_class = 'toast-base'
     end
-    "Materialize.toast('#{msg}', '4000', '#{css_class}')"
+    "Materialize.toast('#{j msg}', '4000', '#{css_class}')"
   end
 
   def return_to_info
