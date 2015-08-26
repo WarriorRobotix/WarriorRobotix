@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy, :reject, :approve]
 
-  before_action :authenticate_admin!, except: [:index, :new, :create]
+  before_action :authenticate_admin!, except: [:index, :new, :create, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update]
   before_action :authenticate_member!, only: [:index]
 
   # GET /members
@@ -123,6 +123,26 @@ class MembersController < ApplicationController
 
   end
 
+  def reset_password_edit
+    @member = Member.find(params[:record_hex].to_i(16))
+    unless @member.valid_reset_password_token?(params[:reset_token])
+      render :invalid_reset_token
+    end
+  end
+
+  def reset_password_update
+    @member = Member.find(params[:record_hex].to_i(16))
+    if @member.valid_reset_password_token?(params[:reset_token])
+      if @member.update(password: params[:password], password_confirmation: params[:password_confirmation], reset_password_at: nil, reset_password_digest: nil)
+        redirect_to signin_path
+      else
+        render :reset_password_edit
+      end
+    else
+      render :invalid_reset_token
+    end
+  end
+
   def approve
     @member.update(accepted: true)
     respond_to do |format|
@@ -134,6 +154,20 @@ class MembersController < ApplicationController
     @member.destroy
     respond_to do |format|
       format.html { redirect_to members_url, notice: "#{@member.full_name} was successfully rejected." }
+    end
+  end
+
+  def forgot
+  end
+
+  def send_reset_token
+    identifier = params[:identifier]
+    if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", identifier, identifier).take
+      member.generate_reset_password_token!
+      MemberMailer.reset_password_email(member).deliver_now
+    else
+      flash[:alert] =  "Database doesn't have this student number"
+      render :forgot
     end
   end
 

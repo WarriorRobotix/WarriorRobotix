@@ -21,9 +21,4 @@ class SessionsController < ApplicationController
     signout_member
     redirect_back
   end
-
-  private
-  def is_identifier_email?(identifier)
-    (identifier =~ /.+@.+/).present?
-  end
 end

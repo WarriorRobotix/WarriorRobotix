@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   post 'signin' => 'sessions#create'
   delete 'signout' => 'sessions#destroy'
 
+  get 'forgot' => 'members#forgot'
+  post 'forgot' => 'members#send_reset_token'
 
   get 'email' => 'members#email_edit'
   post 'email' => 'members#email_update'
@@ -38,7 +40,7 @@ Rails.application.routes.draw do
   get 'password' => 'members#password_edit'
   post 'password' => 'members#password_update'
 
-  get 'reset/:record_hex/:reset_token' => 'members#reset_password_edit'
+  get 'reset/:record_hex/:reset_token' => 'members#reset_password_edit', as: :reset_password
   post 'reset/:record_hex/:reset_token' => 'members#reset_password_update'
 
   get '/attend' => 'pages#attend'

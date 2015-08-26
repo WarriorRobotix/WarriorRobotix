@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col s12 input-field">
     <%= label_tag :identifier, "Student Number or Email" %>
-    <%= text_field_tag :identifier %>
+    <%= text_field_tag :identifier, params[:identifier] %>
   </div>
 
   <div class="col s12  input-field">
@@ -16,6 +16,7 @@
 
 <div class="actions row">
   <button type="submit" name="commit" class="btn waves-effect waves-light">Log in</button>
+  <%= link_to 'Forgot', forgot_path, class: "btn-flat waves-effect waves-light" %>
 </div>
 <% end %>
 </div>

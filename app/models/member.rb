@@ -10,7 +10,7 @@ class Member < ActiveRecord::Base
 
   validates :grade, presence: true
 
-  validates :email, presence: true, uniqueness: true, format: { with: /.+@.+\..+/, message: "format is invalid" }
+  validates :email, presence: true, uniqueness: true, format: { with: /\A.+@.+\.[^\.]+\z/, message: "format is invalid" }
 
   validates :student_number, presence: true, uniqueness: true, format: { without: /.+@.+/, message: "format is invalid" }, numericality: { only_integer: true }
 
@@ -23,15 +23,18 @@ class Member < ActiveRecord::Base
 
   default_scope { where(accepted: true) }
 
-  def reset_password
+  attr_accessor :reset_password_token
+
+  def generate_reset_password_token!
     self.reset_password_at = Time.zone.now
 
-    reset_password_token = SecureRandom.hex
+    @reset_password_token = SecureRandom.hex
 
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
-    self.reset_password_digest = BCrypt::Password.create(reset_password_token, cost: cost)
+    self.reset_password_digest = BCrypt::Password.create(@reset_password_token, cost: cost)
+    self.save
 
-    reset_password_token
+    @reset_password_token
   end
 
   def valid_reset_password_token?(token)

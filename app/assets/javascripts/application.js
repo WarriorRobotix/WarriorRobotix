@@ -80,6 +80,10 @@ $(document).on('change', '.file-field input[type="file"][data-photo-name-target]
   }
 });
 
+$(document).on('click', '.lean-overlay', function(){
+  location.hash = '#!';
+});
+
 function deletePoll(ele,event) {
   event.preventDefault();
   $t = $(ele);
