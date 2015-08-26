@@ -10,7 +10,7 @@ class Member < ActiveRecord::Base
 
   validates :grade, presence: true
 
-  validates :email, presence: true, uniqueness: true, format: { with: /^.+@.+\.[^\.]+$/, message: "format is invalid" }
+  validates :email, presence: true, uniqueness: true, format: { with: /\A.+@.+\.[^\.]+\z/, message: "format is invalid" }
 
   validates :student_number, presence: true, uniqueness: true, format: { without: /.+@.+/, message: "format is invalid" }, numericality: { only_integer: true }
 
