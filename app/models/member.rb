@@ -32,6 +32,7 @@ class Member < ActiveRecord::Base
 
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     self.reset_password_digest = BCrypt::Password.create(@reset_password_token, cost: cost)
+    self.save
 
     @reset_password_token
   end

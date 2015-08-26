@@ -164,7 +164,7 @@ class MembersController < ApplicationController
     identifier = params[:identifier]
     if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", identifier, identifier).take
       member.generate_reset_password_token!
-      MemberMailer.reset_password_email(member)
+      MemberMailer.reset_password_email(member).deliver_now
     else
       flash[:alert] =  "Database doesn't have this student number"
       render :forgot
