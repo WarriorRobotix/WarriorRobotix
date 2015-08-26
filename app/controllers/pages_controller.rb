@@ -22,5 +22,15 @@ class PagesController < ApplicationController
         end
       end
     end
+    @event_today = false
+    @event_list = Array.new
+    Post.all.each do |f|
+      if f.type == "Event"
+        if f.start_at.day == current_date.day && f.start_at.month == current_date.month && f.start_at.year == current_date.year
+          @event_today = true
+          @event_list.push(f)
+        end
+      end
+    end
   end
 end

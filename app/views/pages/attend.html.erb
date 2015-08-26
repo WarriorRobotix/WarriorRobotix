@@ -10,6 +10,19 @@
 </div>
 </nav>
 
+<% if @event_today == true %>
+  <h1 class="flow-text">Todays Events</h1>
+  <% @event_list.each do |f| %>
+    <div class="card-panel">
+      <%= f.title %>
+      <br>
+      <%= f.start_at.strftime("%l:%M %p") %>
+      &nbsp;to&nbsp;
+      <%= f.end_at.strftime("%l:%M %p") %>
+    </div>
+  <% end %>
+<% end %>
+
 <h1 class="flow-text">Checked In</h1>
 <div class="card-panel">
   <table>

@@ -23,7 +23,7 @@ class MembersController < ApplicationController
 
     if !@member.nil?
     @member.attendances.each do |f|
-      if !f.start_at.nil?
+      if !f.start_at.nil? && f.status != :invited
         attendance_date = f.start_at.to_datetime
         current_date = DateTime.now
         if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
