@@ -1,0 +1,20 @@
+<div class="max6">
+<h1 class="flow-text">Forgot Password</h1>
+<div class="card-panel" style="padding-bottom:10px;padding-top:10px;">
+<%= form_tag do %>
+<div class="row">
+  <div class="col s12 input-field">
+    <%= label_tag :identifier, "Student Number or Email" %>
+    <%= text_field_tag :identifier, params[:identifier] %>
+  </div>
+  <div class="col s12">
+    If you forgot your <strong>student number</strong> and <strong>email</strong>, please contact Warrior Robotix administers
+  </div>
+</div>
+
+<div class="actions row">
+  <button type="submit" name="forgot" class="btn waves-effect waves-light">Send Reset Token</button>
+</div>
+<% end %>
+</div>
+</div>
