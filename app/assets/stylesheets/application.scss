@@ -90,6 +90,10 @@ label.dark {
   }
 }
 
+.col.large-margin-bottom{
+  margin-bottom: 20px;
+}
+
 .row.large-margin,.large-margin-sm{
   @media #{$medium-and-down} {
     margin-top: 36px;

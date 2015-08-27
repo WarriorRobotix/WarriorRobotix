@@ -1,8 +1,8 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy, :reject, :approve]
 
-  before_action :authenticate_admin!, except: [:index, :new, :create, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update]
-  before_action :authenticate_member!, only: [:index]
+  before_action :authenticate_admin!, except: [:index, :new, :create, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update, :edit_email, :update_email, :edit_password, :update_password]
+  before_action :authenticate_member!, only: [:index, :edit_email, :update_email, :edit_password, :update_password]
 
   # GET /members
   # GET /members.json
@@ -112,7 +112,15 @@ class MembersController < ApplicationController
   end
 
   def update_email
-
+    respond_to do |format|
+      if current_member.update(params.require(:member).permit(:email))
+        format.html { redirect_to members_path, notice: 'Email was successfully updated.' }
+        format.json { render :show, status: :ok, location: current_member }
+      else
+        format.html { render :edit_email }
+        format.json { render json: current_member.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit_password
@@ -120,7 +128,17 @@ class MembersController < ApplicationController
   end
 
   def update_password
-
+    password_params = params.require(:member).permit(:old_password, :password, :password_confirmation)
+    respond_to do |format|
+      (current_member.incorrect_old_password = true) unless (current_member.authenticate(params[:old_password]) == false)
+      if current_member.update(password_params)
+        format.html { redirect_to members_path, notice: 'Password was successfully updated.' }
+        format.json { render :show, status: :ok, location: current_member }
+      else
+        format.html { render :edit_password }
+        format.json { render json: current_member.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def reset_password_edit

@@ -16,6 +16,7 @@ class Member < ActiveRecord::Base
 
   validate :extra_info_fields
   validate :admin_must_accpeted
+  validate :correct_old_password
 
   has_many :attendances, dependent: :destroy
   has_many :ballots, dependent: :destroy
@@ -24,6 +25,8 @@ class Member < ActiveRecord::Base
   default_scope { where(accepted: true) }
 
   attr_accessor :reset_password_token
+  attr_accessor :old_password
+  attr_accessor :incorrect_old_password
 
   def generate_reset_password_token!
     self.reset_password_at = Time.zone.now
@@ -32,7 +35,7 @@ class Member < ActiveRecord::Base
 
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     self.reset_password_digest = BCrypt::Password.create(@reset_password_token, cost: cost)
-    self.save
+    self.save!
 
     @reset_password_token
   end
@@ -123,6 +126,13 @@ class Member < ActiveRecord::Base
   end
 
   private
+
+  def correct_old_password
+    if self.incorrect_old_password
+      errors.add(:old_password, 'is incorrect')
+    end
+  end
+
   def set_default_password
     self.password ||= SecureRandom.base64(40)
   end

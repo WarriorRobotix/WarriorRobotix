@@ -1,0 +1,21 @@
+<div class="max6">
+<h1 class="flow-text">Update Email</h1>
+<div class="card-panel" style="padding-bottom:10px;padding-top:10px;">
+  <%= form_for(current_member, url: email_path, method: :post) do |f| %>
+    <%= errors_for f.object %>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="actions col s12">
+        <%= f.submit 'Update Email', class: 'btn', data: { disable_with: nil } %>
+        <%= link_to 'Back', members_path, class: 'btn-flat' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>

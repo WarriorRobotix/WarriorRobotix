@@ -34,11 +34,11 @@ Rails.application.routes.draw do
   get 'forgot' => 'members#forgot'
   post 'forgot' => 'members#send_reset_token'
 
-  get 'email' => 'members#email_edit'
-  post 'email' => 'members#email_update'
+  get 'email' => 'members#edit_email'
+  post 'email' => 'members#update_email'
 
-  get 'password' => 'members#password_edit'
-  post 'password' => 'members#password_update'
+  get 'password' => 'members#edit_password'
+  post 'password' => 'members#update_password'
 
   get 'reset/:record_hex/:reset_token' => 'members#reset_password_edit', as: :reset_password
   post 'reset/:record_hex/:reset_token' => 'members#reset_password_update'
