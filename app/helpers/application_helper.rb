@@ -2,6 +2,7 @@ module ApplicationHelper
   include ActionView::Helpers::TagHelper
   include ActionView::Context
   include ActionView::Helpers::TextHelper
+  include ReturnToHelper
 
   def errors_for(object)
     return unless object.errors.any?
@@ -42,13 +43,6 @@ module ApplicationHelper
     "Materialize.toast('#{j msg}', '4000', '#{css_class}')"
   end
 
-  def return_to_info
-    { from:  request_path}
-  end
-
-  def request_path
-    request.fullpath == '/' ? nil : request.fullpath
-  end
 
   def white_spaces(n=1)
     raw( "&nbsp;" * n )
