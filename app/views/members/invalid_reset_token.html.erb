@@ -1,8 +1,11 @@
 <div class="max6">
-<h1 class="flow-text">Reset Password</h1>
+<h1 class="flow-text"><%= params[:type].to_s.capitalize %> Password</h1>
 <div class="card-panel" style="padding-bottom:10px;padding-top:10px;">
-  Your reset password URL is invalid. It may causes by following reasons:
-  <br/>1. Reset password email has sent out more than 2 days ago
-  <br/>2. Password has already reseted
+  Your <%= params[:type].to_s %> password URL is invalid. It may causes by following reasons:
+  <br/>1. <%= params[:type] == :reset ? 'Reset password' : 'welcome' %> email has sent out more than 2 days ago
+  <br/>2. Password has already <%= params[:type] == :reset ? 'reseted' : 'seted' %> by someone
+  <br/>
+  <br/>
+  <%= link_to "Sent a new #{params[:type].to_s} password token", forgot_path %>
 </div>
 </div>

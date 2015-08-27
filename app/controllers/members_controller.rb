@@ -142,15 +142,15 @@ class MembersController < ApplicationController
   end
 
   def reset_password_edit
-    @member = Member.find(params[:record_hex].to_i(16))
-    unless @member.valid_reset_password_token?(params[:reset_token])
+    @member = Member.find_by(id: params[:record_hex].to_i(16))
+    unless @member.present? && @member.valid_reset_password_token?(params[:reset_token])
       render :invalid_reset_token
     end
   end
 
   def reset_password_update
-    @member = Member.find(params[:record_hex].to_i(16))
-    if @member.valid_reset_password_token?(params[:reset_token])
+    @member = Member.find_by(id: params[:record_hex].to_i(16))
+    if @member.present? && @member.valid_reset_password_token?(params[:reset_token])
       if @member.update(password: params[:password], password_confirmation: params[:password_confirmation], reset_password_at: nil, reset_password_digest: nil)
         redirect_to signin_path
       else
@@ -162,7 +162,9 @@ class MembersController < ApplicationController
   end
 
   def approve
-    @member.update(accepted: true)
+    @member.accepted = true
+    token = @member.generate_reset_password_token!
+    MemberMailer.welcome_email(@member, token).deliver_later
     respond_to do |format|
       format.html { redirect_to members_url, notice: "#{@member.full_name} was successfully became a member." }
     end
@@ -170,6 +172,7 @@ class MembersController < ApplicationController
 
   def reject
     @member.destroy
+    MemberMailer.registration_rejected_email(@member).deliver_later
     respond_to do |format|
       format.html { redirect_to members_url, notice: "#{@member.full_name} was successfully rejected." }
     end
@@ -181,8 +184,8 @@ class MembersController < ApplicationController
   def send_reset_token
     identifier = params[:identifier]
     if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", identifier, identifier).take
-      member.generate_reset_password_token!
-      MemberMailer.reset_password_email(member).deliver_now
+      token = member.generate_reset_password_token!
+      MemberMailer.reset_password_email(member, token).deliver_now
     else
       flash[:alert] =  "Database doesn't have this student number"
       render :forgot

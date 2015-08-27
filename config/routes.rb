@@ -40,8 +40,11 @@ Rails.application.routes.draw do
   get 'password' => 'members#edit_password'
   post 'password' => 'members#update_password'
 
-  get 'reset/:record_hex/:reset_token' => 'members#reset_password_edit', as: :reset_password
-  post 'reset/:record_hex/:reset_token' => 'members#reset_password_update'
+  get 'reset/:record_hex/:reset_token' => 'members#reset_password_edit', as: :reset_password, type: :reset
+  post 'reset/:record_hex/:reset_token' => 'members#reset_password_update', type: :reset
+
+  get '/set-password/:record_hex/:reset_token' => 'members#reset_password_edit', type: :set
+  post '/set-password/:record_hex/:reset_token' => 'members#reset_password_update', type: :set
 
   get '/attend' => 'pages#attend'
   get '/search' => 'members#search'

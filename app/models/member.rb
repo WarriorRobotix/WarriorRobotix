@@ -31,13 +31,13 @@ class Member < ActiveRecord::Base
   def generate_reset_password_token!
     self.reset_password_at = Time.zone.now
 
-    @reset_password_token = SecureRandom.hex
+    self.reset_password_token = SecureRandom.hex
 
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
-    self.reset_password_digest = BCrypt::Password.create(@reset_password_token, cost: cost)
+    self.reset_password_digest = BCrypt::Password.create(self.reset_password_token, cost: cost)
     self.save!
 
-    @reset_password_token
+    self.reset_password_token
   end
 
   def valid_reset_password_token?(token)
