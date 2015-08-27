@@ -18,6 +18,8 @@
 //= require cocoon
 //= require_tree .
 
+Turbolinks.enableProgressBar();
+
 $(function(){
   if (window.is_ios()) { window.ios_ready(); }
   window.hash_modal.refresh();
