@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
-  before_action :authenticate_admin!, except: [:index]
+  before_action :authenticate_admin!, except: [:index, :show]
 
   # GET /posts
   # GET /posts.json
@@ -20,6 +20,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    raise Forbidden if @post[:restriction] > max_restriction
   end
 
   # GET /posts/new

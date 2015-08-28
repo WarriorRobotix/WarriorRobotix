@@ -9,19 +9,19 @@ Rails.application.routes.draw do
 
   resources :posts, type: "Post"
 
-  resources :events, only: [:new, :create, :edit, :update, :show] do
+  resources :events, only: [:new, :create, :edit, :update] do
     post '/reply' => 'events#reply', :constraints => {:format => :js}
   end
 
-  resources :polls, only: [:new, :create, :edit, :update, :show] do
+  resources :polls, only: [:new, :create, :edit, :update] do
     post '/vote' => 'polls#vote', :constraints => {:format => :js}
   end
 
   get '/events', to: redirect('/posts')
   get '/polls', to: redirect('/posts')
 
-  resources :events, only: [:index, :destroy], controller: :posts, type: "Event"
-  resources :polls, only: [:index, :destroy], controller: :posts, type: "Poll"
+  resources :events, only: [:index, :destroy, :show], controller: :posts, type: "Event"
+  resources :polls, only: [:index, :destroy, :show], controller: :posts, type: "Poll"
 
   resources :sponsors, except: [:show]
 
