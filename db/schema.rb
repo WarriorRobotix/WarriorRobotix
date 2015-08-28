@@ -91,8 +91,6 @@ ActiveRecord::Schema.define(version: 20150822004804) do
   end
 
   add_index "photo_locations", ["page"], name: "index_photo_locations_on_page"
-  add_index "photo_locations", ["photo_id"], name: "index_photo_locations_on_photo_id"
-  add_index "photo_locations", ["processed_photo_id"], name: "index_photo_locations_on_processed_photo_id"
 
   create_table "photos", force: :cascade do |t|
     t.string   "name"

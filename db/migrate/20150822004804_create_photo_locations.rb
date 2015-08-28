@@ -5,8 +5,8 @@ class CreatePhotoLocations < ActiveRecord::Migration
       t.string :location, null: false
       t.boolean :prefered_local, null: false, default: false
 
-      t.belongs_to :photo, foreign_key: true
-      t.belongs_to :processed_photo, class_name: 'Photo', foreign_key: true
+      t.references :photo, foreign_key: true
+      t.references :processed_photo, references: :photos, foreign_key: true
 
       t.integer :dimension_restriction, default: 0, null: false
       t.integer :width
