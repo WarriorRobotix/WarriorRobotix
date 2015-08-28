@@ -52,6 +52,8 @@ gem 'carrierwave'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'puma'
+
 group :development do
   gem 'letter_opener'
 end
