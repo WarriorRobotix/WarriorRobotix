@@ -16,7 +16,8 @@ module SessionsHelper
         session[:member_id] = nil
       end
     elsif remember_cookies = cookies.signed[:mtk]
-      token, member_id = remember_cookies.split("$")
+      member_id, token = remember_cookies.split("$")
+      member_id = member_id.to_i
       if member = Member.find_and_authenticate_remember_token(member_id,token)
         return signin_member(member)
       else
@@ -43,6 +44,7 @@ module SessionsHelper
   alias_method :member_is_accepted?, :is_member_accepted?
 
   def signout_member
+    cookies.delete :mtk
     session[:member_id] = @current_member = nil
   end
 

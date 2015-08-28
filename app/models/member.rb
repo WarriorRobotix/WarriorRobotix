@@ -44,22 +44,19 @@ class Member < ActiveRecord::Base
     self.reset_password_digest.present? && self.reset_password_at.present? && ((Time.zone.now - self.reset_password_at) < 2.days) && BCrypt::Password.new(self.reset_password_digest).is_password?(token)
   end
 
-  def regenerate_remember_token
-    remember_token = SecureRandom.urlsafe_base64
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
-    self.remember_digest = BCrypt::Password.create(remember_token, cost: cost)
-    remember_token
+  def remember_token
+    if self.remember_digest.nil?
+      self.remember_digest = SecureRandom.urlsafe_base64
+      self.save
+    end
+    self.remember_digest
   end
 
   def self.find_and_authenticate_remember_token(record_id, remember_token)
     member = Member.where(id: record_id).take
     unless member.nil?
-      member if member.authenticate_remember_token?(remember_token)
+      member if member.remember_digest == remember_token
     end
-  end
-
-  def authenticate_remember_token?(token)
-    self.remember_digest.nil? ? false : BCrypt::Password.new(self.remember_digest).is_password?(token)
   end
 
   def full_name
