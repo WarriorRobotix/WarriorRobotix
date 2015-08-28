@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(version: 20150822004804) do
     t.string   "location",                              null: false
     t.boolean  "prefered_local",        default: false, null: false
     t.integer  "photo_id"
-    t.integer  "processed_photo_id"
     t.integer  "dimension_restriction", default: 0,     null: false
     t.integer  "width"
     t.integer  "height"
