@@ -39,8 +39,10 @@ $(function(){
   $('.button-collapse').sideNav();
 
   $('.materialboxed').materialbox();
-  
+
   $('.slider').slider({full_width: true});
+
+  $('.fixed-action-btn').openFAB();
 });
 
 $(window).on('hashchange', function(){
