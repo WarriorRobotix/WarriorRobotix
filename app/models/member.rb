@@ -1,5 +1,8 @@
 class Member < ActiveRecord::Base
   has_secure_password
+
+  validates :password, length: { in: 5..64 }, unless: :password_nil?
+
   serialize :extra_info
   before_validation :set_default_password, on: :create
   before_validation :titleize_names
@@ -13,8 +16,6 @@ class Member < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true, format: { with: /\A.+@.+\.[^\.]+\z/, message: "format is invalid" }
 
   validates :student_number, presence: true, uniqueness: true, numericality: { only_integer: true }
-
-  validates :password, length: { in: 5..64 }
 
   validate :extra_info_fields
   validate :admin_must_accpeted
@@ -125,6 +126,9 @@ class Member < ActiveRecord::Base
   end
 
   private
+  def password_nil?
+    self.password.nil?
+  end
 
   def correct_old_password
     if self.incorrect_old_password
