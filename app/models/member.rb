@@ -2,17 +2,19 @@ class Member < ActiveRecord::Base
   has_secure_password
   serialize :extra_info
   before_validation :set_default_password, on: :create
-
+  before_validation :titleize_names
   before_validation :set_invalid_graduated_year_to_nil, :titleize_names
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+  validates :first_name, presence: true, format: { with: /\A[A-Z]([a-zA-Z\-\s\.]+[a-zA-Z\.]|[a-zA-Z\.]?)\z/, message: "format is invalid. It must starts with a uppercase letter, following uppercase letters(A-Z), lowercase letters(a-z), hyphens(-), spaces, or dots(.). It can't end with hyphen and space" }
+  validates :last_name, presence: true, format: { with: /\A[A-Z]([a-zA-Z\-\s\.]+[a-zA-Z\.]|[a-zA-Z\.]?)\z/, message: "format is invalid. It must starts with a uppercase letter, following uppercase letters(A-Z), lowercase letters(a-z), hyphens(-), spaces, or dots(.). It can't end with hyphen and space" }
 
   validates :grade, presence: true
 
   validates :email, presence: true, uniqueness: true, format: { with: /\A.+@.+\.[^\.]+\z/, message: "format is invalid" }
 
-  validates :student_number, presence: true, uniqueness: true, format: { without: /.+@.+/, message: "format is invalid" }, numericality: { only_integer: true }
+  validates :student_number, presence: true, uniqueness: true, numericality: { only_integer: true }
+
+  validates :password, length: { in: 5..64 }
 
   validate :extra_info_fields
   validate :admin_must_accpeted
@@ -139,8 +141,12 @@ class Member < ActiveRecord::Base
   end
 
   def titleize_names
-    self.first_name.try(:capitalize!)
-    self.last_name.try(:capitalize!)
+    unless self.first_name.blank? || !(self.first_name[0] =~ /[[:lower:]]/)
+      self.first_name = self.first_name[0].upcase + self.first_name[1..(-1)]
+    end
+    unless self.last_name.blank? || !(self.last_name[0] =~ /[[:lower:]]/)
+      self.last_name = self.last_name[0].upcase + self.last_name[1..(-1)]
+    end
   end
 
   def extra_info_fields
