@@ -145,6 +145,35 @@ label.dark {
   padding-top: 75%;
 }
 
+.error-explanation.card-panel{
+  margin: 30px;
+  padding: 0;
+
+  .panel-heading{
+    @extend .red;
+
+    padding: 5px 10px;
+
+    .panel-title{
+      font-size: 1.4rem;
+      color: #FFC2B5;
+    }
+  }
+
+  .panel-content{
+    table{
+      td{
+        padding-left: 8px;
+      }
+    }
+  }
+
+  @media #{$medium-and-down} {
+    margin: 0;
+    margin-top: 10px;
+  }
+}
+
 /// FOR MINI PROFILER
 .profiler-results{
   @media #{$medium-and-down} {
