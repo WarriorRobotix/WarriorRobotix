@@ -1,1 +1,82 @@
-Welcome to Warrior Robotix's Website.
+<div style="padding-top: 30px;">
+<div class="row">
+   <div class="slider ">
+      <ul class="slides">
+        <li>
+          <%= image_tag 'pages/home/slider_image_0.jpg' %>
+        </li>
+        <li>
+          <%= image_tag 'pages/home/slider_image_1.jpg' %>
+        </li>
+        <li>
+          <%= image_tag 'pages/home/slider_image_2.jpg' %>
+        </li>
+        <li>
+          <%= image_tag 'pages/home/slider_image_3.jpg' %>
+        </li>
+      </ul>
+    </div>
+</div>
+<div class="row">
+  <div class="col s12 m4 l4">
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light">
+        <%= image_tag 'pages/home/skills2013.jpg', class: 'activator' %>
+      </div>
+      <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">Skills<i class="material-icons right">more_vert</i></span>
+
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Skills Canada<i class="material-icons right">close</i></span>
+        <p>The Skills Canada competition is a top tier event that pits Canada's best youth trades people against each other. Warrior Robotix has a long and successful history in the competition. Currently the club competes in many competitions at Skills Canada, including Robotics, Electrical, Programming and more. </p>
+        <a class="waves-effect waves-light btn ">Learn More</a>
+
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m4 l4">
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light">
+        <%= image_tag 'pages/home/vex2015.png', class: 'activator' %>
+      </div>
+      <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">VEX<i class="material-icons right">more_vert</i></span>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">VEX Robotic<i class="material-icons right">close</i></span>
+        <p>The VEX Robotics Competition is an international robotics competition run by the VEX Robotics Organization. Teams in over 50 countries compete for the championship in Louisville Kentucky. Warrior Robotix fields a strong VEX division with four teams and 60+ members.</p>
+        <a class="waves-effect waves-light btn ">Learn More</a>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m4 l4">
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light">
+        <%= image_tag 'pages/home/hami.png', class: 'activator' %>
+      </div>
+      <div class="card-content" >
+        <span class="card-title activator grey-text text-darken-4 ">Other<i class="material-icons right">more_vert</i></span>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Other Events<i class="material-icons right">close</i></span>
+        <p>Warrior Robotix has a presence in many other robotics and community events. The club also competes in the CETA robotics competition, Google Science Fair,and many more events. The school also hosts and supervises the Junior Solar Car competition and Mississauga Jr. FLL competition.</p>
+        <a class="waves-effect waves-light btn ">Learn More</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<% content_for :side_buttons do %>
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">share</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating red"><%= image_tag 'googleplus.png', style: 'width:100%;' %></a></li>
+    <li><a class="btn-floating yellow darken-1"><i class="material-icons">message</i></a></li>
+    <li><a class="btn-floating green"><i class="material-icons">mail</i></a></li>
+    <li><a class="btn-floating blue"><%= image_tag 'facebook500.png', style: 'width:100%;' %></a></li>
+  </ul>
+</div>
+<% end %>

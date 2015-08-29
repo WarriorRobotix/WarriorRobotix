@@ -14,6 +14,7 @@
 <div class="container">
 <%= yield %>
 </div>
+<%= yield :side_buttons %>
 <script type="text/javascript" data-turbolinks-eval=always>
   <%= raw(flash_toasts) %>
 </script>
