@@ -36,7 +36,7 @@ $(function(){
 
   replceNullDisableWith();
 
-  $(".button-collapse").sideNav();
+  $('.button-collapse').sideNav();
 
   $('.materialboxed').materialbox();
 });
@@ -46,7 +46,7 @@ $(window).on('hashchange', function(){
 });
 
 $(document).on('click', 'input[type=text][for]',function(){
-  $(['input[id="',$(this).attr('for'),'"]'].join('')).click();
+  $(['input[id=\"',$(this).attr('for'),'\"]'].join('')).click();
 });
 
 $(document).on('click', '.stop-propagation', function(event){
@@ -71,13 +71,13 @@ $(document).on('click', 'input[data-trigger-form]', function(event){
   form.submit();
 });
 
-$(document).on('change', '.file-field input[type="file"][data-photo-name-target]', function () {
+$(document).on('change', '.file-field input[type=\"file\"][data-photo-name-target]', function () {
   $t = $(this);
   var form = $t.closest('form');
   var target = form.find($t.data('photo-name-target'));
   if ($t[0].files !== undefined || $t[0].files[0] !== undefined) {
-    var file = $t[0].files[0].name.replace(/\.[^/.]+$/, "");
-    form.find(['label[for="',$t.data('photo-name-target').slice(1),'"]'].join('')).addClass('active');
+    var file = $t[0].files[0].name.replace(/\.[^/.]+$/, '');
+    form.find(['label[for=\"',$t.data('photo-name-target').slice(1),'\"]'].join('')).addClass('active');
     target.attr('placeholder',file);
   }
 });
@@ -102,7 +102,7 @@ function deletePoll(ele,event) {
 }
 
 function replceNullDisableWith(){
-  $('input[data-disable-with="null"]').each(function(){
+  $('input[data-disable-with=\"null\"]').each(function(){
     var t = $(this);
     t.attr('data-disable-with',t.val());
   });
