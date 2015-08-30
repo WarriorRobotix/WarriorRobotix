@@ -41,7 +41,9 @@ nav a:hover{
 body{
   padding-top:60px;
   background-color: $background-color;
-  padding-bottom: 50px;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 label.dark {
