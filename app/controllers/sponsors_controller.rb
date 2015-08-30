@@ -5,7 +5,7 @@ class SponsorsController < ApplicationController
   # GET /sponsors
   # GET /sponsors.json
   def index
-    @sponsors = Sponsor.all
+    @sponsors = Sponsor.order(id: :ASC).all
   end
 
   # GET /sponsors/new
