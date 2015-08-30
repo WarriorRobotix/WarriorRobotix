@@ -41,8 +41,6 @@ gem 'rack-mini-profiler'
 
 # Use carrierwave for image uploading
 gem 'carrierwave'
-# tzinfo-data
-gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 # Use Unicorn as the app server
 # gem 'unicorn'
