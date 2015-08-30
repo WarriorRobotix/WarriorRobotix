@@ -92,7 +92,7 @@ Sponsor.create!({
   website_link: "https://bostonpizza.com/en",
   facebook_link: "https://www.facebook.com/BostonPizza",
   twitter_link: "https://twitter.com/bostonpizza",
-  image_link: "https://upload.wikimedia.org/wikipedia/en/thumb/2/20/Boston_Pizza.svg/1024px-Boston_Pizza.svg.png"
+  image_link: "sponsors/boston_pizza.png"
 })
 
 Sponsor.create!({
