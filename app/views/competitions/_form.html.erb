@@ -1,45 +1,43 @@
 <%= form_for(@competition) do |f| %>
-  <% if @competition.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@competition.errors.count, "error") %> prohibited this competition from being saved:</h2>
-
-      <ul>
-      <% @competition.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <%= errors_for @competition %>
+  <div class="row large-margin-bottom">
+    <div class="col s12 input-field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <div class="col s12 input-field">
+      <%= f.text_area :description, class: "materialize-textarea" %>
+      <%= f.label :description %>
+    </div>
+    <div class="col s12 input-field">
+      <%= f.label :location %>
+      <%= f.text_field :location %>
+    </div>
+    <div class="col s12 input-field">
+      <%= f.text_area :achievements, class: "materialize-textarea" %>
+      <%= f.label :achievements %>
+    </div>
+    <div class="date-field col s12">
+      <%= f.label :start_date %>
+      <%= date_field_tag 'competition[start_date]', nil, class: "datepicker", data: { value: f.object.start_date.try(:strftime,'%A, %B %d, %Y') } %>
+    </div>
+    <div class="date-field col s12">
+      <%= f.label :end_date %>
+      <%= date_field_tag 'competition[end_date]', nil, class: "datepicker", data: { value: f.object.end_date.try(:strftime,'%A, %B %d, %Y') } %>
+    </div>
+    <div class="col s12 input-field">
+      <%= f.label :cover_image_link %>
+      <%= f.text_field :cover_image_link %>
+    </div>
+    <div class="input-field col s6">
+      <%= f.check_box :count_down %>
+      <%= f.label :count_down %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
-    <%= f.label :achievements %><br>
-    <%= f.text_field :achievements %>
-  </div>
-  <div class="field">
-    <%= f.label :cover_image_link %><br>
-    <%= f.text_field :cover_image_link %>
-  </div>
-  <div class="field">
-    <%= f.label :start_date %><br>
-    <%= f.date_select :start_date %>
-  </div>
-  <div class="field">
-    <%= f.label :end_date %><br>
-    <%= f.date_select :end_date %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="row">
+    <div class="actions col s12">
+      <%= f.submit class: 'btn', data: { disable_with: nil } %>
+      <%= link_to 'Back', competitions_path, class: 'btn-flat' %>
+    </div>
   </div>
 <% end %>
