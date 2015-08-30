@@ -12,11 +12,15 @@ $link-color-darker: color("blue", "darken-4");
 .btn-text{
   @extend .btn-flat;
   color: $secondary-color;
+  margin-bottom: 15px;
 }
-
+.btn{
+  margin-bottom: 15px;
+}
 .btn-narrow-flat{
   @extend  .btn-flat;
   padding: 0 .5rem;
+  margin-bottom: 15px;
 }
 
 .btn-bordered{
