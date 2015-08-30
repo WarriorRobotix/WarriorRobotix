@@ -8,6 +8,7 @@ class CreateCompetitions < ActiveRecord::Migration
       t.string :cover_image_link
       t.date :start_date
       t.date :end_date
+      t.boolean :count_down, null: false, default: false
 
       t.timestamps null: false
     end
