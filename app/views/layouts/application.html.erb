@@ -10,9 +10,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
 </head>
-<body>
+<body class="<%= controller_name %>-<%= action_name %>">
 <%= render 'components/navbar' %>
 <main>
+  <%= yield :above_container %>
   <div class="container">
   <%= yield %>
   </div>
