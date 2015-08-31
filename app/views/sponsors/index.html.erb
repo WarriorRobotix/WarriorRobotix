@@ -15,30 +15,36 @@
         </div>
       </div>
       <div class="card-content">
-        <div class="card-title activator">
-          <% if !sponsor.facebook_link.empty? %>
-          <a href="<%= sponsor.facebook_link %>" class="sponsor-social hide-on-med-and-down">
-            <img src="<%= asset_path 'fb_icon.gif' %>">
-          </a>
-          <% end %>
-          <% if !sponsor.twitter_link.empty? %>
-          <a href="<%= sponsor.twitter_link %>" class="sponsor-social hide-on-med-and-down">
-            <img src="<%= asset_path 'twitter_icon.png' %>">
-          </a>
-          <% end %>
-          <div class="sponsor-link-w">
-          <a class="sponsor-link" href="<%= sponsor.website_link %>"><%= sponsor.name %></a>
-          </div>
-          <i class="material-icons right sponsor-more">more_vert</i>
+        <div class="card-title activator truncate">
+          <%= sponsor.name %>
+          <i class="material-icons">more_vert</i>
         </div>
+        <p>
+          <% unless sponsor.facebook_link.empty? %>
+          <a href="<%= sponsor.facebook_link %>" class="sponsor-social">
+            <%= image_tag 'sponsors/socials/facebook.png' %>
+          </a>
+          <% end %>
+          <% unless sponsor.twitter_link.empty? %>
+          <a href="<%= sponsor.twitter_link %>" class="sponsor-social">
+            <%= image_tag 'sponsors/socials/twitter.png' %>
+          </a>
+          <% end %>
+          <% unless sponsor.twitter_link.empty? %>
+          <a href="<%= sponsor.website_link %>" class="sponsor-social" >
+            <%= image_tag 'sponsors/socials/web.png' %>
+          </a>
+          <% end %>
+        </p>
       </div>
       <div class="card-reveal">
-        <span class="card-title"><%= sponsor.name %><i class="material-icons right">close</i></span>
+        <span class="card-title grey-text text-darken-4"><%= sponsor.name %><i class="material-icons right">close</i></span>
         <p><%= sponsor.description %></p>
         <% if !sponsor.facebook_link.empty? %><p><a href="<%= sponsor.facebook_link %>">Facebook</a></p><% end %>
         <% if !sponsor.twitter_link.empty? %><p><a href="<%= sponsor.twitter_link %>">Twitter</a></p><% end %>
+        <% if !sponsor.website_link.empty? %><p><a href="<%= sponsor.website_link %>">Website</a></p><% end %>
         <% if member_is_admin? %>
-        <p><%= link_to 'Edit', edit_sponsor_path(sponsor) %> | <%= link_to 'Delete', sponsor, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+        <p class="large-padding-bottom"><%= link_to 'Edit', edit_sponsor_path(sponsor) %> | <%= link_to 'Delete', sponsor, method: :delete, data: { confirm: 'Are you sure?' } %></p>
         <% end %>
       </div>
     </div>

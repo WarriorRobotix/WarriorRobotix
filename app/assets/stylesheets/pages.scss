@@ -38,3 +38,15 @@
     }
   }
 }
+
+.slider.indicators-inside{
+  margin-bottom: -30px;
+   ul.indicators{
+    z-index: 2;
+    bottom: 60px;
+  }
+}
+
+body.pages-home{
+  background-color: white;
+}
