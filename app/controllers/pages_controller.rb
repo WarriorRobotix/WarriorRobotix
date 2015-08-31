@@ -1,8 +1,9 @@
 class PagesController < ApplicationController
   before_action :authenticate_admin!, only: [:attend]
   def home
+    @show_side_buttons = true
   end
-  
+
   def attend
     @checkedin = Array.new
     @checkedout = Array.new
