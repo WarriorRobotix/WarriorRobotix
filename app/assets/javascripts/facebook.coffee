@@ -1,6 +1,7 @@
-$ ->
+$(document).on('ready', ->
   loadFacebookSDK()
   bindFacebookEvents() unless window.fbEventsBound
+)
 
 bindFacebookEvents = ->
   $(document)

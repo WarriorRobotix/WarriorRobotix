@@ -1,8 +1,9 @@
 twttr_events_bound = false
 
-$ ->
+$(document).on('ready', ->
   loadTwitterSDK()
   bindTwitterEventHandlers() unless twttr_events_bound
+)
 
 bindTwitterEventHandlers = ->
   $(document).on 'page:load', renderTweetButtons
