@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150822004804) do
+ActiveRecord::Schema.define(version: 20150830155633) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id",              null: false
@@ -36,6 +36,19 @@ ActiveRecord::Schema.define(version: 20150822004804) do
   end
 
   add_index "ballots", ["option_id"], name: "index_ballots_on_option_id"
+
+  create_table "competitions", force: :cascade do |t|
+    t.string   "name",                             null: false
+    t.text     "description"
+    t.string   "location"
+    t.string   "achievements"
+    t.string   "cover_image_link"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.boolean  "count_down",       default: false, null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
 
   create_table "global_vars", force: :cascade do |t|
     t.string  "name",                      null: false
