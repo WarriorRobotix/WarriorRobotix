@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   resources :photos, except: [:show]
 
+  resources :competitions
+
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'
   delete 'signout' => 'sessions#destroy'

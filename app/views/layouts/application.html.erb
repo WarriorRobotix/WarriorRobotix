@@ -4,63 +4,20 @@
   <title>WarriorRobotix</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://apis.google.com/js/platform.js"></script>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
 </head>
 <body>
-<%= render partial: 'layouts/navbar' %>
-
-<div class="container">
-<%= yield %>
-</div>
-
-<footer class="page-footer ">
-    <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Design-Build-Win</h5>
-                <img style="width: 60% " src="pic/fulllogo.png" >
-              </div>
-              <div class="col l6 s12">
-                <h5 class="white-text">Links</h5>
-                <div class="col s6">
-                  <a class="waves-effect waves-light btn"><i class="material-icons right">mail</i>Contact Us</a>
-                </div>
-                <div class="col s6">
-                  <a class="waves-effect waves-light btn"><i class="material-icons right">account_circle</i>About Us</a>
-                </div>
-                <br>
-                <div class="col s12">
-                  <a href="https://twitter.com/WarriorRobotix" class="twitter-follow-button" data-show-count="false">Follow @WarriorRobotix</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                  <a href="https://twitter.com/share" class="twitter-share-button" data-via="warriorrobotix">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-                  <div class="g-follow" data-annotation="bubble" data-height="24" data-href="https://plus.google.com/102688573529185323382" data-rel="publisher"></div>
-                  </div>
-                  <div class="col s12"><div class="fb-like " data-href="http://www.facebook.com/4659Robotix" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>
-                  </div>
-              </div>
-            </div>
-          </div>
-    <div class="footer-copyright">
-    <div class="container">
-      CopyRight <a class="orange-text text-lighten-3" href="http://materializecss.com">Warrior Robotix</a>
-      </div>
-    </div>
-  </footer>
-
-<%= yield :side_buttons %>
-<script type="text/javascript" data-turbolinks-eval=always>
-  <%= raw(flash_toasts) %>
-</script>
-<div id="fb-root"></div>
-        <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
+<%= render 'components/navbar' %>
+<main>
+  <div class="container">
+  <%= yield %>
+  </div>
+</main>
+<%= render 'components/footer' %>
+<%= render 'components/side_buttons' if @show_side_buttons %>
 </body>
 </html>
