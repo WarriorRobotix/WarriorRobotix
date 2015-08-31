@@ -18,16 +18,18 @@
         <div class="card-title activator">
           <% if !sponsor.facebook_link.empty? %>
           <a href="<%= sponsor.facebook_link %>" class="sponsor-social hide-on-med-and-down">
-            <img src="<%= asset_path 'fb_icon.gif' %>">
+            <img src="<%= asset_path 'facebook500.png' %>">
           </a>
           <% end %>
           <% if !sponsor.twitter_link.empty? %>
           <a href="<%= sponsor.twitter_link %>" class="sponsor-social hide-on-med-and-down">
-            <img src="<%= asset_path 'twitter_icon.png' %>">
+            <img src="<%= asset_path 'twitter.png' %>">
           </a>
           <% end %>
           <div class="sponsor-link-w">
-          <a class="sponsor-link" href="<%= sponsor.website_link %>"><%= sponsor.name %></a>
+          <a class="sponsor-social " href="<%= sponsor.website_link %>">
+            <img src="<%= asset_path 'web.png' %>">
+          </a>
           </div>
           <i class="material-icons right sponsor-more">more_vert</i>
         </div>
