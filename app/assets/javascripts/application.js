@@ -110,6 +110,8 @@ function deletePoll(ele,event) {
 function replceNullDisableWith(){
   $('input[data-disable-with=\"null\"]').each(function(){
     var t = $(this);
-    t.attr('data-disable-with',t.val());
+    var v = t.val();
+    t.data('disable-with',v)
+    t.attr('data-disable-with',v);
   });
 }
