@@ -1,5 +1,6 @@
 class Competition < ActiveRecord::Base
   validates :name, presence: true
+  validates :start_date, presence: true
   validates :cover_image_link, presence: true
   before_validation :nullify_blanks
 
