@@ -1,32 +1,19 @@
 <%= form_for([@member, @attendance]) do |f| %>
-  <% if @attendance.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
-
-      <ul>
-      <% @attendance.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <%= errors_for f.object %>
+  <p></p>
+  <%= render 'components/datetime', f: f, method: :start_at %>
+  <%= render 'components/datetime', f: f, method: :end_at %>
+  <div class="row">
+    <div class="input-field col s12 m6 l3">
+      <%= f.select :status, Attendance.statuses.map { |k,v| [k.capitalize, k] } %>
+      <%= f.label :status %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :start_at %><br>
-    <%= f.datetime_select :start_at %>
-  </div>
-  <div class="field">
-    <%= f.label :end_at %><br>
-    <%= f.check_box :skip_end_at %>
-    <%= f.label :skip_end_at, "Blank End At" %><br>
-    <%= f.datetime_select :end_at %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.select :status, Attendance.statuses.map { |k,v| [k.capitalize, k] } %>
   </div>
 
-  <div class="actions">
-    <%= f.submit data: { disable_with: nil } %>
+  <div class="row">
+    <div class="actions col s12">
+      <%= f.submit class: 'btn', data: { disable_with: nil } %>
+      <%= link_to 'Back', member_attendances_path(@member), class: 'btn-flat' %>
+    </div>
   </div>
 <% end %>

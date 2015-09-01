@@ -1,0 +1,18 @@
+<% method = method.to_s.underscore %>
+<% obj = f.object %>
+<% datetime = obj.send(method) %>
+<% model_name = obj.model_name.singular %>
+<div class="row">
+  <div class="date-field col s12 m6 l6">
+    <%= label_tag "#{model_name}[#{method}][date]", method.titleize %>
+    <%= date_field_tag "#{model_name}[#{method}][date]", nil, class: "datepicker", data: { value: datetime.try(:strftime,'%A, %B %d, %Y') } %>
+  </div>
+  <div class="input-field col s6 m3 l3">
+    <%= label_tag "#{model_name}[#{method}][hour]", 'Hour'  %>
+    <%= telephone_field_tag "#{model_name}[#{method}][hour]", datetime.try(:strftime, '%H') %>
+  </div>
+  <div class="input-field col s6 m3 l3">
+    <%= label_tag "#{model_name}[#{method}][minute]", 'Minute'  %>
+    <%= telephone_field_tag "#{model_name}[#{method}][minute]", datetime.try(:strftime, '%M') %>
+  </div>
+</div>

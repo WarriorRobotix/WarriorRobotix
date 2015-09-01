@@ -5,33 +5,35 @@
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4"><%= competition.name %><i class="material-icons right">more_vert</i></span>
-      <p><%= competition.start_date.try(:strftime,'%a, %b %d, %Y') || "unknown" %> - <%= competition.end_date.try(:strftime,'%a, %b %d, %Y')  || "unknown" %></p>
+      <p><%= competition.start_date.try(:strftime,'%B %d, %Y') || "unknown" %><%= " - #{competition.end_date.strftime('%B %d, %Y')}" if competition.end_date %></p>
     </div>
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4"><%= competition.name %><i class="material-icons right">close</i></span>
-      <% if competition.description.present? %>
+      <% if competition.description %>
       <div class="col s12">
         <p><%= simple_format competition.description %></p>
       </div>
       <% end %>
-      <% if competition.location.present? %>
+      <% if competition.location %>
       <div class="col s6">
         <p>Location:<br>
           <%= simple_format competition.location %>
         </p>
       </div>
       <% end %>
-      <% if competition.achievements.present? %>
+      <% if competition.achievements %>
       <div class="col s6">
-        <p>Acheavments:<br>
+        <p>Achievements:<br>
           <%= simple_format competition.achievements %>
         </p>
       </div>
       <% end %>
       <% if member_is_admin? %>
       <div class="col s12">
-        <%= link_to 'Edit', edit_competition_path(competition) %> |
-        <%= link_to 'Delete', competition, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <p class="large-padding-bottom">
+          <%= link_to 'Edit', edit_competition_path(competition) %> |
+          <%= link_to 'Delete', competition, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </p>
       </div>
       <% end %>
     </div>
