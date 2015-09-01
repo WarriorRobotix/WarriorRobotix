@@ -40,7 +40,7 @@ $(function(){
 
   $('.materialboxed').materialbox();
 
-  $('.slider').slider({full_width: true});
+  $('.slider').slider({full_width: true, height: 500});
 
   $('.fixed-action-btn').openFAB();
 

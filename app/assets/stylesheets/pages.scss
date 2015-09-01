@@ -49,6 +49,11 @@
 
 body.pages-home{
   background-color: white;
+  @media #{$large-and-up} {
+    .container{
+      width: 80%;
+    }
+  }
 }
 
 .black-caption{
