@@ -1,6 +1,6 @@
 <%= hash_modal 'm-', member_path(id: '$') if member_is_admin? %>
-<h1 class="max8 flow-text">Members Center</h1>
-<%= render 'quick_members_panel' if member_is_admin?  %>
+<h1 class="flow-text">Members Center</h1>
+<%= render 'quick_members_panel'  %>
 <%= render('members_table', members: @current_members, title: 'Current Members') %>
 <%= render('pending_members_table', members: @pending_members, title: 'Pending Members') if @pending_members.present? %>
 <%= render('members_table', members: @graduated_members, title: 'Graduated Members') if @graduated_members.present? %>

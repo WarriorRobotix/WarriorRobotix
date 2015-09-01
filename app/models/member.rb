@@ -1,21 +1,25 @@
 class Member < ActiveRecord::Base
   has_secure_password
+
+  validates :password, length: { in: 5..64 }, unless: :password_nil?
+
   serialize :extra_info
   before_validation :set_default_password, on: :create
-
+  before_validation :titleize_names
   before_validation :set_invalid_graduated_year_to_nil, :titleize_names
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+  validates :first_name, presence: true, format: { with: /\A[A-Z]([a-zA-Z\-\s\.]+[a-zA-Z\.]|[a-zA-Z\.]?)\z/, message: "format is invalid. It must starts with a uppercase letter, following uppercase letters(A-Z), lowercase letters(a-z), hyphens(-), spaces, or dots(.). It can't end with hyphen and space" }
+  validates :last_name, presence: true, format: { with: /\A[A-Z]([a-zA-Z\-\s\.]+[a-zA-Z\.]|[a-zA-Z\.]?)\z/, message: "format is invalid. It must starts with a uppercase letter, following uppercase letters(A-Z), lowercase letters(a-z), hyphens(-), spaces, or dots(.). It can't end with hyphen and space" }
 
   validates :grade, presence: true
 
   validates :email, presence: true, uniqueness: true, format: { with: /\A.+@.+\.[^\.]+\z/, message: "format is invalid" }
 
-  validates :student_number, presence: true, uniqueness: true, format: { without: /.+@.+/, message: "format is invalid" }, numericality: { only_integer: true }
+  validates :student_number, presence: true, uniqueness: true, numericality: { only_integer: true }
 
   validate :extra_info_fields
   validate :admin_must_accpeted
+  validate :correct_old_password
 
   has_many :attendances, dependent: :destroy
   has_many :ballots, dependent: :destroy
@@ -24,39 +28,38 @@ class Member < ActiveRecord::Base
   default_scope { where(accepted: true) }
 
   attr_accessor :reset_password_token
+  attr_accessor :old_password
+  attr_accessor :incorrect_old_password
 
   def generate_reset_password_token!
     self.reset_password_at = Time.zone.now
 
-    @reset_password_token = SecureRandom.hex
+    self.reset_password_token = SecureRandom.urlsafe_base64(6)
 
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
-    self.reset_password_digest = BCrypt::Password.create(@reset_password_token, cost: cost)
-    self.save
+    self.reset_password_digest = BCrypt::Password.create(self.reset_password_token, cost: cost)
+    self.save!
 
-    @reset_password_token
+    self.reset_password_token
   end
 
   def valid_reset_password_token?(token)
     self.reset_password_digest.present? && self.reset_password_at.present? && ((Time.zone.now - self.reset_password_at) < 2.days) && BCrypt::Password.new(self.reset_password_digest).is_password?(token)
   end
 
-  def regenerate_remember_token
-    remember_token = SecureRandom.urlsafe_base64
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
-    self.remember_digest = BCrypt::Password.create(remember_token, cost: cost)
-    remember_token
+  def remember_token
+    if self.remember_digest.nil?
+      self.remember_digest = SecureRandom.urlsafe_base64
+      self.save
+    end
+    self.remember_digest
   end
 
   def self.find_and_authenticate_remember_token(record_id, remember_token)
     member = Member.where(id: record_id).take
     unless member.nil?
-      member if member.authenticate_remember_token?(remember_token)
+      member if member.remember_digest == remember_token
     end
-  end
-
-  def authenticate_remember_token?(token)
-    self.remember_digest.nil? ? false : BCrypt::Password.new(self.remember_digest).is_password?(token)
   end
 
   def full_name
@@ -123,6 +126,16 @@ class Member < ActiveRecord::Base
   end
 
   private
+  def password_nil?
+    self.password.nil?
+  end
+
+  def correct_old_password
+    if self.incorrect_old_password
+      errors.add(:old_password, 'is incorrect')
+    end
+  end
+
   def set_default_password
     self.password ||= SecureRandom.base64(40)
   end
@@ -132,8 +145,12 @@ class Member < ActiveRecord::Base
   end
 
   def titleize_names
-    self.first_name.try(:capitalize!)
-    self.last_name.try(:capitalize!)
+    unless self.first_name.blank? || !(self.first_name[0] =~ /[[:lower:]]/)
+      self.first_name = self.first_name[0].upcase + self.first_name[1..(-1)]
+    end
+    unless self.last_name.blank? || !(self.last_name[0] =~ /[[:lower:]]/)
+      self.last_name = self.last_name[0].upcase + self.last_name[1..(-1)]
+    end
   end
 
   def extra_info_fields

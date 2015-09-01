@@ -3,14 +3,14 @@
 <div class="row">
   <div class="date-field col s12 m6 l6">
     <label for="event_<%= method %>_date"><%= method.titleize %></label>
-    <input type="date" class="datepicker" name="event[<%= method %>][date]" id="event_<%= method %>_date" data-value="<%= datetime %>">
+    <input type="date" class="datepicker" name="event[<%= method %>][date]" id="event_<%= method %>_date" data-value="<%= datetime.try(:strftime,'%A, %B %d, %Y') %>">
   </div>
   <div class="input-field col s6 m3 l3">
     <label for="event_<%= method %>_hour">Hour</label>
-    <input type="number" name="event[<%= method %>][hour]" id="event_<%= method %>_hour" min="0" max="24" value="<%= datetime.try(:hour) %>">
+    <input type="number" name="event[<%= method %>][hour]" id="event_<%= method %>_hour" min="0" max="24" value="<%= datetime.try(:strftime, '%H') %>">
   </div>
   <div class="input-field col s6 m3 l3">
     <label for="event_<%= method %>_minute">Minute</label>
-    <input type="number" name="event[<%= method %>][minute]" id="event_<%= method %>_minute" min="0" max="60" value="<%= datetime.try(:minute)%>">
+    <input type="number" name="event[<%= method %>][minute]" id="event_<%= method %>_minute" min="0" max="60" value="<%= datetime.try(:strftime, '%M')%>">
   </div>
 </div>

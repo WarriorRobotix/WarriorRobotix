@@ -12,11 +12,15 @@ $link-color-darker: color("blue", "darken-4");
 .btn-text{
   @extend .btn-flat;
   color: $secondary-color;
+  margin-bottom: 15px;
 }
-
+.btn{
+  margin-bottom: 15px;
+}
 .btn-narrow-flat{
   @extend  .btn-flat;
   padding: 0 .5rem;
+  margin-bottom: 15px;
 }
 
 .btn-bordered{
@@ -28,8 +32,11 @@ $link-color-darker: color("blue", "darken-4");
   }
 }
 
+.large-padding-bottom{
+  padding-bottom: 30px;
+}
+
 nav {
-  background-color: $primary-color;
   padding-left: 2%;
   padding-right: 2%;
 }
@@ -39,9 +46,38 @@ nav a:hover{
 }
 
 body{
-  padding-top:60px;
   background-color: $background-color;
-  padding-bottom: 50px;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+main{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+
+  min-height: calc(100vh - 84px);
+}
+
+footer.page-footer{
+  background-color: $primary-color;
+  .footer-copyright {
+    background-color: #4B4B4B;
+  }
+  .footer-logo{
+    max-width: 100%;
+    max-height: 100px;
+  }
 }
 
 label.dark {
@@ -90,11 +126,19 @@ label.dark {
   }
 }
 
-.row.large-margin,.large-margin-sm{
+.col.large-margin-bottom{
+  margin-bottom: 20px;
+}
+
+.row.large-margin, .large-margin-sm{
   @media #{$medium-and-down} {
     margin-top: 36px;
     margin-bottom: 36px;
   }
+}
+
+.col.med-margin-bottom{
+  margin-bottom: 15px;
 }
 
 .margin-center{
@@ -139,6 +183,35 @@ label.dark {
 
 .ratio-4-3-wrapper::before{
   padding-top: 75%;
+}
+
+.error-explanation.card-panel{
+  margin: 30px;
+  padding: 0;
+
+  .panel-heading{
+    @extend .red;
+
+    padding: 5px 10px;
+
+    .panel-title{
+      font-size: 1.4rem;
+      color: #FFC2B5;
+    }
+  }
+
+  .panel-content{
+    table{
+      td{
+        padding-left: 8px;
+      }
+    }
+  }
+
+  @media #{$medium-and-down} {
+    margin: 0;
+    margin-top: 10px;
+  }
 }
 
 /// FOR MINI PROFILER

@@ -4,18 +4,21 @@
   <title>WarriorRobotix</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://apis.google.com/js/platform.js"></script>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-</head>
-<body>
-<%= render partial: 'layouts/navbar' %>
 
-<div class="container">
-<%= yield %>
-</div>
-<script type="text/javascript" data-turbolinks-eval=always>
-  <%= raw(flash_toasts) %>
-</script>
+</head>
+<body class="<%= controller_name %>-<%= action_name %>">
+<%= render 'components/navbar' %>
+<main>
+  <%= yield :above_container %>
+  <div class="container">
+  <%= yield %>
+  </div>
+</main>
+<%= render 'components/footer' %>
+<%= render 'components/side_buttons' if @show_side_buttons %>
 </body>
 </html>

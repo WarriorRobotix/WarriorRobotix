@@ -20,3 +20,33 @@
 .no-pointer-events{
   pointer-events: none;
 }
+
+.front-page-content{
+  .text-description{
+    font-size: 1.2rem;
+  }
+}
+
+.fixed-action-btn{
+  .social-logo{
+    background-color: transparent;
+    img{
+      width: 100%;
+    }
+    &.twitter{
+      background-color: #55acee;
+    }
+  }
+}
+
+.slider.indicators-inside{
+  margin-bottom: -30px;
+   ul.indicators{
+    z-index: 2;
+    bottom: 60px;
+  }
+}
+
+body.pages-home{
+  background-color: white;
+}

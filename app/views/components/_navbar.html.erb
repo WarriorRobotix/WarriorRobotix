@@ -1,0 +1,73 @@
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper">
+    <span class="brand-logo flow-text" style="font-size:132%">
+    <%= link_to "WarriorRobotix", root_path %>
+    </span>
+    <ul class="flow-text right hide-on-med-and-down" style="font-size:100%;">
+      <% if member_signed_in? %>
+      <li style="padding-right:15px;padding-left:15px;">
+          Hi, <%= current_member.full_name %> <%= "(admin)" if member_is_admin? %>
+      </li>
+      <% end %>
+      <% if member_is_admin? %>
+      <li>
+        <%= link_to "Attendance", '/attend' %>
+      </li>
+      <li>
+        <%= link_to "Photos", photos_path %>
+      </li>
+      <% end %>
+      <li>
+        <%= link_to "Competitions", '/competitions' %>
+      </li>
+      <li>
+        <%= link_to "Posts", posts_path %>
+      </li>
+      <li>
+        <%= link_to "Members", members_path %>
+      </li>
+      <li>
+        <%= link_to "Sponsors", sponsors_path %>
+      </li>
+      <li>
+        <% if member_signed_in? %>
+          <%= link_to "Sign out", signout_path(return_to_info), method: :delete %>
+        <% else %>
+          <%= link_to "Sign in", signin_path(return_to_info) %>
+        <% end %>
+      </li>
+    </ul>
+    <ul id="slide-out" class="side-nav flow-text">
+      <% if member_is_admin? %>
+      <li>
+        <%= link_to "Attendance", '/attend' %>
+      </li>
+      <li>
+        <%= link_to "Photos", photos_path %>
+      </li>
+      <% end %>
+      <li>
+        <%= link_to "Competitions", '/competitions' %>
+      </li>
+      <li>
+        <%= link_to "Posts", posts_path %>
+      </li>
+      <li>
+        <%= link_to "Members", members_path %>
+      </li>
+      <li>
+        <%= link_to "Sponsors", sponsors_path %>
+      </li>
+      <li>
+        <% if member_signed_in? %>
+          <%= link_to "Sign out", signout_path(return_to_info), method: :delete %>
+        <% else %>
+          <%= link_to "Sign in", signin_path(return_to_info) %>
+        <% end %>
+      </li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+    </div>
+  </nav>
+</div>

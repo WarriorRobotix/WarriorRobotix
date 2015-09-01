@@ -1,33 +1,37 @@
 .sponsor-card.card {
   padding: 10px;
-  .card-title {
-    @extend .grey-text, .text-darken-4;
-  }
-  .card-content .card-title {
-    height:48px;
-    line-height:48px;
-    vertical-align:middle;
+
+  .card-content{
+    .card-title {
+      @extend .grey-text, .text-darken-4;
+      position: relative;
+      padding-right: 30px;
+      .material-icons{
+        position: absolute;
+        top: 12px;
+        right: 0px;
+      }
+    }
     .sponsor-social{
       float: left;
       img{
-        height:28px;
-        margin-top:10px;
-        margin-right:10px;
+        position: relative;
+        height: 28px;
+        border-radius: 14px;
+        margin-top: 10px;
+        margin-right: 14px;
       }
-    }
-    .sponsor-more {
-      height:28px;
-      margin-top:10px;
-    }
-    .sponsor-link-w{
-      display: inline-block;
-      .sponsor-link {
-        @extend .truncate;
-        @media #{$small-and-down} {
-          max-width: 170px;
+      @media #{$medium-and-down} {
+        img{
+          border-radius: 22px;
+          height: 44px;
+          margin-top: 10px;
+          margin-right: 28px;
         }
       }
     }
+    .sponsor-social:last-of-type img{
+      margin-right: 0;
+    }
   }
-
 }

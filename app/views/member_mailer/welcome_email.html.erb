@@ -1,0 +1,5 @@
+<h2>Welcome to Warrior Robotix club</h2>
+<p>By setting your password, you have accesses to information, events, and attendances on the club website</p>
+<p style="text-align:center">
+<%= link_to 'Set Password', reset_password_url(@member.id.to_s(16), @member.reset_password_token) %>
+</p>

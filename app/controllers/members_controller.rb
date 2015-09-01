@@ -1,8 +1,8 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy, :reject, :approve]
 
-  before_action :authenticate_admin!, except: [:index, :new, :create, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update]
-  before_action :authenticate_member!, only: [:index]
+  before_action :authenticate_admin!, except: [:index, :new, :create, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update, :edit_email, :update_email, :edit_password, :update_password]
+  before_action :authenticate_member!, only: [:index, :edit_email, :update_email, :edit_password, :update_password]
 
   # GET /members
   # GET /members.json
@@ -117,7 +117,7 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.save
-        format.html { redirect_to @member, notice: 'Member was successfully created.' }
+        format.html { redirect_to members_path, notice: 'Member was successfully created.' }
         format.json { render :show, status: :created, location: @member }
       else
         format.html { render :new }
@@ -131,7 +131,7 @@ class MembersController < ApplicationController
   def update
     respond_to do |format|
       if @member.update(member_params)
-        format.html { redirect_to @member, notice: 'Member was successfully updated.' }
+        format.html { redirect_to members_path, notice: 'Member was successfully updated.' }
         format.json { render :show, status: :ok, location: @member }
       else
         format.html { render :edit }
@@ -155,7 +155,15 @@ class MembersController < ApplicationController
   end
 
   def update_email
-
+    respond_to do |format|
+      if current_member.update(params.require(:member).permit(:email))
+        format.html { redirect_to members_path, notice: 'Email was successfully updated.' }
+        format.json { render :show, status: :ok, location: current_member }
+      else
+        format.html { render :edit_email }
+        format.json { render json: current_member.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit_password
@@ -163,19 +171,29 @@ class MembersController < ApplicationController
   end
 
   def update_password
-
+    password_params = params.require(:member).permit(:old_password, :password, :password_confirmation)
+    respond_to do |format|
+      (current_member.incorrect_old_password = true) unless (current_member.authenticate(params[:old_password]) == false)
+      if current_member.update(password_params)
+        format.html { redirect_to members_path, notice: 'Password was successfully updated.' }
+        format.json { render :show, status: :ok, location: current_member }
+      else
+        format.html { render :edit_password }
+        format.json { render json: current_member.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def reset_password_edit
-    @member = Member.find(params[:record_hex].to_i(16))
-    unless @member.valid_reset_password_token?(params[:reset_token])
+    @member = Member.find_by(id: params[:record_hex].to_i(16))
+    unless @member.present? && @member.valid_reset_password_token?(params[:reset_token])
       render :invalid_reset_token
     end
   end
 
   def reset_password_update
-    @member = Member.find(params[:record_hex].to_i(16))
-    if @member.valid_reset_password_token?(params[:reset_token])
+    @member = Member.find_by(id: params[:record_hex].to_i(16))
+    if @member.present? && @member.valid_reset_password_token?(params[:reset_token])
       if @member.update(password: params[:password], password_confirmation: params[:password_confirmation], reset_password_at: nil, reset_password_digest: nil)
         redirect_to signin_path
       else
@@ -187,7 +205,9 @@ class MembersController < ApplicationController
   end
 
   def approve
-    @member.update(accepted: true)
+    @member.accepted = true
+    token = @member.generate_reset_password_token!
+    MemberMailer.welcome_email(@member, token).deliver_later
     respond_to do |format|
       format.html { redirect_to members_url, notice: "#{@member.full_name} was successfully became a member." }
     end
@@ -195,6 +215,7 @@ class MembersController < ApplicationController
 
   def reject
     @member.destroy
+    MemberMailer.registration_rejected_email(@member).deliver_later
     respond_to do |format|
       format.html { redirect_to members_url, notice: "#{@member.full_name} was successfully rejected." }
     end
@@ -206,8 +227,8 @@ class MembersController < ApplicationController
   def send_reset_token
     identifier = params[:identifier]
     if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", identifier, identifier).take
-      member.generate_reset_password_token!
-      MemberMailer.reset_password_email(member).deliver_now
+      token = member.generate_reset_password_token!
+      MemberMailer.reset_password_email(member, token).deliver_now
     else
       flash[:alert] =  "Database doesn't have this student number"
       render :forgot

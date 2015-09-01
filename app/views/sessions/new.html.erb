@@ -2,15 +2,20 @@
 <h1 class="flow-text">Login</h1>
 <div class="card-panel" style="padding-bottom:10px;padding-top:10px;">
 <%= form_tag signin_path(from: params[:from]) do %>
-<div class="row">
+<div class="row large-margin-bottom">
   <div class="col s12 input-field">
     <%= label_tag :identifier, "Student Number or Email" %>
     <%= text_field_tag :identifier, params[:identifier] %>
   </div>
 
-  <div class="col s12  input-field">
+  <div class="col s12 input-field">
     <%= label_tag :password %>
     <%= password_field_tag :password %>
+  </div>
+
+  <div class="input-field col s12">
+    <%= check_box_tag :remember_me %>
+    <%= label_tag :remember_me %>
   </div>
 </div>
 
