@@ -43,6 +43,8 @@ $(function(){
   $('.slider').slider({full_width: true});
 
   $('.fixed-action-btn').openFAB();
+
+  $('.countdown').countdown();
 });
 
 $(window).on('hashchange', function(){
