@@ -5,20 +5,23 @@ class PagesController < ApplicationController
       redirect_to posts_path
     end
   end
+
   def attend
     @checkedin = Array.new
     @checkedout = Array.new
     current_date = DateTime.now
     Attendance.order(start_at: :asc).each do |f|
-      attendance_date = f.start_at
-      if !f.start_at.nil? && f.end_at.nil?
-        if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
-          @checkedin.push(f)
+      if f.event_id.nil?
+        attendance_date = f.start_at
+        if !f.start_at.nil? && f.end_at.nil?
+          if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
+            @checkedin.push(f)
+          end
         end
-      end
-      if !f.start_at.nil? && !f.end_at.nil?
-        if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
-          @checkedout.push(f)
+        if !f.start_at.nil? && !f.end_at.nil?
+          if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
+            @checkedout.push(f)
+          end
         end
       end
     end
@@ -29,6 +32,28 @@ class PagesController < ApplicationController
         if f.start_at.day == current_date.day && f.start_at.month == current_date.month && f.start_at.year == current_date.year
           @event_today = true
           @event_list.push(f)
+        end
+      end
+    end
+  end
+
+  def event
+    @event = Event.find(params[:id])
+    @checkedin = Array.new
+    @checkedout = Array.new
+    current_date = DateTime.now
+    Attendance.order(start_at: :asc).each do |f|
+      if !f.event_id.nil?
+        attendance_date = f.start_at
+        if !f.start_at.nil? && f.end_at.nil?
+          if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
+            @checkedin.push(f)
+          end
+        end
+        if !f.start_at.nil? && !f.end_at.nil?
+          if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
+            @checkedout.push(f)
+          end
         end
       end
     end

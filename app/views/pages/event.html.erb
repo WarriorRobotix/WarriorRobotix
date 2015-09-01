@@ -1,28 +1,15 @@
-
+<h1 class="flow-text">Attendance for <b><%= @event.title %></b></h1>
 <nav style="background-color:white;margin-top:20px;">
 <div class="nav-wrapper">
-<%= form_tag '/search', method:'get', class:'form-inline float-right', role:'form' do %>
+<%= form_tag '/eventsearch', method:'get', class:'form-inline float-right', role:'form' do %>
 <div class="input-field">
+  <%= hidden_field_tag :id , @event.id %>
   <input id="search" name="text" type="search" placeholder="Enter Student Number..." required>
   <label class="hide-on-small-only" for="search"><i style="color:#ffab00;" class="material-icons">search</i></label>
 </div>
 <% end %>
 </div>
 </nav>
-
-<% if @event_today == true %>
-  <h1 class="flow-text">Todays Events</h1>
-  <% @event_list.each do |f| %>
-    <div class="card-panel">
-      <b><%= f.title %></b>
-      <br>
-      <%= f.start_at.strftime("%l:%M %p") %>
-      &nbsp;to&nbsp;
-      <%= f.end_at.strftime("%l:%M %p") %>
-      <span style="float:right;" class="material-icons"><%= link_to 'today', {:controller => "pages", :action => "event", :id => f.id }%></span>
-    </div>
-  <% end %>
-<% end %>
 
 <h1 class="flow-text">Checked In</h1>
 <div class="card-panel">

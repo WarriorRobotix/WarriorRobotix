@@ -44,7 +44,9 @@ Rails.application.routes.draw do
   post 'reset/:record_hex/:reset_token' => 'members#reset_password_update'
 
   get '/attend' => 'pages#attend'
+  get '/event' => 'pages#event'
   get '/search' => 'members#search'
+  get '/eventsearch' => 'members#eventsearch'
 
   get '/register' => 'registrations#form'
   post '/register' => 'registrations#submit'

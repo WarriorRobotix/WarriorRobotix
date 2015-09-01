@@ -14,6 +14,49 @@ class MembersController < ApplicationController
     end
   end
 
+  def eventsearch
+    @student_number = params[:text]
+    @member = Member.find_by(:student_number => @student_number)
+    @event = Event.find(params[:id])
+    @event_attendance_created = false
+    @status = ""
+    if !@member.nil?
+      @member.attendances.each do |f|
+        if !f.event_id.nil? && f.event_id == @event.id
+          @event_attendance_created = true
+          @event_attendance = f
+        end
+      end
+      if @event_attendance_created == true
+        if !@event_attendance.start_at.nil?
+          if !@event_attendance.end_at.nil?
+            #already signed in and out
+            flash[:alert] = "Already Checked In and Out!"
+          else
+            #need to check out
+            @event_attendance.update_attribute(:end_at, DateTime.now)
+            @event_attendance.update_attribute(:status, :attended)
+            flash[:notice] = "Successfully Checked Out!"
+          end
+        else
+          #need to check in
+          @event_attendance.update_attribute(:start_at, DateTime.now)
+          @event_attendance.update_attribute(:status, :attending)
+          flash[:notice] = "Successfully Checked In!"
+        end
+      else
+        #need to create a new attendance and check in
+        Attendance.create(:member_id => @member.id, :event_id => @event.id, :start_at => DateTime.now, :status => :attending)
+        flash[:notice] = "Successfully Checked In!"
+      end
+      redirect_to :back
+    else
+      #student number invalid
+      redirect_to :back
+      flash[:alert] = "Can not find anyone with that Student Number!"
+    end
+  end
+
   def search
     @student_number = params[:text]
     @member = Member.find_by(:student_number => @student_number)
@@ -23,7 +66,7 @@ class MembersController < ApplicationController
 
     if !@member.nil?
     @member.attendances.each do |f|
-      if !f.start_at.nil? && f.status != :invited
+      if !f.start_at.nil? && f.status != :invited && f.event_id.nil?
         attendance_date = f.start_at.to_datetime
         current_date = DateTime.now
         if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
