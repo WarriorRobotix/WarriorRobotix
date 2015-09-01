@@ -1,6 +1,6 @@
 <%= form_for(@competition) do |f| %>
   <%= errors_for @competition %>
-  <div class="row large-margin-bottom">
+  <div class="row">
     <div class="col s12 input-field">
       <%= f.label :name %>
       <%= f.text_field :name %>
@@ -9,29 +9,27 @@
       <%= f.text_area :description, class: "materialize-textarea" %>
       <%= f.label :description %>
     </div>
-    <div class="col s12 input-field">
+    <div class="col s12 m6 input-field">
+      <%= f.text_area :location, class: "materialize-textarea" %>
       <%= f.label :location %>
-      <%= f.text_field :location %>
     </div>
-    <div class="col s12 input-field">
+    <div class="col s12 m6 input-field">
       <%= f.text_area :achievements, class: "materialize-textarea" %>
       <%= f.label :achievements %>
     </div>
-    <div class="date-field col s12">
+  </div>
+  <div class="row">
+    <div class="date-field col s12 m6">
       <%= f.label :start_date %>
       <%= date_field_tag 'competition[start_date]', nil, class: "datepicker", data: { value: f.object.start_date.try(:strftime,'%A, %B %d, %Y') } %>
     </div>
-    <div class="date-field col s12">
-      <%= f.label :end_date %>
+    <div class="date-field col s12 m6">
+      <%= f.label :end_date, 'End date (Optional)' %>
       <%= date_field_tag 'competition[end_date]', nil, class: "datepicker", data: { value: f.object.end_date.try(:strftime,'%A, %B %d, %Y') } %>
     </div>
     <div class="col s12 input-field">
       <%= f.label :cover_image_link %>
       <%= f.text_field :cover_image_link %>
-    </div>
-    <div class="input-field col s6">
-      <%= f.check_box :count_down %>
-      <%= f.label :count_down %>
     </div>
   </div>
   <div class="row">
