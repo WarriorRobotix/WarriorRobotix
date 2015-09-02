@@ -50,7 +50,7 @@
 body.pages-home{
   background-color: white;
   @media #{$large-and-up} {
-    .container{
+    main > div.container{
       width: 80%;
     }
   }
