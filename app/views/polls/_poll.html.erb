@@ -1,7 +1,9 @@
+<% cache([poll, max_restriction]) do %>
 <%= render layout: 'posts/post_wrap', locals: {post: poll} do %>
   <div class="attachment flow-text">
     <div class="event-reply">
     <%= render partial: "polls/vote_form", locals: {poll: poll} %>
     </div>
   </div>
+<% end %>
 <% end %>

@@ -1,2 +1,4 @@
+<% cache([post, member_is_admin?]) do %>
 <%= render layout: 'post_wrap', locals: {post: post} do %>
+<% end %>
 <% end %>
