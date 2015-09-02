@@ -3,7 +3,7 @@ class MemberMailerPreview < ActionMailer::Preview
   def reset_password_email
     member = Member.last
     member.reset_password_token = SecureRandom.urlsafe_base64(6)
-    MemberMailer.reset_password_email(member)
+    MemberMailer.reset_password_email(member, member.reset_password_token)
   end
 
   def welcome_email
