@@ -3,8 +3,10 @@
     Start At: <%= event.start_at.strftime("%a, %e %b %Y %H:%M") %>
     <br>
     End At: <%= event.end_at.strftime("%a, %e %b %Y %H:%M") %>
+    <% if member_is_accepted? %>
     <div class="event-reply">
     <%= render partial: "events/reply_form", locals: {event: event} %>
     </div>
+    <% end %>
   </div>
 <% end %>
