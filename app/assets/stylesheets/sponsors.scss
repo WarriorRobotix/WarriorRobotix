@@ -2,16 +2,6 @@
   padding: 10px;
 
   .card-content{
-    .card-title {
-      @extend .grey-text, .text-darken-4;
-      position: relative;
-      padding-right: 30px;
-      .material-icons{
-        position: absolute;
-        top: 12px;
-        right: 0px;
-      }
-    }
     .sponsor-social{
       float: left;
       img{

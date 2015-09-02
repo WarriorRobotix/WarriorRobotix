@@ -12,6 +12,10 @@ $navbar-height-mobile: 44px;
 
 @import "materialize";
 
+.amber-link{
+  color: $secondary-color;
+}
+
 .btn-text{
   @extend .btn-flat;
   color: $secondary-color;
@@ -69,7 +73,7 @@ main{
   -ms-flex: 1 0 auto;
   flex: 1 0 auto;
 
-  min-height: calc(100vh - 84px);
+  min-height: calc(100vh - 74px);
 }
 
 footer.page-footer{
@@ -80,6 +84,17 @@ footer.page-footer{
   .footer-logo{
     max-width: 100%;
     max-height: 100px;
+  }
+}
+
+.card .card-content .card-title {
+  @extend .grey-text, .text-darken-4, .truncate;
+  position: relative;
+  padding-right: 30px;
+  .material-icons{
+    position: absolute;
+    top: 12px;
+    right: 0px;
   }
 }
 

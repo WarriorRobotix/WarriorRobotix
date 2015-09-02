@@ -20,5 +20,8 @@
 </main>
 <%= render 'components/footer' %>
 <%= render 'components/side_buttons' if @show_side_buttons %>
+<script type="text/javascript" data-turbolinks-eval=always>
+  <%= raw(flash_toasts) %>
+</script>
 </body>
 </html>

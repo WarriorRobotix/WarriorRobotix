@@ -40,7 +40,15 @@ $(function(){
 
   $('.materialboxed').materialbox();
 
-  $('.slider').slider({full_width: true, height: 500});
+  $('.slider').each(function(){
+    var t = $(this);
+    var options = {full_width: true};
+    var height = t.data('height');
+    if (typeof height !== "undefined"){
+      options['height'] = parseInt(height);
+    }
+    t.slider(options);
+  });
 
   $('.fixed-action-btn').openFAB();
 

@@ -7,11 +7,13 @@
       <%= link_to 'delete', post, class: "material-icons", method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
     </div>
-    <br>
-    <%= post.model_name.human %> | <%= post.created_at.strftime("%a, %e %b %Y %H:%M") %> | from <%= post.author.try(:full_name) %> to <%= post.restriction == "everyone" ? post.restriction : post.restriction.pluralize %>
   </div>
 
   <div class="flow-text body markdown"><%= markdown(post.description) %></div>
 
   <%= yield %>
+
+  <div class="right-align">
+    <%= post.created_at.strftime("%a, %e %b %Y %H:%M") %> | <%= post.author.try(:full_name) %> | <%= post.restriction == "everyone" ? post.restriction.capitalize : post.restriction.pluralize.capitalize %>
+  </div>
 </div>
