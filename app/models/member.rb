@@ -20,6 +20,7 @@ class Member < ActiveRecord::Base
   validate :extra_info_fields
   validate :admin_must_accpeted
   validate :correct_old_password
+  validate :ensure_password_not_nil
 
   has_many :attendances, dependent: :destroy
   has_many :ballots, dependent: :destroy
@@ -30,6 +31,7 @@ class Member < ActiveRecord::Base
   attr_accessor :reset_password_token
   attr_accessor :old_password
   attr_accessor :incorrect_old_password
+  attr_accessor :password_allow_nil
 
   def generate_reset_password_token!
     self.reset_password_at = Time.zone.now
@@ -159,5 +161,9 @@ class Member < ActiveRecord::Base
 
   def admin_must_accpeted
     errors.add(:accepted, 'must be true for an admin account') if (admin && !accepted)
+  end
+
+  def ensure_password_not_nil
+    errors.add(:password, :blank) if !(password_allow_nil.nil? || password_allow_nil) && password.nil?
   end
 end

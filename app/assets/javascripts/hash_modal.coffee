@@ -2,6 +2,7 @@ window.hash_modal=
   refresh: ()->
     @bindings = []
     @loadings = {}
+    @loadedModals = {}
     self = @
     $('.hash-modal').each ->
       loader = $(this)
@@ -15,11 +16,12 @@ window.hash_modal=
 
   hashchange: ()->
     hash = location.hash.slice(1)
-    modal = $(location.hash + '.modal').first()
-    if (modal.length)
-      modal.openModal()
-    else
-      @loadHash(hash)
+    if hash != "" && hash != "!"
+      modal = $(location.hash + '.modal').first()
+      if (modal.length && @loadedModals[hash] == true)
+        modal.openModal()
+      else
+        @loadHash(hash)
     return
 
   loadHash: (hash) ->
@@ -40,6 +42,7 @@ window.hash_modal=
         self.loadings[url] = true
         loader.one 'ajax:complete', (xhr, status) ->
           self.loadings[url] = false
+          self.loadedModals[hash] = true
 
         loader.click();
     return
