@@ -12,6 +12,10 @@ $navbar-height-mobile: 44px;
 
 @import "materialize";
 
+.amber-link{
+  color: $secondary-color;
+}
+
 .btn-text{
   @extend .btn-flat;
   color: $secondary-color;
