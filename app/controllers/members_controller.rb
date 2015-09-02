@@ -194,6 +194,7 @@ class MembersController < ApplicationController
   def reset_password_update
     @member = Member.find_by(id: params[:record_hex].to_i(16))
     if @member.present? && @member.valid_reset_password_token?(params[:reset_token])
+      @member.password_allow_nil = false
       if @member.update(password: params[:password], password_confirmation: params[:password_confirmation], reset_password_at: nil, reset_password_digest: nil)
         redirect_to signin_path
       else
