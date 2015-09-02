@@ -9,7 +9,7 @@ class MemberMailerPreview < ActionMailer::Preview
   def welcome_email
     member = Member.last
     member.reset_password_token = SecureRandom.urlsafe_base64(6)
-    MemberMailer.welcome_email(member)
+    MemberMailer.welcome_email(member, member.reset_password_token)
   end
 
   def registration_rejected_email
