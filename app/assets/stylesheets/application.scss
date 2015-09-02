@@ -87,6 +87,17 @@ footer.page-footer{
   }
 }
 
+.card .card-content .card-title {
+  @extend .grey-text, .text-darken-4, .truncate;
+  position: relative;
+  padding-right: 30px;
+  .material-icons{
+    position: absolute;
+    top: 12px;
+    right: 0px;
+  }
+}
+
 label.dark {
   color: black;
 }
