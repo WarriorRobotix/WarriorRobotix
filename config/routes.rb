@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   resources :members do
-    resources :attendances
-    post '/reject' => 'members#reject'
+    collection do
+      post '/reject' => 'members#reject'
+    end
     post '/approve'  => 'members#approve'
+    resources :attendances
   end
 
   resources :posts, type: "Post"

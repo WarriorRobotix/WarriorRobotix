@@ -13,6 +13,12 @@ class MemberMailerPreview < ActionMailer::Preview
   end
 
   def registration_rejected_email
-    MemberMailer.registration_rejected_email(Member.last)
+    member = Member.last
+    MemberMailer.registration_rejected_email(member.full_name, member.email, "Your answers are too short")
+  end
+
+  def registration_rejected_without_reason_email
+    member = Member.last
+    MemberMailer.registration_rejected_email(member.full_name, member.email, nil)
   end
 end
