@@ -53,6 +53,8 @@ $(function(){
   $('.fixed-action-btn').openFAB();
 
   $('.countdown').countdown();
+
+  $(".dropdown-button").dropdown();
 });
 
 $(window).on('hashchange', function(){

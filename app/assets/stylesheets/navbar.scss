@@ -1,0 +1,22 @@
+nav {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+nav a:hover{
+  color: $secondary-color;
+}
+
+.dropdown-content{
+  li.text{
+    &:hover{
+      background-color: color("grey", "darken-2");
+    }
+  }
+  li{
+    line-height: 1rem;
+    & > a, & > span {
+      font-size: 1rem;
+    }
+  }
+}
