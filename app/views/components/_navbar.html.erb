@@ -18,14 +18,16 @@
         <%= link_to "Photos", photos_path %>
       </li>
       <% end %>
+      <% if member_is_accepted? %>
+      <li>
+        <%= link_to "Members", members_path %>
+      </li>
+      <% end %>
       <li>
         <%= link_to "Competitions", '/competitions' %>
       </li>
       <li>
         <%= link_to "Posts", posts_path %>
-      </li>
-      <li>
-        <%= link_to "Members", members_path %>
       </li>
       <li>
         <%= link_to "Sponsors", sponsors_path %>
@@ -47,14 +49,16 @@
         <%= link_to "Photos", photos_path %>
       </li>
       <% end %>
+      <% if member_is_accepted? %>
+      <li>
+        <%= link_to "Members", members_path %>
+      </li>
+      <% end %>
       <li>
         <%= link_to "Competitions", '/competitions' %>
       </li>
       <li>
         <%= link_to "Posts", posts_path %>
-      </li>
-      <li>
-        <%= link_to "Members", members_path %>
       </li>
       <li>
         <%= link_to "Sponsors", sponsors_path %>
