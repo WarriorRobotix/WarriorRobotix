@@ -2,10 +2,10 @@
   <div class="row center-align">
     <% if RegistrationField.valid_member_fields? && RegistrationForm.open? %>
     The Warrior Robotix member registration form is open.<br/>
-    <%= link_to r_url, r_url %> or <%= link_to register_url, register_url %>
+    <%= link_to register_url, register_url %>
     <% else %>
     The Warrior Robotix member registration form is disabled.
-    <%= r_url %> or <%= register_url %>
+    <%= register_url %>
     <% end %>
   </div>
 </div>

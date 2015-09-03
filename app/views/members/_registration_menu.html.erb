@@ -7,7 +7,7 @@
     <div class="col m8 l9">
       <% if valid_fields %>
         <%= link_to 'Edit Fields', registration_fields_path, class: "btn-text" %>
-        <%= link_to r_url, r_url %> or <%= link_to register_url, register_url %>
+        <%= link_to register_url, register_url %>
       <% else %>
         Invalid form: Valid form requires first name, last name, email, grade, and student number fields.
         <br>
