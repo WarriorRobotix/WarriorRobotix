@@ -1,7 +1,7 @@
 <%= form_tag poll_vote_path(poll), remote: true  do %>
 <%= error unless local_assigns[:error].blank? %>
 <% ballots = poll.ballots_from(current_member) %>
-<% disabled = !is_member_accepted? || !(ballots.empty? || poll.ballots_changeable) %>
+<% disabled = !member_signed_in? || !(ballots.empty? || poll.ballots_changeable) %>
 <% multi = poll.multiple_choices %>
 <table class="flow-text" style="font-size:18px;">
 <% poll.options.each do |option| %>

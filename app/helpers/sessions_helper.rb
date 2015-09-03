@@ -37,12 +37,6 @@ module SessionsHelper
 
   alias_method :member_is_admin?, :is_member_admin?
 
-  def is_member_accepted?
-    !current_member.nil? && current_member.accepted
-  end
-
-  alias_method :member_is_accepted?, :is_member_accepted?
-
   def signout_member
     cookies.delete :mtk
     session[:member_id] = @current_member = nil

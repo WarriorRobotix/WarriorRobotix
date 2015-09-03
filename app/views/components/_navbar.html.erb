@@ -18,7 +18,7 @@
         <%= link_to "Photos", photos_path %>
       </li>
       <% end %>
-      <% if member_is_accepted? %>
+      <% if member_signed_in? %>
       <li>
         <%= link_to "Members", members_path %>
       </li>
@@ -49,7 +49,7 @@
         <%= link_to "Photos", photos_path %>
       </li>
       <% end %>
-      <% if member_is_accepted? %>
+      <% if member_signed_in? %>
       <li>
         <%= link_to "Members", members_path %>
       </li>
