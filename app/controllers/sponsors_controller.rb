@@ -1,6 +1,7 @@
 class SponsorsController < ApplicationController
   before_action :set_sponsor, only: [:edit, :update, :destroy]
-  before_action :authenticate_admin!, except: [:index]
+
+  skip_before_action :authenticate_admin!, only: [:index]
 
   # GET /sponsors
   # GET /sponsors.json

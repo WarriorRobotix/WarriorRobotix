@@ -1,4 +1,7 @@
-<%= hash_modal 'm-', member_path(id: '$') if member_is_admin? %>
+<% if member_is_admin? %>
+<%= hash_modal 'm-', member_path(id: '$') %>
+<%= render 'reject_member_modal' %>
+<% end %>
 <h1 class="flow-text">Members Center</h1>
 <%= render 'quick_members_panel'  %>
 <%= render('members_table', members: @current_members, title: 'Current Members') %>

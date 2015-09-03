@@ -7,7 +7,7 @@
         <th class="hide-on-small-only">Grade</th>
         <th class="hide-on-med-and-down">Email</th>
         <th class="hide-on-med-and-down">Student Number</th>
-        <th colspan="2"></th>
+        <th colspan="2"><%= link_to 'Reject All', '#!', class: 'data-modal-trigger', data: { modal_target: "reject_member_modal", modal_fill: {id: 'all', name: "All #{pluralize(members.count,'Pending Member')}"} } %></th>
       </tr>
     </thead>
 
@@ -19,7 +19,7 @@
         <td class="hide-on-med-and-down"><%= member.email %></td>
         <td class="hide-on-med-and-down"><%= member.student_number %></td>
         <td><%= link_to 'check', member_approve_path(member), method: :post, class: 'material-icons' %></td>
-        <td><%= link_to 'close', member_reject_path(member), method: :post, class: 'material-icons' %></td>
+        <td><%= link_to 'close', '#!', class: 'material-icons data-modal-trigger', data: { modal_target: "reject_member_modal", modal_fill: {id: member.id, name: member.full_name} } %></td>
       </tr>
       <% end %>
     </tbody>

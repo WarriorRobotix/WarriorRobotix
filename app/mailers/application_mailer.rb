@@ -1,7 +1,7 @@
 class ApplicationMailer < ActionMailer::Base
   before_action :attach_logo
 
-  default :from => "no-reply@warrior-robotix.herokuapp.com"
+  default :from => "no-reply@4659warriors.com"
   layout 'mailer'
 
   private

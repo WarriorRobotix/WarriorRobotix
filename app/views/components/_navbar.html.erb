@@ -1,3 +1,11 @@
+<% if member_signed_in? %>
+<ul id="member_menu_dropdown" class="dropdown-content">
+  <li class="text"><span><%= current_member.full_name %></span></li>
+  <li><%= link_to "Members Center", members_path %></li>
+  <li class="divider"></li>
+  <li><%= link_to "Sign out", signout_path(return_to_info), method: :delete %></li>
+</ul>
+<% end %>
 <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper">
@@ -5,11 +13,6 @@
     <%= link_to "WarriorRobotix", root_path %>
     </span>
     <ul class="flow-text right hide-on-med-and-down" style="font-size:100%;">
-      <% if member_signed_in? %>
-      <li style="padding-right:15px;padding-left:15px;">
-          Hi, <%= current_member.full_name %> <%= "(admin)" if member_is_admin? %>
-      </li>
-      <% end %>
       <% if member_is_admin? %>
       <li>
         <%= link_to "Attendance", '/attend' %>
@@ -25,16 +28,20 @@
         <%= link_to "Posts", posts_path %>
       </li>
       <li>
-        <%= link_to "Members", members_path %>
-      </li>
-      <li>
         <%= link_to "Sponsors", sponsors_path %>
       </li>
       <li>
         <% if member_signed_in? %>
-          <%= link_to "Sign out", signout_path(return_to_info), method: :delete %>
+        <a class="dropdown-button" href="#!" data-activates="member_menu_dropdown">
+          <i class="material-icons left">
+          <%= member_is_admin? ? 'people' : 'person' %>
+          </i>
+          <%= current_member.first_name %>
+        </a>
         <% else %>
-          <%= link_to "Sign in", signin_path(return_to_info) %>
+          <%= link_to signin_path do %>
+            <i class="material-icons">person_outline</i>
+          <% end %>
         <% end %>
       </li>
     </ul>
@@ -47,14 +54,16 @@
         <%= link_to "Photos", photos_path %>
       </li>
       <% end %>
+      <% if member_signed_in? %>
+      <li>
+        <%= link_to "Members", members_path %>
+      </li>
+      <% end %>
       <li>
         <%= link_to "Competitions", '/competitions' %>
       </li>
       <li>
         <%= link_to "Posts", posts_path %>
-      </li>
-      <li>
-        <%= link_to "Members", members_path %>
       </li>
       <li>
         <%= link_to "Sponsors", sponsors_path %>

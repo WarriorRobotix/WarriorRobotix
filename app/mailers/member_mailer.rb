@@ -11,9 +11,10 @@ class MemberMailer < ApplicationMailer
     mail(to: @member.email, subject: 'Welcome to Warrior Robotix')
   end
 
-  def registration_rejected_email(member, reason=nil)
-    @member = member
+  def registration_rejected_email(member_name, member_email, reason)
+    @member_name = member_name
+    @member_email = member_email
     @reason = reason
-    mail(to: @member.email, subject: 'Your Warrior Robotix registration application has rejected')
+    mail(to: @member_email, subject: 'Your Warrior Robotix registration application has rejected')
   end
 end

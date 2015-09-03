@@ -10,6 +10,10 @@ $link-color-darker: color("blue", "darken-4");
 $navbar-height: 44px;
 $navbar-height-mobile: 44px;
 
+$dropdown-color: white;
+$dropdown-bg-color: color("grey", "darken-2");
+$dropdown-hover-bg-color: color("grey", "darken-3");
+
 @import "materialize";
 
 .amber-link{
@@ -21,6 +25,14 @@ $navbar-height-mobile: 44px;
   color: $secondary-color;
   margin-bottom: 15px;
 }
+
+.amber-link, .btn-text{
+  &:hover, &:active{
+    color: #BF7800;
+  }
+}
+
+
 .btn{
   margin-bottom: 15px;
 }
@@ -41,15 +53,6 @@ $navbar-height-mobile: 44px;
 
 .large-padding-bottom{
   padding-bottom: 30px;
-}
-
-nav {
-  padding-left: 2%;
-  padding-right: 2%;
-}
-
-nav a:hover{
-  color: $secondary-color;
 }
 
 body{

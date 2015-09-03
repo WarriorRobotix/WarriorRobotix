@@ -1,0 +1,20 @@
+<div id="reject_member_modal" class="modal bottom-sheet">
+  <div class="container">
+    <%= form_tag reject_members_path do %>
+    <%= hidden_field_tag 'member', nil, data: {fill: "id"} %>
+    <div class="modal-content" style="padding-bottom:0">
+      <h4 class="flow-text">Reject <span data-fill="name"></span></h4>
+      <div class="row" style="margin-bottom:0">
+        <div class="input-field col s12">
+          <textarea id="reject_reason" name="reason" class="materialize-textarea" ><%= GlobalVar[:last_reject_members_reason] %></textarea>
+          <label for="reject_reason">Reason (Leave blank will reject without reason)</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <%= submit_tag 'Reject', class: "modal-action btn", data: {disable_with: 'Rejecting'} %>
+      <a href="#!" class="modal-action modal-close btn-flat">Cancel</a>
+    </div>
+    <% end %>
+  </div>
+</div>

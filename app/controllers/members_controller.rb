@@ -1,7 +1,8 @@
 class MembersController < ApplicationController
-  before_action :set_member, only: [:show, :edit, :update, :destroy, :reject, :approve]
+  before_action :set_member, only: [:show, :edit, :update, :destroy, :approve]
 
-  before_action :authenticate_admin!, except: [:index, :new, :create, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update, :edit_email, :update_email, :edit_password, :update_password]
+  skip_before_action :authenticate_admin!, only: [:index, :new, :create, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update, :edit_email, :update_email, :edit_password, :update_password]
+
   before_action :authenticate_member!, only: [:index, :edit_email, :update_email, :edit_password, :update_password]
 
   # GET /members
@@ -215,10 +216,27 @@ class MembersController < ApplicationController
   end
 
   def reject
-    @member.destroy
-    MemberMailer.registration_rejected_email(@member).deliver_later
+    reason = params[:reason].blank? ? nil :  params[:reason]
+    GlobalVar[:last_reject_members_reason] = reason
+    if params[:member] == 'all'
+      pending_members = Member.unscoped.where(accepted: false)
+      pending_members.pluck(:first_name, :last_name, :email).map { |e| ["#{e[0]} #{e[1]}", e[2]] }.each do |pm|
+        MemberMailer.registration_rejected_email(pm[0], pm[1], reason).deliver_later
+      end
+      pending_members.destroy_all
+    else
+      if pending_member = Member.unscoped.where(id: params[:member].to_i, accepted: false).take
+        pending_member.destroy
+        MemberMailer.registration_rejected_email(pending_member.full_name, pending_member.email, reason).deliver_later
+      end
+    end
+
     respond_to do |format|
-      format.html { redirect_to members_url, notice: "#{@member.full_name} was successfully rejected." }
+      if params[:member] == 'all'
+        format.html { redirect_to members_url, notice: "All pending members were successfully rejected." }
+      else
+        format.html { redirect_to members_url, notice: "#{pending_member.try(:full_name) || 'A pending member'} was successfully rejected." }
+      end
     end
   end
 

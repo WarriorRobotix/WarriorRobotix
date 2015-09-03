@@ -53,6 +53,8 @@ $(function(){
   $('.fixed-action-btn').openFAB();
 
   $('.countdown').countdown();
+
+  $(".dropdown-button").dropdown();
 });
 
 $(window).on('hashchange', function(){
@@ -98,6 +100,24 @@ $(document).on('change', '.file-field input[type=\"file\"][data-photo-name-targe
 
 $(document).on('click', '.lean-overlay', function(){
   location.hash = '#!';
+});
+
+$(document).on('click', '.data-modal-trigger', function(event){
+  event.preventDefault;
+
+  var t = $(this);
+  var modal = $(['#', t.data('modal-target'), '.modal'].join('')).first();
+  if (modal.length){
+    var fillData = t.data('modal-fill');
+    if (typeof fillData === "object"){
+      for (key in fillData){
+        value = fillData[key];
+        modal.find(['span[data-fill=\"', key ,'\"]'].join('')).html(value)
+        modal.find(['input[data-fill=\"', key ,'\"]'].join('')).val(value)
+      }
+    }
+    modal.openModal();
+  }
 });
 
 function deletePoll(ele,event) {
