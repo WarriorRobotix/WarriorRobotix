@@ -21,6 +21,14 @@ $navbar-height-mobile: 44px;
   color: $secondary-color;
   margin-bottom: 15px;
 }
+
+.amber-link, .btn-text{
+  &:hover, &:active{
+    color: #BF7800;
+  }
+}
+
+
 .btn{
   margin-bottom: 15px;
 }
