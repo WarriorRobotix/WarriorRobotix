@@ -61,6 +61,8 @@ Rails.application.routes.draw do
   get '/r' => 'registrations#form'
   post '/r' => 'registrations#submit'
 
+  get 'contact' => 'pages#contact'
+
   post 'registration/toggle' => 'registrations#toggle'
 
   resources :registration_fields, except: [:show] do

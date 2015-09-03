@@ -16,6 +16,10 @@ $dropdown-hover-bg-color: color("grey", "darken-3");
 
 @import "materialize";
 
+.slider .indicators .indicator-item.active{
+  background-color: $secondary-color;
+}
+
 .amber-link{
   color: $secondary-color;
 }

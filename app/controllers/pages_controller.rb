@@ -4,6 +4,9 @@ class PagesController < ApplicationController
     @show_side_buttons = true
   end
 
+  def contact
+  end
+
   def attend
     @checkedin = Array.new
     @checkedout = Array.new
