@@ -1,4 +1,5 @@
 class RegistrationsController < ApplicationController
+  skip_before_action :authenticate_admin!, only: [:form, :submit]
   def form
     @form = Hash.new
     unless RegistrationField.valid_member_fields? && RegistrationForm.open?
