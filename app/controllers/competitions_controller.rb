@@ -1,6 +1,8 @@
 class CompetitionsController < ApplicationController
   before_action :set_competition, only: [:edit, :update, :destroy]
 
+  skip_before_action :authenticate_admin!, only: [:index]
+
   # GET /competitions
   # GET /competitions.json
   def index

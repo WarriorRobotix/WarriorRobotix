@@ -1,7 +1,8 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy, :approve]
 
-  before_action :authenticate_admin!, except: [:index, :new, :create, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update, :edit_email, :update_email, :edit_password, :update_password]
+  skip_before_action :authenticate_admin!, only: [:index, :new, :create, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update, :edit_email, :update_email, :edit_password, :update_password]
+
   before_action :authenticate_member!, only: [:index, :edit_email, :update_email, :edit_password, :update_password]
 
   # GET /members

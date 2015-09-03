@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :authenticate_admin!, only: [:attend]
+  skip_before_action :authenticate_admin!, only: [:home]
   def home
     @show_side_buttons = true
   end
