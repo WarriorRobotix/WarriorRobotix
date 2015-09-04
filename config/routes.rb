@@ -52,12 +52,13 @@ Rails.application.routes.draw do
 
   get '/attend' => 'pages#attend'
   get '/event' => 'pages#event'
+  get '/contact' => 'pages#contact'
   get '/search' => 'members#search'
   get '/eventsearch' => 'members#eventsearch'
 
   get '/register' => 'registrations#form'
   post '/register' => 'registrations#submit'
-  
+
   post 'registration/toggle' => 'registrations#toggle'
 
   resources :registration_fields, except: [:show] do
