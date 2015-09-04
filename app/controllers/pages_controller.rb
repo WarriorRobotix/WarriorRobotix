@@ -8,6 +8,15 @@ class PagesController < ApplicationController
   def contact
   end
 
+  def contact_message
+    if verify_recaptcha
+      flash[:notice] =  "Your message has successfully sent to us"
+    else
+      flash[:alert] =  "There are some errors with reCAPTCHA"
+    end
+    redirect_to contact_path
+  end
+
   def attend
     @checkedin = Array.new
     @checkedout = Array.new
