@@ -4,6 +4,7 @@ class RegistrationsController < ApplicationController
     @form = Hash.new
     unless RegistrationField.valid_member_fields? && RegistrationForm.open?
       render :error
+      return
     end
     @old_member = params[:old].present?
     if @old_member
