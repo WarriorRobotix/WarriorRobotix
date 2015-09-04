@@ -107,8 +107,11 @@ label.dark {
   color: black;
 }
 
-.actions *{
-  float: right;
+.actions{
+  padding-right: .5rem;
+  *{
+    float: right;
+  }
 }
 
 .date-field {
