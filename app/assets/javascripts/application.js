@@ -77,7 +77,6 @@ $(document).on('click', 'input[data-trigger-form]', function(event){
   event.preventDefault();
   $t = $(this);
   if ($t.attr('type') == 'checkbox') {
-    console.log($t.prop('checked') == true);
     $t.prop('checked',!$t.prop('checked'));
   } else {
     $t.prop('checked',true);
