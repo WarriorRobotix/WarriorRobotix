@@ -1,17 +1,7 @@
 class PagesController < ApplicationController
   skip_before_action :authenticate_admin!, only: [:home, :contact]
   def home
-    set_meta_tags og: {
-      title:    'Home Page',
-      type:     'website',
-      url:      'http://4659warriors.com',
-      image:    [{
-        _: 'http://4659warriors.com/assets/pages/home/vex2015.jpg',
-        type: 'image/jpeg',
-        width: 400,
-        height: 300,
-      }]
-    }
+    set_meta_tags_for_home
     @show_side_buttons = true
   end
 
@@ -69,5 +59,31 @@ class PagesController < ApplicationController
         end
       end
     end
+  end
+  private
+  def set_meta_tags_for_home
+    set_meta_tags og: {
+      title:    'Warrior Robotix',
+      type:     'website',
+      url:      'http://4659warriors.com',
+      description: 'Team 4659 Warrior Robotix is the robotics club of Port Credit Secondary School in Mississauga. We participate in Vex, Skills Ontario and other robotics competitions.',
+      image:    [{
+        _: 'http://4659warriors.com/assets/pages/home/slider_image_0.jpg',
+        type: 'image/jpeg',
+        width: 1400,
+        height: 700,
+      },
+      {
+        _: 'http://4659warriors.com/assets/pages/home/slider_image_3.jpg',
+        type: 'image/jpeg',
+        width: 1400,
+        height: 700,
+      }]
+    },  twitter: {
+      site: '@WarriorRobotix',
+      card: 'summary_large_image',
+      description: 'Team 4659 Warrior Robotix is the robotics club of Port Credit Secondary School in Mississauga. We participate in Vex, Skills Ontario and other robotics competitions.',
+      image: 'http://4659warriors.com/assets/pages/home/slider_image_0.jpg'
+    }
   end
 end
