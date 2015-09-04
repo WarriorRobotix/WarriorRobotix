@@ -31,28 +31,30 @@
   <div class="col s12">
     <div class="card-panel max8">
       <h5 class="flow-text">Send Us A Message</h5>
-      <div class="row">
-        <div class="input-field col s12">
-          <input value="" id="name" type="text" class="validate">
-          <label class="active" for="name">Full Name</label>
+      <%= form_tag do %>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= label_tag :full_name, "Full name" %>
+            <%= text_field_tag :full_name, params[:full_name] %>
+          </div>
+          <div class="input-field col s12 m6">
+            <%= label_tag :email, "Email" %>
+            <%= email_field_tag :email, params[:email] %>
+          </div>
+          <div class="input-field col s12 m6">
+            <%= label_tag :phone_number, "Phone Number" %>
+            <%= telephone_field_tag :phone_number, params[:phone_number] %>
+          </div>
+          <div class="input-field col s12">
+            <%= text_area_tag :message, params[:message], class: "materialize-textarea" %>
+            <%= label_tag :message, "Message" %>
+          </div>
+          <%= recaptcha_tags %>
         </div>
-        <div class="input-field col s12 m6">
-          <input value="" id="email" type="text" class="validate">
-          <label class="active" for="email">Email</label>
+        <div class="actions row">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Send Message</button>
         </div>
-        <div class="input-field col s12 m6">
-          <input value="" id="phone" type="text" class="validate">
-          <label class="active" for="phone">Phone Number</label>
-        </div>
-        <div class="input-field col s12">
-          <textarea value="" id="message" class="validate materialize-textarea"></textarea>
-          <label class="active" for="message">Message</label>
-        </div>
-        <%= recaptcha_tags %>
-      </div>
-      <div class="actions row">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Send Message</button>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
