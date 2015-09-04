@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_admin!, only: [:home]
+  skip_before_action :authenticate_admin!, only: [:home, :contact]
   def home
     set_meta_tags og: {
       title:    'Home Page',
