@@ -178,9 +178,9 @@ DEPENDENCIES
   jquery-turbolinks
   letter_opener
   materialize-sass
+  meta-tags
   pg
   puma
-  meta-tags
   rack-mini-profiler
   rails (= 4.2.3)
   rails_12factor
