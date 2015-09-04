@@ -5,6 +5,7 @@ class PagesController < ApplicationController
       title:    'Home Page',
       type:     'website',
       url:      'http://4659warriors.com',
+      description: 'Team 4659 Warrior Robotix is the robotics club of Port Credit Secondary School in Mississauga. We participate in Vex, Skills Ontario and other robotics competitions.'
       image:    [{
         _: 'http://4659warriors.com/assets/pages/home/vex2015.jpg',
         type: 'image/jpeg',
