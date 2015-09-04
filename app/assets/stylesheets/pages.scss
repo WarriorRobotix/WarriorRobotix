@@ -80,3 +80,26 @@ body.pages-home{
     margin-bottom: 50px;
   }
 }
+
+body.pages-contact{
+  .contact-details{
+    padding: 0.75rem;
+    .google-maps {
+      position: relative;
+      padding-bottom: 75%;
+      height: 0;
+      overflow: hidden;
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+
+      }
+    }
+    .contact-info{
+      margin-bottom: 0;
+    }
+  }
+}
