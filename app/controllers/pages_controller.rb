@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_admin!, only: [:home, :contact]
   def home
     set_meta_tags og: {
-      title:    'Home Page',
+      title:    'Warrior Robotix',
       type:     'website',
       url:      'http://4659warriors.com',
       description: 'Team 4659 Warrior Robotix is the robotics club of Port Credit Secondary School in Mississauga. We participate in Vex, Skills Ontario and other robotics competitions.'
