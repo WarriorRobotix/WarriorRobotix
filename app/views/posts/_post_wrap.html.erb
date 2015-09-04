@@ -1,6 +1,6 @@
 <div class="post-box" id="post<%= post.id %>">
   <div class="heading">
-    <span class="title"><%= link_to "#{post.title}", post, class: "flow-text" %></span>
+    <span class="title"><%= link_to "#{post.title}", post %></span>
     <div style="float:right;margin-top:2%;">
       <% if member_is_admin? %>
       <%= link_to 'create', send("edit_#{post.model_name.element}_path",post, from: request_path), class: "material-icons" %>
