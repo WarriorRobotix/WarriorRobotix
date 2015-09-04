@@ -42,6 +42,9 @@ gem 'rack-mini-profiler'
 # Use carrierwave for image uploading
 gem 'carrierwave'
 
+# User meta-tags for meta and SEO
+gem 'meta-tags'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
