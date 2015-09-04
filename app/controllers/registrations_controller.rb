@@ -5,15 +5,23 @@ class RegistrationsController < ApplicationController
     unless RegistrationField.valid_member_fields? && RegistrationForm.open?
       render :error
     end
+    @old_member = params[:old].present?
+    if @old_member
+      render :old_member_form
+    else
+      render :form
+    end
   end
 
   def submit
+    @old_member = params[:old].present?
     @member = Member.new(accepted: false)
+    @member.extra_info = @member.extra_info.merge("Old member" => (@old_member ? 'Yes' : 'No'))
     RegistrationField.all.to_a.each do |field|
       value = params[:form][field.title]
       if field.map_to.present?
         @member.send("#{field.map_to}=", value)
-      else
+      elsif !@old_member
         value = nil if value.blank?
         if !field.input_value_valid?(value)
           @member.add_extra_info_field_error("\"#{field.title}\" field is invalid or blank")
@@ -24,6 +32,9 @@ class RegistrationsController < ApplicationController
     end
     if @member.save
       render :confirmation
+    elsif @old_member
+      @form = params[:form].to_unsafe_h
+      render :old_member_form
     else
       @form = params[:form].to_unsafe_h
       render :form

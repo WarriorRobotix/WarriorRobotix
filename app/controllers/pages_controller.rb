@@ -1,7 +1,21 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_admin!, only: [:home]
+  skip_before_action :authenticate_admin!, only: [:home, :contact]
   def home
+    set_meta_tags og: {
+      title:    'Home Page',
+      type:     'website',
+      url:      'http://4659warriors.com',
+      image:    [{
+        _: 'http://4659warriors.com/assets/pages/home/vex2015.jpg',
+        type: 'image/jpeg',
+        width: 400,
+        height: 300,
+      }]
+    }
     @show_side_buttons = true
+  end
+
+  def contact
   end
 
   def attend

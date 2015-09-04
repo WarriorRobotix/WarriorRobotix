@@ -52,14 +52,12 @@ Rails.application.routes.draw do
 
   get '/attend' => 'pages#attend'
   get '/event' => 'pages#event'
+  get '/contact' => 'pages#contact'
   get '/search' => 'members#search'
   get '/eventsearch' => 'members#eventsearch'
 
   get '/register' => 'registrations#form'
   post '/register' => 'registrations#submit'
-
-  get '/r' => 'registrations#form'
-  post '/r' => 'registrations#submit'
 
   post 'registration/toggle' => 'registrations#toggle'
 

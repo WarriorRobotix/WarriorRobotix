@@ -62,3 +62,21 @@ body.pages-home{
   padding-bottom: 20px;
   border-radius: 10px;
 }
+
+.home-info{
+  @media #{$large-and-up} {
+    margin-top: 100px;
+  }
+}
+
+.home-join-us{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  .btn{
+    margin-top: 10px;
+  }
+  @media #{$large-and-up} {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+}

@@ -1,0 +1,44 @@
+<h1 class="flow-text">Warrior Robotix Registration (Old Members)</h1>
+<div class="card-panel">
+  <p>
+    This registration form is intended for old members only. If you are a new member, please use the other <%= link_to 'registration form', register_path %>.
+  </p>
+</div>
+
+<div class="card-panel" style="padding-bottom:15px;padding-top:10px;">
+  <%= form_tag register_path(old: "member") do %>
+    <%= errors_for(@member) unless @member.nil? %>
+    <div class="row">
+      <div class="input-field col s12 m6">
+        <%= label_tag "form_First name", 'First name' %>
+        <%= text_field_tag "form[First name]", @form['First name'] %>
+      </div>
+
+      <div class="input-field col s12 m6">
+        <%= label_tag "form_Last name", 'Last name' %>
+        <%= text_field_tag "form[Last name]", @form['Last name'] %>
+      </div>
+
+      <div class="input-field col s12 m6">
+        <%= label_tag "form_Email", 'Email' %>
+        <%= text_field_tag "form[Email]", @form['Email'] %>
+      </div>
+
+      <div class="input-field col s12 m12 l6">
+        <%= select :form, 'Grade', ["9","10","11","12"], { selected: @form['Grade'], include_blank: false } %>
+        <%= label_tag "form_Grade", 'Grade' %>
+      </div>
+
+      <div class="input-field col s12 m6">
+        <%= label_tag "form_Student number", 'Student number' %>
+        <%= text_field_tag "form[Student number]", @form['Student number'] %>
+      </div>
+
+      <div class="input-field col s12 m6">
+        <%= label_tag "form_Phone number", 'Phone number' %>
+        <%= text_field_tag "form[Phone number]", @form['Phone number'] %>
+      </div>
+    </div>
+    <%= submit_tag "Submit", class: 'btn', data: { disable_with: "Please Wait..." } %>
+  <% end %>
+</div>

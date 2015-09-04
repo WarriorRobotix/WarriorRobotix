@@ -5,6 +5,7 @@
       <tr>
         <th>Full Name</th>
         <th class="hide-on-small-only">Grade</th>
+        <th class="hide-on-small-only">Old member</th>
         <th class="hide-on-med-and-down">Email</th>
         <th class="hide-on-med-and-down">Student Number</th>
         <th colspan="2"><%= link_to 'Reject All', '#!', class: 'data-modal-trigger', data: { modal_target: "reject_member_modal", modal_fill: {id: 'all', name: "All #{pluralize(members.count,'Pending Member')}"} } %></th>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= link_to member.full_name, "#m-#{member.id}" %></td>
         <td class="hide-on-small-only"><%= member.grade %></td>
+        <td class="hide-on-small-only"><%= member.extra_info["Old member"] if member.extra_info["Old member"] == 'Yes' %></td>
         <td class="hide-on-med-and-down"><%= member.email %></td>
         <td class="hide-on-med-and-down"><%= member.student_number %></td>
         <td><%= link_to 'check', member_approve_path(member), method: :post, class: 'material-icons' %></td>
