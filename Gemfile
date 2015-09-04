@@ -45,6 +45,9 @@ gem 'carrierwave'
 # User meta-tags for meta and SEO
 gem 'meta-tags'
 
+# Use recaptcha to avoid spams
+gem "recaptcha", :require => "recaptcha/rails"
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
