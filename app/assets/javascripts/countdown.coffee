@@ -24,7 +24,6 @@
       unless distance == 0
         setTimeout ->
           $this.countdown()
-          console.log('lol')
         , 1000
 
 ) window.jQuery, window
