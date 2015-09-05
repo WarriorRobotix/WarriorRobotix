@@ -22,4 +22,4 @@
 en:
   hello: "Hello world"
   recaptcha:
-    errors: There are some errors with reCAPTCHA
+    errors: There is an error with reCAPTCHA
