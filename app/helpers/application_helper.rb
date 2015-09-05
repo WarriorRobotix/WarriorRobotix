@@ -38,8 +38,7 @@ module ApplicationHelper
     case name
     when 'notice'
       css_class = 'toast-notice'
-    when 'alert'
-    when 'recaptcha_error'
+    when 'alert', 'recaptcha_error'
       css_class = 'toast-alert'
     else
       css_class = 'toast-base'
