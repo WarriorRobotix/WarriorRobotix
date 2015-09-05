@@ -20,11 +20,11 @@ admin.save!
 admins << admin
 
 RegistrationField.create!([
-  {title: "First Name"},
-  {title: "Last Name"},
+  {title: "First name"},
+  {title: "Last name"},
   {title: "Email"},
   {title: "Grade"},
-  {title: "Student Number"},
+  {title: "Student number"},
   {title: "What robots do you want to make?", input_type: :text_area, optional: true}
 ])
 
