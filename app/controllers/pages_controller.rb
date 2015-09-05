@@ -13,10 +13,10 @@ class PagesController < ApplicationController
     @message = params.require(:message).permit(:full_name, :email, :phone_number, :body).to_h.symbolize_keys!
     if verify_recaptcha
       if @message[:full_name].blank?
-        flash[:alert] = 'Please tell us your name.'
+        flash.now[:alert] = 'Please tell us your name.'
         @message[:full_name] = 'Anonymous'
       elsif @message[:body].blank?
-        flash[:alert] = 'Message can\'t be blank.'
+        flash.now[:alert] = 'Message can\'t be blank.'
       else
         @message.merge!(ip: request.remote_ip.to_s, timestamp: Time.now.to_s)
         ContactMailer.contact_us_email(@message).deliver_later
