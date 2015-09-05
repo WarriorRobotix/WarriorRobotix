@@ -1,7 +1,6 @@
 <% if @reason.present? %>
-<h2>Hi <%= @member_name %>, Your application has rejected for following reason:</h2>
-<p><%= @reason %></p>
+<h2>Your application has rejected for following reason:</h2>
+<p style="font-size:23px"><%= @reason %></p>
 <% else %>
-<h2>Hi <%= @member_name %>, Your application has rejected</h2>
+<h2>Your application has rejected</h2>
 <% end %>
-<p>You may resubmit your application, approval is not guaranteed. Do not abuse the website or email. Any abuse of the website or email will report to the school.</p>
