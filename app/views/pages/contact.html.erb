@@ -31,28 +31,30 @@
   <div class="col s12">
     <div class="card-panel max8">
       <h5 class="flow-text">Send Us A Message</h5>
-      <%= form_tag do %>
+      <%= form_tag contact_path, id: 'contact_form' do %>
         <div class="row">
           <div class="input-field col s12">
-            <%= label_tag :full_name, "Full name" %>
-            <%= text_field_tag :full_name, params[:full_name] %>
+            <%= label_tag 'message[full_name]', "Full name" %>
+            <%= text_field_tag 'message[full_name]', params[:full_name] %>
           </div>
           <div class="input-field col s12 m6">
-            <%= label_tag :email, "Email" %>
-            <%= email_field_tag :email, params[:email] %>
+            <%= label_tag 'message[email]', "Email" %>
+            <%= email_field_tag 'message[email]', params[:email] %>
           </div>
           <div class="input-field col s12 m6">
-            <%= label_tag :phone_number, "Phone Number" %>
-            <%= telephone_field_tag :phone_number, params[:phone_number] %>
+            <%= label_tag 'message[phone_number]', "Phone Number" %>
+            <%= telephone_field_tag 'message[phone_number]', params[:phone_number] %>
           </div>
           <div class="input-field col s12">
-            <%= text_area_tag :message, params[:message], class: "materialize-textarea" %>
-            <%= label_tag :message, "Message" %>
+            <%= text_area_tag 'message[body]', params[:message], class: "materialize-textarea" %>
+            <%= label_tag 'message[body]', "Message" %>
           </div>
-          <%= recaptcha_tags %>
+          <div class="col s12">
+            <%= recaptcha_tags callback: 'enableForm' %>
+          </div>
         </div>
         <div class="actions row">
-          <button class="btn waves-effect waves-light" type="submit" name="action">Send Message</button>
+          <%= submit_tag 'Send Message', disabled: true, class: 'btn', data: {disable_with: nil, enable_by_recaptcha: '1'} %>
         </div>
       <% end %>
     </div>

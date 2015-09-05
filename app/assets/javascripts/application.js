@@ -142,3 +142,7 @@ function replceNullDisableWith(){
     t.attr('data-disable-with',v);
   });
 }
+
+function enableForm(){
+  $('form input[data-enable-by-recaptcha]').prop('disabled', false);
+}

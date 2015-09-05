@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_admin!, only: [:home, :contact]
+  skip_before_action :authenticate_admin!, only: [:home, :contact, :contact_message]
   def home
     set_meta_tags_for_home
     @show_side_buttons = true
@@ -10,6 +10,9 @@ class PagesController < ApplicationController
 
   def contact_message
     if verify_recaptcha
+      message = params.require.permit(:full_name, :email, :phone_number, :body).to_h
+      message.merge(ip: request.remote_ip.to_s, timestamp: Time.now.to_s)
+      ContactMailer.contact_us_email(info).deliver_later
       flash[:notice] =  "Your message has successfully sent to us"
     else
       flash[:alert] =  "There are some errors with reCAPTCHA"
