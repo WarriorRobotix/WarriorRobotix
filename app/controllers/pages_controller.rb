@@ -18,7 +18,7 @@ class PagesController < ApplicationController
       elsif @message[:body].blank?
         flash.now[:alert] = 'Message can\'t be blank.'
       else
-        @message.merge!(ip: request.remote_ip.to_s, timestamp: Time.now.to_s)
+        @message.merge!(ip: request.remote_ip.to_s, timestamp: Time.zone.now.to_s)
         ContactMailer.contact_us_email(@message).deliver_later
         flash[:notice] =  "Your message has successfully sent to us"
         redirect_to contact_path
