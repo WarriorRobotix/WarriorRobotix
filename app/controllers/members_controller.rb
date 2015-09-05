@@ -249,8 +249,13 @@ class MembersController < ApplicationController
   def send_reset_token
     identifier = params[:identifier]
     if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", identifier, identifier).take
-      token = member.generate_reset_password_token!
-      MemberMailer.reset_password_email(member, token).deliver_now
+      if (Time.zone.now - member.reset_password_at) < 5.minutes
+        flash.now[:alert] =  "Can't send another reset password token within 5 minutes"
+        render :forgot
+      else
+        token = member.generate_reset_password_token!
+        MemberMailer.reset_password_email(member, token).deliver_now
+      end
     else
       flash[:alert] =  "Database doesn't have this student number"
       render :forgot
