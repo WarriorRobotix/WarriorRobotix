@@ -29,24 +29,24 @@
     </div>
   </div>
   <div class="col s12">
-    <div class="card-panel max8">
+    <div id="contact_message" class="card-panel max8">
       <h5 class="flow-text">Send Us A Message</h5>
       <%= form_tag contact_path, id: 'contact_form' do %>
         <div class="row">
           <div class="input-field col s12">
-            <%= label_tag 'message[full_name]', "Full name" %>
-            <%= text_field_tag 'message[full_name]', params[:full_name] %>
+            <%= text_field_tag 'message[full_name]', @message[:full_name] %>
+            <%= label_tag 'message[full_name]', "Full name", class: 'active' %>
           </div>
           <div class="input-field col s12 m6">
             <%= label_tag 'message[email]', "Email" %>
-            <%= email_field_tag 'message[email]', params[:email] %>
+            <%= email_field_tag 'message[email]', @message[:email] %>
           </div>
           <div class="input-field col s12 m6">
             <%= label_tag 'message[phone_number]', "Phone Number" %>
-            <%= telephone_field_tag 'message[phone_number]', params[:phone_number] %>
+            <%= telephone_field_tag 'message[phone_number]', @message[:phone_number] %>
           </div>
           <div class="input-field col s12">
-            <%= text_area_tag 'message[body]', params[:message], class: "materialize-textarea" %>
+            <%= text_area_tag 'message[body]', @message[:message], class: "materialize-textarea" %>
             <%= label_tag 'message[body]', "Message" %>
           </div>
           <div class="col s12">
@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class="actions row">
-          <%= submit_tag 'Send Message', disabled: true, class: 'btn', data: {disable_with: nil, enable_by_recaptcha: '1'} %>
+          <%= submit_tag 'Send Message', disabled: true, class: 'btn', data: {disable_with: 'Sending...', enable_by_recaptcha: '1'} %>
         </div>
       <% end %>
     </div>
