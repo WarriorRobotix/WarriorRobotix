@@ -38,7 +38,14 @@
         <%= label_tag "form_Phone number", 'Phone number' %>
         <%= text_field_tag "form[Phone number]", @form['Phone number'] %>
       </div>
+      <div class="col s12">
+        <%= recaptcha_tags callback: 'enableForm' %>
+      </div>
     </div>
-    <%= submit_tag "Submit", class: 'btn', data: { disable_with: "Please Wait..." } %>
+    <div class="row">
+      <div class="actions col s12">
+        <%= submit_tag "Submit", class: 'btn', disabled: true, data: { disable_with: "Please Wait...", enable_by_recaptcha: '1' } %>
+      </div>
+    </div>
   <% end %>
 </div>

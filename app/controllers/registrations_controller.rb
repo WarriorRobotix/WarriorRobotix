@@ -17,28 +17,38 @@ class RegistrationsController < ApplicationController
   def submit
     @old_member = params[:old].present?
     @member = Member.new(accepted: false)
-    @member.extra_info = @member.extra_info.merge("Old member" => (@old_member ? 'Yes' : 'No'))
-    RegistrationField.all.to_a.each do |field|
-      value = params[:form][field.title]
-      if field.map_to.present?
-        @member.send("#{field.map_to}=", value)
-      elsif !@old_member
-        value = nil if value.blank?
-        if !field.input_value_valid?(value)
-          @member.add_extra_info_field_error("\"#{field.title}\" field is invalid or blank")
-        else
-          @member.extra_info = @member.extra_info.merge(field.title => value.to_s)
+    if verify_recaptcha(:model => @member, :message => "There is an error with reCAPTCHA")
+      @member.extra_info = @member.extra_info.merge("Old member" => (@old_member ? 'Yes' : 'No'), "Registration timestamp" => Time.zone.now, "Registration IP" => request.remote_ip)
+      RegistrationField.all.to_a.each do |field|
+        value = params[:form][field.title]
+        if field.map_to.present?
+          @member.send("#{field.map_to}=", value)
+        elsif !@old_member
+          value = nil if value.blank?
+          if !field.input_value_valid?(value)
+            @member.add_extra_info_field_error("\"#{field.title}\" field is invalid or blank")
+          else
+            @member.extra_info = @member.extra_info.merge(field.title => value.to_s)
+          end
         end
       end
-    end
-    if @member.save
-      render :confirmation
-    elsif @old_member
-      @form = params[:form].to_unsafe_h
-      render :old_member_form
+      if @member.save
+        render :confirmation
+      elsif @old_member
+        @form = params[:form].to_unsafe_h
+        render :old_member_form
+      else
+        @form = params[:form].to_unsafe_h
+        render :form
+      end
     else
-      @form = params[:form].to_unsafe_h
-      render :form
+      if @old_member
+        @form = params[:form].to_unsafe_h
+        render :old_member_form
+      else
+        @form = params[:form].to_unsafe_h
+        render :form
+      end
     end
   end
 
