@@ -257,7 +257,7 @@ class MembersController < ApplicationController
         MemberMailer.reset_password_email(member, token).deliver_now
       end
     else
-      flash[:alert] =  "Database doesn't have this student number"
+      flash.now[:alert] =  "Database doesn't have this student number"
       render :forgot
     end
   end
