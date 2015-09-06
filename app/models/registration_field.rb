@@ -11,6 +11,14 @@ class RegistrationField < ActiveRecord::Base
   validate :select_tag_extra_info, if: :select_tag?
   validate :uniq_map_to
 
+  def self.cache_key
+    @cache_key ||= [count(:updated_at),maximum(:updated_at)].map(&:to_i).join('-')
+  end
+
+  def self.expire_cache_key
+    @cache_key = nil
+  end
+
   def extra_info_for_human
     if input_type == "select_tag" && !extra_info.blank?
       if extra_info.length <= 1

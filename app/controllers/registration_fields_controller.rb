@@ -13,9 +13,9 @@ class RegistrationFieldsController < ApplicationController
 
   def create
     @registration_field = RegistrationField.new(registration_field_params)
-
     respond_to do |format|
       if @registration_field.save
+        RegistrationField.expire_cache_key
         format.html { redirect_to registration_fields_url, notice: 'Registration field was successfully created.' }
         format.json { render :show, status: :created, location: @registration_field }
       else
@@ -28,6 +28,7 @@ class RegistrationFieldsController < ApplicationController
   def update
     respond_to do |format|
       if @registration_field.update(registration_field_params)
+        RegistrationField.expire_cache_key
         format.html { redirect_to registration_fields_url, notice: 'Registration field was successfully updated.' }
         format.json { render :show, status: :ok, location: @registration_field }
       else
@@ -39,6 +40,7 @@ class RegistrationFieldsController < ApplicationController
 
   def destroy
     @registration_field.destroy
+    RegistrationField.expire_cache_key
     respond_to do |format|
       format.html { redirect_to registration_fields_url, notice: 'Registration field was successfully destroyed.' }
       format.json { head :no_content }
@@ -47,6 +49,7 @@ class RegistrationFieldsController < ApplicationController
 
   def fix
     RegistrationField.create([{ title: "First name" }, { title: "Last name" }, { title: "Email" }, { title: "Grade" }, { title: "Student number" }])
+    RegistrationField.expire_cache_key
     respond_to do |format|
       format.html { try_redirect_back { redirect_to registration_fields_url, notice: 'Registration fields\' issues were successfully fixed.' } }
     end
@@ -60,7 +63,7 @@ class RegistrationFieldsController < ApplicationController
       @registration_field.order -= 1
       @registration_field.save
     end
-
+    RegistrationField.expire_cache_key
     respond_to do |format|
       format.html { redirect_to registration_fields_url }
       format.json { head :no_content }
@@ -76,7 +79,7 @@ class RegistrationFieldsController < ApplicationController
       @registration_field.order += 1
       @registration_field.save
     end
-
+    RegistrationField.expire_cache_key
     respond_to do |format|
       format.html { redirect_to registration_fields_url }
       format.json { head :no_content }
