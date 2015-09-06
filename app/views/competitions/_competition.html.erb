@@ -5,7 +5,7 @@
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4"><%= competition.name %><i class="material-icons right">more_vert</i></span>
-      <p><%= competition.start_date.try(:strftime,'%B %d, %Y') || "unknown" %><%= " - #{competition.end_date.strftime('%B %d, %Y')}" if competition.end_date %></p>
+      <p class="truncate"><%= competition.start_date.try(:strftime,'%B %d, %Y') || "unknown" %><%= " - #{competition.end_date.strftime('%B %d, %Y')}" if competition.end_date %></p>
     </div>
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4"><%= competition.name %><i class="material-icons right">close</i></span>
