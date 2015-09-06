@@ -64,4 +64,20 @@ module ApplicationHelper
     options = options.merge(class: 'hash-modal', id: "hm-#{prefix}", remote: true)
     link_to prefix, url_format, options
   end
+
+  def try_short_format_duration(start_date, end_date, max_length = 25)
+    return if start_date.nil? || end_date.nil?
+
+    string =  "#{start_date.strftime('%B %d, %Y')} - #{end_date.strftime('%B %d, %Y')}"
+    return string if string.length <= max_length
+
+    start_date_str = (start_date.strftime('%B').length <= 5) ? '%B %d, %Y' : '%b %d, %Y'
+
+    end_date_str = (end_date.strftime('%B').length <= 5) ? '%B %d, %Y' : '%b %d, %Y'
+
+    string =  "#{start_date.strftime(start_date_str)} - #{end_date.strftime(end_date_str)}"
+    return string if string.length <= max_length
+
+    "#{start_date.strftime('%b %d, %Y')} - #{end_date.strftime('%b %d, %Y')}"
+  end
 end
