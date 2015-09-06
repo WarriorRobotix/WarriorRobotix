@@ -6,7 +6,7 @@
 </div>
 <div class="card-panel" style="padding-bottom:15px;padding-top:10px;">
   <%= form_tag do %>
-    <%= errors_for(@member) unless @member.nil? %>
+    <%= errors_for(@member, "in this registration application") unless @member.nil? %>
     <div class="row">
     <% RegistrationField.order(order: :ASC, id: :ASC).all.each do |field| %>
     <% name = field.title %>
@@ -29,6 +29,14 @@
       </div>
     <% end %>
     <% end %>
+      <div class="col s12 large-margin-bottom">
+        <input type="checkbox" id="form_allow_emails" name="form[allow_emails]" value="1"/>
+        <label for="form_allow_emails">I agree to receive emails from Warrior Robotix club.</label>
+      </div>
+      <div class="col s12 large-margin-bottom">
+        <input type="checkbox" id="form_media_release_signed" name="form[media_release_signed]" value="1"/>
+        <label for="form_media_release_signed">I have signed Port Credit Secondary School's media release form.</label>
+      </div>
       <div class="col s12">
         <%= recaptcha_tags callback: 'enableForm' %>
       </div>
