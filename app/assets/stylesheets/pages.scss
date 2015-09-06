@@ -47,7 +47,7 @@
   }
 }
 
-body.pages-home{
+body.pages-home, body.pages-vex{
   background-color: white;
   @media #{$large-and-up} {
     main > div.container{
