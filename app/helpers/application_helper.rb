@@ -4,7 +4,7 @@ module ApplicationHelper
   include ActionView::Helpers::TextHelper
   include ReturnToHelper
 
-  def errors_for(object)
+  def errors_for(object, message = nil)
     return unless object.errors.any?
     content_tag :div, class:'card-panel error-explanation' do
       concat(content_tag(:div, class: 'panel-heading') do
@@ -15,8 +15,12 @@ module ApplicationHelper
           else
             title << " are #{object.errors.count} errors"
           end
-          title << " prohibited this #{object.model_name.human.downcase} from being "
-          title << (object.new_record? ? 'created' : 'saved')
+          if message.nil?
+            title << " prohibited this #{object.model_name.human.downcase} from being "
+            title << (object.new_record? ? 'created' : 'saved')
+          else
+            title << " #{message}"
+          end
         end
       end)
 
