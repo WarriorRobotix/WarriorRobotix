@@ -1,8 +1,11 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_admin!, only: [:home, :contact, :contact_message]
+  skip_before_action :authenticate_admin!, only: [:home, :contact, :contact_message, :skills]
   def home
     set_meta_tags_for_home
     @show_side_buttons = true
+  end
+
+  def skills
   end
 
   def contact

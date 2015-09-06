@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 
   get '/attend' => 'pages#attend'
   get '/event' => 'pages#event'
+  get '/skills' => 'pages#skills'
   get '/contact' => 'pages#contact', :constraints => {:format => :html}
   post '/contact' => 'pages#contact_message', :constraints => {:format => :html}
   get '/search' => 'members#search'
