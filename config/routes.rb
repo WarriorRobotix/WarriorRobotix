@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   get '/attend' => 'pages#attend'
   get '/event' => 'pages#event'
   get '/vex' => 'pages#vex'
+  get '/skills' => 'pages#skills'
   get '/teams' => 'pages#teams'
   get '/about-us' => 'pages#about_us'
   get '/contact' => 'pages#contact', :constraints => {:format => :html}
