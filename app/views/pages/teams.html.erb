@@ -1,28 +1,31 @@
-<h3>About Us</h3>
-<div class="divider"></div>
-<div class="row valign-wrapper">
-  <div class=" col l6 s12 ">
-    <h5>Mission Statement: Design-Build-Win</h5>
+<h1><%= title 'Teams' %></h1>
+<div class="row">
+  <div class="col l6 m6 s12">
+    <h5>President's note:</h5>
     <p>
-      Here at Warrior Robotix we pride ourselves by following our simple motto: Design. Build. Win. and for us it has worked effectively. We are based out of Port Credit Secondary School in Mississauga, Ontario, Canada, and have been competing in tournaments such as VEX and Skills Canada. We founded Warrior Robotix back in 2012 and have worked ourselves into one of the elite teams in high school robotics. We offer not only the materials for a successful member but also the skills and character building that not only will help in robotics but also in life. If you are interested in joining robotics come and join Warrior Robotix today!
+      Here at Warrior Robotix, we strive to bridge the gap between theoretical studies and practical experience. Built on the dedication put forth by its members and administrators, Warrior Robotix is more that merely a club, it is a lifestyle.
     </p>
   </div>
-  <div class=" col l6 s12 ">
+  <div class="col l6 m6 s12">
     <%= image_tag 'logos/full.jpg', class: 'materialboxed hover responsive-img' %>
   </div>
 </div>
-
 <div class="row">
   <div class="col s12 large-margin-bottom">
     <ul class="tabs">
-      <li class="tab col s3"><a class="active" href="#admins">Admins</a>
+      <li class="tab col s6">
+        <a class="active" href="#vex_a">VEX Team A</a>
       </li>
-      <li class="tab col s3"><a href="#coaches">Coaches</a>
+      <li class="tab col s6">
+        <a href="#skills">Skills Team</a>
       </li>
     </ul>
   </div>
-  <div id="admins" class="col s12">
-    <div class="col s10 m6 l4 offset-s1 offset-l2 center-align">
+  <div id="vex_a" class="col s12">
+    <div class="col s12 m6 offset-m3 center-align">
+      <%= image_tag 'pages/teams/vex_a.jpg', class: 'materialboxed hover responsive-img' %>
+    </div>
+    <div class="col s10 m6 l4 offset-s1 center-align">
       <div class="card">
         <div class="card-content">
           <h5>Joe</h5>
@@ -111,18 +114,53 @@
       </div>
     </div>
   </div>
-  <div id="coaches" class="col s12">
-    <div class="col m6 s12 ">
-      <h5>Mr. Tempelmann</h5>
-      <p>
-        Mr. Tempelmannhas dictated countless hours afterschool and at lunch to help us build our robots, keep us safe and to supervise us.
-      </p>
+  <div id="skills" class="col s12">
+    <div class="col s12 m6 offset-m3 center-align">
+      <%= image_tag 'pages/teams/skills.jpg', class: 'materialboxed hover responsive-img' %>
     </div>
-    <div class="col m6 s12">
-      <h5>Mr. Mathewson</h5>
-      <p>
-        Mr. Mathewson has dictated many hours afterschool and to help us build our robots, keep us safe and to supervise us.
-      </p>
+    <div class="col s10 m6 l4 offset-s1 center-align">
+      <div class="card">
+        <div class="card-content">
+          <h5>Sohail</h5>
+          <p class="truncate">
+            Website Devloper<br>
+            Robot Builder
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col s10 m6 l4 offset-s1 center-align">
+      <div class="card">
+        <div class="card-content">
+          <h5>Swaleh</h5>
+          <p class="truncate">
+            Skills Captain<br>
+            Robot Builder and Promotions
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col s10 m6 l4 offset-s1 center-align">
+      <div class="card">
+        <div class="card-content">
+          <h5>Jackie</h5>
+          <p class="truncate">
+            Vex &amp; Skills Robot Builder<br>
+            Senior Desginer &amp; Adviser
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col s10 m6 l4 offset-s1 center-align">
+      <div class="card">
+        <div class="card-content">
+          <h5>Justin</h5>
+          <p class="truncate">
+            Head Scout<br>
+            Robot Builder
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
