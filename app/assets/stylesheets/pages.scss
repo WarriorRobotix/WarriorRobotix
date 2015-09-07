@@ -40,8 +40,8 @@
 }
 
 .slider.indicators-inside{
-  margin-bottom: -30px;
-   ul.indicators{
+  margin-bottom: -40px;
+  ul.indicators{
     z-index: 2;
     bottom: 60px;
   }
@@ -70,10 +70,14 @@ body.pages-home, body.pages-vex, body.pages-skills, body.pages-about_us,  body.p
 }
 
 .home-join-us{
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 0px;
+  margin-bottom: 10px;
   .btn{
     margin-top: 10px;
+  }
+  @media #{$medium-and-up} {
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
   @media #{$large-and-up} {
     margin-top: 50px;
