@@ -14,7 +14,7 @@
 <% cache(['previous_competitions',@previous_competitions.count, @previous_competitions.maximum(:updated_at),member_is_admin?]) do %>
 <div class="row">
   <% @previous_competitions.each do |competition| %>
-  <% cache(competition,member_is_admin?) do %>
+  <% cache([competition,member_is_admin?]) do %>
   <%= render competition %>
   <% end %>
   <% end %>
