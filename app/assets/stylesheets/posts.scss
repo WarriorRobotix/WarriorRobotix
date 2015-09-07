@@ -59,6 +59,12 @@
   .row{
     margin-bottom: 0px;
   }
+  a.note{
+    color: #9E9E9E;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
 }
 
 .preloader-container{
