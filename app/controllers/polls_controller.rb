@@ -19,6 +19,9 @@ class PollsController < ApplicationController
 
     respond_to do |format|
       if @poll.save
+        if @poll.email_notification
+          PostMailer.poll_email(@poll, true).deliver_later
+        end
         format.html { try_redirect_back { redirect_to @poll, notice: 'Poll was successfully created.' } }
         format.json { render :show, status: :created, location: @poll }
       else
@@ -33,6 +36,9 @@ class PollsController < ApplicationController
   def update
     respond_to do |format|
       if @poll.update(poll_params)
+        if @poll.email_notification
+          PostMailer.poll_email(@poll, false).deliver_later
+        end
         format.html { try_redirect_back { redirect_to @poll, notice: 'Poll was successfully updated.' } }
         format.json { render :show, status: :ok, location: @poll }
       else
@@ -95,6 +101,6 @@ class PollsController < ApplicationController
   end
 
   def poll_params
-    params.require(:poll).permit(:title, :description, :restriction, :multiple_choices, :maximum_choices, :ballots_changeable, :ballots_privacy, options_attributes: [:id, :description, :_destroy])
+    params.require(:poll).permit(:title, :description, :restriction, :email_notification, :multiple_choices, :maximum_choices, :ballots_changeable, :ballots_privacy, options_attributes: [:id, :description, :_destroy])
   end
 end

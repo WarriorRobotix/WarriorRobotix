@@ -59,6 +59,13 @@
   .row{
     margin-bottom: 0px;
   }
+}
+
+.sp-post-f-row, .compact-form-wrap .sp-post-f-row{
+  margin-bottom: 30px;
+  .input-field{
+    margin-top: -12px;
+  }
   a.note{
     color: #9E9E9E;
     &:hover{

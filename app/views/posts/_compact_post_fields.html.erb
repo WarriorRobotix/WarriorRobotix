@@ -14,3 +14,12 @@
     <%= f.label :description %>
   </div>
 </div>
+<div class="row sp-post-f-row">
+  <div class="input-field col s6">
+    <%= f.check_box :email_notification %>
+    <%= f.label :email_notification %>
+  </div>
+  <div class="col s6 right-align">
+    <%= link_to 'Supported markdown ( images, links, etc )', 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet', class: "note" %>
+  </div>
+</div>

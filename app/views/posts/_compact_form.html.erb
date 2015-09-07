@@ -2,7 +2,6 @@
   <%= form_for(post) do |f| %>
     <%= hidden_field_tag :from, from if local_assigns[:from].present? %>
     <%= render "compact_post_fields", f: f %>
-    <%= link_to 'Supported markdown ( images, links, etc )', 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet', class: "note" %>
     <div>
       <%= f.submit class: 'btn right', data: { disable_with: nil } %>
     </div>
