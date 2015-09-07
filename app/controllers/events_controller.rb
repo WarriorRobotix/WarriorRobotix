@@ -28,6 +28,9 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
+        if @event.email_notification
+          PostMailer.event_email(@event, true).deliver_later
+        end
         format.html { try_redirect_back { redirect_to @event, notice: 'Event was successfully created.' } }
         format.json { render :show, status: :created, location: @event }
       else
@@ -51,6 +54,9 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.update(event_params)
+        if @event.email_notification
+          PostMailer.event_email(@event, false).deliver_later
+        end
         format.html { try_redirect_back { redirect_to @event, notice: 'Event was successfully updated.' } }
         format.json { render :show, status: :ok, location: @event }
       else
@@ -70,6 +76,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :description, :restriction)
+    params.require(:event).permit(:title, :description, :restriction, :email_notification)
   end
 end

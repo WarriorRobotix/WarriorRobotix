@@ -1,0 +1,21 @@
+<div style="text-align:justify;max-width:500px;margin:0 auto;margin-top:-10px">
+  <h2 style="text-align:center;"><%= @title %></h2>
+
+  <%= raw MarkdownRender.render(@event.description) %>
+
+  <p style="text-align:center">
+  <% if @event.start_at.to_date === @event.end_at.to_date %>
+  <strong><%= @event.start_at.strftime("%A, %B %e, %Y from %H:%M") %> to <%= @event.end_at.strftime("%H:%M") %></strong>
+  <% else %>
+  <strong><%= @event.start_at.strftime("%A, %B %e, %Y @ %H:%M") %> to <%= @event.end_at.strftime("%A, %B %e, %Y @ %H:%M") %></strong>
+  <% end %>
+  </p>
+
+  <p style="text-align:center">
+    <%= link_to 'Response invitation ( Yes, Maybe, No )', event_url(@event) %>
+  </p>
+
+  <div style="margin-top:30px;color:#666;text-align:center;">
+  <%= link_to 'Link', event_url(@event) %> | <%= @new_event ? "Created at #{ @event.created_at.strftime("%a, %e %b %Y %H:%M")}" : "Updated at #{ @event.updated_at.strftime("%a, %e %b %Y %H:%M") }" %> | <%= @event.author.try(:full_name) %> | <%= @event.restriction == "everyone" ? @event.restriction.capitalize : @event.restriction.pluralize.capitalize %>
+  </div>
+</div>
