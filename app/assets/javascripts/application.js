@@ -44,7 +44,11 @@ $(function(){
     var t = $(this);
     var options = {full_width: true};
     options['height'] = t.data('height') || Math.max(400, ~~(t.parent().width() / 2.5));
-    console.log(options['height'])
+    if (typeof t.data('vh-minus') != 'undefined'){
+      var vheight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+      vheight -= parseInt(t.data('vh-minus'));
+      options['height'] = Math.max(Math.min(options['height'], vheight), 300);
+    }
     t.slider(options);
   });
 
