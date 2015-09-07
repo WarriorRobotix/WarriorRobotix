@@ -19,6 +19,7 @@ class PagesController < ApplicationController
 
   def contact
     @message = Hash.new
+    @show_side_buttons = true
   end
 
   def contact_message
