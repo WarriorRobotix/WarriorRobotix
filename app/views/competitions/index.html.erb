@@ -11,7 +11,7 @@
 <% if member_is_admin? %>
 <%= link_to 'New Competition', new_competition_path, class: "btn-bordered" %>
 <% end %>
-
+<% cache([@previous_competitions.count, @previous_competitions.maximum(:updated_at)]) do %>
 <div class="row">
   <% @previous_competitions.each do |competition| %>
   <% cache(competition) do %>
@@ -19,3 +19,4 @@
   <% end %>
   <% end %>
 </div>
+<% end %>
