@@ -43,10 +43,8 @@ $(function(){
   $('.slider').each(function(){
     var t = $(this);
     var options = {full_width: true};
-    var height = t.data('height');
-    if (typeof height !== "undefined"){
-      options['height'] = parseInt(height);
-    }
+    options['height'] = t.data('height') || Math.max(400, ~~(t.parent().width() / 2.5));
+    console.log(options['height'])
     t.slider(options);
   });
 
