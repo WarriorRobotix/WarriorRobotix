@@ -49,6 +49,11 @@
       </li>
     </ul>
     <ul id="slide-out" class="side-nav flow-text">
+      <% if member_signed_in? %>
+      <li>
+        <a>Hi, <%= current_member.full_name %></a>
+      </li>
+      <% end %>
       <% if member_is_admin? %>
       <li>
         <%= link_to "Attendance", '/attend' %>
