@@ -1,10 +1,12 @@
+<% cache do %>
 <h1 class="flow-text">Warrior Robotix Registration (Old Members)</h1>
 <div class="card-panel">
   <p>
     This registration form is intended for old members only. If you are a new member, please use the other <%= link_to 'registration form', register_path %>.
   </p>
 </div>
-
+<% end %>
+<% cache_unless @form.present?, 'old_member_form' do %>
 <div class="card-panel" style="padding-bottom:15px;padding-top:10px;">
   <%= form_tag register_path(old: "member") do %>
     <%= errors_for(@member) unless @member.nil? %>
@@ -55,3 +57,4 @@
     </div>
   <% end %>
 </div>
+<% end %>
