@@ -13,7 +13,6 @@ class RegistrationFieldsController < ApplicationController
 
   def create
     @registration_field = RegistrationField.new(registration_field_params)
-
     respond_to do |format|
       if @registration_field.save
         format.html { redirect_to registration_fields_url, notice: 'Registration field was successfully created.' }
@@ -60,7 +59,6 @@ class RegistrationFieldsController < ApplicationController
       @registration_field.order -= 1
       @registration_field.save
     end
-
     respond_to do |format|
       format.html { redirect_to registration_fields_url }
       format.json { head :no_content }
@@ -76,7 +74,6 @@ class RegistrationFieldsController < ApplicationController
       @registration_field.order += 1
       @registration_field.save
     end
-
     respond_to do |format|
       format.html { redirect_to registration_fields_url }
       format.json { head :no_content }

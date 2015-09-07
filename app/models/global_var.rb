@@ -32,7 +32,16 @@ class GlobalVar < ActiveRecord::Base
 
     def fetch(name, options={})
       default = options[:default]
-      var = find_by(name: name).try(:value) || default
+
+      if var = find_by(name: name).try(:value)
+        var
+      elsif !default.nil?
+        default
+      elsif block_given?
+        set(name, yield)
+      else
+        nil
+      end
     end
 
     def set(name, value, data_type=nil)

@@ -2,9 +2,10 @@
 <% if member_is_admin? %>
 <%= link_to 'New Sponsor', new_sponsor_path, class: "btn-bordered" %>
 <% end %>
-
+<% cache(['sponsors',@sponsors.count, @sponsors.maximum(:updated_at),member_is_admin?]) do %>
 <div class="row">
   <% @sponsors.each do |sponsor| %>
+  <% cache([sponsor,member_is_admin?]) do %>
   <div class="col s12 m6 l6">
     <div class="sponsor-card card">
       <div class="card-image waves-effect waves-block waves-light">
@@ -50,4 +51,6 @@
     </div>
   </div>
   <% end %>
+  <% end %>
 </div>
+<% end %>

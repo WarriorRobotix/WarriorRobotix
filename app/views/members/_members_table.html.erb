@@ -17,6 +17,7 @@
 
     <tbody>
       <% members.each do |member| %>
+        <% cache(['index',member,member_is_admin?]) do %>
         <tr>
           <% if member_is_admin? %>
           <td style="padding-bottom:25px;"><%= raw('<i class="small material-icons inline">supervisor_account</i> ') if member.admin? %><%= link_to member.full_name, "#m-#{member.id}" %></td>
@@ -33,6 +34,7 @@
           <td class="hide-on-med-and-down"><%= link_to 'delete', member, method: :delete, class: 'material-icons', data: { confirm: 'Are you sure?' } %></td>
           <% end %>
         </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
