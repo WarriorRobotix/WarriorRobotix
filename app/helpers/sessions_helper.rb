@@ -19,6 +19,7 @@ module SessionsHelper
       member_id, token = remember_cookies.split("$")
       member_id = member_id.to_i
       if member = Member.find_and_authenticate_remember_token(member_id,token)
+        flash.now[:notice] = 'You have signed in via remember me'
         return signin_member(member)
       else
         cookies.delete :mtk
