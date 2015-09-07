@@ -196,7 +196,9 @@ class MembersController < ApplicationController
     @member = Member.find_by(id: params[:record_hex].to_i(16))
     if @member.present? && @member.valid_reset_password_token?(params[:reset_token])
       @member.password_allow_nil = false
-      if @member.update(password: params[:password], password_confirmation: params[:password_confirmation], reset_password_at: nil, reset_password_digest: nil)
+      @member.reset_password_at = nil
+      @member.reset_password_digest = nil
+      if @member.update(password: params[:password], password_confirmation: params[:password_confirmation])
         redirect_to signin_path
       else
         render :reset_password_edit
@@ -249,12 +251,12 @@ class MembersController < ApplicationController
   def send_reset_token
     identifier = params[:identifier]
     if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", identifier, identifier).take
-      if (Time.zone.now - member.reset_password_at) < 5.minutes
+      unless member.reset_password_at.nil? || (Time.zone.now - member.reset_password_at) > 5.minutes
         flash.now[:alert] =  "Can't send another reset password token within 5 minutes"
         render :forgot
       else
         token = member.generate_reset_password_token!
-        MemberMailer.reset_password_email(member, token).deliver_now
+        MemberMailer.reset_password_email(member, token).deliver_later
       end
     else
       flash.now[:alert] =  "Database doesn't have this student number"
