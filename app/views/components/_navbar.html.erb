@@ -17,12 +17,12 @@
       <li>
         <%= link_to "Attendance", '/attend' %>
       </li>
-      <li>
-        <%= link_to "Photos", photos_path %>
-      </li>
       <% end %>
       <li>
         <%= link_to "Vex", vex_path %>
+      </li>
+      <li>
+        <%= link_to "Skills", skills_path %>
       </li>
       <li>
         <%= link_to "Competitions", competitions_path %>
@@ -52,21 +52,26 @@
       </li>
     </ul>
     <ul id="slide-out" class="side-nav flow-text">
+      <% if member_signed_in? %>
+      <li>
+        <a>Hi, <%= current_member.full_name %></a>
+      </li>
+      <% end %>
       <% if member_is_admin? %>
       <li>
         <%= link_to "Attendance", '/attend' %>
       </li>
-      <li>
-        <%= link_to "Photos", photos_path %>
-      </li>
       <% end %>
       <% if member_signed_in? %>
       <li>
-        <%= link_to "Members", members_path %>
+        <%= link_to "Members Center", members_path %>
       </li>
       <% end %>
       <li>
         <%= link_to "Vex", vex_path %>
+      </li>
+      <li>
+        <%= link_to "Skills", skills_path %>
       </li>
       <li>
         <%= link_to "Competitions", competitions_path %>
