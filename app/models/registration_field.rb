@@ -6,10 +6,15 @@ class RegistrationField < ActiveRecord::Base
   before_destroy :correct_fields_order
 
   before_validation :try_map_to_member
+  after_commit :verify_registration_fields
 
   validates :title, presence: true, uniqueness: { case_sensitive: false }
   validate :select_tag_extra_info, if: :select_tag?
   validate :uniq_map_to
+
+  def self.cache_key
+    [count(:updated_at),maximum(:updated_at)].map(&:to_i).join('-')
+  end
 
   def extra_info_for_human
     if input_type == "select_tag" && !extra_info.blank?
@@ -103,5 +108,10 @@ class RegistrationField < ActiveRecord::Base
       end
       errors.add(:base, "Map to attribute value has already taken. This error may causes by similar title with another field") if flag
     end
+  end
+
+  def verify_registration_fields
+    valid_fields = GlobalVar[:valid_registration_fields] = RegistrationField.valid_member_fields?
+    RegistrationForm.verify_registration_fields!(valid_fields)
   end
 end

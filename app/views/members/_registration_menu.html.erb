@@ -1,6 +1,6 @@
 <div id="registration_wrap" class="col s12 compact-form-wrap">
   <div class="row">
-    <% valid_fields = RegistrationField.valid_member_fields? %>
+    <% valid_fields = RegistrationForm.valid_registration_fields? %>
     <div class="col m4 l3 right-align" style="padding-top:1.4rem;">
       <%= render 'registrations/toggle_form', valid_fields: valid_fields %>
     </div>

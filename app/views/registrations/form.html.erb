@@ -1,9 +1,12 @@
+<% cache do %>
 <h1 class="flow-text">Warrior Robotix Registration</h1>
 <div class="card-panel">
   <p>
     Please fill out this registration form seriously. We are accepting a limited amount of new members bases on the registration form answers.
   </p>
 </div>
+<% end %>
+<% cache_unless @form.present?, RegistrationField.cache_key do %>
 <div class="card-panel" style="padding-bottom:15px;padding-top:10px;">
   <%= form_tag do %>
     <%= errors_for(@member, "in this registration application") unless @member.nil? %>
@@ -44,3 +47,4 @@
     </div>
   <% end %>
 </div>
+<% end %>
