@@ -17,9 +17,6 @@
       <li>
         <%= link_to "Attendance", '/attend' %>
       </li>
-      <li>
-        <%= link_to "Photos", photos_path %>
-      </li>
       <% end %>
       <li>
         <%= link_to "Vex", vex_path %>
@@ -55,9 +52,6 @@
       <% if member_is_admin? %>
       <li>
         <%= link_to "Attendance", '/attend' %>
-      </li>
-      <li>
-        <%= link_to "Photos", photos_path %>
       </li>
       <% end %>
       <% if member_signed_in? %>
