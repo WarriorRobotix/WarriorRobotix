@@ -22,6 +22,9 @@ $slider-indicator-color: $secondary-color;
   max-height: 400px;
   position: relative;
   overflow: hidden;
+  @media only screen and (min-width : 1301px) {
+    max-height: 500px;
+  }
   &.expended{
     max-height: none;
   }
