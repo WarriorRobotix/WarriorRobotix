@@ -25,6 +25,13 @@
   .text-description{
     font-size: 1.2rem;
     text-align: justify;
+
+    .video-wrapper{
+      margin: 0 10px 10px 0;
+    }
+    .video-wrapper.right{
+      margin: 0 0 10px 10px;
+    }
   }
 }
 
