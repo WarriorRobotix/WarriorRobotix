@@ -1,12 +1,12 @@
-<h1 class="max8 flow-text">Listing Posts</h1>
+<h1 class="max8 flow-text">Posts</h1>
 
 <% if member_is_admin? %>
 <% cache do %>
 <%= render(partial: "index_create")  %>
 <% end %>
 <% end %>
+<div class="posts-container">
 <% @posts.each do |post| %>
   <%= render post %>
 <% end %>
-
-<br>
+</div>

@@ -1,7 +1,7 @@
 <% cache([event, max_restriction]) do %>
 <%= render layout: 'posts/post_wrap', locals: {post: event} do %>
   <% cache([event, 'datetime']) do %>
-  <div class="row center-align">
+  <div class="row" style="padding-left:30px;">
     <% if event.start_at.to_date === event.end_at.to_date %>
     <div class="col s12"><strong><%= event.start_at.strftime("%A, %B %e, %Y from %H:%M") %> to <%= event.end_at.strftime("%H:%M") %></strong></div>
     <% else %>
