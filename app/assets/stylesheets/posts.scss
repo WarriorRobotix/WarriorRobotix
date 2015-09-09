@@ -10,7 +10,7 @@ body.posts-index{
 .posts-container{
   .post-box {
     padding: 5px 20px 10px 20px;
-    border-bottom: 1px solid #bbb;
+    border-bottom: 2px solid #ddd;
     .heading{
       .title{
         font-size: 2rem;
@@ -40,8 +40,8 @@ body.posts-index{
     }
 
     @media #{$large-and-up} {
-      margin-top: 8rem;
-      padding-bottom: 8rem;
+      margin-top: 4rem;
+      padding-bottom: 4rem;
       padding-top: 0;
     }
 
