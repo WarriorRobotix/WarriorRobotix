@@ -24,6 +24,7 @@
   <% end %>
 <% end %>
 
+<% if !@checkedin.empty? %>
 <h1 class="flow-text">Checked In</h1>
 <div class="card-panel">
   <table>
@@ -45,7 +46,12 @@
     </tbody>
   </table>
 </div>
-
+<% else %>
+<% if @checkedout.empty? %>
+<h1 class="flow-text center-align">No one has checked in yet...</h1>
+<% end %>
+<% end %>
+<% if !@checkedout.empty? %>
 <h1 class="flow-text">Checked Out</h1>
 <div class="card-panel">
   <table>
@@ -73,3 +79,4 @@
     </tbody>
   </table>
 </div>
+<% end %>
