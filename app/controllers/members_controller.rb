@@ -1,17 +1,17 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy, :approve]
 
-  skip_before_action :authenticate_admin!, only: [:index, :new, :create, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update, :edit_email, :update_email, :edit_password, :update_password]
+  skip_before_action :authenticate_admin!, only: [:index, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update, :edit_email, :update_email, :edit_password, :update_password]
 
   before_action :authenticate_member!, only: [:index, :edit_email, :update_email, :edit_password, :update_password]
 
   # GET /members
   # GET /members.json
   def index
-    @current_members = Member.where(graduated_year: nil).order(first_name: :ASC, last_name: :ASC).all.to_a
+    @current_members = Member.where(graduated_year: nil).order(first_name: :ASC, last_name: :ASC).all
     if member_is_admin?
-      @pending_members = Member.unscoped.where(accepted: false).all.to_a
-      @graduated_members = Member.where.not(graduated_year: nil).order(graduated_year: :DESC).all.to_a
+      @pending_members = Member.unscoped.where(accepted: false).all
+      @graduated_members = Member.where.not(graduated_year: nil).order(graduated_year: :DESC, first_name: :ASC, last_name: :ASC).all
     end
   end
 
@@ -196,7 +196,9 @@ class MembersController < ApplicationController
     @member = Member.find_by(id: params[:record_hex].to_i(16))
     if @member.present? && @member.valid_reset_password_token?(params[:reset_token])
       @member.password_allow_nil = false
-      if @member.update(password: params[:password], password_confirmation: params[:password_confirmation], reset_password_at: nil, reset_password_digest: nil)
+      @member.reset_password_at = nil
+      @member.reset_password_digest = nil
+      if @member.update(password: params[:password], password_confirmation: params[:password_confirmation])
         redirect_to signin_path
       else
         render :reset_password_edit
@@ -218,24 +220,27 @@ class MembersController < ApplicationController
   def reject
     reason = params[:reason].blank? ? nil :  params[:reason]
     GlobalVar[:last_reject_members_reason] = reason
+    @quite_reject = params[:commit] == "Quite Reject"
     if params[:member] == 'all'
       pending_members = Member.unscoped.where(accepted: false)
-      pending_members.pluck(:first_name, :last_name, :email).map { |e| ["#{e[0]} #{e[1]}", e[2]] }.each do |pm|
-        MemberMailer.registration_rejected_email(pm[0], pm[1], reason).deliver_later
+      unless @quite_reject
+        pending_members.pluck(:first_name, :last_name, :email).map { |e| ["#{e[0]} #{e[1]}", e[2]] }.each do |pm|
+          MemberMailer.registration_rejected_email(pm[0], pm[1], reason).deliver_later
+        end
       end
       pending_members.destroy_all
     else
       if pending_member = Member.unscoped.where(id: params[:member].to_i, accepted: false).take
         pending_member.destroy
-        MemberMailer.registration_rejected_email(pending_member.full_name, pending_member.email, reason).deliver_later
+        MemberMailer.registration_rejected_email(pending_member.full_name, pending_member.email, reason).deliver_later unless @quite_reject
       end
     end
 
     respond_to do |format|
       if params[:member] == 'all'
-        format.html { redirect_to members_url, notice: "All pending members were successfully rejected." }
+        format.html { redirect_to members_url, notice: "All pending members were successfully#{" and quietly" if @quite_reject} rejected." }
       else
-        format.html { redirect_to members_url, notice: "#{pending_member.try(:full_name) || 'A pending member'} was successfully rejected." }
+        format.html { redirect_to members_url, notice: "#{pending_member.try(:full_name) || 'A pending member'} was successfully#{" and quietly" if @quite_reject} rejected." }
       end
     end
   end
@@ -246,10 +251,15 @@ class MembersController < ApplicationController
   def send_reset_token
     identifier = params[:identifier]
     if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", identifier, identifier).take
-      token = member.generate_reset_password_token!
-      MemberMailer.reset_password_email(member, token).deliver_now
+      unless member.reset_password_at.nil? || (Time.zone.now - member.reset_password_at) > 5.minutes
+        flash.now[:alert] =  "Can't send another reset password token within 5 minutes"
+        render :forgot
+      else
+        token = member.generate_reset_password_token!
+        MemberMailer.reset_password_email(member, token).deliver_later
+      end
     else
-      flash[:alert] =  "Database doesn't have this student number"
+      flash.now[:alert] =  "Database doesn't have this student number"
       render :forgot
     end
   end

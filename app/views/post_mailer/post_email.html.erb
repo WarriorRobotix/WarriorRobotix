@@ -1,0 +1,9 @@
+<div style="text-align:justify;max-width:500px;margin:0 auto;margin-top:-10px">
+  <h2 style="text-align:center;"><%= @title %></h2>
+
+  <%= raw MarkdownRender.render(@post.description) %>
+
+  <div style="margin-top:30px;color:#666;text-align:center;">
+  <%= link_to 'Link', post_url(@post) %> | <%= @new_post ? "Created at #{ @post.created_at.strftime("%a, %e %b %Y %H:%M")}" : "Updated at #{ @post.updated_at.strftime("%a, %e %b %Y %H:%M") }" %> | <%= @post.author.try(:full_name) %> | <%= @post.restriction == "everyone" ? @post.restriction.capitalize : @post.restriction.pluralize.capitalize %>
+  </div>
+</div>

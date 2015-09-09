@@ -40,6 +40,9 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        if @post.email_notification
+          PostMailer.post_email(@post, true).deliver_later
+        end
         format.html { try_redirect_back { redirect_to @post, notice: 'Post was successfully created.' } }
         format.json { render :show, status: :created, location: @post }
       else
@@ -54,6 +57,9 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
+        if @post.email_notification
+          PostMailer.post_email(@post, false).deliver_later
+        end
         format.html { try_redirect_back { redirect_to @post, notice: 'Post was successfully updated.' } }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -79,6 +85,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :description, :restriction)
+    params.require(:post).permit(:title, :description, :restriction, :email_notification)
   end
 end

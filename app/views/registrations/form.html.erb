@@ -1,12 +1,15 @@
+<% cache do %>
 <h1 class="flow-text">Warrior Robotix Registration</h1>
 <div class="card-panel">
   <p>
     Please fill out this registration form seriously. We are accepting a limited amount of new members bases on the registration form answers.
   </p>
 </div>
+<% end %>
+<% cache_unless @form.present?, RegistrationField.cache_key do %>
 <div class="card-panel" style="padding-bottom:15px;padding-top:10px;">
   <%= form_tag do %>
-    <%= errors_for(@member) unless @member.nil? %>
+    <%= errors_for(@member, "in this registration application") unless @member.nil? %>
     <div class="row">
     <% RegistrationField.order(order: :ASC, id: :ASC).all.each do |field| %>
     <% name = field.title %>
@@ -29,7 +32,19 @@
       </div>
     <% end %>
     <% end %>
+      <div class="col s12 large-margin-bottom">
+        <input type="checkbox" id="form_allow_emails" name="form[allow_emails]" value="1"/>
+        <label for="form_allow_emails">I agree to receive emails from Warrior Robotix club.</label>
+      </div>
+      <div class="col s12">
+        <%= recaptcha_tags callback: 'enableForm' %>
+      </div>
     </div>
-    <%= submit_tag "Submit", class: 'btn', data: { disable_with: "Please Wait..." } %>
+    <div class="row">
+      <div class="actions col s12">
+        <%= submit_tag "Submit", class: 'btn', disabled: true, data: { disable_with: "Please Wait...", enable_by_recaptcha: '1' } %>
+      </div>
+    </div>
   <% end %>
 </div>
+<% end %>

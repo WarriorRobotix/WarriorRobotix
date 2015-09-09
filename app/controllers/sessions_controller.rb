@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
         return
       end
     end
-    flash[:alert] =  "Wrong email and password combination"
+    flash.now[:alert] =  "Wrong email and password combination"
     render :new
   end
 

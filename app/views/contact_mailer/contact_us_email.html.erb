@@ -1,0 +1,16 @@
+<table style="margin:0 auto;text-align:left">
+  <tr>
+    <td colspan="2"><span style="color:#666">Full name: </span> <strong><%= @message[:full_name] %></strong></td>
+  </tr>
+  <tr>
+    <td><span style="color:#666">Email: </span> <%= link_to @message[:email], "mailto:#{@message[:email]}" if @message[:email].present? %></td>
+    <td><span style="color:#666">Phone: </span> <%= link_to @message[:phone_number], "tel://#{@message[:phone_number]}" if @message[:phone_number].present? %></td>
+  </tr>
+  <tr>
+    <td><span style="color:#666">IP: </span> <%= @message[:ip] %></td>
+    <td><span style="color:#666">Timestamp: </span> <%= @message[:timestamp] %></td>
+  </tr>
+  <tr>
+    <td colspan="2" style="padding-top: 40px;"><%= @message[:body] %></td>
+  </tr>
+</table>

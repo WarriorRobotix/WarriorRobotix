@@ -24,6 +24,14 @@
 .front-page-content{
   .text-description{
     font-size: 1.2rem;
+    text-align: justify;
+
+    .video-wrapper{
+      margin: 0 10px 10px 0;
+    }
+    .video-wrapper.right{
+      margin: 0 0 10px 10px;
+    }
   }
 }
 
@@ -40,14 +48,14 @@
 }
 
 .slider.indicators-inside{
-  margin-bottom: -30px;
-   ul.indicators{
+  margin-bottom: -40px;
+  ul.indicators{
     z-index: 2;
     bottom: 60px;
   }
 }
 
-body.pages-home{
+body.pages-home, body.pages-vex, body.pages-skills, body.pages-about_us,  body.pages-teams{
   background-color: white;
   @media #{$large-and-up} {
     main > div.container{
@@ -70,10 +78,14 @@ body.pages-home{
 }
 
 .home-join-us{
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 0px;
+  margin-bottom: 10px;
   .btn{
     margin-top: 10px;
+  }
+  @media #{$medium-and-up} {
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
   @media #{$large-and-up} {
     margin-top: 50px;
@@ -97,9 +109,6 @@ body.pages-contact{
         height: 100% !important;
 
       }
-    }
-    .contact-info{
-      margin-bottom: 0;
     }
   }
 }

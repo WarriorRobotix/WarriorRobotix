@@ -1,12 +1,12 @@
 <div class="row" style="padding-top:30px;">
   <div class="col s12">
     <div class="card-panel contact-details max8" style="margin-bottom:0">
-      <div class="col m7 l8" style="padding:0;">
-        <div class="google-maps">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11564.30447030167!2d-79.588919!3d43.563297!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb69c8a518daf86c!2sPort+Credit+Secondary+School!5e0!3m2!1sen!2sca!4v1419569664308" width="600" height="450" frameborder="0" style="border:0"></iframe>
+      <div class="row" style="margin-bottom:0;">
+        <div class="col m7 l8" style="">
+          <div class="google-maps">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11564.30447030167!2d-79.588919!3d43.563297!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb69c8a518daf86c!2sPort+Credit+Secondary+School!5e0!3m2!1sen!2sca!4v1419569664308" width="600" height="450" frameborder="0" style="border:0"></iframe>
+          </div>
         </div>
-      </div>
-      <div class="row contact-info">
         <div class="col s12 m5 l4">
           <h5>Contact Details</h5>
         </div>
@@ -29,29 +29,34 @@
     </div>
   </div>
   <div class="col s12">
-    <div class="card-panel max8">
+    <div id="contact_message" class="card-panel max8">
       <h5 class="flow-text">Send Us A Message</h5>
-      <div class="row">
-        <div class="input-field col s12">
-          <input value="" id="name" type="text" class="validate">
-          <label class="active" for="name">Full Name</label>
+      <%= form_tag contact_path, id: 'contact_form' do %>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= text_field_tag 'message[full_name]', @message[:full_name] %>
+            <%= label_tag 'message[full_name]', "Full name", class: 'active' %>
+          </div>
+          <div class="input-field col s12 m6">
+            <%= label_tag 'message[email]', "Email" %>
+            <%= email_field_tag 'message[email]', @message[:email] %>
+          </div>
+          <div class="input-field col s12 m6">
+            <%= label_tag 'message[phone_number]', "Phone Number" %>
+            <%= telephone_field_tag 'message[phone_number]', @message[:phone_number] %>
+          </div>
+          <div class="input-field col s12">
+            <%= text_area_tag 'message[body]', @message[:message], class: "materialize-textarea" %>
+            <%= label_tag 'message[body]', "Message" %>
+          </div>
+          <div class="col s12">
+            <%= recaptcha_tags callback: 'enableForm' %>
+          </div>
         </div>
-        <div class="input-field col s12 m6">
-          <input value="" id="email" type="text" class="validate">
-          <label class="active" for="email">Email</label>
+        <div class="actions row">
+          <%= submit_tag 'Send Message', disabled: true, class: 'btn', data: {disable_with: 'Sending...', enable_by_recaptcha: '1'} %>
         </div>
-        <div class="input-field col s12 m6">
-          <input value="" id="phone" type="text" class="validate">
-          <label class="active" for="phone">Phone Number</label>
-        </div>
-        <div class="input-field col s12">
-          <textarea value="" id="message" class="validate materialize-textarea"></textarea>
-          <label class="active" for="message">Message</label>
-        </div>
-      </div>
-      <div class="actions row">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Send Message</button>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -1,0 +1,23 @@
+<div style="text-align:justify;max-width:500px;margin:0 auto;margin-top:-10px">
+  <h2 style="text-align:center;"><%= @title %></h2>
+
+  <%= raw MarkdownRender.render(@poll.description) %>
+
+  <p style="text-align:center;"><strong><%= @poll.multiple_choices ? 'Multiple Choices' : 'Single Choice' %></strong></p>
+  <table style="margin:0 auto">
+  <% @poll.options.each.with_index do |option, index| %>
+    <tr>
+      <td><%= index + 1 %>.</td>
+      <td><%= option.description %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <p style="text-align:center">
+    <%= link_to 'Vote', poll_url(@poll) %>
+  </p>
+
+  <div style="margin-top:30px;color:#666;text-align:center;">
+  <%= link_to 'Link', poll_url(@poll) %> | <%= @new_poll ? "Created at #{ @poll.created_at.strftime("%a, %e %b %Y %H:%M")}" : "Updated at #{ @poll.updated_at.strftime("%a, %e %b %Y %H:%M") }" %> | <%= @poll.author.try(:full_name) %> | <%= @poll.restriction == "everyone" ? @poll.restriction.capitalize : @poll.restriction.pluralize.capitalize %>
+  </div>
+</div>

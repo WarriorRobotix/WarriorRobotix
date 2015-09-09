@@ -1,11 +1,44 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_admin!, only: [:home, :contact]
+  skip_before_action :authenticate_admin!, only: [:home, :contact, :contact_message, :vex, :skills, :teams, :about_us]
   def home
     set_meta_tags_for_home
     @show_side_buttons = true
   end
 
+  def vex
+  end
+
+  def skills
+  end
+
+  def teams
+  end
+
+  def about_us
+  end
+
   def contact
+    @message = Hash.new
+    @show_side_buttons = true
+  end
+
+  def contact_message
+    @message = params.require(:message).permit(:full_name, :email, :phone_number, :body).to_h.symbolize_keys!
+    if verify_recaptcha
+      if @message[:full_name].blank?
+        flash.now[:alert] = 'Please tell us your name.'
+        @message[:full_name] = 'Anonymous'
+      elsif @message[:body].blank?
+        flash.now[:alert] = 'Message can\'t be blank.'
+      else
+        @message.merge!(ip: request.remote_ip.to_s, timestamp: Time.zone.now.to_s)
+        ContactMailer.contact_us_email(@message).deliver_later
+        flash[:notice] =  "Your message has successfully sent to us"
+        redirect_to contact_path
+        return
+      end
+    end
+    render :contact
   end
 
   def attend
