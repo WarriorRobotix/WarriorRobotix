@@ -3,35 +3,59 @@
   max-width: 800px;
 }
 
-.post-box {
-  @extend .max8;
-  padding: 5px 20px 10px 20px;
-
-  .heading{
-    .title{
-      font-size: 30px;
-      font-weight: bold;
-    }
-  }
-
-  .body{
-    font-size: 20px;
-  }
-
-  .attachment{
-    padding: 5px 20px 10px 20px;
-
-    font-size: 18px;
-  }
-
-  @media #{$small-and-down} {
-    padding: 5px 10px;
-    .attachment{
-      padding: 0;
-    }
-  }
+body.posts-index{
+  background-color: white;
 }
 
+.posts-container{
+  .post-box {
+    padding: 5px 20px 10px 20px;
+    border-bottom: 2px solid #ddd;
+    .heading{
+      .title{
+        font-size: 2rem;
+        font-weight: bold;
+        a {
+          color: black;
+        }
+
+        a:hover{
+          color: #1976D2;
+        }
+      }
+    }
+
+    .body{
+      font-size: 20px;
+    }
+
+    .attachment{
+      padding: 5px 20px 10px 20px;
+
+      font-size: 18px;
+    }
+
+    .info{
+      color: #999;
+    }
+
+    @media #{$large-and-up} {
+      margin-top: 5rem;
+      padding-bottom: 3rem;
+      padding-top: 0;
+    }
+
+    @media #{$small-and-down} {
+      padding: 5px 10px;
+      .attachment{
+        padding: 0;
+      }
+    }
+  }
+  .post-box:last-of-type{
+    border-bottom: 0;
+  }
+}
 .deleted-option{
   label{
     text-decoration: line-through;

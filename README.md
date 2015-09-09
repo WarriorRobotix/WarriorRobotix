@@ -3,9 +3,11 @@ Put your name beside each feature you are working on
 
 1. Broadcast emails
 2. Private messages
-3. Dynamics teams
+3. Dynamic teams
 4. Attendence export xlsx
 5. Emails export xlsx
+6. Post/Event/Poll comments
+7. Sort Members by categories(grade, admin, team, role, name)
 
 ## How to create an admin account
 
