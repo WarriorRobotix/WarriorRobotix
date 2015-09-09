@@ -6,6 +6,7 @@ Put your name beside each feature you are working on
 3. Dynamics teams
 4. Attendence export xlsx
 5. Emails export xlsx
+6. Post/Event/Poll comments
 
 ## How to create an admin account
 
