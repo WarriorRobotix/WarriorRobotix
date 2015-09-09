@@ -43,9 +43,11 @@ $(function(){
   $('.slider').each(function(){
     var t = $(this);
     var options = {full_width: true};
-    var height = t.data('height');
-    if (typeof height !== "undefined"){
-      options['height'] = parseInt(height);
+    options['height'] = t.data('height') || Math.max(400, ~~(t.parent().width() / 2.5));
+    if (typeof t.data('vh-minus') != 'undefined'){
+      var vheight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+      vheight -= parseInt(t.data('vh-minus'));
+      options['height'] = Math.max(Math.min(options['height'], vheight), 300);
     }
     t.slider(options);
   });
@@ -119,6 +121,35 @@ $(document).on('click', '.data-modal-trigger', function(event){
   }
 });
 
+$(document).on('click', '.read-more-box .read-more .button', function() {
+
+  var totalHeight = 0
+
+  var $el = $(this);
+  var $p  = $el.parent();
+  var $up = $p.parent();
+  var $ps = $up.children("p:not('.read-more')");
+
+  $ps.each(function() {
+    totalHeight += $(this).outerHeight();
+  });
+
+  $up
+    .css({
+      "height": $up.height(),
+      "max-height": 9999
+    })
+    .animate({
+      "height": totalHeight
+    }, 400, 'swing', function(){
+      var $t = $(this);
+      $t.addClass('expended');
+      $t.css({"height": "","max-height": ""});
+    });
+  $p.fadeOut();
+  return false;
+});
+
 function deletePoll(ele,event) {
   event.preventDefault();
   $t = $(ele);
@@ -141,4 +172,8 @@ function replceNullDisableWith(){
     t.data('disable-with',v)
     t.attr('data-disable-with',v);
   });
+}
+
+function enableForm(){
+  $('form input[data-enable-by-recaptcha]').prop('disabled', false);
 }

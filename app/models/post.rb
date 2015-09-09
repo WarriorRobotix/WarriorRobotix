@@ -11,4 +11,17 @@ class Post < ActiveRecord::Base
   def self.valid_restrictions
     restrictions
   end
+
+  def email_notification
+    @email_notification ||= false
+  end
+
+  def email_notification=(val)
+    if val.is_a? String
+      val = (val =~ (/^(true|t|yes|y|1)$/i)) ? true : false
+    else
+      val = (val == true)
+    end
+    @email_notification = val
+  end
 end

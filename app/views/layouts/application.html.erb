@@ -2,6 +2,16 @@
 <html>
 <head>
   <%= display_meta_tags site: '4659 Warrior Robotix' %>
+  <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+  <link rel="icon" type="image/png" sizes="64x64"  href="/icons/icon-64x64.png">
+  <link rel="icon" type="image/png" sizes="128x128"  href="/icons/icon-128x128.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/icons/icon-192x192.png">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://apis.google.com/js/platform.js"></script>
@@ -10,14 +20,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 </head>
 <body class="<%= controller_name %>-<%= action_name %>">
+<% cache(['navbar', (member_signed_in? ? current_member : 'visitor')]) do %>
 <%= render 'components/navbar' %>
+<% end %>
 <main>
   <%= yield :above_container %>
   <div class="container">
   <%= yield %>
   </div>
 </main>
+<% cache do %>
 <%= render 'components/footer' %>
+<% end %>
 <%= render 'components/side_buttons' if @show_side_buttons %>
 <script type="text/javascript" data-turbolinks-eval=always>
   <%= raw(flash_toasts) %>
