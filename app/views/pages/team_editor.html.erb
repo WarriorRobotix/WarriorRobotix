@@ -10,8 +10,8 @@
     <% @teams.each do |team| %>
       <tr>
         <td><a href="teams/<%= team.id %>"><%= team.name %></a></td>
-        <td><%= link_to 'Add Members', {:controller => "teams", :action => "add_team_member", :id => team.id } %></td>
-        <td><%= link_to 'Remove Members', '/remove_team_member' %></td>
+        <td><a href="#">Add Members</a></td>
+        <td><a href="#">Remove Members</a></td>
         <td class="right-align"><%= link_to 'create', edit_team_path(team), class: 'material-icons' %>&nbsp;&nbsp;
         <%= link_to 'delete', team, method: :delete, class: 'material-icons', data: { confirm: 'Are you sure?' } %></td>
       </tr>

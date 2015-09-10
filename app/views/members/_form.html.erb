@@ -26,6 +26,10 @@
       <%= f.text_field :title %>
     </div>
 
+    <div class="input-field col s12 m6">
+      <%= select(:member, :team_id , Team.all.collect {|t| [ t.name, t.id ] }) %>
+    </div>
+
     <div class="col s12">
       <%= f.label :graduated_year %><br>
       <%= radio_button_tag "member[graduated]","0", @member.graduated_year.nil? %>
