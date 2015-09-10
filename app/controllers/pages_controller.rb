@@ -17,6 +17,10 @@ class PagesController < ApplicationController
   def about_us
   end
 
+  def team_editor
+    @teams = Team.all
+  end
+
   def contact
     @message = Hash.new
     @show_side_buttons = true

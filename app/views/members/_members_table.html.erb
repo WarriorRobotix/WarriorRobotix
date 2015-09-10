@@ -24,7 +24,11 @@
           <% else %>
           <td style="padding-bottom:25px;"><%= member.full_name %></td>
           <% end %>
-          <td><%= member.team %></td>
+          <% if !member.team_id.nil? %>
+          <td><%= Team.find(member.team_id).name %></td>
+          <% else %>
+          <td>N/A</td>
+          <% end %>
           <td class="hide-on-small-only"><%= member.grade %></td>
           <% if member_is_admin? %>
           <td class="hide-on-med-and-down"><%= member.email %></td>

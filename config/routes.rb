@@ -29,6 +29,10 @@ Rails.application.routes.draw do
 
   resources :photos, except: [:show]
 
+  resources :teams
+  
+  get 'add_team_member' => 'teams#add_team_member'
+
   resources :competitions
 
   get 'signin' => 'sessions#new'
@@ -54,8 +58,8 @@ Rails.application.routes.draw do
   get '/event' => 'pages#event'
   get '/vex' => 'pages#vex'
   get '/skills' => 'pages#skills'
-  get '/teams' => 'pages#teams'
-  get '/about-us' => 'pages#about_us'
+  get '/team-editor' => 'pages#team_editor'
+  get '/about' => 'pages#about_us'
   get '/contact' => 'pages#contact', :constraints => {:format => :html}
   post '/contact' => 'pages#contact_message', :constraints => {:format => :html}
   get '/search' => 'members#search'
