@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   resources :photos, except: [:show]
 
   resources :teams
-  
+
   get 'add_team_member' => 'teams#add_team_member'
 
   resources :competitions
@@ -67,6 +67,7 @@ Rails.application.routes.draw do
 
   get '/register' => 'registrations#form'
   post '/register' => 'registrations#submit'
+  get '/register/contract' => 'pages#member_contract'
 
   post 'registration/toggle' => 'registrations#toggle'
 

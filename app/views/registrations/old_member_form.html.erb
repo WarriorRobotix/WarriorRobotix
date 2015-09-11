@@ -45,7 +45,10 @@
         <input type="checkbox" id="form_allow_emails" name="form[allow_emails]" value="1"/>
         <label for="form_allow_emails">I agree to receive emails from Warrior Robotix club.</label>
       </div>
-
+      <div class="col s12 x-large-margin-bottom">
+        <input type="checkbox" id="form_agree_contract" name="form[agree_contract]" value="1"/>
+        <label for="form_agree_contract">I have read over all the terms in the <%= link_to 'student/parent contract', register_contract_path %> with my parents. My parents and I agree to all of the terms.</label>
+      </div>
       <div class="col s12">
         <%= recaptcha_tags callback: 'enableForm' %>
       </div>

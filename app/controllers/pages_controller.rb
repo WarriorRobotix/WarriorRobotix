@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_admin!, only: [:home, :contact, :contact_message, :vex, :skills, :teams, :about_us]
+  skip_before_action :authenticate_admin!, only: [:home, :contact, :contact_message, :vex, :skills, :teams, :about_us, :member_contract]
   def home
     set_meta_tags_for_home
     @show_side_buttons = true
@@ -15,6 +15,9 @@ class PagesController < ApplicationController
   end
 
   def about_us
+  end
+
+  def member_contract
   end
 
   def team_editor
