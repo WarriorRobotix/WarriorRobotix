@@ -6,7 +6,7 @@ class Member < ActiveRecord::Base
   serialize :extra_info
   before_validation :set_default_password, on: :create
   before_validation :titleize_names
-  before_validation :set_invalid_graduated_year_to_nil, :titleize_names
+  before_validation :set_invalid_graduated_year_to_nil, :titleize_names, :remove_trailing_space
 
   validates :first_name, presence: true, format: { with: /\A[A-Z]([a-zA-Z\-\s\.]+[a-zA-Z\.]|[a-zA-Z\.]?)\z/, message: "format is invalid. It must starts with a uppercase letter, following uppercase letters(A-Z), lowercase letters(a-z), hyphens(-), spaces, or dots(.). It can't end with hyphen and space" }
   validates :last_name, presence: true, format: { with: /\A[A-Z]([a-zA-Z\-\s\.]+[a-zA-Z\.]|[a-zA-Z\.]?)\z/, message: "format is invalid. It must starts with a uppercase letter, following uppercase letters(A-Z), lowercase letters(a-z), hyphens(-), spaces, or dots(.). It can't end with hyphen and space" }
@@ -130,6 +130,11 @@ class Member < ActiveRecord::Base
   private
   def password_nil?
     self.password.nil?
+  end
+
+  def remove_trailing_space
+    self.first_name = self.first_name.rstrip
+    self.last_name = self.last_name.rstrip
   end
 
   def correct_old_password
