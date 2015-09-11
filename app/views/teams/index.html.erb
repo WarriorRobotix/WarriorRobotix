@@ -22,7 +22,7 @@
   <% @teams.each do |f| %>
     <div id="team<%= f.id %>" class="col s12">
       <div class="col s12 m6 offset-m3 center-align vertical-margin-40">
-        <img src="<%= f.image_link %>" class="materialboxed hover responsive-img">
+        <%= image_tag f.image_link, class: "materialboxed hover responsive-img" %>
       </div>
       <% Member.all.each do |x| %>
       <% if x.team_id == f.id %>
