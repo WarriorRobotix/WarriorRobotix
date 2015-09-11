@@ -17,7 +17,7 @@ class RegistrationsController < ApplicationController
   def submit
     @old_member = params[:old].present?
     @member = Member.new(accepted: false)
-    if verify_recaptcha(:model => @member, :message => "There is an error with reCAPTCHA") && (params[:form][:allow_emails] == '1')
+    if verify_recaptcha(:model => @member, :message => "There is an error with reCAPTCHA") && (params[:form][:allow_emails] == '1') && (params[:form][:agree_contract] == '1')
       @member.extra_info = @member.extra_info.merge("Old member" => (@old_member ? 'Yes' : 'No'), "Registration timestamp" => Time.zone.now, "Registration IP" => request.remote_ip)
       RegistrationField.all.to_a.each do |field|
         value = params[:form][field.title]
@@ -43,6 +43,7 @@ class RegistrationsController < ApplicationController
       end
     else
       @member.errors.add(:base, 'You must agree to receive emails from Warrior Robotix') unless (params[:form][:allow_emails] == '1')
+      @member.errors.add(:base, 'You and your parents must read over and agree the <a href="/register/contract">student/parent contract</a>'.html_safe) unless (params[:form][:agree_contract] == '1')
       if @old_member
         @form = params[:form].to_unsafe_h
         render :old_member_form

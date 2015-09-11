@@ -31,7 +31,11 @@
         <%= link_to "Teams", teams_path %>
       </li>
       <li>
+        <% if member_signed_in? %>
         <%= link_to "Posts", posts_path %>
+        <% else %>
+        <%= link_to "Blog", posts_path %>
+        <% end %>
       </li>
       <li>
         <%= link_to "Sponsors", sponsors_path %>

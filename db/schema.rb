@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150830155633) do
+ActiveRecord::Schema.define(version: 20150909231742) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id",              null: false
@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 20150830155633) do
     t.string   "first_name",                            null: false
     t.string   "last_name",                             null: false
     t.string   "title"
-    t.string   "team"
     t.string   "email",                                 null: false
     t.string   "student_number"
     t.integer  "grade"
@@ -77,6 +76,7 @@ ActiveRecord::Schema.define(version: 20150830155633) do
     t.datetime "reset_password_at"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
+    t.integer  "team_id"
   end
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true
@@ -149,6 +149,13 @@ ActiveRecord::Schema.define(version: 20150830155633) do
     t.string   "website_link"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string   "name"
+    t.string   "image_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

@@ -1,0 +1,44 @@
+<h1><%= title 'Teams' %></h1>
+<div class="row">
+  <div class="col s12">
+    <h5>President's note</h5>
+  </div>
+  <div class="col l7 m7 s12 flow-text" style="font-size:1.5rem">
+    Here at Warrior Robotix, we strive to bridge the gap between theoretical studies and practical experience. Built on the dedication put forth by its members and administrators, Warrior Robotix is more that merely a club, it is a lifestyle.
+  </div>
+  <div class="col l5 m5 s12" style="max-width:350px;">
+    <%= image_tag 'logos/full.jpg', class: 'materialboxed hover responsive-img' %>
+  </div>
+</div>
+
+<div class="row hide-on-med-and-down">
+  <div class="col s12">
+    <ul class="tabs">
+      <% @teams.each do |f| %>
+        <li class="tab col s3"><a href="#team<%= f.id %>"><%= f.name %></a></li>
+      <% end %>
+    </ul>
+  </div>
+  <% @teams.each do |f| %>
+    <div id="team<%= f.id %>" class="col s12">
+      <div class="col s12 m6 offset-m3 center-align vertical-margin-40">
+        <%= image_tag f.image_link, class: "materialboxed hover responsive-img" %>
+      </div>
+      <% Member.all.each do |x| %>
+      <% if x.team_id == f.id %>
+      <div class="col s10 m6 l4 offset-s1 center-align">
+        <div class="card">
+          <div class="card-content">
+            <h5><%= x.full_name %></h5>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<% if member_is_admin? %>
+<%= link_to 'Team Editor', '/team-editor', class: 'btn-bordered' %>
+<% end %>

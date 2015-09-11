@@ -17,6 +17,21 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def parse_datetime_params(values)
+    unless values.nil? || values[:date].blank? || values[:hour].blank? || values[:minute].blank?
+      date = values[:date]
+      hour = values[:hour]
+      mintue = values[:minute]
+      if hour =~ /\A\d\d?\Z/ && mintue =~ /\A\d\d?\Z/
+        hour = hour.to_i
+        minute = minute.to_i
+        if hour.between?(0,24) && minute.between?(0,60)
+          return DateTime.parse(date).change(hour: hour, minute: minute).in_time_zone
+        end
+      end
+    end
+  end
+
   alias_method :try_redirect_back, :redirect_back
   private
   def set_basic_meta_tags

@@ -29,7 +29,8 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.new(attendance_params)
     @attendance.member = @member
 
-
+    @attendance.start_at = parse_datetime_params(params[:attendance][:start_at])
+    @attendance.end_at = parse_datetime_params(params[:attendance][:end_at])
     respond_to do |format|
       if @attendance.save
         format.html { redirect_to [@member, @attendance], notice: 'Attendance was successfully created.' }
@@ -44,8 +45,11 @@ class AttendancesController < ApplicationController
   # PATCH/PUT members/1/attendances/1
   # PATCH/PUT members/1/attendances/1.json
   def update
+    @attendance.update_attributes(attendance_params)
+    @attendance.start_at = parse_datetime_params(params[:attendance][:start_at])
+    @attendance.end_at = parse_datetime_params(params[:attendance][:end_at])
     respond_to do |format|
-      if @attendance.update(attendance_params)
+      if @attendance.save
         format.html { redirect_to [@member, @attendance], notice: 'Attendance was successfully updated.' }
         format.json { render :show, status: :ok, location: @attendance }
       else
@@ -77,6 +81,6 @@ class AttendancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attendance_params
-      a_params = params.require(:attendance).permit(:start_at, :end_at, :status, :duration, :skip_end_at)
+      a_params = params.require(:attendance).permit(:status, :duration)
     end
 end

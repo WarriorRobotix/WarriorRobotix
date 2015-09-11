@@ -1,0 +1,14 @@
+<%= form_for(@team) do |f| %>
+  <%= errors_for @team %>
+  <div class="input-field col s12">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="input-field col s12">
+    <%= f.label :image_link %>
+    <%= f.text_field :image_link %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: 'btn' %>
+  </div>
+<% end %>

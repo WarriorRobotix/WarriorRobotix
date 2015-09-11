@@ -27,8 +27,8 @@
     </div>
 
     <div class="input-field col s12 m6">
-      <%= f.label :team %>
-      <%= f.text_field :team %>
+      <%= select :member, :team_id, [["Choose a team", ""]].concat(Team.all.collect {|t| [ t.name, t.id ] }), { selected: f.object.team_id} %>
+      <%= label_tag "member_team_id", 'Team' %>
     </div>
 
     <div class="col s12">
