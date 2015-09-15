@@ -20,7 +20,13 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    raise Forbidden if @post[:restriction] > max_restriction
+    if @post[:restriction] > max_restriction
+      if member_signed_in?
+        raise Forbidden
+      else
+        redirect_to signin_path(return_to_info)
+      end
+    end
   end
 
   # GET /posts/new
