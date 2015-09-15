@@ -15,7 +15,7 @@ module SessionsHelper
       else
         session[:member_id] = nil
       end
-    elsif remember_cookies = cookies.signed[:mtk]
+    elsif remember_cookies = cookies[:mtk]
       member_id, token = remember_cookies.split("$")
       member_id = member_id.to_i
       if member = Member.find_and_authenticate_remember_token(member_id,token)
