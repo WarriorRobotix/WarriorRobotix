@@ -24,14 +24,25 @@ class AttendancesController < ApplicationController
   def edit
   end
 
+  def checkout_all
+  end
+
   # POST members/1/attendances
   # POST members/1/attendances.json
   def create
     @attendance = Attendance.new(attendance_params)
     @attendance.member = @member
 
-    @attendance.start_at = parse_datetime_params(params[:attendance][:start_at])
-    @attendance.end_at = parse_datetime_params(params[:attendance][:end_at])
+
+    start_at_date = params[:attendance][:start_at][:date]
+    start_at_hour = params[:attendance][:start_at][:hour]
+    start_at_minute = params[:attendance][:start_at][:minute]
+    @attendance.start_at = Time.parse("#{params[:attendance][:start_at][:date]} @ #{params[:attendance][:start_at][:hour]}:#{params[:attendance][:start_at][:minute]}")
+
+    end_at_date = params[:attendance][:end_at][:date]
+    end_at_hour = params[:attendance][:end_at][:hour]
+    end_at_minute = params[:attendance][:end_at][:minute]
+    @attendance.end_at = Time.parse("#{params[:attendance][:end_at][:date]} @ #{params[:attendance][:end_at][:hour]}:#{params[:attendance][:end_at][:minute]}")
 
     respond_to do |format|
       if @attendance.save
@@ -48,8 +59,17 @@ class AttendancesController < ApplicationController
   # PATCH/PUT members/1/attendances/1.json
   def update
     @attendance.update_attributes(attendance_params)
-    @attendance.start_at = parse_datetime_params(params[:attendance][:start_at])
-    @attendance.end_at = parse_datetime_params(params[:attendance][:end_at])
+
+    start_at_date = params[:attendance][:start_at][:date]
+    start_at_hour = params[:attendance][:start_at][:hour]
+    start_at_minute = params[:attendance][:start_at][:minute]
+    @attendance.start_at = Time.parse("#{params[:attendance][:start_at][:date]} @ #{params[:attendance][:start_at][:hour]}:#{params[:attendance][:start_at][:minute]}")
+
+    end_at_date = params[:attendance][:end_at][:date]
+    end_at_hour = params[:attendance][:end_at][:hour]
+    end_at_minute = params[:attendance][:end_at][:minute]
+    @attendance.end_at = Time.parse("#{params[:attendance][:end_at][:date]} @ #{params[:attendance][:end_at][:hour]}:#{params[:attendance][:end_at][:minute]}")
+
     respond_to do |format|
       if @attendance.save
         format.html { redirect_to [@member, @attendance], notice: 'Attendance was successfully updated.' }

@@ -26,5 +26,7 @@ module WarriorRobotix
     }
 
     config.autoload_paths += %W["#{config.root}/app/objects/"]
+
+    config.time_zone = "Eastern Time (US & Canada)" 
   end
 end

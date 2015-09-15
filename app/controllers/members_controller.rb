@@ -35,19 +35,19 @@ class MembersController < ApplicationController
             flash[:alert] = "Already Checked In and Out!"
           else
             #need to check out
-            @event_attendance.update_attribute(:end_at, DateTime.now)
+            @event_attendance.update_attribute(:end_at, Time.zone.now)
             @event_attendance.update_attribute(:status, :attended)
             flash[:notice] = "Successfully Checked Out!"
           end
         else
           #need to check in
-          @event_attendance.update_attribute(:start_at, DateTime.now)
+          @event_attendance.update_attribute(:start_at, Time.zone.now)
           @event_attendance.update_attribute(:status, :attending)
           flash[:notice] = "Successfully Checked In!"
         end
       else
         #need to create a new attendance and check in
-        Attendance.create(:member_id => @member.id, :event_id => @event.id, :start_at => DateTime.now, :status => :attending)
+        Attendance.create(:member_id => @member.id, :event_id => @event.id, :start_at => Time.zone.now, :status => :attending)
         flash[:notice] = "Successfully Checked In!"
       end
       redirect_to :back
@@ -69,12 +69,12 @@ class MembersController < ApplicationController
     @member.attendances.each do |f|
       if !f.start_at.nil? && f.status != :invited && f.event_id.nil?
         attendance_date = f.start_at.to_datetime
-        current_date = DateTime.now
+        current_date = Time.zone.now
         if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
           @checkedin_today = true
         end
         if f.end_at.nil? && @checkedin_today == true
-          f.update_attribute(:end_at, DateTime.now)
+          f.update_attribute(:end_at, Time.zone.now)
           f.update_attribute(:status, :attended)
           @checked = true
           flash[:notice] = "You have been Checked Out"
@@ -83,7 +83,7 @@ class MembersController < ApplicationController
     end
     if @checked == false
       if @checkedin_today == false
-        @attendance = Attendance.create(:member_id => @member.id, :start_at => DateTime.now, :status => :attending)
+        @attendance = Attendance.create(:member_id => @member.id, :start_at => Time.zone.now, :status => :attending)
         flash[:notice] = "You have been Checked In"
       else
         flash[:alert] = "You have already Checked In and Out Today!"
