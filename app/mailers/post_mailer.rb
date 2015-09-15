@@ -1,5 +1,5 @@
 class PostMailer < ApplicationMailer
-  default from: 'notification@4659warriors.com'
+  default from: 'Warrior Robotix <notification@4659warriors.com>'
 
   def post_email(post, new_post)
     @post = post
