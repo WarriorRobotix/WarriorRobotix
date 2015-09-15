@@ -5,7 +5,7 @@
 
   <p style="text-align:center;"><strong><%= @poll.multiple_choices ? 'Multiple Choices' : 'Single Choice' %></strong></p>
   <table style="margin:0 auto">
-  <% @poll.options.each.with_index do |option, index| %>
+  <% @poll.options.order(id: :ASC).all.each.with_index do |option, index| %>
     <tr>
       <td><%= index + 1 %>.</td>
       <td><%= option.description %></td>
