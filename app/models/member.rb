@@ -126,6 +126,10 @@ class Member < ActiveRecord::Base
     end
   end
 
+  def abbr_name
+    "#{self.first_name} #{self.last_name[0]}."
+  end
+
   private
   def password_nil?
     self.password.nil?

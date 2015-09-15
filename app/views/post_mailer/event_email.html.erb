@@ -16,6 +16,6 @@
   </p>
 
   <div style="margin-top:30px;color:#666;text-align:center;">
-  <%= link_to 'Link', event_url(@event) %> | <%= @new_event ? "Created at #{ @event.created_at.strftime("%a, %e %b %Y %H:%M")}" : "Updated at #{ @event.updated_at.strftime("%a, %e %b %Y %H:%M") }" %> | <%= @event.author.try(:full_name) %> | <%= @event.restriction == "everyone" ? @event.restriction.capitalize : @event.restriction.pluralize.capitalize %>
+  <%= link_to 'Link', event_url(@event) %> | <%= @new_event ? "Created at #{ @event.created_at.strftime("%a, %e %b %Y %H:%M")}" : "Updated at #{ @event.updated_at.strftime("%a, %e %b %Y %H:%M") }" %> - <%= @event.author.try(:abbr_name) %> to <%= @event.restriction == "everyone" ? @event.restriction.capitalize : @event.restriction.pluralize.capitalize %>
   </div>
 </div>
