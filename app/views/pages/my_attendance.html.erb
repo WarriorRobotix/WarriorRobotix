@@ -1,0 +1,25 @@
+<h1 class="flow-text">My Attendances</h1>
+
+<div class="card-panel">
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Check In</th>
+      <th>Check Out</th>
+      <th class="hide-on-med-and-down">Status</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attendances.each do |attendance| %>
+      <tr>
+        <td><%= attendance.start_at.try(:strftime, "%a, %e %b %Y") %></td>
+        <td><%= attendance.start_at.try(:strftime, "%H:%M %p") %></td>
+        <td><%= attendance.end_at.try(:strftime, "%H:%M %p") %></td>
+        <td class="hide-on-med-and-down"><%= attendance.status.capitalize %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,11 +1,16 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_admin!, only: [:home, :contact, :contact_message, :vex, :skills, :teams, :about_us]
+  skip_before_action :authenticate_admin!, only: [:home, :contact, :contact_message, :vex, :skills, :teams, :about_us, :my_attendance]
+  before_action :authenticate_member!, only: [:my_attendance]
   def home
     set_meta_tags_for_home
     @show_side_buttons = true
   end
 
   def vex
+  end
+
+  def my_attendance
+    @attendances = current_member.attendances.all.order(:start_at => :asc)
   end
 
   def skills

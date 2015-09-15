@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   resources :photos, except: [:show]
 
   resources :teams
-  
+
   get 'add_team_member' => 'teams#add_team_member'
 
   resources :competitions
@@ -60,6 +60,7 @@ Rails.application.routes.draw do
   get '/skills' => 'pages#skills'
   get '/team-editor' => 'pages#team_editor'
   get '/about' => 'pages#about_us'
+  get '/myattendance' => 'pages#my_attendance'
   get '/contact' => 'pages#contact', :constraints => {:format => :html}
   post '/contact' => 'pages#contact_message', :constraints => {:format => :html}
   get '/search' => 'members#search'

@@ -1,6 +1,7 @@
 class AttendancesController < ApplicationController
   before_action :set_attendance, only: [:show, :edit, :update, :destroy]
   before_action :set_member
+  before_action :authenticate_admin!
 
   # GET members/1/attendances
   # GET members/1/attendances.json
@@ -28,8 +29,6 @@ class AttendancesController < ApplicationController
   def create
     @attendance = Attendance.new(attendance_params)
     @attendance.member = @member
-
-
     respond_to do |format|
       if @attendance.save
         format.html { redirect_to [@member, @attendance], notice: 'Attendance was successfully created.' }

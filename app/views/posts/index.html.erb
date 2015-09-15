@@ -1,4 +1,8 @@
-<h2><%= title 'Posts' %></h2>
+<% if member_signed_in? %>
+<h1 style="font-size:2rem;" class="flow-text">Posts</h2>
+<% else %>
+<h1 style="font-size:2rem;" class="flow-text">Blog</h2>
+<% end %>
 
 <% if member_is_admin? %>
 <% cache do %>
