@@ -1,5 +1,6 @@
 class PollsController < ApplicationController
   before_action :set_poll, only: [:vote, :edit, :update, :show]
+  skip_before_action :authenticate_admin!, only: [:vote]
   before_action :authenticate_member!
 
   # GET /polls/new
