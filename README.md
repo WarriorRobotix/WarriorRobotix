@@ -8,6 +8,7 @@ Put your name beside each feature you are working on
 5. Emails export xlsx
 6. Post/Event/Poll comments
 7. Sort Members by categories(grade, admin, team, role, name)
+8. Total hours of attendance
 
 ## How to create an admin account
 

@@ -68,6 +68,7 @@ Rails.application.routes.draw do
 
   get '/register' => 'registrations#form'
   post '/register' => 'registrations#submit'
+  get '/register/contract' => 'pages#member_contract'
 
   post 'registration/toggle' => 'registrations#toggle'
 

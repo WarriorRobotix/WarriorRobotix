@@ -178,6 +178,16 @@ label.dark {
   margin-bottom: 20px;
 }
 
+.col.x-large-margin-bottom{
+  margin-bottom: 30px;
+  @media #{$medium-and-down} {
+    margin-bottom: 50px;
+  }
+  @media #{$small-and-down} {
+    margin-bottom: 80px;
+  }
+}
+
 .row.large-margin, .large-margin-sm{
   @media #{$medium-and-down} {
     margin-top: 36px;
