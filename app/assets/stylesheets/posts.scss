@@ -56,6 +56,25 @@ body.posts-index{
     border-bottom: 0;
   }
 }
+
+
+body.posts-show{
+  .posts-container{
+    margin-top: 2rem;
+    .post-box {
+      @media #{$large-and-up} {
+        margin-top: 0;
+        padding-bottom: 0;
+        padding-top: 0;
+      }
+    }
+
+    @media #{$large-and-up} {
+      margin-top: 3rem;
+    }
+  }
+}
+
 .deleted-option{
   label{
     text-decoration: line-through;
