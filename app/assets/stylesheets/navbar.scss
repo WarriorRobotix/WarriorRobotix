@@ -1,7 +1,7 @@
 nav {
   padding-left: 2%;
   padding-right: 2%;
-  .top-nav li a{
+  .top-nav li a[class*="nav-"]{
     height: $navbar-height
   }
 }
