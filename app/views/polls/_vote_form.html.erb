@@ -4,7 +4,7 @@
 <% disabled = !member_signed_in? || !(ballots.empty? || poll.ballots_changeable) %>
 <% multi = poll.multiple_choices %>
 <table class="flow-text" style="font-size:18px;">
-<% poll.options.each do |option| %>
+<% poll.options.order(id: :ASC).all.each do |option| %>
   <tr>
     <td>
     <% if multi %>
