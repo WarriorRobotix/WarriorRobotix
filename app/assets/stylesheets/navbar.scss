@@ -1,6 +1,9 @@
 nav {
   padding-left: 2%;
   padding-right: 2%;
+  .top-nav li a{
+    height: $navbar-height
+  }
 }
 
 nav a:hover{
@@ -19,4 +22,28 @@ nav a:hover{
       font-size: 1rem;
     }
   }
+}
+
+.nav-hl{
+  color: $secondary-color;
+  border-bottom: 2px solid $secondary-color;
+}
+
+body.pages-vex .nav-vex{
+  @extend .nav-hl;
+}
+body.pages-skills .nav-skills{
+  @extend .nav-hl;
+}
+body.competitions-index .nav-competitions{
+  @extend .nav-hl;
+}
+body.teams-index .nav-teams{
+  @extend .nav-hl;
+}
+body.posts-index .nav-posts{
+  @extend .nav-hl;
+}
+body.sponsors-index .nav-sponsors{
+  @extend .nav-hl;
 }

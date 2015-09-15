@@ -12,37 +12,37 @@
     <span class="brand-logo flow-text" style="font-size:132%">
     <%= link_to "WarriorRobotix", root_path %>
     </span>
-    <ul class="flow-text right hide-on-med-and-down" style="font-size:100%;">
+    <ul class="flow-text right hide-on-med-and-down top-nav" style="font-size:100%;">
       <% if member_is_admin? %>
       <li>
-        <%= link_to "Attendance", '/attend' %>
+        <%= link_to "Attendance", '/attend', class: 'nav-attend' %>
       </li>
       <% elsif member_signed_in? && !member_is_admin? %>
       <li>
-        <%= link_to "Attendance", '/myattendance' %>
+        <%= link_to "Attendance", '/myattendance', class: 'nav-attend' %>
       </li>
       <% end %>
       <li>
-        <%= link_to "Vex", vex_path %>
+        <%= link_to "Vex", vex_path, class: 'nav-vex' %>
       </li>
       <li>
-        <%= link_to "Skills", skills_path %>
+        <%= link_to "Skills", skills_path, class: 'nav-skills' %>
       </li>
       <li>
-        <%= link_to "Competitions", competitions_path %>
+        <%= link_to "Competitions", competitions_path, class: 'nav-competitions' %>
       </li>
       <li>
-        <%= link_to "Teams", teams_path %>
+        <%= link_to "Teams", teams_path, class: 'nav-teams' %>
       </li>
       <li>
         <% if member_signed_in? %>
-        <%= link_to "Posts", posts_path %>
+        <%= link_to "Posts", posts_path, class: 'nav-posts' %>
         <% else %>
-        <%= link_to "Blog", posts_path %>
+        <%= link_to "Blog", posts_path, class: 'nav-posts' %>
         <% end %>
       </li>
       <li>
-        <%= link_to "Sponsors", sponsors_path %>
+        <%= link_to "Sponsors", sponsors_path, class: 'nav-sponsors' %>
       </li>
       <li>
         <% if member_signed_in? %>
