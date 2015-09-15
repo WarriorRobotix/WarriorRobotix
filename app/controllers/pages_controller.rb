@@ -129,6 +129,6 @@ class PagesController < ApplicationController
       card: 'summary_large_image',
       description: 'Team 4659 Warrior Robotix is the robotics club of Port Credit Secondary School in Mississauga. We participate in Vex, Skills Ontario and other robotics competitions.',
       image: 'http://4659warriors.com/assets/pages/home/slider_image_0.jpg'
-    }
+    }, canonical: 'http://4659warriors.com'
   end
 end
