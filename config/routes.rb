@@ -31,7 +31,8 @@ Rails.application.routes.draw do
 
   resources :teams
 
-  get 'add_team_member' => 'teams#add_team_member'
+  post 'add_team_member' => 'teams#add_team_member'
+  post 'remove_team_member' => 'teams#remove_team_member'
 
   resources :competitions
 

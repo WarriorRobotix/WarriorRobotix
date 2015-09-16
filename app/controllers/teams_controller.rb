@@ -22,6 +22,30 @@ class TeamsController < ApplicationController
   def edit
   end
 
+  def add_team_member
+    @addmembers = params[:add_team_member_array]
+    teamid = params[:teamid]
+    if !@addmembers.nil?
+      @addmembers.each do |f|
+        member = Member.find(f)
+        member.update_attribute(:team_id, teamid)
+      end
+    end
+    redirect_to :back
+  end
+
+  def remove_team_member
+    @removemembers = params[:remove_team_member_array]
+    teamid = params[:teamid]
+    if !@removemembers.nil?
+      @removemembers.each do |f|
+        member = Member.find(f)
+        member.update_attribute(:team_id, nil)
+      end
+    end
+    redirect_to :back
+  end
+
   # POST /teams
   # POST /teams.json
   def create

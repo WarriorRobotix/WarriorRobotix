@@ -27,6 +27,13 @@ class PagesController < ApplicationController
 
   def team_editor
     @teams = Team.all
+    @members = Array.new
+    Member.order(:first_name => :asc).each do |f|
+      if f.team_id.nil?
+        @members.push(f)
+      end
+    end
+    @removemembers = Member.all
   end
 
   def contact
