@@ -1,3 +1,40 @@
+<div id="checkin_group" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>Check In Group</h4>
+    <%= form_tag '/checkin_group',id: 'checkin_group_form', :method => "post" do |f| %>
+    <b class="flow-text">Select members:</b>
+    <br>
+    <% Member.all.each do |x| %>
+      <input type="checkbox" value="<%= x.id %>" name="checkin_group_array[]" id="in<%= x.id %>" />
+      <label style="color:#333;" class="flow-text" for="in<%= x.id %>"><%= x.full_name %></label>
+      <br>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" onclick="getElementById('checkin_group_form').submit()" class="btn">Check In</button>
+    <a href="#!" class="modal-action modal-close waves-effect btn-flat ">Close</a>
+  </div>
+</div>
+
+<div id="checkout_group" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>Check Out Group</h4>
+    <%= form_tag '/checkout_group',id: 'checkout_group_form', :method => "post" do |f| %>
+    <b class="flow-text">Select members:</b>
+    <br>
+    <% Member.all.each do |x| %>
+      <input type="checkbox" value="<%= x.id %>" name="checkout_group_array[]" id="out<%= x.id %>" />
+      <label style="color:#333;" class="flow-text" for="out<%= x.id %>"><%= x.full_name %></label>
+      <br>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" onclick="getElementById('checkout_group_form').submit()" class="btn">Check In</button>
+    <a href="#!" class="modal-action modal-close waves-effect btn-flat ">Close</a>
+  </div>
+</div>
 
 <nav style="background-color:white;margin-top:20px;">
 <div class="nav-wrapper">
@@ -23,9 +60,17 @@
     </div>
   <% end %>
 <% end %>
+<br>
+<div class="row center-align">
+  <%= link_to 'Check In Group', '/checkin_group', class: 'modal-switch waves-effect waves-light btn', href: "#checkin_group", style: "margin-bottom:1px;" %>
+</div>
 
+<hr>
 <% if !@checkedin.empty? %>
 <h1 class="flow-text">Checked In</h1>
+<%= link_to 'Check Out All', '/checkout_all', class: 'btn-bordered', method: :post, data: { confirm: 'Are you sure?' } %>
+&nbsp;&nbsp;
+<%= link_to 'Check Out Group', '/checkout_group', class: 'modal-switch btn-bordered', href: "#checkout_group" %>
 <div class="card-panel">
   <table>
     <thead>
@@ -51,6 +96,7 @@
 <h1 class="flow-text center-align">No one has checked in yet...</h1>
 <% end %>
 <% end %>
+
 <% if !@checkedout.empty? %>
 <h1 class="flow-text">Checked Out</h1>
 <div class="card-panel">

@@ -99,6 +99,11 @@ $(document).on('change', '.file-field input[type=\"file\"][data-photo-name-targe
   }
 });
 
+$(document).ready(function(){
+  $('.modal-switch').leanModal();
+});
+
+
 $(document).on('click', '.lean-overlay', function(){
   location.hash = '#!';
 });

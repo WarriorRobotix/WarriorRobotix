@@ -35,6 +35,10 @@ Rails.application.routes.draw do
 
   resources :competitions
 
+  post '/checkout_all' => 'attendances#checkout_all'
+  post '/checkin_group' => 'attendances#checkin_group'
+  post '/checkout_group' => 'attendances#checkout_group'
+
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'
   delete 'signout' => 'sessions#destroy'

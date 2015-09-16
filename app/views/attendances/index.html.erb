@@ -15,7 +15,7 @@
   <tbody>
     <% @attendances.each do |attendance| %>
       <tr>
-        <td><%= link_to "#{attendance.start_at.try(:strftime, "%a, %e %b %Y")}", [@member, attendance] %></td>
+        <td><%= link_to "#{attendance.start_at.try(:strftime, "%A, %B %e, %Y")}", [@member, attendance] %></td>
         <td><%= attendance.start_at.try(:strftime, "%l:%M %p") %></td>
         <td><%= attendance.end_at.try(:strftime, "%l:%M %p") %></td>
         <td class="hide-on-med-and-down"><%= attendance.status.capitalize %></td>

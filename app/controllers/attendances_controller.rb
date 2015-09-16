@@ -1,6 +1,6 @@
 class AttendancesController < ApplicationController
   before_action :set_attendance, only: [:show, :edit, :update, :destroy]
-  before_action :set_member
+  before_action :set_member, except: [:checkout_all, :checkin_group, :checkout_group]
   before_action :authenticate_admin!
 
   # GET members/1/attendances
@@ -24,7 +24,85 @@ class AttendancesController < ApplicationController
   def edit
   end
 
+  def checkout_group
+    checkout_array = params[:checkout_group_array]
+    if !checkout_array.nil?
+      current_date = Time.zone.now
+      checkout_array.each do |f|
+        member = Member.find(f)
+        member.attendances.all.each do |i|
+          checked_in = false
+          checked_out = false
+          if !i.start_at.nil? && i.start_at.year == current_date.year && i.start_at.month == current_date.month && i.start_at.day == current_date.day
+            checked_in = true
+            if !i.end_at.nil?
+              checked_out = true
+            end
+          end
+          if checked_in == true && checked_out == false
+            i.update_attribute(:end_at, Time.zone.now)
+            i.update_attribute(:status, :attended)
+          end
+        end
+      end
+    end
+    flash[:notice] = "Selected Members Checked Out!"
+    redirect_to attend_path
+  end
+
+  def checkin_group
+    checkin_array = params[:checkin_group_array]
+
+    if !checkin_array.nil?
+      current_date = Time.zone.now
+      @check = false
+      checkin_array.each do |f|
+        @checkedin_today = false
+        member = Member.find(f)
+        member.attendances.all.each do |i|
+          if !i.start_at.nil? && i.status != :invited && i.event_id.nil?
+            attendance_date = i.start_at.to_datetime
+            current_date = Time.zone.now
+            if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
+              @checkedin_today = true
+            end
+          end
+        end
+        if @checkedin_today == false
+          @check = true
+          Attendance.create(:member_id => member.id, :start_at => Time.zone.now, :status => :attending)
+        end
+      end
+      if @check == true
+        flash[:notice] = "Selected Members Checked In!"
+      else
+        flash[:alert] = "Selected Members Already Checked In!"
+      end
+    end
+    redirect_to attend_path
+  end
+
   def checkout_all
+    @checkedin = Array.new
+    current_date = Time.zone.now
+    Attendance.all.each do |f|
+      if f.event_id.nil?
+        attendance_date = f.start_at
+        if !f.start_at.nil? && f.end_at.nil?
+          if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
+            @checkedin.push(f)
+          end
+        end
+      end
+    end
+    if !@checkedin.empty?
+      @checkedin.each do |f|
+        f.update_attribute(:end_at, Time.zone.now)
+        f.update_attribute(:status, :attended)
+      end
+      flash[:notice] = "Everyone is checked out!"
+    end
+    redirect_to :back
   end
 
   # POST members/1/attendances

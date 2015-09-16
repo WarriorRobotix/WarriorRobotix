@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:reply, :edit, :update, :show]
-  skip_before_action :authenticate_admin!, only: [:reply]
+  before_action :authenticate_admin!, except: [:reply]
   before_action :authenticate_member!
 
   # GET /events/new

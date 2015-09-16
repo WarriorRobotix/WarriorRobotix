@@ -3,11 +3,11 @@
   <% cache([event, 'datetime']) do %>
   <div class="row" style="padding-left:30px;">
     <% if event.start_at.to_date === event.end_at.to_date %>
-    <div class="col s12"><strong><%= event.start_at.strftime("%A, %B %e, %Y from %H:%M") %> to <%= event.end_at.strftime("%H:%M") %></strong></div>
+    <div class="col s12"><strong><%= event.start_at.strftime("%A, %B %e, %Y from %H:%M %p") %> to <%= event.end_at.strftime("%H:%M %p") %></strong></div>
     <% else %>
-    <div class="col s5"><strong><%= event.start_at.strftime("%A, %B %e, %Y @ %H:%M") %></strong></div>
+    <div class="col s5"><strong><%= event.start_at.strftime("%A, %B %e, %Y @ %H:%M %p") %></strong></div>
     <div class="col s2">to</div>
-    <div class="col s5"><strong><%= event.end_at.strftime("%A, %B %e, %Y @ %H:%M") %></strong></div>
+    <div class="col s5"><strong><%= event.end_at.strftime("%A, %B %e, %Y @ %H:%M %p") %></strong></div>
     <% end %>
   </div>
   <% end %>
