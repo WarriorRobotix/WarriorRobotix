@@ -3,7 +3,7 @@
     <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
-  <div class="input-field col s12 m3">
+  <div class="input-field col s12 m3 post-restriction">
     <%= f.select :restriction, f.object.class.valid_restrictions.map { |k,v| [k.capitalize, k] }, {} %>
     <%= f.label :restriction %>
   </div>
@@ -13,6 +13,14 @@
     <%= f.text_area :description, class: "materialize-textarea" %>
     <%= f.label :description %>
   </div>
+</div>
+<div class="row sp-post-f-row post-limited-teams"<%= raw(" style=\"display:none\"") unless (f.object.restriction == 'limited') %>>
+  <% Team.all.order(name: :ASC).each do |team| %>
+  <div class="input-field col s3">
+    <%= check_box_tag "teams[#{team.id}]", '1', (params[:teams].try('[]',team.id.to_s) == '1') %>
+    <%= label_tag "teams[#{team.id}]", team.name %>
+  </div>
+  <% end %>
 </div>
 <div class="row sp-post-f-row">
   <div class="input-field col s6">

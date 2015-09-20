@@ -8,13 +8,18 @@ class PostsController < ApplicationController
   def index
     case params[:type]
     when "Event"
-      scope = Event
+      post_scope = Event
     when "Poll"
-      scope = Poll
+      post_scope = Poll
     else
-      scope = Post
+      post_scope = Post
     end
-    @posts = scope.where("restriction <= ?", max_restriction).order(created_at: :desc).all
+    if member_signed_in?
+      post_scope = post_scope.where("restriction <= ?", max_restriction)
+    else
+      post_scope = post_scope.where(restriction: 0)
+    end
+    @posts = post_scope.order(created_at: :desc).all
   end
 
   # GET /posts/1
@@ -43,6 +48,9 @@ class PostsController < ApplicationController
   def create
     @post=  Post.new(post_params)
     @post.author = current_member
+    if @post.limited? && params[:teams].present?
+      @post.add_limited_teams(params[:teams].keys)
+    end
 
     respond_to do |format|
       if @post.save

@@ -17,6 +17,9 @@ class PollsController < ApplicationController
   def create
     @poll = Poll.new(poll_params)
     @poll.author = current_member
+    if @poll.limited? && params[:teams].present?
+      @poll.add_limited_teams(params[:teams].keys)
+    end
 
     respond_to do |format|
       if @poll.save

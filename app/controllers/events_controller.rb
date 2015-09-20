@@ -17,6 +17,9 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.author = current_member
+    if @event.limited? && params[:teams].present?
+      @event.add_limited_teams(params[:teams].keys)
+    end
 
     if start_at_params = params[:event][:start_at]
       @event.start_at = "#{start_at_params[:date]} #{start_at_params[:hour]}:#{start_at_params[:minute]}"
