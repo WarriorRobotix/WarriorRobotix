@@ -63,6 +63,7 @@ Rails.application.routes.draw do
   get '/event' => 'pages#event'
   get '/vex' => 'pages#vex'
   get '/skills' => 'pages#skills'
+  get '/frc-ceta' => 'pages#other_competitions'
   get '/team-editor' => 'pages#team_editor'
   get '/about' => 'pages#about_us'
   get '/myattendance' => 'pages#my_attendance'

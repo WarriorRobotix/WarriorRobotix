@@ -79,6 +79,14 @@ $slider-indicator-color: $secondary-color;
   padding-bottom: 30px;
 }
 
+.thick-divider{
+  @extend .divider;
+  @media #{$large-and-up} {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+}
+
 body{
   background-color: $background-color;
 

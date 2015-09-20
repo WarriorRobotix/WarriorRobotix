@@ -55,7 +55,7 @@
   }
 }
 
-body.pages-home, body.pages-vex, body.pages-skills, body.pages-about_us,  body.pages-teams{
+body.pages-home, body.pages-vex, body.pages-skills, body.pages-about_us,  body.pages-teams, body.pages-other_competitions{
   background-color: white;
   @media #{$large-and-up} {
     main > div.container{
@@ -74,6 +74,12 @@ body.pages-home, body.pages-vex, body.pages-skills, body.pages-about_us,  body.p
 .home-info{
   @media #{$large-and-up} {
     margin-top: 100px;
+  }
+}
+
+.home-info.small-margin-top{
+  @media #{$large-and-up} {
+    margin-top: 50px;
   }
 }
 
