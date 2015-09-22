@@ -185,8 +185,7 @@ function enableForm(){
 
 $(document).ready(function(){
 	$('#reader').html5_qrcode(function(data){
-
-			document.getElementById("search").value = (data);
+		$('form #search').val(data);
 		},
 
 		function(error){
