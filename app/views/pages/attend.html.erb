@@ -5,10 +5,12 @@
     <b class="flow-text">Select members:</b>
     <br>
     <% Member.order(:first_name => :asc).each do |x| %>
+      <% unless x.attendances.order(start_at: :DESC).take.today? %>
       <p style="padding-left:5px;">
       <input type="checkbox" value="<%= x.id %>" name="checkin_group_array[]" id="in<%= x.id %>" />
       <label style="color:#333;" class="flow-text" for="in<%= x.id %>"><%= x.full_name %> - Grade <%= x.grade %></label>
       </p>
+      <% end%>
     <% end %>
     <% end %>
   </div>
