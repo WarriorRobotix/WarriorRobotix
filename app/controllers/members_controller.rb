@@ -77,16 +77,16 @@ class MembersController < ApplicationController
           f.update_attribute(:end_at, Time.zone.now)
           f.update_attribute(:status, :attended)
           @checked = true
-          flash[:notice] = "You have been Checked Out"
+          flash[:notice] = "#{@member.full_name} has been checked out..."
         end
       end
     end
     if @checked == false
       if @checkedin_today == false
         @attendance = Attendance.create(:member_id => @member.id, :start_at => Time.zone.now, :status => :attending)
-        flash[:notice] = "You have been Checked In"
+        flash[:notice] = "#{@member.full_name} has been checked in..."
       else
-        flash[:alert] = "You have already Checked In and Out Today!"
+        flash[:alert] = "#{@member.full_name} has already checked in and out today!"
       end
     end
     redirect_to attend_path
