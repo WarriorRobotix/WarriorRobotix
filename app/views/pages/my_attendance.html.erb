@@ -16,8 +16,8 @@
     <% @attendances.each do |attendance| %>
       <tr>
         <td><%= attendance.start_at.try(:strftime, "%a, %e %b %Y") %></td>
-        <td><%= attendance.start_at.try(:strftime, "%H:%M %p") %></td>
-        <td><%= attendance.end_at.try(:strftime, "%H:%M %p") %></td>
+        <td><%= attendance.start_at.try(:strftime, "%l:%M %p") %></td>
+        <td><%= attendance.end_at.try(:strftime, "%l:%M %p") %></td>
         <td class="hide-on-med-and-down"><%= attendance.status.capitalize %></td>
       </tr>
     <% end %>
