@@ -1,3 +1,6 @@
+<script src="<%= asset_path 'qrcode/lib/jsqrcode-combined.min.js' %>"></script>
+<script src="<%= asset_path 'qrcode/src/html5-qrcode.js' %>"></script>
+<script src="<%= asset_path 'qrcode/lib/html5-qrcode.min.js' %>"></script>
 <div id="checkin_group" class="modal modal-fixed-footer">
   <div class="modal-content">
     <h4>Check In Group</h4>
@@ -5,13 +8,10 @@
     <b class="flow-text">Select members:</b>
     <br>
     <% Member.order(:first_name => :asc).each do |x| %>
-    <% last_attendance_date =  x.attendances.where.not(start_at: nil).order(start_at: :DESC).take.try(:start_at) %>
-      <% if last_attendance_date.nil? || !last_attendance_date.today? %>
       <p style="padding-left:5px;">
       <input type="checkbox" value="<%= x.id %>" name="checkin_group_array[]" id="in<%= x.id %>" />
       <label style="color:#333;" class="flow-text" for="in<%= x.id %>"><%= x.full_name %> - Grade <%= x.grade %></label>
       </p>
-      <% end %>
     <% end %>
     <% end %>
   </div>
@@ -65,9 +65,10 @@
   <% end %>
 <% end %>
 <br>
-<div class="row center-align">
+<div class="row center-align" >
   <%= link_to 'Check In Group', '/checkin_group', class: 'modal-switch waves-effect waves-light btn', href: "#checkin_group", style: "margin-bottom:1px;" %>
 </div>
+<div id="reader" ></div>
 
 <hr>
 <% if !@checkedin.empty? %>
