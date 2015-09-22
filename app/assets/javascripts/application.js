@@ -182,17 +182,3 @@ function replceNullDisableWith(){
 function enableForm(){
   $('form input[data-enable-by-recaptcha]').prop('disabled', false);
 }
-
-$(document).ready(function(){
-	$('#reader').html5_qrcode(function(data){
-		$('form #search').val(data);
-		},
-
-		function(error){
-			$('#read_error').html(error);
-		}, function(videoError){
-			$('#vid_error').html(videoError);
-		}
-
-	);
-});
