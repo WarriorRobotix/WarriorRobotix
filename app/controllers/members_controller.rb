@@ -8,7 +8,7 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @current_members = Member.where(graduated_year: nil).order(first_name: :ASC, last_name: :ASC).all
+    @current_members = Member.where(graduated_year: nil).order(team_id: :ASC,first_name: :ASC, last_name: :ASC).all
     if member_is_admin?
       @pending_members = Member.unscoped.where(accepted: false).all
       @graduated_members = Member.where.not(graduated_year: nil).order(graduated_year: :DESC, first_name: :ASC, last_name: :ASC).all
