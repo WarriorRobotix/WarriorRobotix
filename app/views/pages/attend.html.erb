@@ -5,8 +5,8 @@
     <b class="flow-text">Select members:</b>
     <br>
     <% Member.order(:first_name => :asc).each do |x| %>
-    <% last_attendance =  x.attendances.order(start_at: :DESC).take %>
-      <% if last_attendance.nil? || !last_attendance.start_at.today? %>
+    <% last_attendance_date =  x.attendances.order(start_at: :DESC).take.try(:start_at) %>
+      <% if last_attendance_date.nil? || !last_attendance_date.today? %>
       <p style="padding-left:5px;">
       <input type="checkbox" value="<%= x.id %>" name="checkin_group_array[]" id="in<%= x.id %>" />
       <label style="color:#333;" class="flow-text" for="in<%= x.id %>"><%= x.full_name %> - Grade <%= x.grade %></label>
