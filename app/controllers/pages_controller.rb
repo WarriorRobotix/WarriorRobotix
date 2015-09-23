@@ -67,7 +67,7 @@ class PagesController < ApplicationController
     @checkedin = Array.new
     @checkedout = Array.new
     current_date = Time.zone.now
-    Attendance.order(start_at: :asc).each do |f|
+    Attendance.order(member_id: :asc).each do |f|
       if f.event_id.nil?
         attendance_date = f.start_at
         if !f.start_at.nil? && f.end_at.nil?

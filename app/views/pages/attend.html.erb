@@ -170,4 +170,21 @@
     </tbody>
   </table>
 </div>
+
+<button class="btn-bordered" id="set_startat" data-confirm="Are you sure?" onclick="window.location.href=window.location.href">Set check in to 3:00 PM</button>
+<button class="btn-bordered" id="set_endat" data-confirm="Are you sure?" onclick="window.location.href=window.location.href">Set check out to 4:30 PM</button>
+<script>
+$("#set_startat").onclick(set_time_to_three());
+function set_time_to_three(){
+  <% @checkedout.each do |f| %>
+    <% f.update_attribute(:start_at, Time.zone.parse("#{Time.zone.now.day}/#{Time.zone.now.month}/#{Time.zone.now.year} @ 3:00 PM")) %>
+  <% end %>
+};
+$("#set_endat").onclick(set_time_to_fourthirty());
+function set_time_to_fourthirty(){
+  <% @checkedout.each do |f| %>
+    <% f.update_attribute(:end_at, Time.zone.parse("#{Time.zone.now.day}/#{Time.zone.now.month}/#{Time.zone.now.year} @ 4:30 PM")) %>
+  <% end %>
+};
+</script>
 <% end %>
