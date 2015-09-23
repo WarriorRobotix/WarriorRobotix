@@ -150,7 +150,7 @@ class AttendancesController < ApplicationController
 
     respond_to do |format|
       if @attendance.save
-        format.html { redirect_to [@member, @attendance], notice: 'Attendance was successfully updated.' }
+        format.html { redirect_to member_attendances_path(@member), notice: 'Attendance was successfully updated.' }
         format.json { render :show, status: :ok, location: @attendance }
       else
         format.html { render :edit }
