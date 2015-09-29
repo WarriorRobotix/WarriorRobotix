@@ -64,35 +64,49 @@ class MembersController < ApplicationController
     #Check if user is already checked-in
     @checked = false
     @checkedin_today = false
+    success = false
+    
+    allow_checkin = true
+    allow_checkout = true
+    
+    if params[:check] == 'in'
+      allow_checkout = false
+    elsif params[:check] == 'out'
+      allow_checkin = false
+    end
 
     if !@member.nil?
-    @member.attendances.each do |f|
-      if !f.start_at.nil? && f.status != :invited && f.event_id.nil?
-        attendance_date = f.start_at.to_datetime
-        current_date = Time.zone.now
-        if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
-          @checkedin_today = true
-        end
-        if f.end_at.nil? && @checkedin_today == true
-          f.update_attribute(:end_at, Time.zone.now)
-          f.update_attribute(:status, :attended)
-          @checked = true
-          flash[:notice] = "#{@member.full_name} has been checked out..."
+      @member.attendances.each do |f|
+        if !f.start_at.nil? && f.status != :invited && f.event_id.nil?
+          attendance_date = f.start_at.to_datetime
+          current_date = Time.zone.now
+          if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
+            @checkedin_today = true
+          end
+          if f.end_at.nil? && @checkedin_today == true && allow_checkout == true
+            f.update_attribute(:end_at, Time.zone.now)
+            f.update_attribute(:status, :attended)
+            @checked = true
+            success = true
+            flash[:notice] = "#{@member.full_name} has been checked out..."
+          end
         end
       end
-    end
-    if @checked == false
-      if @checkedin_today == false
-        @attendance = Attendance.create(:member_id => @member.id, :start_at => Time.zone.now, :status => :attending)
-        flash[:notice] = "#{@member.full_name} has been checked in..."
-      else
-        flash[:alert] = "#{@member.full_name} has already checked in and out today!"
+      if @checked == false && allow_checkin == true
+        if @checkedin_today == false
+          @attendance = Attendance.create(:member_id => @member.id, :start_at => Time.zone.now, :status => :attending)
+          success = true
+          flash[:notice] = "#{@member.full_name} has been checked in..."
+        else
+          flash[:alert] = "#{@member.full_name} has already checked in and out today!"
+        end
       end
-    end
-    redirect_to attend_path
     else
-      redirect_to attend_path
       flash[:alert] = "Can not find anyone with that Student Number!"
+    end
+    respond_to do |format|
+      format.html { redirect_to attend_path }
+      format.json { render json: {success: success} }
     end
   end
 
