@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   skip_before_action :authenticate_admin!, [:new, :create, :destroy]
+  skip_before_action :verify_authenticity_token
+  
   def new
     redirect_back if member_signed_in?
   end
