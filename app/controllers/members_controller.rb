@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy, :approve]
 
-  skip_before_action :authenticate_admin!, only: [:index, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update, :edit_email, :update_email, :edit_password, :update_password]
+  skip_before_action :authenticate_admin!, only: [:index, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update, :edit_email, :update_email, :edit_password, :update_password, :search]
 
   before_action :authenticate_member!, only: [:index, :edit_email, :update_email, :edit_password, :update_password]
 
@@ -74,8 +74,20 @@ class MembersController < ApplicationController
     elsif params[:check] == 'out'
       allow_checkin = false
     end
-
-    if !@member.nil?
+    
+    if is_member_admin?
+      is_from_admin = true
+    elsif member_signed_in?
+      is_from_admin = false
+    else
+      if admin = Member.find_by(admin: true, identifier: params[:identifier]).try(:authenticate, params[:password])
+        is_from_admin = true
+      else
+        is_from_admin = false
+      end
+    end
+    
+    if !@member.nil? && is_from_admin
       @member.attendances.each do |f|
         if !f.start_at.nil? && f.status != :invited && f.event_id.nil?
           attendance_date = f.start_at.to_datetime
