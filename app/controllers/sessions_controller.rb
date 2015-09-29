@@ -16,14 +16,14 @@ class SessionsController < ApplicationController
           signin_member(member)
           cookies.permanent[:mtk] = "#{member.id}$#{member.remember_token}" if params[:remember_me] == '1'
           format.html { redirect_to root_path, notice: "You have successfully signed in" }
-          format.json { render plain: member.max_restriction.to_s }
+          format.json { render json: {access: member.max_restriction} }
           flag = false
         end
       end
       if flag
         flash.now[:alert] =  "Wrong email and password combination"
         format.html { render :new }
-        format.json { render plain: '0' }
+        format.json { render json: {access: 0} }
       end
     end
   end
