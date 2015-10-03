@@ -80,7 +80,7 @@ class MembersController < ApplicationController
     elsif member_signed_in?
       is_from_admin = false
     else
-      if admin = Member.find_by(admin: true, identifier: params[:identifier]).try(:authenticate, params[:password])
+      if admin = Member.find_by(admin: true, student_number: params[:identifier]).try(:authenticate, params[:password])
         is_from_admin = true
       else
         is_from_admin = false
