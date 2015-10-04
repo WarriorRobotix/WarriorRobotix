@@ -6,7 +6,15 @@ class CompetitionsController < ApplicationController
   # GET /competitions
   # GET /competitions.json
   def index
-    @previous_competitions = Competition.order(start_date: :DESC).all
+    @previous_competitions = Array.new
+    @upcoming_competitions = Array.new
+    Competition.order(start_date: :DESC).all do |f|
+      if start_date < Time.zone.now
+        @previous_competitions.push(f)
+      else
+        @upcoming_competitions.push(f)
+      end
+    end
   end
 
   # GET /competitions/1
