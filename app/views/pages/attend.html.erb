@@ -5,7 +5,7 @@
       <%= form_tag '/checkin_group',id: "checkin_group_form_#{i.id}", :method => "post" do |f| %>
       <b class="flow-text">Select members:</b>
       <br>
-      <% Member.all.each do |x| %>
+      <% Member.order(first_name: :ASC, last_name: :ASC).all.each do |x| %>
         <% checked_in_today = false %>
         <% x.attendances.each do |m| %>
         <% if !m.start_at.nil? && m.start_at.year == Time.zone.now.year && m.start_at.month == Time.zone.now.month && m.start_at.day == Time.zone.now.day %>
