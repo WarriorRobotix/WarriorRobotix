@@ -4,7 +4,7 @@ class Attendance < ActiveRecord::Base
 
   validate :end_at_after_start_at
 
-  belongs_to :member
+  belongs_to :member, touch: true
   belongs_to :event, touch: true
 
   private
