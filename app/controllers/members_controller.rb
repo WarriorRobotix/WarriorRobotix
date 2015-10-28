@@ -13,6 +13,13 @@ class MembersController < ApplicationController
       @pending_members = Member.unscoped.where(accepted: false).all
       @graduated_members = Member.where.not(graduated_year: nil).order(graduated_year: :DESC, first_name: :ASC, last_name: :ASC).all
     end
+    @show_attend = (params[:show] == "attend") && member_is_admin?
+    if @show_attend
+      today = Time.zone.now
+      @this_month_attendances = Attendance.where(status: 2, start_at: today.beginning_of_month..today).group(:member_id).all.count
+      last_month = today.last_month
+      @last_month_attendances = Attendance.where(status: 2, start_at: last_month.beginning_of_month..last_month.end_of_month).group(:member_id).all.count
+    end
   end
 
   def eventsearch
@@ -65,16 +72,16 @@ class MembersController < ApplicationController
     @checked = false
     @checkedin_today = false
     success = false
-    
+
     allow_checkin = true
     allow_checkout = true
-    
+
     if params[:check] == 'in'
       allow_checkout = false
     elsif params[:check] == 'out'
       allow_checkin = false
     end
-    
+
     if is_member_admin?
       is_from_admin = true
     elsif member_signed_in?
@@ -86,7 +93,7 @@ class MembersController < ApplicationController
         is_from_admin = false
       end
     end
-    
+
     if !@member.nil? && is_from_admin
       @member.attendances.each do |f|
         if !f.start_at.nil? && f.status != :invited && f.event_id.nil?
