@@ -4,7 +4,7 @@
 <% end %>
 <h1 class="flow-text">Members Center</h1>
 <%= render 'quick_members_panel'  %>
-<% cache(['current_members',@current_members.count,@current_members.maximum(:updated_at),member_is_admin?]) do %>
+<% cache(['current_members',@show_attend,@current_members.count,@current_members.maximum(:updated_at),member_is_admin?]) do %>
 <%= render('members_table', members: @current_members, title: 'Current Members', show_attend: @show_attend, display_show_attend: member_is_admin?) %>
 <% end %>
 <% if member_is_admin? %>
