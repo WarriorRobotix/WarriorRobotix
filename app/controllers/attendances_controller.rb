@@ -6,7 +6,7 @@ class AttendancesController < ApplicationController
   # GET members/1/attendances
   # GET members/1/attendances.json
   def index
-    @attendances = @member.attendances.where.not(status: 0).all
+    @attendances = @member.attendances.where.not(status: 0).order(start_at: :ASC).all
   end
 
   # GET members/1/attendances/1
