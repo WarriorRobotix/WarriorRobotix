@@ -29,7 +29,7 @@
 
     <tbody>
       <% members.each do |member| %>
-        <% cache(['index',member,member_is_admin?]) do %>
+        <% cache(['index', (local_assigns[:show_attend] == true), member,member_is_admin?]) do %>
         <tr>
           <% if member_is_admin? %>
           <td style="padding-bottom:25px;"><%= raw('<i class="small material-icons inline">supervisor_account</i> ') if member.admin? %><%= link_to member.full_name, "#m-#{member.id}" %></td>
