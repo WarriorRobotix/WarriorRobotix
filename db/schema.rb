@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150909231742) do
+ActiveRecord::Schema.define(version: 20151106214810) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id",              null: false
@@ -129,6 +129,14 @@ ActiveRecord::Schema.define(version: 20150909231742) do
     t.datetime "updated_at",                         null: false
   end
 
+  create_table "posts_teams", id: false, force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "team_id", null: false
+  end
+
+  add_index "posts_teams", ["post_id"], name: "index_posts_teams_on_post_id"
+  add_index "posts_teams", ["team_id"], name: "index_posts_teams_on_team_id"
+
   create_table "registration_fields", force: :cascade do |t|
     t.string   "title",                     null: false
     t.string   "extra_info"
@@ -156,6 +164,15 @@ ActiveRecord::Schema.define(version: 20150909231742) do
     t.string   "image_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "videos", force: :cascade do |t|
+    t.string   "title",       null: false
+    t.string   "youtube_vid", null: false
+    t.string   "author"
+    t.date     "upload_date", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end

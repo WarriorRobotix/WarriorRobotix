@@ -1,0 +1,33 @@
+.video-wrapper{
+  margin-bottom: 3rem;
+  &.col {
+    padding: 0 1.5rem;
+  }
+
+  .video-box{
+    margin: auto;
+    max-width: 520px;
+    .heading{
+      margin-top: 10px;
+      .title{
+        font-size: 2rem;
+        font-weight: bold;
+        @media #{$medium-and-down} {
+          font-size: 1.4rem;
+        }
+        @media #{$small-and-down} {
+          font-size: 1.2rem;
+        }
+        a {
+          color: black;
+        }
+        a:hover{
+          color: #1976D2;
+        }
+      }
+    }
+    .info{
+      color: #999;
+    }
+  }
+}
