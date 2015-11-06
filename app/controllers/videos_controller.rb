@@ -5,7 +5,7 @@ class VideosController < ApplicationController
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.order(upload_date: :DESC).all
+    @videos = Video.order(upload_date: :DESC, title: :ASC).all
   end
 
   # GET /videos/new
