@@ -18,7 +18,7 @@ class PollsController < ApplicationController
     @poll = Poll.new(poll_params)
     @poll.author = current_member
     if @poll.limited? && params[:teams].present?
-      @poll.add_limited_teams(params[:teams].keys)
+      @poll.team_ids = params[:teams].keys
     end
 
     respond_to do |format|
@@ -39,6 +39,9 @@ class PollsController < ApplicationController
   # PATCH/PUT /polls/1.json
   def update
     respond_to do |format|
+      if (params[:poll][:restriction] == "limited" || (params[:poll][:restriction].nil? && @poll.limited?)) && params[:teams].present?
+        @poll.team_ids = params[:teams].keys
+      end
       if @poll.update(poll_params)
         if @poll.email_notification
           PostMailer.poll_email(@poll, false).deliver_later

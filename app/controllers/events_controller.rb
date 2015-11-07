@@ -18,7 +18,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.author = current_member
     if @event.limited? && params[:teams].present?
-      @event.add_limited_teams(params[:teams].keys)
+      @event.team_ids = params[:teams].keys
     end
 
     if start_at_params = params[:event][:start_at]
@@ -56,6 +56,9 @@ class EventsController < ApplicationController
     end
 
     respond_to do |format|
+      if (params[:event][:restriction] == "limited" || (params[:event][:restriction].nil? && @event.limited?)) && params[:teams].present?
+        @event.team_ids = params[:teams].keys
+      end
       if @event.update(event_params)
         if @event.email_notification
           PostMailer.event_email(@event, false).deliver_later
