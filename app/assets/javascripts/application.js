@@ -25,7 +25,7 @@ $(function(){
   window.hash_modal.refresh();
 
   $('.datepicker').pickadate({
-   selectMonths: false,
+   selectMonths: true,
    selectYears: false,
    format: 'dddd, mmmm d, yyyy'
   });

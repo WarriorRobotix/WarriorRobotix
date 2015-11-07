@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
   resources :photos, except: [:show]
 
+  resources :videos, except: [:show]
+
   resources :teams
 
   post 'add_team_member' => 'teams#add_team_member'

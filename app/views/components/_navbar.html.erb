@@ -6,6 +6,19 @@
   <li><%= link_to "Sign out", signout_path(return_to_info), method: :delete %></li>
 </ul>
 <% end %>
+<ul id="competitions_dropdown" class="dropdown-content">
+  <li class="text"><span>Competitions</span></li>
+  <li><%= link_to "Vex", vex_path %></li>
+  <li><%= link_to "Skills", skills_path %></li>
+  <li><%= link_to "FRC/CETA", frc_ceta_path %></li>
+</ul>
+<ul id="about_dropdown" class="dropdown-content">
+  <li class="text"><span>About</span> </li>
+  <li><%= link_to "Club", about_path %></li>
+  <li><%= link_to "Upcoming & Past", competitions_path %></li>
+  <li><%= link_to "Teams", teams_path %></li>
+  <li><%= link_to "Sponsors", sponsors_path %></li>
+</ul>
 <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper">
@@ -23,19 +36,14 @@
       </li>
       <% end %>
       <li>
-        <%= link_to "Vex", vex_path, class: 'nav-vex' %>
+        <a class="dropdown-button nav-competitions" href="#!" data-activates="competitions_dropdown">
+          Competitions <i class="material-icons right">keyboard_arrow_down</i>
+        </a>
       </li>
       <li>
-        <%= link_to "Skills", skills_path, class: 'nav-skills' %>
-      </li>
-      <li>
-        <%= link_to "FRC/CETA", frc_ceta_path, class: 'nav-other-competitons' %>
-      </li>
-      <li>
-        <%= link_to "Competitions", competitions_path, class: 'nav-competitions' %>
-      </li>
-      <li>
-        <%= link_to "Teams", teams_path, class: 'nav-teams' %>
+        <a class="dropdown-button nav-about" href="#!" data-activates="about_dropdown">
+          About <i class="material-icons right">keyboard_arrow_down</i>
+        </a>
       </li>
       <li>
         <% if member_signed_in? %>
@@ -45,7 +53,7 @@
         <% end %>
       </li>
       <li>
-        <%= link_to "Sponsors", sponsors_path, class: 'nav-sponsors' %>
+        <%= link_to "Videos", videos_path, class: 'nav-videos' %>
       </li>
       <li>
         <% if member_signed_in? %>
@@ -68,6 +76,13 @@
         <a>Hi, <%= current_member.full_name %></a>
       </li>
       <% end %>
+      <li>
+        <% if member_signed_in? %>
+          <%= link_to "Sign out", signout_path(return_to_info), method: :delete %>
+        <% else %>
+          <%= link_to "Sign in", signin_path(return_to_info) %>
+        <% end %>
+      </li>
       <% if member_is_admin? %>
       <li>
         <%= link_to "Attendance", '/attend' %>
@@ -92,23 +107,22 @@
         <%= link_to "FRC/CETA", frc_ceta_path %>
       </li>
       <li>
-        <%= link_to "Competitions", competitions_path %>
+        <%= link_to "About Club", competitions_path %>
+      </li>
+      <li>
+        <%= link_to "Upcoming & Past", competitions_path %>
       </li>
       <li>
         <%= link_to "Teams", teams_path %>
       </li>
       <li>
-        <%= link_to "Posts", posts_path %>
-      </li>
-      <li>
         <%= link_to "Sponsors", sponsors_path %>
       </li>
       <li>
-        <% if member_signed_in? %>
-          <%= link_to "Sign out", signout_path(return_to_info), method: :delete %>
-        <% else %>
-          <%= link_to "Sign in", signin_path(return_to_info) %>
-        <% end %>
+        <%= link_to "Posts", posts_path %>
+      </li>
+      <li>
+        <%= link_to "Videos", videos_path %>
       </li>
     </ul>
     <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>

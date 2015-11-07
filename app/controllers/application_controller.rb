@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
         hour = hour.to_i
         minute = minute.to_i
         if hour.between?(0,24) && minute.between?(0,60)
-          return DateTime.parse(date).change(hour: hour, minute: minute).in_time_zone
+          return Time.zone.parse(date).change(hour: hour, min: minute)
         end
       end
     end

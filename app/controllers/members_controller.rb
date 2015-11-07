@@ -1,17 +1,24 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy, :approve]
 
-  skip_before_action :authenticate_admin!, only: [:index, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update, :edit_email, :update_email, :edit_password, :update_password]
+  skip_before_action :authenticate_admin!, only: [:index, :forgot, :send_reset_token, :reset_password_edit, :reset_password_update, :edit_email, :update_email, :edit_password, :update_password, :search]
 
   before_action :authenticate_member!, only: [:index, :edit_email, :update_email, :edit_password, :update_password]
 
   # GET /members
   # GET /members.json
   def index
-    @current_members = Member.where(graduated_year: nil).order(first_name: :ASC, last_name: :ASC).all
+    @current_members = Member.where(graduated_year: nil).order(team_id: :ASC,first_name: :ASC, last_name: :ASC).all
     if member_is_admin?
       @pending_members = Member.unscoped.where(accepted: false).all
       @graduated_members = Member.where.not(graduated_year: nil).order(graduated_year: :DESC, first_name: :ASC, last_name: :ASC).all
+    end
+    @show_attend = (params[:show] == "attend") && member_is_admin?
+    if @show_attend
+      today = Time.zone.now
+      @this_month_attendances = Attendance.where(status: 2, start_at: today.beginning_of_month..today).group(:member_id).all.count
+      last_month = today.last_month
+      @last_month_attendances = Attendance.where(status: 2, start_at: last_month.beginning_of_month..last_month.end_of_month).group(:member_id).all.count
     end
   end
 
@@ -64,35 +71,61 @@ class MembersController < ApplicationController
     #Check if user is already checked-in
     @checked = false
     @checkedin_today = false
+    success = false
 
-    if !@member.nil?
-    @member.attendances.each do |f|
-      if !f.start_at.nil? && f.status != :invited && f.event_id.nil?
-        attendance_date = f.start_at.to_datetime
-        current_date = Time.zone.now
-        if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
-          @checkedin_today = true
-        end
-        if f.end_at.nil? && @checkedin_today == true
-          f.update_attribute(:end_at, Time.zone.now)
-          f.update_attribute(:status, :attended)
-          @checked = true
-          flash[:notice] = "You have been Checked Out"
-        end
-      end
+    allow_checkin = true
+    allow_checkout = true
+
+    if params[:check] == 'in'
+      allow_checkout = false
+    elsif params[:check] == 'out'
+      allow_checkin = false
     end
-    if @checked == false
-      if @checkedin_today == false
-        @attendance = Attendance.create(:member_id => @member.id, :start_at => Time.zone.now, :status => :attending)
-        flash[:notice] = "You have been Checked In"
-      else
-        flash[:alert] = "You have already Checked In and Out Today!"
-      end
-    end
-    redirect_to attend_path
+
+    if is_member_admin?
+      is_from_admin = true
+    elsif member_signed_in?
+      is_from_admin = false
     else
-      redirect_to attend_path
+      if admin = Member.find_by(admin: true, student_number: params[:identifier]).try(:authenticate, params[:password])
+        is_from_admin = true
+      else
+        is_from_admin = false
+      end
+    end
+
+    if !@member.nil? && is_from_admin
+      @member.attendances.each do |f|
+        if !f.start_at.nil? && f.status != :invited && f.event_id.nil?
+          attendance_date = f.start_at.to_datetime
+          current_date = Time.zone.now
+          if attendance_date.day == current_date.day && attendance_date.month == current_date.month && attendance_date.year == current_date.year
+            @checkedin_today = true
+          end
+          if f.end_at.nil? && @checkedin_today == true && allow_checkout == true
+            f.update_attribute(:end_at, Time.zone.now)
+            f.update_attribute(:status, :attended)
+            @checked = true
+            success = true
+            flash[:notice] = "#{@member.full_name} has been checked out..."
+          end
+        end
+      end
+      if @checked == false && allow_checkin == true
+        if @checkedin_today == false
+          @attendance = Attendance.create(:member_id => @member.id, :start_at => Time.zone.now, :status => :attending)
+          success = true
+          flash[:notice] = "#{@member.full_name} has been checked in..."
+        else
+          flash[:alert] = "#{@member.full_name} has already checked in and out today!"
+        end
+      end
+    else
       flash[:alert] = "Can not find anyone with that Student Number!"
+    end
+    respond_to do |format|
+      format.html { redirect_to attend_path }
+      format.json { render json: {success: success} }
     end
   end
 

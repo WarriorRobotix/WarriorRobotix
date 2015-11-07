@@ -1,4 +1,11 @@
 <h3 class="flow-text"><%= local_assigns[:title] || "Members" %></h3>
+<% if local_assigns[:display_show_attend] %>
+<% if local_assigns[:show_attend] %>
+<%= link_to "Show email", members_path %>
+<% else %>
+<%= link_to "Show monthly attendances history", members_path(show: :attend) %>
+<% end %>
+<% end %>
 <div class="card-panel" style="padding:10px;">
   <table class="centered except-last">
     <thead>
@@ -7,7 +14,12 @@
         <th>Team</th>
         <th class="hide-on-small-only">Grade</th>
         <% if member_is_admin? %>
+        <% if local_assigns[:show_attend] %>
+        <th class="hide-on-med-and-down">Last month</th>
+        <th class="hide-on-med-and-down">This month</th>
+        <% else %>
         <th class="hide-on-med-and-down">Email</th>
+        <% end %>
         <th class="hide-on-med-and-down">Student Number</th>
         <th></th>
         <th colspan="2" class="hide-on-med-and-down"></th>
@@ -17,7 +29,7 @@
 
     <tbody>
       <% members.each do |member| %>
-        <% cache(['index',member,member_is_admin?]) do %>
+        <% cache(['index', (local_assigns[:show_attend] == true), member,member_is_admin?]) do %>
         <tr>
           <% if member_is_admin? %>
           <td style="padding-bottom:25px;"><%= raw('<i class="small material-icons inline">supervisor_account</i> ') if member.admin? %><%= link_to member.full_name, "#m-#{member.id}" %></td>
@@ -31,7 +43,12 @@
           <% end %>
           <td class="hide-on-small-only"><%= member.grade %></td>
           <% if member_is_admin? %>
+          <% if local_assigns[:show_attend]  %>
+          <td class="hide-on-med-and-down"><%= @last_month_attendances[member.id] || 0 %></td>
+          <td class="hide-on-med-and-down"><%= @this_month_attendances[member.id] || 0 %></td>
+          <% else %>
           <td class="hide-on-med-and-down"><%= member.email %></td>
+          <% end %>
           <td class="hide-on-med-and-down"><%= member.student_number %></td>
           <td><%= link_to 'today', member_attendances_path(member), class: 'material-icons' %></td>
           <td class="hide-on-med-and-down"><%= link_to 'create', edit_member_path(member), class: 'material-icons' %></td>

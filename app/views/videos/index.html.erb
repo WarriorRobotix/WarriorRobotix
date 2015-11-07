@@ -1,0 +1,25 @@
+<h1><%= title 'Videos' %></h1>
+<% if member_is_admin? %>
+<%= link_to 'New Video', new_video_path, class: "btn-bordered" %>
+<% end %>
+<div class="row">
+  <% @videos.each do |video| %>
+  <div class="col s12 m6 video-wrapper">
+    <div class="video-box">
+      <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= video.youtube_vid %>?showinfo=0" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="heading truncate"><span class="title"><%= link_to video.title, "https://www.youtube.com/watch?v=#{video.youtube_vid}" %></span></div>
+      <div>
+        <div class="info truncate"><%= video.author %> - <%= video.upload_date.strftime('%b %d, %Y') %></div>
+        <% if member_is_admin? %>
+        <div>
+          <%= link_to 'Edit', edit_video_path(video) %> |
+          <%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

@@ -2,5 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 body.teams-index{
-  background-color: white;
+ background-color: white;
+}
+.member-names{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }

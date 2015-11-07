@@ -6,6 +6,9 @@
   *{
     max-width: 100%;
   }
+  ul li{
+    list-style-type:disc;
+  }
 }
 
 .unselectable {
@@ -55,7 +58,7 @@
   }
 }
 
-body.pages-home, body.pages-vex, body.pages-skills, body.pages-about_us,  body.pages-teams, body.pages-other_competitions{
+body.pages-home, body.pages-vex, body.pages-skills, body.pages-about_us,  body.pages-teams, body.pages-other_competitions, body.videos-index{
   background-color: white;
   @media #{$large-and-up} {
     main > div.container{

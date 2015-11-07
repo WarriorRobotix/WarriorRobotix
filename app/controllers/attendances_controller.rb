@@ -6,7 +6,7 @@ class AttendancesController < ApplicationController
   # GET members/1/attendances
   # GET members/1/attendances.json
   def index
-    @attendances = @member.attendances.where.not(status: 0).all
+    @attendances = @member.attendances.where.not(status: 0).order(start_at: :ASC).all
   end
 
   # GET members/1/attendances/1
@@ -115,12 +115,12 @@ class AttendancesController < ApplicationController
     start_at_date = params[:attendance][:start_at][:date]
     start_at_hour = params[:attendance][:start_at][:hour]
     start_at_minute = params[:attendance][:start_at][:minute]
-    @attendance.start_at = Time.parse("#{params[:attendance][:start_at][:date]} @ #{params[:attendance][:start_at][:hour]}:#{params[:attendance][:start_at][:minute]}")
+    @attendance.start_at = Time.zone.parse("#{params[:attendance][:start_at][:date]} @ #{params[:attendance][:start_at][:hour]}:#{params[:attendance][:start_at][:minute]}")
 
     end_at_date = params[:attendance][:end_at][:date]
     end_at_hour = params[:attendance][:end_at][:hour]
     end_at_minute = params[:attendance][:end_at][:minute]
-    @attendance.end_at = Time.parse("#{params[:attendance][:end_at][:date]} @ #{params[:attendance][:end_at][:hour]}:#{params[:attendance][:end_at][:minute]}")
+    @attendance.end_at = Time.zone.parse("#{params[:attendance][:end_at][:date]} @ #{params[:attendance][:end_at][:hour]}:#{params[:attendance][:end_at][:minute]}")
 
     respond_to do |format|
       if @attendance.save
@@ -141,16 +141,16 @@ class AttendancesController < ApplicationController
     start_at_date = params[:attendance][:start_at][:date]
     start_at_hour = params[:attendance][:start_at][:hour]
     start_at_minute = params[:attendance][:start_at][:minute]
-    @attendance.start_at = Time.parse("#{params[:attendance][:start_at][:date]} @ #{params[:attendance][:start_at][:hour]}:#{params[:attendance][:start_at][:minute]}")
+    @attendance.start_at = Time.zone.parse("#{params[:attendance][:start_at][:date]} @ #{params[:attendance][:start_at][:hour]}:#{params[:attendance][:start_at][:minute]}")
 
     end_at_date = params[:attendance][:end_at][:date]
     end_at_hour = params[:attendance][:end_at][:hour]
     end_at_minute = params[:attendance][:end_at][:minute]
-    @attendance.end_at = Time.parse("#{params[:attendance][:end_at][:date]} @ #{params[:attendance][:end_at][:hour]}:#{params[:attendance][:end_at][:minute]}")
+    @attendance.end_at = Time.zone.parse("#{params[:attendance][:end_at][:date]} @ #{params[:attendance][:end_at][:hour]}:#{params[:attendance][:end_at][:minute]}")
 
     respond_to do |format|
       if @attendance.save
-        format.html { redirect_to [@member, @attendance], notice: 'Attendance was successfully updated.' }
+        format.html { redirect_to member_attendances_path(@member), notice: 'Attendance was successfully updated.' }
         format.json { render :show, status: :ok, location: @attendance }
       else
         format.html { render :edit }

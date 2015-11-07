@@ -1,0 +1,37 @@
+.video-wrapper{
+  margin-bottom: 5rem;
+  @media #{$medium-and-down} {
+    margin-bottom: 3rem;
+  }
+  &.col {
+    padding: 0 4rem;
+    @media #{$medium-and-down} {
+      padding: 0 2rem;
+    }
+  }
+  .video-box{
+    margin: auto;
+    max-width: 520px;
+    .heading{
+      margin-top: 10px;
+      .title{
+        font-size: 1.4rem;
+        @media #{$medium-and-down} {
+          font-size: 1.3rem;
+        }
+        @media #{$small-and-down} {
+          font-size: 1.2rem;
+        }
+        a {
+          color: black;
+        }
+        a:hover{
+          color: #1976D2;
+        }
+      }
+    }
+    .info{
+      color: #999;
+    }
+  }
+}
