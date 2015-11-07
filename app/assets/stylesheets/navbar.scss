@@ -4,6 +4,12 @@ nav {
   .top-nav li a[class*="nav-"]{
     height: $navbar-height
   }
+  .dropdown-button{
+    .material-icons.right{
+      margin-left: 0;
+      margin-right: -10px;
+    }
+  }
 }
 
 nav a:hover{
@@ -29,24 +35,30 @@ nav a:hover{
   border-bottom: 2px solid $secondary-color;
 }
 
-body.pages-vex .nav-vex{
+body.pages-vex .nav-competitions{
   @extend .nav-hl;
 }
-body.pages-skills .nav-skills{
+body.pages-skills .nav-competitions{
   @extend .nav-hl;
 }
-body.competitions-index .nav-competitions{
+body.pages-other_competitions .nav-competitions{
   @extend .nav-hl;
 }
-body.teams-index .nav-teams{
+body.competitions-index .nav-about{
+  @extend .nav-hl;
+}
+body.teams-index .nav-about{
+  @extend .nav-hl;
+}
+body.sponsors-index .nav-about{
+  @extend .nav-hl;
+}
+body.pages-about .nav-about{
   @extend .nav-hl;
 }
 body.posts-index .nav-posts{
   @extend .nav-hl;
 }
-body.sponsors-index .nav-sponsors{
-  @extend .nav-hl;
-}
-body.pages-other_competitions .nav-other-competitons{
+body.videos-index .nav-videos{
   @extend .nav-hl;
 }
