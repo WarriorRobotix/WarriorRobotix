@@ -1,19 +1,23 @@
 .video-wrapper{
-  margin-bottom: 3rem;
-  &.col {
-    padding: 0 1.5rem;
+  margin-bottom: 5rem;
+  @media #{$medium-and-down} {
+    margin-bottom: 3rem;
   }
-
+  &.col {
+    padding: 0 4rem;
+    @media #{$medium-and-down} {
+      padding: 0 2rem;
+    }
+  }
   .video-box{
     margin: auto;
     max-width: 520px;
     .heading{
       margin-top: 10px;
       .title{
-        font-size: 2rem;
-        font-weight: bold;
+        font-size: 1.4rem;
         @media #{$medium-and-down} {
-          font-size: 1.4rem;
+          font-size: 1.3rem;
         }
         @media #{$small-and-down} {
           font-size: 1.2rem;
