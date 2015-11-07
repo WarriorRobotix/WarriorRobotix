@@ -18,7 +18,7 @@ class PostsController < ApplicationController
       if current_member.team_id.nil? || member_is_admin?
         post_scope = post_scope.where('"posts"."restriction" <= ?', max_restriction)
       else
-        post_scope = post_scope.joins(:teams).where("\"posts\".\"restriction\" <= ? OR \"teams\".\"id\" = ?", max_restriction, current_member.team_id)
+        post_scope = post_scope.joins('LEFT JOIN "posts_teams" ON "posts_teams"."post_id" = "posts"."id"').where('"posts"."restriction" <= ? OR "posts_teams"."team_id" = ?', max_restriction, current_member.team_id)
       end
     else
       post_scope = post_scope.where(restriction: 0)
