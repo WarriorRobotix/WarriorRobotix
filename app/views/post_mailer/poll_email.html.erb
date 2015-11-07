@@ -18,6 +18,6 @@
   </p>
 
   <div style="margin-top:30px;color:#666;text-align:center;">
-  <%= link_to 'Link', poll_url(@poll) %> | <%= @new_poll ? "Created at #{ @poll.created_at.strftime("%a, %e %b %Y %H:%M")}" : "Updated at #{ @poll.updated_at.strftime("%a, %e %b %Y %H:%M") }" %> - <%= @poll.author.try(:abbr_name) %> to <%= @poll.restriction == "everyone" ? @poll.restriction.capitalize : @poll.restriction.pluralize.capitalize %>
+  <%= link_to 'Link', poll_url(@poll) %> | <%= @new_poll ? "Created at #{ @poll.created_at.strftime("%a, %e %b %Y %H:%M")}" : "Updated at #{ @poll.updated_at.strftime("%a, %e %b %Y %H:%M") }" %> - <%= @poll.author.try(:abbr_name) %> to <%= @poll.audience_description %>
   </div>
 </div>
