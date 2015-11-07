@@ -16,7 +16,7 @@ class PostsController < ApplicationController
     end
     if member_signed_in?
       if current_member.team_id.nil? || member_is_admin?
-        post_scope = post_scope.where("\"posts\".\"restriction\" <= ?", max_restriction)
+        post_scope = post_scope.where('"posts"."restriction" <= ?', max_restriction)
       else
         post_scope = post_scope.joins(:teams).where("\"posts\".\"restriction\" <= ? OR \"teams\".\"id\" = ?", max_restriction, current_member.team_id)
       end
@@ -53,7 +53,7 @@ class PostsController < ApplicationController
     @post=  Post.new(post_params)
     @post.author = current_member
     if @post.limited? && params[:teams].present?
-      @post.add_limited_teams(params[:teams].keys)
+      @post.team_ids = params[:teams].keys
     end
 
     respond_to do |format|
@@ -74,6 +74,9 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
+      if (params[:post][:restriction] == "limited" || (params[:post][:restriction].nil? && @post.limited?)) && params[:teams].present?
+        @post.team_ids = params[:teams].keys
+      end
       if @post.update(post_params)
         if @post.email_notification
           PostMailer.post_email(@post, false).deliver_later
