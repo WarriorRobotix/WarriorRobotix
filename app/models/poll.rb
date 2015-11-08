@@ -6,7 +6,7 @@ class Poll < Post
   validate :min_restriction
 
   after_initialize do
-    self.restriction = 1 if self.restriction = 0
+    self.restriction = 1 if self.restriction == 0
   end
 
   def option_descriptions
