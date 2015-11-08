@@ -99,6 +99,19 @@ $(document).on('change', '.file-field input[type=\"file\"][data-photo-name-targe
   }
 });
 
+$(document).on('change', '.post-restriction select', function () {
+  var $t = $(this);
+  var newVal = $t.val();
+  var limitedTeamsRow = $t.closest('form').find('.post-limited-teams');
+  if (newVal == 'limited'){
+    limitedTeamsRow.css({'display':'block'});
+  } else {
+    limitedTeamsRow.css({'display':'none'});
+  }
+});
+
+
+
 $(document).ready(function(){
   $('.modal-switch').leanModal();
 });

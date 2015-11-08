@@ -95,7 +95,7 @@ class Member < ActiveRecord::Base
   end
 
   def max_restriction
-    admin ? 2 : 1
+    admin ? 3 : 1
   end
 
   def self.mappable_attributes

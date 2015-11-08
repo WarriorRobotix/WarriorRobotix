@@ -14,6 +14,6 @@
   <%= yield %>
 
   <div class="right-align info">
-    <%= post.created_at.strftime("%A, %B %e, %Y @ %l:%M %p") %> - <%= post.author.try(:abbr_name) %> to <%= post.restriction == "everyone" ? post.restriction.capitalize : post.restriction.pluralize.capitalize %>
+    <%= post.created_at.strftime("%A, %B %e, %Y @ %l:%M %p") %> - <%= post.author.try(:abbr_name) %> to <%= post.audience_description %>
   </div>
 </div>

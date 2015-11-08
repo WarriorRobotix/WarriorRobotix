@@ -8,13 +8,22 @@ class PostsController < ApplicationController
   def index
     case params[:type]
     when "Event"
-      scope = Event
+      post_scope = Event
     when "Poll"
-      scope = Poll
+      post_scope = Poll
     else
-      scope = Post
+      post_scope = Post
     end
-    @posts = scope.where("restriction <= ?", max_restriction).order(created_at: :desc).all
+    if member_signed_in?
+      if current_member.team_id.nil? || member_is_admin?
+        post_scope = post_scope.where('"posts"."restriction" <= ?', max_restriction)
+      else
+        post_scope = post_scope.joins('LEFT JOIN "posts_teams" ON "posts_teams"."post_id" = "posts"."id"').where('"posts"."restriction" <= ? OR "posts_teams"."team_id" = ?', max_restriction, current_member.team_id)
+      end
+    else
+      post_scope = post_scope.where(restriction: 0)
+    end
+    @posts = post_scope.order(created_at: :desc).all
   end
 
   # GET /posts/1
@@ -22,7 +31,9 @@ class PostsController < ApplicationController
   def show
     if @post[:restriction] > max_restriction
       if member_signed_in?
-        raise Forbidden
+        unless @post.team_ids.include?(current_member.team_id)
+          raise Forbidden
+        end
       else
         redirect_to signin_path(return_to_info)
       end
@@ -43,6 +54,9 @@ class PostsController < ApplicationController
   def create
     @post=  Post.new(post_params)
     @post.author = current_member
+    if @post.limited? && params[:teams].present?
+      @post.team_ids = params[:teams].keys
+    end
 
     respond_to do |format|
       if @post.save
@@ -62,6 +76,9 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
+      if (params[:post][:restriction] == "limited" || (params[:post][:restriction].nil? && @post.limited?)) && params[:teams].present?
+        @post.team_ids = params[:teams].keys
+      end
       if @post.update(post_params)
         if @post.email_notification
           PostMailer.post_email(@post, false).deliver_later

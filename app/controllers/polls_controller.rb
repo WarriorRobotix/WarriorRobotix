@@ -17,6 +17,9 @@ class PollsController < ApplicationController
   def create
     @poll = Poll.new(poll_params)
     @poll.author = current_member
+    if @poll.limited? && params[:teams].present?
+      @poll.team_ids = params[:teams].keys
+    end
 
     respond_to do |format|
       if @poll.save
@@ -36,6 +39,9 @@ class PollsController < ApplicationController
   # PATCH/PUT /polls/1.json
   def update
     respond_to do |format|
+      if (params[:poll][:restriction] == "limited" || (params[:poll][:restriction].nil? && @poll.limited?)) && params[:teams].present?
+        @poll.team_ids = params[:teams].keys
+      end
       if @poll.update(poll_params)
         if @poll.email_notification
           PostMailer.poll_email(@poll, false).deliver_later
@@ -51,6 +57,12 @@ class PollsController < ApplicationController
 
   # POST /polls/1/vote (js only)
   def vote
+    if @poll[:restriction] > max_restriction
+      unless @poll.team_ids.include?(current_member.team_id)
+        raise Forbidden
+      end
+    end
+
     voted_ballots = Ballot.joins(:option).where(member_id: current_member.id, options: { poll_id: @poll.id }).pluck(:option_id)
     vaild_option_ids = Set.new(@poll.option_ids)
     has_voted = !voted_ballots.empty?

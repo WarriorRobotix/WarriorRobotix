@@ -27,6 +27,8 @@ class PostMailer < ApplicationMailer
     post = @post || @event || @poll
     if post.everyone? || post.member?
       Member.all.pluck(:email)
+    elsif post.limited?
+      Member.joins('INNER JOIN "posts_teams" ON "posts_teams"."team_id" = "members"."team_id"').where('"posts_teams"."post_id" = ?', post.id).pluck(:email)
     elsif post.admin?
       Member.where(admin: true).all.pluck(:email)
     else

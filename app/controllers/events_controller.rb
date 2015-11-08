@@ -17,6 +17,9 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.author = current_member
+    if @event.limited? && params[:teams].present?
+      @event.team_ids = params[:teams].keys
+    end
 
     if start_at_params = params[:event][:start_at]
       @event.start_at = "#{start_at_params[:date]} #{start_at_params[:hour]}:#{start_at_params[:minute]}"
@@ -53,6 +56,9 @@ class EventsController < ApplicationController
     end
 
     respond_to do |format|
+      if (params[:event][:restriction] == "limited" || (params[:event][:restriction].nil? && @event.limited?)) && params[:teams].present?
+        @event.team_ids = params[:teams].keys
+      end
       if @event.update(event_params)
         if @event.email_notification
           PostMailer.event_email(@event, false).deliver_later
@@ -67,6 +73,11 @@ class EventsController < ApplicationController
   end
 
   def reply
+    if @event[:restriction] > max_restriction
+      unless @event.team_ids.include?(current_member.team_id)
+        raise Forbidden
+      end
+    end
     @event.update_reply(current_member, params[:reply])
   end
 
