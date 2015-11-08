@@ -31,7 +31,9 @@ class PostsController < ApplicationController
   def show
     if @post[:restriction] > max_restriction
       if member_signed_in?
-        raise Forbidden
+        unless @post.team_ids.include?(current_member.team_id)
+          raise Forbidden
+        end
       else
         redirect_to signin_path(return_to_info)
       end

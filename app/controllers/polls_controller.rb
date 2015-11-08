@@ -57,6 +57,12 @@ class PollsController < ApplicationController
 
   # POST /polls/1/vote (js only)
   def vote
+    if @poll[:restriction] > max_restriction
+      unless @poll.team_ids.include?(current_member.team_id)
+        raise Forbidden
+      end
+    end
+
     voted_ballots = Ballot.joins(:option).where(member_id: current_member.id, options: { poll_id: @poll.id }).pluck(:option_id)
     vaild_option_ids = Set.new(@poll.option_ids)
     has_voted = !voted_ballots.empty?

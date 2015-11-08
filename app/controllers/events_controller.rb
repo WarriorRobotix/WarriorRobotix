@@ -73,6 +73,11 @@ class EventsController < ApplicationController
   end
 
   def reply
+    if @event[:restriction] > max_restriction
+      unless @event.team_ids.include?(current_member.team_id)
+        raise Forbidden
+      end
+    end
     @event.update_reply(current_member, params[:reply])
   end
 
