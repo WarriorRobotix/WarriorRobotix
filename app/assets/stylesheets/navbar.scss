@@ -34,7 +34,9 @@ nav a:hover{
   color: $secondary-color;
   border-bottom: 2px solid $secondary-color;
 }
-
+body.competitions-index .nav-competitions{
+  @extend .nav-hl;
+}
 body.pages-vex .nav-competitions{
   @extend .nav-hl;
 }
@@ -42,9 +44,6 @@ body.pages-skills .nav-competitions{
   @extend .nav-hl;
 }
 body.pages-other_competitions .nav-competitions{
-  @extend .nav-hl;
-}
-body.competitions-index .nav-about{
   @extend .nav-hl;
 }
 body.teams-index .nav-about{
