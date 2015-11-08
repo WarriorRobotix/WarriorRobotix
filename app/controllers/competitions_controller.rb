@@ -6,7 +6,8 @@ class CompetitionsController < ApplicationController
   # GET /competitions
   # GET /competitions.json
   def index
-    @previous_competitions = Competition.order(start_date: :DESC).all
+    @upcoming_competitions = Competition.where('"competitions"."start_date" >= ?', Date.today).order(start_date: :ASC).all
+    @previous_competitions = Competition.where('"competitions"."start_date" < ?', Date.today).order(start_date: :DESC).all
   end
 
   # GET /competitions/1
