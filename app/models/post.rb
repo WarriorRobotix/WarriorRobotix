@@ -9,6 +9,8 @@ class Post < ActiveRecord::Base
   validates :title, presence: true
   validates :description, presence: true
 
+  before_save :remove_useless_limited_teams
+
   def self.valid_restrictions
     restrictions
   end
@@ -45,5 +47,12 @@ class Post < ActiveRecord::Base
     else
       self.restriction.pluralize.capitalize
     end
+  end
+  private
+  def remove_useless_limited_teams
+    if self.restriction_changed? && self.restriction_was == "limited"
+      self.teams.clear
+    end
+    true
   end
 end
