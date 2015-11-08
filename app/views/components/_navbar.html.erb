@@ -8,6 +8,7 @@
 <% end %>
 <ul id="competitions_dropdown" class="dropdown-content">
   <li class="text"><span>Competitions</span></li>
+  <li><%= link_to "Upcoming & Past", competitions_path %></li>
   <li><%= link_to "Vex", vex_path %></li>
   <li><%= link_to "Skills", skills_path %></li>
   <li><%= link_to "FRC/CETA", frc_ceta_path %></li>
@@ -15,7 +16,6 @@
 <ul id="about_dropdown" class="dropdown-content">
   <li class="text"><span>About</span> </li>
   <li><%= link_to "Club", about_path %></li>
-  <li><%= link_to "Upcoming & Past", competitions_path %></li>
   <li><%= link_to "Teams", teams_path %></li>
   <li><%= link_to "Sponsors", sponsors_path %></li>
 </ul>
@@ -98,6 +98,9 @@
       </li>
       <% end %>
       <li>
+        <%= link_to "Upcoming & Past", competitions_path %>
+      </li>
+      <li>
         <%= link_to "Vex", vex_path %>
       </li>
       <li>
@@ -108,9 +111,6 @@
       </li>
       <li>
         <%= link_to "About Club", competitions_path %>
-      </li>
-      <li>
-        <%= link_to "Upcoming & Past", competitions_path %>
       </li>
       <li>
         <%= link_to "Teams", teams_path %>
