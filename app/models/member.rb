@@ -23,7 +23,10 @@ class Member < ActiveRecord::Base
 
   has_many :attendances, dependent: :destroy
   has_many :ballots, dependent: :destroy
+  has_many :options, through: :ballots
   has_many :posts
+
+  belongs_to :team
 
   default_scope { where(accepted: true) }
 

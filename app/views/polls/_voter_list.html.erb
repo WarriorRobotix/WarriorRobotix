@@ -1,0 +1,22 @@
+<div class="card-panel">
+  <table class="centered except-last">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Student Number</th>
+        <th>Team</th>
+        <th><%= poll.multiple_choices ? 'Ballots' : 'Ballot' %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Member.includes(:options, :team).where(options: {poll_id: poll.id}).order(first_name: :ASC, last_name: :DESC).all.each do |member| %>
+      <tr>
+        <td><%= member.full_name %></td>
+        <td><%= member.student_number %></td>
+        <td><%= member.team.try(:name) %></td>
+        <td><%= member.options.map{|opt| opt.description}.join(', ') %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

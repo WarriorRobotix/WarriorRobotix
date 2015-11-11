@@ -1,3 +1,6 @@
 <div class="posts-container card-panel">
   <%= render @post %>
 </div>
+<% if member_is_admin? && @post.type == "Poll" %>
+  <%= render 'polls/voter_list', poll: @post %>
+<% end %>
