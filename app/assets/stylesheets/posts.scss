@@ -27,6 +27,12 @@ body.posts-index{
 
     .body{
       font-size: 20px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+
+      a:hover{
+        text-decoration: underline;
+      }
     }
 
     .attachment{
