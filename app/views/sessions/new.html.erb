@@ -1,7 +1,7 @@
 <div class="max6">
 <h1 class="flow-text">Login</h1>
 <div class="card-panel" style="padding-bottom:10px;padding-top:10px;">
-<%= form_tag signin_path(from: params[:from]) do %>
+<%= form_tag signin_path(from: params[:from] || request.referer) do %>
 <div class="row large-margin-bottom">
   <div class="col s12 input-field">
     <%= label_tag :identifier, "Student Number or Email" %>

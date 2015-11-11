@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   skip_before_action :authenticate_admin!, [:new, :create, :destroy]
   skip_before_action :verify_authenticity_token
-  
+
   def new
     redirect_back if member_signed_in?
   end
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
         if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", identifier, identifier).take.try(:authenticate, password)
           signin_member(member)
           cookies.permanent[:mtk] = "#{member.id}$#{member.remember_token}" if params[:remember_me] == '1'
-          format.html { redirect_to root_path, notice: "You have successfully signed in" }
+          format.html { redirect_back root_path, notice: "You have successfully signed in" }
           format.json { render json: {access: member.max_restriction} }
           flag = false
         end
