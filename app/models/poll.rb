@@ -1,5 +1,5 @@
 class Poll < Post
-  enum ballots_privacy: [:voters_viewable, :counts_viewable]
+  enum ballots_privacy: [:voters_viewable, :counts_viewable, :nothing_viewable]
   has_many :options, dependent: :destroy
   accepts_nested_attributes_for :options, allow_destroy: true, reject_if: :invalid_option
   validate :immutable_active_poll_attributes
