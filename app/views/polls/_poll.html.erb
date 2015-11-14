@@ -1,7 +1,7 @@
 <% cache([poll, max_restriction]) do %>
 <%= render layout: 'posts/post_wrap', locals: {post: poll} do %>
   <div class="attachment flow-text<%= ' interact-disabled' if poll.disabled %>">
-    <%= raw('<strong class="disabled-label"><i class="material-icons">warning</i>This poll has been disabled. Or this poll is closed.</strong>') if poll.disabled %>
+    <%= raw('<strong class="disabled-label"><i class="material-icons">warning</i>This poll is closed.</strong>') if poll.disabled %>
     <div class="event-reply">
     <%= render partial: "polls/vote_form", locals: {poll: poll} %>
     </div>
