@@ -38,6 +38,10 @@ Rails.application.routes.draw do
 
   resources :competitions
 
+  scope :attendances do
+    get 'center' => 'attendances#center'
+  end
+
   post '/checkout_all' => 'attendances#checkout_all'
   post '/checkin_group' => 'attendances#checkin_group'
   post '/checkout_group' => 'attendances#checkout_group'

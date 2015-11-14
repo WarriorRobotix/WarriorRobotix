@@ -1,6 +1,6 @@
 class AttendancesController < ApplicationController
   before_action :set_attendance, only: [:show, :edit, :update, :destroy]
-  before_action :set_member, except: [:checkout_all, :checkin_group, :checkout_group]
+  before_action :set_member, except: [:checkout_all, :checkin_group, :checkout_group, :center]
   before_action :authenticate_admin!
 
   # GET members/1/attendances
@@ -167,6 +167,9 @@ class AttendancesController < ApplicationController
       format.html { redirect_to member_attendances_url(@member), notice: 'Attendance was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def center
   end
 
   private
