@@ -18,6 +18,8 @@
     <td><%= pluralize(option.members.count,"member") %><%= " - #{option.members.pluck(:first_name, :last_name).map{|n| n.join(" ")}.join(", ")}" if (option.members.count > 0)  %></td>
     <% elsif poll.ballots_privacy == "counts_viewable" %>
     <td><%= pluralize(option.members.count,"member") %></td>
+    <% elsif member_is_admin? %>
+    <td><i class="material-icons inline small ballot-visibility">visibility_off</i> <%= pluralize(option.members.count,"member") %></td>
     <% else %>
     <td></td>
     <% end %>
