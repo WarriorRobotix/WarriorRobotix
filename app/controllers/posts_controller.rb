@@ -108,6 +108,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :description, :restriction, :email_notification)
+    params.require(:post).permit(:title, :description, :restriction, :email_notification, :disabled)
   end
 end

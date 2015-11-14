@@ -24,11 +24,17 @@
   <% end %>
 </div>
 <div class="row sp-post-f-row">
-  <div class="input-field col s6">
+  <div class="input-field col s6 m4">
     <%= f.check_box :email_notification %>
     <%= f.label :email_notification %>
   </div>
-  <div class="col s6 right-align">
-    <%= link_to 'Supported markdown ( images, links, etc )', 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet', class: "note" %>
+  <div class="input-field col s6 m3 l3">
+    <%= f.check_box :disabled %>
+    <%= f.label :disabled %>
+  </div>
+  <div class="col s12 m5 right-align hide-on-small-only">
+    <%= link_to('https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet', class: "note") do %>
+    Support markdown<span class="hide-on-med-and-down"> ( images, links, etc )</span>
+    <% end %>
   </div>
 </div>

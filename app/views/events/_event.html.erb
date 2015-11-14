@@ -11,8 +11,9 @@
     <% end %>
   </div>
   <% end %>
-  <div class="attachment flow-text">
+  <div class="attachment flow-text <%= ' interact-disabled' if event.disabled %>">
     <% if member_signed_in? %>
+    <%= raw('<strong class="disabled-label"><i class="material-icons">warning</i> Reply of this event has disabled</strong>') if event.disabled %>
     <div class="event-reply">
     <%= render partial: "events/reply_form", locals: {event: event} %>
     </div>
