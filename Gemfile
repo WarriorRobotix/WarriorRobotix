@@ -52,6 +52,9 @@ gem 'meta-tags'
 # Use recaptcha to avoid spams
 gem "recaptcha", :require => "recaptcha/rails"
 
+# Use kaminari for pagination
+gem 'kaminari'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

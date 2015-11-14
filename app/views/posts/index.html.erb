@@ -1,4 +1,4 @@
-<% if member_is_admin? %>
+<% if member_is_admin? && (params[:page].nil? || params[:page] == "1") %>
 <% cache do %>
 <%= render(partial: "index_create")  %>
 <% end %>
@@ -8,3 +8,4 @@
   <%= render post %>
 <% end %>
 </div>
+<%= paginate @posts %>
