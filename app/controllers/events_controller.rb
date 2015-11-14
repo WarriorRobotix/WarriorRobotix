@@ -78,6 +78,11 @@ class EventsController < ApplicationController
         raise Forbidden
       end
     end
+
+    if @event.disabled
+      raise ActiveRecord::RecordInvalid
+    end
+    
     @event.update_reply(current_member, params[:reply])
   end
 
@@ -87,6 +92,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :description, :restriction, :email_notification)
+    params.require(:event).permit(:title, :description, :restriction, :email_notification, :disabled)
   end
 end

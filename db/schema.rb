@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107235958) do
+ActiveRecord::Schema.define(version: 20151113233557) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id",              null: false
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20151107235958) do
     t.integer  "author_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.boolean  "disabled",           default: false, null: false
   end
 
   create_table "posts_teams", id: false, force: :cascade do |t|

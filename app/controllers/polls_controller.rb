@@ -63,6 +63,10 @@ class PollsController < ApplicationController
       end
     end
 
+    if @poll.disabled
+      raise ActiveRecord::RecordInvalid
+    end
+
     voted_ballots = Ballot.joins(:option).where(member_id: current_member.id, options: { poll_id: @poll.id }).pluck(:option_id)
     vaild_option_ids = Set.new(@poll.option_ids)
     has_voted = !voted_ballots.empty?
@@ -114,6 +118,6 @@ class PollsController < ApplicationController
   end
 
   def poll_params
-    params.require(:poll).permit(:title, :description, :restriction, :email_notification, :multiple_choices, :maximum_choices, :ballots_changeable, :ballots_privacy, options_attributes: [:id, :description, :_destroy])
+    params.require(:poll).permit(:title, :description, :restriction, :email_notification, :multiple_choices, :maximum_choices, :ballots_changeable, :ballots_privacy, :disabled, options_attributes: [:id, :description, :_destroy])
   end
 end

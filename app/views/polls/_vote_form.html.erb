@@ -1,7 +1,7 @@
 <%= form_tag poll_vote_path(poll), remote: true  do %>
 <%= error unless local_assigns[:error].blank? %>
 <% ballots = poll.ballots_from(current_member) %>
-<% disabled = !member_signed_in? || !(ballots.empty? || poll.ballots_changeable) %>
+<% disabled = poll.disabled || !member_signed_in? || !(ballots.empty? || poll.ballots_changeable) %>
 <% multi = poll.multiple_choices %>
 <table class="flow-text" style="font-size:18px;">
 <% poll.options.order(id: :ASC).all.each do |option| %>
@@ -16,8 +16,10 @@
     </td>
     <% if poll.ballots_privacy == "voters_viewable" %>
     <td><%= pluralize(option.members.count,"member") %><%= " - #{option.members.pluck(:first_name, :last_name).map{|n| n.join(" ")}.join(", ")}" if (option.members.count > 0)  %></td>
-    <% else %>
+    <% elsif poll.ballots_privacy == "counts_viewable" %>
     <td><%= pluralize(option.members.count,"member") %></td>
+    <% else %>
+    <td></td>
     <% end %>
   </tr>
 <% end %>

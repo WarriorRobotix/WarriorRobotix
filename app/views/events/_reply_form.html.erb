@@ -3,7 +3,7 @@
 <table class="flow-text" style="font-size:100%;">
 <% ({'yes' => 'confirmed', 'maybe' => 'maybe', 'no' => 'declined' }).each do |key, value| %>
   <tr>
-    <td><%= radio_button_tag 'reply', value, reply == value, class: "stop-propagation", data: {"trigger-form" => "1"} %>
+    <td><%= radio_button_tag 'reply', value, reply == value, class: "stop-propagation", disabled: event.disabled, data: {"trigger-form" => "1"} %>
     <%= label_tag "reply_#{value}", key.capitalize, class: :dark %></td>
     <td><%= event.replyers_description(value) %></td>
   </tr>
