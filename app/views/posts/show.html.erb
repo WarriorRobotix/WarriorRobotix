@@ -2,5 +2,7 @@
   <%= render @post %>
 </div>
 <% if member_is_admin? && @post.type == "Poll" %>
+  <% cache(['voter_list',@post]) do %>
   <%= render 'polls/voter_list', poll: @post %>
+  <% end %>
 <% end %>
