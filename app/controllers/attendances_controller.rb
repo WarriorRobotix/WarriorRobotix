@@ -170,6 +170,41 @@ class AttendancesController < ApplicationController
   end
 
   def center
+    members = Member.order(first_name: :ASC, last_name: :ASC).all.select(:id, :first_name, :last_name, :grade, :team_id)
+    member_ids = Set.new( members.map { |m| m.id } )
+
+    today = Time.zone.now
+    today_attendances = Hash.new
+    Attendance.where(start_at: today.beginning_of_day..today.end_of_day).order(created_at: :DESC).all.each do |attendance|
+      today_attendances[attendance.member_id] = attendance
+    end
+
+    teams = Team.order(name: :ASC).all
+    team_names = Hash.new
+    teams.each do |team|
+      team_names[team.id] = team.name
+    end
+
+    @unchecked_members = []
+    @unchecked_member_teams = Hash.new {|h,k| h[k] = [] }
+
+    @checked_in_attendance_descriptions = []
+    @checked_out_attendance_descriptions = []
+
+    members.each do |member|
+      if today_attendances.include?(member.id)
+        attendance = today_attendances[member.id]
+        description = [member.full_name, team_names[member.team_id], attendance.start_at, attendance.end_at]
+        if attendance.end_at.nil?
+          @checked_in_attendance_descriptions << description
+        else
+          @checked_out_attendance_descriptions << description
+        end
+      else
+        @unchecked_members << member
+        @unchecked_member_teams[member.team_id] << member
+      end
+    end
   end
 
   private
