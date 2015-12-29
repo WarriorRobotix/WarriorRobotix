@@ -7,7 +7,7 @@
     <% members_list.each do |member| %>
     <p style="padding-left:5px;">
       <%= check_box_tag "members[#{member.id}]", "1", false, id: "members_#{member.id}_#{team_id}" %>
-      <%= label_tag "members_#{member.id}_#{team_id}", "#{member.full_name} - Grade #{member.grade}" %>
+      <%= label_tag "members_#{member.id}_#{team_id}", "#{member.full_name} - Grade #{member.grade}", style: "color:#333;" %>
     </p>
     <% end %>
   </div>
