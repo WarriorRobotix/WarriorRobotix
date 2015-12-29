@@ -308,6 +308,16 @@ label.dark {
   }
 }
 
+.modal-footer {
+  .checkbox-counter {
+    line-height: 47px;
+    font-size: 20px;
+
+    padding-left: 6px;
+    color: #9e9e9e;
+  }
+}
+
 /// FOR MINI PROFILER
 .profiler-results{
   @media #{$medium-and-down} {

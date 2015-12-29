@@ -1,5 +1,5 @@
 <div id="check_in_<%= team_id %>" class="modal modal-fixed-footer">
-  <%= form_tag '/attendances/check_in', id: "check_in_form_#{team_id}" do %>
+  <%= form_tag '/attendances/check_in', id: "check_in_form_#{team_id}", class: "checkbox-counter-form" do %>
   <div class="modal-content">
     <h4><%= team_name %></h4>
     <b class="flow-text">Select members:</b>
@@ -14,6 +14,7 @@
   <div class="modal-footer">
     <%= submit_tag "Check In", class: "btn", data: { disable_with: nil } %>
     <a href="#!" class="modal-action modal-close waves-effect btn-flat ">Close</a>
+    <div class="checkbox-counter"></div>
   </div>
   <% end %>
 </div>

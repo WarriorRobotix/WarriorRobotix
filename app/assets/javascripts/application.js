@@ -57,6 +57,10 @@ $(function(){
   $('.countdown').countdown();
 
   $(".dropdown-button").dropdown();
+
+  $("form.checkbox-counter-form").each(function(){
+    updateCheckboxCounterForm($(this));
+  })
 });
 
 $(window).on('hashchange', function(){
@@ -168,6 +172,10 @@ $(document).on('click', '.read-more-box .read-more .button', function() {
   return false;
 });
 
+$(document).on('change', 'form.checkbox-counter-form input[type="checkbox"]', function() {
+  updateCheckboxCounterForm($(this).closest('form'))
+});
+
 function deletePoll(ele,event) {
   event.preventDefault();
   $t = $(ele);
@@ -194,4 +202,16 @@ function replceNullDisableWith(){
 
 function enableForm(){
   $('form input[data-enable-by-recaptcha]').prop('disabled', false);
+}
+
+function updateCheckboxCounterForm(form){
+  var count = 0;
+  var checked = 0;
+  form.find('input[type="checkbox"]').each(function(){
+    if ($(this).prop('checked')) {
+      checked += 1;
+    }
+    count += 1;
+  });
+  form.find('.checkbox-counter').html(checked + "/" + count)
 }
