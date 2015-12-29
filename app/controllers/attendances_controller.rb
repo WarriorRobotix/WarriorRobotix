@@ -1,6 +1,6 @@
 class AttendancesController < ApplicationController
   before_action :set_attendance, only: [:show, :edit, :update, :destroy]
-  before_action :set_member, except: [:checkout_all, :checkin_group, :checkout_group, :center]
+  before_action :set_member, except: [:checkout_all, :checkin_group, :checkout_group, :center, :check_in, :check_out, :set_check_in]
   before_action :authenticate_admin!
 
   # GET members/1/attendances
@@ -179,9 +179,9 @@ class AttendancesController < ApplicationController
       today_attendances[attendance.member_id] = attendance
     end
 
-    teams = Team.order(name: :ASC).all
+    @teams = Team.order(name: :ASC).all
     team_names = Hash.new
-    teams.each do |team|
+    @teams.each do |team|
       team_names[team.id] = team.name
     end
 
@@ -194,7 +194,7 @@ class AttendancesController < ApplicationController
     members.each do |member|
       if today_attendances.include?(member.id)
         attendance = today_attendances[member.id]
-        description = [member.full_name, team_names[member.team_id], attendance.start_at, attendance.end_at]
+        description = [member.id, member.full_name, team_names[member.team_id], attendance.start_at, attendance.end_at]
         if attendance.end_at.nil?
           @checked_in_attendance_descriptions << description
         else
@@ -205,6 +205,59 @@ class AttendancesController < ApplicationController
         @unchecked_member_teams[member.team_id] << member
       end
     end
+  end
+
+  def check_in
+    time_now = Time.zone.now
+
+    if params[:search] == '1'
+      check_in_member = Member.where(student_number: params[:student_number]).take
+      if check_in_member.nil?
+        flash[:alert] = "Member #{params[:student_number]} can't be found"
+        redirect_to attendances_center_path
+        return
+      else
+        member_ids = [{ member_id: check_in_member.id, start_at: time_now, status: 1}]
+      end
+    else
+      member_ids = Set.new( params[:members].keys.map { |e| e.to_i } )
+      attended_today_ids = Set.new( Attendance.where(start_at: time_now.beginning_of_day..time_now.end_of_day).pluck(:id) )
+
+      member_ids = member_ids - attended_today_ids
+
+      member_ids = member_ids.to_a.map { |e| { member_id: e, start_at: time_now, status: 1} }
+    end
+
+    if Attendance.create(member_ids)
+      flash[:notice] = "Selected Members Checked In!"
+    else
+      flash[:alert] = "There is a problem"
+    end
+    redirect_to attendances_center_path
+  end
+
+  def check_out
+    time_now = Time.zone.now
+    if params[:id] == 'all'
+      attendances = Attendance.where(start_at: time_now.beginning_of_day..time_now.end_of_day, end_at: nil, status: 1).all
+    else
+      attendances = Attendance.where(start_at: time_now.beginning_of_day..time_now.end_of_day, end_at: nil, status: 1, member_id: params[:id].to_i).all
+    end
+
+    if params[:time].blank?
+      check_out_time = time_now
+    else
+      check_out_time = Time.zone.parse(params[:time])
+    end
+
+    attendances.update_all(status: 2, end_at: check_out_time)
+    redirect_to attendances_center_path
+  end
+
+  def set_check_in
+    time_now = Time.zone.now
+    Attendance.where(start_at: time_now.beginning_of_day..time_now.end_of_day, end_at: nil, status: 1).update_all(start_at: Time.zone.parse(params[:time]))
+    redirect_to attendances_center_path
   end
 
   private

@@ -1,1 +1,85 @@
+<% @teams.each do |team| %>
+  <%= render 'check_in_modal', team_id: team.id, team_name: team.name, members_list: @unchecked_member_teams[team.id] %>
+<% end %>
+<%= render 'check_in_modal', team_id: "all", team_name: "Check In Group", members_list: @unchecked_members %>
 
+<nav style="background-color:white;margin-top:20px;">
+  <div class="nav-wrapper">
+  <%= form_tag check_in_path, method: :POST, class:'form-inline float-right', role:'form' do %>
+  <div class="input-field">
+    <input type="hidden" name="search" value="1">
+    <input id="search" name="student_number" type="search" placeholder="Enter Student Number..." required>
+    <label class="hide-on-small-only" for="search"><i style="color:#ffab00;" class="material-icons">search</i></label>
+  </div>
+  <% end %>
+  </div>
+</nav>
+
+<br>
+
+<div class="row center-align" >
+<% @teams.each do |team| %>
+  <%= link_to "#{team.name}", "#check_in_#{team.id}", class: 'modal-switch waves-light waves-effect btn', style: "margin-bottom:1px;" %>
+<% end %>
+  <%= link_to "List All", "#check_in_all", class: 'modal-switch waves-light waves-effect btn', style: "margin-bottom:1px;" %>
+</div>
+<hr>
+<% if !@checked_in_attendance_descriptions.empty? %>
+<h1 class="flow-text">Checked In</h1>
+<div class="card-panel">
+  <div class="row no-margin-bottom">
+    <div class="col s3">
+      <%= button_to "Check Out 4:30", check_out_path('all'), class: 'btn-bordered', method: :POST, params: { time: "4:30 PM" }, data: { disable_with: nil } %>
+    </div>
+    <div class="col s3">
+      <%= button_to "Check Out Now", check_out_path('all'), class: 'btn-bordered', method: :POST, data: { disable_with: nil } %>
+    </div>
+    <div class="col s3">
+      <%= button_to "Set Check In 3:00", set_check_in_path, class: 'btn-bordered', method: :POST, params: { time: "3:00 PM" }, data: { disable_with: nil } %>
+    </div>
+  </div>
+  <table>
+    <thead>
+      <th>Name</th>
+      <th class="hide-on-small-only">Team</th>
+      <th>Check In</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @checked_in_attendance_descriptions.each do |description| %>
+        <tr>
+          <td><%= link_to description[1], member_attendances_path(description[0]) %></td>
+          <td class="hide-on-small-only"><%= description[2] %></td>
+          <td><%= description[3].strftime('%l:%M %p') %></td>
+          <td><%= link_to raw('<i class="material-icons">block</i>'), check_out_path(description[0]), method: :post %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% end %>
+<% if !@checked_out_attendance_descriptions.empty? %>
+<h1 class="flow-text">Checked Out</h1>
+<div class="card-panel">
+  <table>
+    <thead>
+      <th>Name</th>
+      <th class="hide-on-small-only">Team</th>
+      <th>Duration</th>
+      <th>Check In</th>
+      <th>Check Out</th>
+    </thead>
+    <tbody>
+      <% @checked_out_attendance_descriptions.each do |description| %>
+        <tr>
+          <td><%= link_to description[1], member_attendances_path(description[0]) %></td>
+          <td class="hide-on-small-only"><%= description[2] %></td>
+          <td><%= distance_of_time_in_words(description[3],description[4]) %></td>
+          <td><%= description[3].strftime('%l:%M %p') %></td>
+          <td><%= description[4].strftime('%l:%M %p') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% end %>
