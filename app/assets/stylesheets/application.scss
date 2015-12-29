@@ -294,6 +294,20 @@ label.dark {
   }
 }
 
+.pagination-wrapper{
+  text-align: center;
+  .pagination{
+    display: inline-block;
+    li.active{
+      color: white;
+    }
+    li.disabled i {
+      cursor: default;
+      color: #999;
+    }
+  }
+}
+
 /// FOR MINI PROFILER
 .profiler-results{
   @media #{$medium-and-down} {

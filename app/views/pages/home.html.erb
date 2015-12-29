@@ -32,6 +32,9 @@
 <% end %>
 <br>
 <div class="row">
+  <div class="col s12 large-margin-bottom">
+    <h5 class="flow-text">Competitions</h5>
+  </div>
   <div class="col s12 m4 l4">
     <div class="card">
       <div class="card-image waves-effect waves-block waves-light">
@@ -78,7 +81,12 @@
     </div>
   </div>
 </div>
-<div class="home-info row">
+
+<% cache(['latest_posts',@latest_posts.count, @latest_posts.maximum(:updated_at)]) do %>
+<%= render 'latest_posts' %>
+<% end %>
+
+<div class="home-info small-margin-top row">
   <div class="col s12 large-margin-bottom">
     <h5 class="flow-text">Mission Statement</h5>
   </div>
@@ -98,7 +106,6 @@
 </div>
 <div class="home-info row">
   <div class="col s12 large-margin-bottom">
-
     <h5 class="flow-text">2015-2016 Vex Competition - Nothing But Net</h5>
   </div>
   <div class="col s12 m6 flow-text front-page-content large-margin-bottom">

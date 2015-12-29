@@ -1,0 +1,19 @@
+<div class="home-info small-margin-top row">
+  <div class="col s12 large-margin-bottom">
+    <h5 class="flow-text">Latest Posts</h5>
+  </div>
+  <% hidden_classes = ["hide-never", "hide-on-small-only", "hide-on-med-and-down"] %>
+  <% @latest_posts.each.with_index do |post, index| %>
+  <div class="col s12 m6 l4 <%= hidden_classes[index] %>">
+    <div class="card-panel">
+      <div class="latest-post-box card-content">
+        <div class="title"><%= link_to post.title, post_path(post.id) %></div>
+        <div class="description markdown">
+          <%= markdown(truncate(post.description, :length => 300)) %>
+        </div>
+        <div class="read-more"><%= link_to "Read More", post_path(post.id) %></div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
