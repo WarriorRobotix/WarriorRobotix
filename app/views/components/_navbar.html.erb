@@ -28,7 +28,7 @@
     <ul class="flow-text right hide-on-med-and-down top-nav" style="font-size:100%;">
       <% if member_is_admin? %>
       <li>
-        <%= link_to "Attendance", '/attend', class: 'nav-attend' %>
+        <%= link_to "Attendance", attendances_center_path, class: 'nav-attend' %>
       </li>
       <% elsif member_signed_in? && !member_is_admin? %>
       <li>
@@ -85,7 +85,7 @@
       </li>
       <% if member_is_admin? %>
       <li>
-        <%= link_to "Attendance", '/attend' %>
+        <%= link_to "Attendance", attendances_center_path %>
       </li>
       <% elsif member_signed_in? && !member_is_admin? %>
       <li>
