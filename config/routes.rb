@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   resources :sponsors, except: [:show]
 
-  resources :photos, except: [:show]
+  #resources :photos, except: [:show]
 
   resources :videos, except: [:show]
 
@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   get '/vex' => 'pages#vex'
   get '/skills' => 'pages#skills'
   get '/frc-ceta' => 'pages#other_competitions'
+  get '/photos' => 'pages#photos'
   get '/team-editor' => 'pages#team_editor'
   get '/about' => 'pages#about_us'
   get '/myattendance' => 'pages#my_attendance'
