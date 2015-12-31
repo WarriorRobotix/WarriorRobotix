@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_admin!, only: [:home, :contact, :contact_message, :vex, :skills, :other_competitions, :photos, :teams, :about_us, :my_attendance, :member_contract]
+  skip_before_action :authenticate_admin!, only: [:home, :contact, :contact_message, :vex, :skills, :other_competitions, :photos, :mentors, :teams, :about_us, :my_attendance, :member_contract]
   before_action :authenticate_member!, only: [:my_attendance]
   def home
     set_meta_tags_for_home

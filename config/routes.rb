@@ -74,6 +74,7 @@ Rails.application.routes.draw do
   get '/skills' => 'pages#skills'
   get '/frc-ceta' => 'pages#other_competitions'
   get '/photos' => 'pages#photos'
+  get '/mentors' => 'pages#mentors'
   get '/team-editor' => 'pages#team_editor'
   get '/about' => 'pages#about_us'
   get '/myattendance' => 'pages#my_attendance'

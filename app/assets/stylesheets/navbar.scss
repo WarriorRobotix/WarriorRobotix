@@ -49,6 +49,9 @@ body.pages-other_competitions .nav-competitions{
 body.teams-index .nav-about{
   @extend .nav-hl;
 }
+body.pages-mentors .nav-about{
+  @extend .nav-hl;
+}
 body.sponsors-index .nav-about{
   @extend .nav-hl;
 }
