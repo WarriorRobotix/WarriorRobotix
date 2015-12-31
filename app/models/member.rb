@@ -26,7 +26,7 @@ class Member < ActiveRecord::Base
   has_many :options, through: :ballots
   has_many :posts
 
-  belongs_to :team
+  belongs_to :team, touch: true
 
   default_scope { where(accepted: true) }
 
