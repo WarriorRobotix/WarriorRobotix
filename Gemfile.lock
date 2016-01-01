@@ -91,7 +91,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    materialize-sass (0.97.4)
+    materialize-sass (0.97.5)
       sass (~> 3.3)
     memcachier (0.0.2)
     meta-tags (2.1.0)
@@ -140,7 +140,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.1)
-      json (~> 1.4)
     recaptcha (1.0.2)
       json
     redcarpet (3.3.4)
