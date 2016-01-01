@@ -82,6 +82,7 @@ GEM
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    kgio (2.10.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.4.1)
@@ -92,6 +93,7 @@ GEM
       mime-types (>= 1.16, < 3)
     materialize-sass (0.97.4)
       sass (~> 3.3)
+    memcachier (0.0.2)
     meta-tags (2.1.0)
       actionpack (>= 3.0.0)
     mime-types (2.99)
@@ -192,8 +194,10 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   kaminari
+  kgio
   letter_opener
   materialize-sass
+  memcachier
   meta-tags
   pg
   puma

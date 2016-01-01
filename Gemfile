@@ -70,6 +70,9 @@ group :production do
 
   gem 'rails_12factor'
 
+  # MemCachier
+  gem 'kgio'
+  gem 'memcachier'
   gem 'dalli'
 end
 
