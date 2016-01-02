@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151113233557) do
+ActiveRecord::Schema.define(version: 20160102152126) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id",              null: false
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20151113233557) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.integer  "team_id"
+    t.boolean  "show_debug_profiler",   default: false, null: false
   end
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true

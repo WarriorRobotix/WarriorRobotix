@@ -305,7 +305,7 @@ class MembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      m_params = params[:member].permit(:first_name, :last_name, :email, :student_number, :grade, :title, :admin, :accepted, :graduated_year, :graduated, :team_id)
+      m_params = params[:member].permit(:first_name, :last_name, :email, :student_number, :grade, :title, :admin, :show_debug_profiler, :accepted, :graduated_year, :graduated, :team_id)
       m_params[:graduated_year] = 0 unless (m_params.delete(:graduated).to_i == 1)
       m_params
     end
