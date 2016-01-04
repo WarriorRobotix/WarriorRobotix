@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160102152126) do
+ActiveRecord::Schema.define(version: 20160104002048) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id",              null: false
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20160102152126) do
     t.integer  "maximum_choices"
     t.integer  "ballots_privacy",    default: 0,     null: false
     t.datetime "end_at"
-    t.integer  "restriction",        default: 0,     null: false
+    t.integer  "restriction",        default: 1,     null: false
     t.integer  "author_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
