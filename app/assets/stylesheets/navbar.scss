@@ -61,6 +61,9 @@ body.posts-index .nav-posts{
 body.videos-index .nav-videos{
   @extend .nav-hl;
 }
+body.pages-photos .nav-photos{
+  @extend .nav-hl;
+}
 body.attendances-center .nav-attend{
   @extend .nav-hl;
 }
