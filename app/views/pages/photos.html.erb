@@ -1,11 +1,13 @@
-<h1><%= title 'Photos' %></h1>
+<div class="flickr-c-div" style="margin: 0 auto;width:800px;">
+  <h1><%= title 'Photos' %></h1>
 
-<a data-flickr-embed="true" data-header="true" data-footer="true"  href="https://www.flickr.com/photos/135183539@N04/albums/72157658116048435" title="Robotix 2014-15 pic">
-  <img src="https://farm6.staticflickr.com/5652/21104385691_10c4195f1f_c.jpg" width="800" height="533" alt="Robotix 2014-15 pic">
-</a>
-
+  <a data-flickr-embed="true" data-header="true" data-footer="true"  href="https://www.flickr.com/photos/135183539@N04/albums/72157658116048435" title="Robotix 2014-15 pic">
+    <img src="https://farm6.staticflickr.com/5652/21104385691_10c4195f1f_c.jpg" width="800" height="533" alt="Robotix 2014-15 pic">
+  </a>
+</div>
 <script type="text/javascript" data-no-turbolink>
 var w = Math.min($('main .container').first().width(),800);
-$('main a img').first().attr('width',Math.round(w)).attr('height',Math.round(w*2/3))
+$('main a img').first().attr('width',Math.round(w)).attr('height',Math.round(w*2/3));
+if (w > 780) { $('.flickr-c-div').first().attr('width',Math.round(w)); }
 </script>
 <script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8" data-no-turbolink></script>
