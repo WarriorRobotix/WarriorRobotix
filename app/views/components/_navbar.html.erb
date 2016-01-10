@@ -25,7 +25,9 @@
   <nav>
     <div class="nav-wrapper">
     <span class="brand-logo flow-text" style="font-size:132%">
-    <%= link_to "4659 WarriorRobotix", root_path %>
+    <%= link_to root_path do %>
+     <span class="hide-on-small-only">4659 </span>WarriorRobotix
+    <% end %>
     </span>
     <ul class="flow-text right hide-on-med-and-down top-nav" style="font-size:100%;">
       <% if member_is_admin? %>
