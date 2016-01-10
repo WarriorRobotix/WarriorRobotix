@@ -190,6 +190,12 @@ label.dark {
   margin-bottom: 20px;
 }
 
+.col.video-large-margin-bottom{
+  @media #{$large-and-up} {
+    margin-bottom: 50px;
+  }
+}
+
 .col.x-large-margin-bottom{
   margin-bottom: 30px;
   @media #{$medium-and-down} {
