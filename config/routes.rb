@@ -77,6 +77,7 @@ Rails.application.routes.draw do
   get '/mentors' => 'pages#mentors'
   get '/team-editor' => 'pages#team_editor'
   get '/about' => 'pages#about_us'
+  get '/website' => 'pages#website'
   get '/myattendance' => 'pages#my_attendance'
   get '/contact' => 'pages#contact', :constraints => {:format => :html}
   post '/contact' => 'pages#contact_message', :constraints => {:format => :html}
