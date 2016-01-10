@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_admin!, only: [:home, :contact, :contact_message, :vex, :skills, :other_competitions, :photos, :mentors, :teams, :about_us, :my_attendance, :member_contract]
+  skip_before_action :authenticate_admin!, only: [:home, :contact, :contact_message, :vex, :skills, :other_competitions, :website, :photos, :mentors, :teams, :about_us, :my_attendance, :member_contract]
   before_action :authenticate_member!, only: [:my_attendance]
   def home
     set_meta_tags_for_home
@@ -7,6 +7,9 @@ class PagesController < ApplicationController
     @latest_posts = Post.where(type: nil, restriction: 0).order(created_at: :DESC).limit(3).select(:id, :title, :description)
   end
 
+  def website
+  end
+  
   def vex
   end
 
