@@ -1,11 +1,29 @@
+<div id="att_video_modal" class="modal">
+  <div class="modal-content">
+    <h4>Attendance System</h4>
+    <div class="video-container">
+      <iframe width="607" height="363" src="//www.youtube.com/embed/jEd0TA3iRUE?rel=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+  </div>
+</div>
+
 <h1><%= title 'Our Website' %></h1>
 
 <div class="home-info row small-margin-top">
   <div class="col s12 front-page-content">
     <div class="text-description flow-text">
-      <div class="col s12 m6 video-wrapper right video-large-margin-bottom">
-        <div class="video-container">
-          <iframe width="607" height="363" src="https://www.youtube.com/embed/jEd0TA3iRUE?rel=0&showinfo=0" frameborder="0" allowfullscreen=""></iframe>
+      <div class="col s12 m6 right" style="margin-left:20px;">
+        <div class="video-modal-trigger">
+          <%= image_tag 'features/video.png', style: 'width:100%;', class: 'modal-switch', href: '#att_video_modal' %>
+          <div class="ovarlay">
+            <div>
+              <i class="large material-icons outline">play_circle_outline</i>
+              <i class="large material-icons filled">play_circle_filled</i>
+            </div>
+          </div>
         </div>
       </div>
       <p class="no-vertical-margin">
