@@ -15,6 +15,10 @@ class RegistrationsController < ApplicationController
   end
 
   def submit
+    #Remove this code if you want real registration
+    render :error
+    return
+    #---------------------
     @old_member = params[:old].present?
     @member = Member.new(accepted: false)
     if verify_recaptcha(:model => @member, :message => "There is an error with reCAPTCHA") && (params[:form][:allow_emails] == '1') && (params[:form][:agree_contract] == '1')
