@@ -1,4 +1,4 @@
-class Competition < ActiveRecord::Base
+class Competition < ApplicationRecord
   validates :name, presence: true
   validates :start_date, presence: true
   validates :cover_image_link, presence: true

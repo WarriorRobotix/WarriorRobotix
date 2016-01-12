@@ -1,4 +1,4 @@
-class RegistrationField < ActiveRecord::Base
+class RegistrationField < ApplicationRecord
   enum input_type: [:text_field, :text_area, :select_tag]
   serialize :extra_info
 

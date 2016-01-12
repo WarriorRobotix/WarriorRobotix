@@ -1,4 +1,4 @@
-class Member < ActiveRecord::Base
+class Member < ApplicationRecord
   has_secure_password
 
   validates :password, length: { in: 5..64 }, unless: :password_nil?

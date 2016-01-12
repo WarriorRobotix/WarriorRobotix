@@ -1,4 +1,4 @@
-class Attendance < ActiveRecord::Base
+class Attendance < ApplicationRecord
   enum status: [:invited, :attending, :attended]
   enum reply: [:no_reply, :confirmed, :maybe, :declined]
 

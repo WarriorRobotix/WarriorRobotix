@@ -1,4 +1,4 @@
-class GlobalVar < ActiveRecord::Base
+class GlobalVar < ApplicationRecord
   enum data_type: [:string, :integer, :boolean]
 
   def value
