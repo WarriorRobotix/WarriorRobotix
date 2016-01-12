@@ -60,10 +60,6 @@ gem 'kaminari'
 
 gem 'puma'
 
-group :development do
-  gem 'letter_opener'
-end
-
 group :production do
   # Use postgresql as the database for Active Record in production
   gem 'pg'

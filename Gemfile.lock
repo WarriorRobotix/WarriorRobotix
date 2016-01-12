@@ -45,7 +45,6 @@ GEM
       method_source
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.4.0)
     arel (7.0.0)
     bcrypt (3.1.10)
     builder (3.2.2)
@@ -115,10 +114,6 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.10.0)
-    launchy (2.4.3)
-      addressable (~> 2.3)
-    letter_opener (1.4.1)
-      launchy (~> 2.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -234,7 +229,6 @@ DEPENDENCIES
   jquery-turbolinks
   kaminari
   kgio
-  letter_opener
   materialize-sass
   memcachier
   meta-tags
