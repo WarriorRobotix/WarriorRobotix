@@ -26,7 +26,7 @@ class Member < ApplicationRecord
   has_many :options, through: :ballots
   has_many :posts
 
-  belongs_to :team, touch: true
+  belongs_to :team, touch: true, optional: true
 
   default_scope { where(accepted: true) }
 

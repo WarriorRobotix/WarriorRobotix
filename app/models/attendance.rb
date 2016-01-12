@@ -5,7 +5,7 @@ class Attendance < ApplicationRecord
   validate :end_at_after_start_at
 
   belongs_to :member, touch: true
-  belongs_to :event, touch: true
+  belongs_to :event, touch: true, optional: true
 
   private
   def end_at_after_start_at
