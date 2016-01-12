@@ -2,7 +2,7 @@
 <% if member_is_admin? %>
 <%= link_to 'New Sponsor', new_sponsor_path, class: "btn-bordered" %>
 <% end %>
-<% cache(['sponsors',@sponsors.count, @sponsors.maximum(:updated_at),member_is_admin?]) do %>
+<% cache(['sponsors',@sponsors,member_is_admin?]) do %>
 <div class="row">
   <% @sponsors.each do |sponsor| %>
   <% cache([sponsor,member_is_admin?]) do %>
