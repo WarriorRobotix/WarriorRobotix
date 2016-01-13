@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/amatsuda/kaminari.git
+  revision: 282b2125292d8f4c721dba89510ee4360c071eb0
+  specs:
+    kaminari (1.0.0.alpha)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
+GIT
   remote: git://github.com/rails/rails.git
   revision: 858b9652ced5438127e6c6404bf3f9cae9699985
   specs:
@@ -132,9 +140,6 @@ GEM
       railties (>= 3.1.0)
       turbolinks
     json (1.8.3)
-    kaminari (0.16.3)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
     kgio (2.10.0)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -231,7 +236,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
-  kaminari
+  kaminari!
   kgio
   materialize-sass
   memcachier

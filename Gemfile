@@ -50,7 +50,7 @@ gem 'meta-tags'
 gem "recaptcha", :require => "recaptcha/rails"
 
 # Use kaminari for pagination
-gem 'kaminari'
+gem 'kaminari', github: 'amatsuda/kaminari'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
