@@ -48,6 +48,11 @@ class Post < ApplicationRecord
       self.restriction.pluralize.capitalize
     end
   end
+
+  def restriction_value
+    Post.restrictions[self.restriction]
+  end
+
   private
   def remove_useless_limited_teams
     if self.restriction_changed? && self.restriction_was == "limited"

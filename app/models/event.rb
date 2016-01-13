@@ -8,7 +8,7 @@ class Event < Post
   def update_reply(member, reply)
     reply = reply.to_s.downcase
 
-    return if member.nil? || !['confirmed', 'maybe', 'declined'].include?(reply) || (self[:restriction] > member.max_restriction)
+    return if member.nil? || !['confirmed', 'maybe', 'declined'].include?(reply) || (self.restriction_value > member.max_restriction)
 
     attendance = Attendance.find_or_initialize_by(member: member, event: self)
 
