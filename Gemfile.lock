@@ -7,6 +7,12 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
+  remote: git://github.com/heroku/rails_serve_static_assets.git
+  revision: 239b9d0c6cf54a1f8a33b02177774410900cf10e
+  specs:
+    rails_serve_static_assets (0.0.4)
+
+GIT
   remote: git://github.com/rails/rails.git
   revision: 858b9652ced5438127e6c6404bf3f9cae9699985
   specs:
@@ -176,7 +182,6 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
-    rails_serve_static_assets (0.0.4)
     rails_stdout_logging (0.0.4)
     rake (10.4.2)
     rdoc (4.2.1)
@@ -246,6 +251,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails!
   rails_12factor
+  rails_serve_static_assets!
   recaptcha
   redcarpet
   sass-rails (~> 5.0)

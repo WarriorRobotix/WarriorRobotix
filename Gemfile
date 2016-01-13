@@ -66,6 +66,8 @@ group :production do
 
   gem 'rails_12factor'
 
+  gem 'rails_serve_static_assets', github: 'heroku/rails_serve_static_assets'
+
   # MemCachier
   gem 'kgio'
   gem 'memcachier'
