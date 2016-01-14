@@ -7,7 +7,8 @@
 edward:
   first_name: Edward
   last_name: Guo
-  email: edwardplguo@gmail.com
+  email: edward.guo@example.com
   student_number: '222'
   grade: 12
-  password_digest: '$2a$10$Ix7qK3KvVY/z6RW5pK77bOOhl5oJ9NctvFeWpQBkPgITVsrjCbJb2'
+  password_digest: '$2a$10$bJ9H6zmk3IHj0GfjoGH3SOKR0viDwtsNzkXuUnyict4MYk7ByOGQi'
+  admin: true

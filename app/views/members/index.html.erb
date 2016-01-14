@@ -4,14 +4,14 @@
 <% end %>
 <h1 class="flow-text">Members Center</h1>
 <%= render 'quick_members_panel'  %>
-<% cache(['current_members',@show_attend,@current_members.count,@current_members.maximum(:updated_at),member_is_admin?]) do %>
+<% cache(['current_members',@show_attend,@current_members,member_is_admin?]) do %>
 <%= render('members_table', members: @current_members, title: 'Current Members', show_attend: @show_attend, display_show_attend: member_is_admin?) %>
 <% end %>
 <% if member_is_admin? %>
-<% cache(['pending_members',@pending_members.count,@pending_members.maximum(:updated_at)]) do %>
+<% cache(['pending_members',@pending_members]) do %>
 <%= render('pending_members_table', members: @pending_members, title: 'Pending Members') if @pending_members.present? %>
 <% end %>
-<% cache(['graduated_members',@graduated_members.count,@graduated_members.maximum(:updated_at)]) do %>
+<% cache(['graduated_members',@graduated_members]) do %>
 <%= render('members_table', members: @graduated_members, title: 'Graduated Members') if @graduated_members.present? %>
 <% end %>
 <% end %>

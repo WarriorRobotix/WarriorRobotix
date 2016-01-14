@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate_admin!, [:new, :create, :destroy]
+  skip_before_action :authenticate_admin!, only: [:new, :create, :destroy]
   skip_before_action :verify_authenticity_token
 
   def new

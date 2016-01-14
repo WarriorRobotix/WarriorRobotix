@@ -1,4 +1,4 @@
-class Member < ActiveRecord::Base
+class Member < ApplicationRecord
   has_secure_password
 
   validates :password, length: { in: 5..64 }, unless: :password_nil?
@@ -26,7 +26,7 @@ class Member < ActiveRecord::Base
   has_many :options, through: :ballots
   has_many :posts
 
-  belongs_to :team, touch: true
+  belongs_to :team, touch: true, optional: true
 
   default_scope { where(accepted: true) }
 

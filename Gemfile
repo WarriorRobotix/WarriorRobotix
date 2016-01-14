@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', github: 'rails/rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -44,13 +44,13 @@ gem 'rack-mini-profiler'
 gem 'carrierwave'
 
 # User meta-tags for meta and SEO
-gem 'meta-tags'
+gem 'meta-tags', github: 'EdwGx/meta-tags'
 
 # Use recaptcha to avoid spams
 gem "recaptcha", :require => "recaptcha/rails"
 
 # Use kaminari for pagination
-gem 'kaminari'
+gem 'kaminari', github: 'amatsuda/kaminari'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -60,15 +60,13 @@ gem 'kaminari'
 
 gem 'puma'
 
-group :development do
-  gem 'letter_opener'
-end
-
 group :production do
   # Use postgresql as the database for Active Record in production
   gem 'pg'
 
   gem 'rails_12factor'
+
+  gem 'rails_serve_static_assets', github: 'heroku/rails_serve_static_assets'
 
   # MemCachier
   gem 'kgio'
@@ -83,12 +81,17 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  #gem 'spring'
 
   # Use .env to load ENV variables
   gem 'dotenv-rails'
 end
+
+group :development do
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 3.0'
+end
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

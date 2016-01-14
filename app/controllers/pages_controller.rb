@@ -4,12 +4,12 @@ class PagesController < ApplicationController
   def home
     set_meta_tags_for_home
     @show_side_buttons = true
-    @latest_posts = Post.where(type: nil, restriction: 0).order(created_at: :DESC).limit(3).select(:id, :title, :description)
+    @latest_posts = Post.where(type: nil, restriction: 0).order(created_at: :DESC).limit(3)
   end
 
   def website
   end
-  
+
   def vex
   end
 

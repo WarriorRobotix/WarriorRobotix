@@ -29,7 +29,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    if @post[:restriction] > max_restriction
+    if @post.restriction_value > max_restriction
       if member_signed_in?
         unless @post.team_ids.include?(current_member.team_id)
           raise Forbidden

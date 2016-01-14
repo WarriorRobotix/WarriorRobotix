@@ -1,4 +1,4 @@
-class Photo < ActiveRecord::Base
+class Photo < ApplicationRecord
   mount_uploader :file, PhotoUploader
   attr_accessor :original_filename
 

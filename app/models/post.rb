@@ -1,4 +1,4 @@
-class Post < ActiveRecord::Base
+class Post < ApplicationRecord
   belongs_to :author, class_name: "Member", :foreign_key => "author_id"
   has_and_belongs_to_many :teams
 
@@ -48,6 +48,11 @@ class Post < ActiveRecord::Base
       self.restriction.pluralize.capitalize
     end
   end
+
+  def restriction_value
+    Post.restrictions[self.restriction]
+  end
+
   private
   def remove_useless_limited_teams
     if self.restriction_changed? && self.restriction_was == "limited"

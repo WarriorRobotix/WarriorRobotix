@@ -57,7 +57,7 @@ class PollsController < ApplicationController
 
   # POST /polls/1/vote (js only)
   def vote
-    if @poll[:restriction] > max_restriction
+    if @poll.restriction_value > max_restriction
       unless @poll.team_ids.include?(current_member.team_id)
         raise Forbidden
       end
