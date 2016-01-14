@@ -1,51 +1,55 @@
 require 'test_helper'
 
-class PostsControllerTest < ActionController::TestCase
-=begin
+class PostsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @post = posts(:one)
+    @post = posts(:everyone)
+    @admin = members(:edward)
+    post "/signin", params: { identifier: @admin.student_number, password: '123456' }
   end
 
   test "should get index" do
-    get :index
+    get posts_url
     assert_response :success
-    assert_not_nil assigns(:posts)
   end
 
   test "should get new" do
-    get :new
+    session[:member_id] = members(:edward).id
+    get new_post_url
     assert_response :success
   end
 
   test "should create post" do
+    session[:member_id] = members(:edward).id
     assert_difference('Post.count') do
-      post :create, post: { description: @post.description, title: @post.title }
+      post posts_url, params: { post: { description: @post.description, restriction: @post.restriction, title: @post.title } }
     end
 
-    assert_redirected_to post_path(assigns(:post))
+    assert_redirected_to post_path(Post.last)
   end
 
   test "should show post" do
-    get :show, id: @post
+    get post_url(@post)
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @post
+    session[:member_id] = members(:edward).id
+    get edit_post_url(@post)
     assert_response :success
   end
 
   test "should update post" do
-    patch :update, id: @post, post: { description: @post.description, title: @post.title }
-    assert_redirected_to post_path(assigns(:post))
+    session[:member_id] = members(:edward).id
+    patch post_url(@post), params: { post: { description: @post.description, restriction: @post.restriction, title: @post.title } }
+    assert_redirected_to post_path(@post)
   end
 
   test "should destroy post" do
+    session[:member_id] = members(:edward).id
     assert_difference('Post.count', -1) do
-      delete :destroy, id: @post
+      delete post_url(@post)
     end
 
     assert_redirected_to posts_path
   end
-=end
 end

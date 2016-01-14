@@ -25,8 +25,7 @@ class MemberTest < ActiveSupport::TestCase
 
   test "rest password" do
     edward = members(:edward)
-    reset_password_token = edward.reset_password
-    edward.save!
+    reset_password_token = edward.generate_reset_password_token!
 
     assert edward.valid_reset_password_token?(reset_password_token), "Should return true on correct token"
     assert_not edward.valid_reset_password_token?("wrong token"), "Should return false on incorrect token"

@@ -39,6 +39,7 @@ class ApplicationController < ActionController::Base
   end
 
   alias_method :try_redirect_back, :redirect_back
+
   private
   def set_basic_meta_tags
     set_meta_tags description: "Team 4659 Warrior Robotix is the robotics club of Port Credit Secondary School in Mississauga. We participate in Vex, Skills Ontario and other robotics competitions."
