@@ -44,7 +44,7 @@ gem 'rack-mini-profiler'
 gem 'carrierwave'
 
 # User meta-tags for meta and SEO
-gem 'meta-tags'
+gem 'meta-tags', github: 'EdwGx/meta-tags'
 
 # Use recaptcha to avoid spams
 gem "recaptcha", :require => "recaptcha/rails"

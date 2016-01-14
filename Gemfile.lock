@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/EdwGx/meta-tags.git
+  revision: b183412c69d1119bff7ed790d70fa4300d30a313
+  specs:
+    meta-tags (2.1.0)
+      actionpack (>= 3.0.0)
+
+GIT
   remote: git://github.com/amatsuda/kaminari.git
   revision: 282b2125292d8f4c721dba89510ee4360c071eb0
   specs:
@@ -154,8 +161,6 @@ GEM
     materialize-sass (0.97.5)
       sass (~> 3.3)
     memcachier (0.0.2)
-    meta-tags (2.1.0)
-      actionpack (>= 3.0.0)
     method_source (0.8.2)
     mime-types (2.99)
     mini_portile2 (2.0.0)
@@ -245,7 +250,7 @@ DEPENDENCIES
   kgio
   materialize-sass
   memcachier
-  meta-tags
+  meta-tags!
   pg
   puma
   rack-mini-profiler
