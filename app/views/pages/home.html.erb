@@ -82,7 +82,7 @@
   </div>
 </div>
 
-<% cache(['latest_posts',@latest_posts.count, @latest_posts.maximum(:updated_at)]) do %>
+<% cache(['latest_posts', @latest_posts.unscope(:select).maximum(:updated_at)]) do %>
 <%= render 'latest_posts' %>
 <% end %>
 
