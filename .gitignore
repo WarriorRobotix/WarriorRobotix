@@ -16,6 +16,9 @@
 !/log/.keep
 /tmp
 
+# Ignore byebug files
+.byebug_history
+
 # Linux gitignore
 *~
 
