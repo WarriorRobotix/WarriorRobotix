@@ -11,7 +11,7 @@
       <% else %>
         Invalid form: Valid form requires first name, last name, email, grade, and student number fields.
         <br>
-        <%= link_to 'Quick FIX', fix_registration_fields_path(return_to_info), method: :post, class: "btn-text", data: { disable_with: nil } %>
+        <%= link_to 'Quick FIX', fix_registration_fields_path(), method: :post, class: "btn-text", data: { disable_with: nil } %>
       <% end %>
     </div>
   </div>

@@ -47,7 +47,6 @@ module SessionsHelper
 
   def authenticate_member!
     unless member_signed_in?
-      #flash[:notice] = "You need a display name to join groups."
       redirect_to signin_path(return_to_info)
       return false
     end
