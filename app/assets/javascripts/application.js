@@ -60,7 +60,12 @@ $(function(){
 
   $("form.checkbox-counter-form").each(function(){
     updateCheckboxCounterForm($(this));
-  })
+  });
+
+  $(".signin").each(function(){
+    var $t = $(this);
+    $t.attr('href', $t.attr('href') + '?from=' + returnToInfo());
+  });
 });
 
 $(window).on('hashchange', function(){
@@ -214,4 +219,14 @@ function updateCheckboxCounterForm(form){
     count += 1;
   });
   form.find('.checkbox-counter').html(checked + "/" + count)
+}
+
+function returnToInfo(){
+  var currentSearch = window.location.search.split('&');
+  for (var i = currentSearch.length - 1; i >= 0; i--) {
+    if ( currentSearch[i].startsWith('from=') || (i == 0 && currentSearch[i].startsWith('?from=')) ) {
+      currentSearch.splice(i, 1);
+    }
+  }
+  return encodeURIComponent(window.location.pathname + currentSearch.join('&'));
 }
