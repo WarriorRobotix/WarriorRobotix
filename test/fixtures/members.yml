@@ -4,11 +4,20 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-edward:
-  first_name: Edward
-  last_name: Guo
-  email: edward.guo@example.com
-  student_number: '222'
+admin:
+  first_name: Admin
+  last_name: Example
+  email: admin@example.com
+  student_number: '111'
   grade: 12
   password_digest: '$2a$10$bJ9H6zmk3IHj0GfjoGH3SOKR0viDwtsNzkXuUnyict4MYk7ByOGQi'
   admin: true
+
+member:
+  first_name: Member
+  last_name: Example
+  email: member@example.com
+  student_number: '222'
+  grade: 12
+  password_digest: '$2a$10$bJ9H6zmk3IHj0GfjoGH3SOKR0viDwtsNzkXuUnyict4MYk7ByOGQi'
+  admin: false

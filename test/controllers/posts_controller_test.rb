@@ -3,8 +3,7 @@ require 'test_helper'
 class PostsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @post = posts(:everyone)
-    @admin = members(:edward)
-    post "/signin", params: { identifier: @admin.student_number, password: '123456' }
+    sign_in_as_admin
   end
 
   test "should get index" do
@@ -13,13 +12,11 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    session[:member_id] = members(:edward).id
     get new_post_url
     assert_response :success
   end
 
   test "should create post" do
-    session[:member_id] = members(:edward).id
     assert_difference('Post.count') do
       post posts_url, params: { post: { description: @post.description, restriction: @post.restriction, title: @post.title } }
     end
@@ -33,19 +30,18 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get edit" do
-    session[:member_id] = members(:edward).id
     get edit_post_url(@post)
     assert_response :success
   end
 
   test "should update post" do
-    session[:member_id] = members(:edward).id
+    session[:member_id] = members(:member).id
     patch post_url(@post), params: { post: { description: @post.description, restriction: @post.restriction, title: @post.title } }
     assert_redirected_to post_path(@post)
   end
 
   test "should destroy post" do
-    session[:member_id] = members(:edward).id
+    session[:member_id] = members(:member).id
     assert_difference('Post.count', -1) do
       delete post_url(@post)
     end
