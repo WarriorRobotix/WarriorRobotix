@@ -1,50 +1,51 @@
 require 'test_helper'
-=begin
-class VideosControllerTest < ActionController::TestCase
+
+class VideosControllerTest < ActionDispatch::IntegrationTest
   setup do
     @video = videos(:one)
+    sign_in_as_admin
   end
 
   test "should get index" do
-    get :index
+    get videos_url
     assert_response :success
-    assert_not_nil assigns(:videos)
   end
 
   test "should get new" do
-    get :new
+    get new_video_url
     assert_response :success
   end
 
   test "should create video" do
     assert_difference('Video.count') do
-      post :create, video: { author: @video.author, title: @video.title, upload_date: @video.upload_date, youtube_vid: @video.youtube_vid }
+      post videos_url, params: { video: { author: @video.author, title: @video.title, upload_date: @video.upload_date, youtube_vid: @video.youtube_vid } }
     end
 
-    assert_redirected_to video_path(assigns(:video))
+    assert_redirected_to videos_url
   end
 
-  test "should show video" do
-    get :show, id: @video
-    assert_response :success
+  test "shouldn't show single video" do
+    #The only way to view video should be Videos#index
+    assert_raises(ActionController::RoutingError) do
+      get video_url(@video)
+    end
   end
 
   test "should get edit" do
-    get :edit, id: @video
+    get edit_video_url(@video)
     assert_response :success
   end
 
   test "should update video" do
-    patch :update, id: @video, video: { author: @video.author, title: @video.title, upload_date: @video.upload_date, youtube_vid: @video.youtube_vid }
-    assert_redirected_to video_path(assigns(:video))
+    patch video_url(@video), params: { video: { author: @video.author, title: @video.title, upload_date: @video.upload_date, youtube_vid: @video.youtube_vid } }
+    assert_redirected_to videos_url
   end
 
   test "should destroy video" do
     assert_difference('Video.count', -1) do
-      delete :destroy, id: @video
+      delete video_url(@video)
     end
 
     assert_redirected_to videos_path
   end
 end
-=end
