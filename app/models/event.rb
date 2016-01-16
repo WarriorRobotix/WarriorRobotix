@@ -27,21 +27,6 @@ class Event < Post
     end
   end
 
-  def replyers_description(reply)
-    reply_id = Attendance.replies[reply]
-    reply_count = self.attendances.where(reply: reply_id).count
-    names = Member.joins(:attendances).where(attendances: {event_id: self.id, reply: reply_id }).limit(4).pluck(:first_name, :last_name).map {|names| names.join(' ')}
-    if reply_count == 0
-      "0 members"
-    elsif reply_count == 1
-      "1 member - #{names[0]}"
-    elsif reply_count <= 4
-      "#{reply_count} members - #{names.join(', ')}"
-    else
-      "#{reply_count} members - #{names[0..2].join(', ')} and others"
-    end
-  end
-
   def end_after_start
     if start_at.present? && end_at.present? && (start_at > end_at)
       errors.add(:end_at, "must after start at")

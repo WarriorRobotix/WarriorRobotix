@@ -1,11 +1,12 @@
 <%= form_tag event_reply_path(event), remote: true  do %>
 <% reply = event.reply_from(current_member) %>
 <table class="flow-text" style="font-size:100%;">
-<% ({'yes' => 'confirmed', 'maybe' => 'maybe', 'no' => 'declined' }).each do |key, value| %>
+<% reply_count = event.attendances.where.not(reply: 0).group(:reply).count %>
+<% ({'yes' => ['confirmed', 1], 'maybe' => ['maybe', 2], 'no' => ['declined', 3] }).each do |key, value| %>
   <tr>
-    <td><%= radio_button_tag 'reply', value, reply == value, class: "stop-propagation", disabled: event.disabled, data: {"trigger-form" => "1"} %>
-    <%= label_tag "reply_#{value}", key.capitalize, class: :dark %></td>
-    <td><%= event.replyers_description(value) %></td>
+    <td><%= radio_button_tag 'reply', value[0], reply == value[0], class: "stop-propagation", disabled: event.disabled, data: {"trigger-form" => "1"} %>
+    <%= label_tag "reply_#{value[0]}", key.capitalize, class: :dark %></td>
+    <td><%= pluralize(reply_count[value[1]], 'member') %></td>
   </tr>
 <% end %>
 </table>

@@ -23,7 +23,7 @@ class PostsController < ApplicationController
     else
       post_scope = post_scope.where(restriction: 0)
     end
-    @posts = post_scope.order(created_at: :desc).page(params[:page]).per(10)
+    @posts = post_scope.includes(:author, :teams).order(created_at: :desc).all.page(params[:page]).per(10)
   end
 
   # GET /posts/1

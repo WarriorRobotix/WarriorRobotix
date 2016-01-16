@@ -41,9 +41,11 @@ class Post < ApplicationRecord
     when "everyone"
       self.restriction.capitalize
     when "limited"
-      teams_description = self.teams.all.order(:name).pluck(:name).join(', ')
-      teams_description = "Limited (ADMIN ONLY)" if teams_description.blank?
-      teams_description
+      if self.teams.empty?
+        "Limited (ADMIN ONLY)"
+      else
+        self.teams.map{|t| t.name}.sort.join(', ')
+      end
     else
       self.restriction.pluralize.capitalize
     end
