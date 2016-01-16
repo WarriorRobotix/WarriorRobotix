@@ -7,17 +7,20 @@
 admin:
   first_name: Admin
   last_name: Example
+  title: TeamOne Leader
   email: admin@example.com
   student_number: '111'
   grade: 12
-  password_digest: '$2a$10$bJ9H6zmk3IHj0GfjoGH3SOKR0viDwtsNzkXuUnyict4MYk7ByOGQi'
+  accepted: true
   admin: true
+  password_digest: '$2a$10$bJ9H6zmk3IHj0GfjoGH3SOKR0viDwtsNzkXuUnyict4MYk7ByOGQi'
 
 member:
   first_name: Member
   last_name: Example
   email: member@example.com
   student_number: '222'
-  grade: 12
-  password_digest: '$2a$10$bJ9H6zmk3IHj0GfjoGH3SOKR0viDwtsNzkXuUnyict4MYk7ByOGQi'
+  grade: 11
+  accepted: true
   admin: false
+  password_digest: '$2a$10$bJ9H6zmk3IHj0GfjoGH3SOKR0viDwtsNzkXuUnyict4MYk7ByOGQi'
