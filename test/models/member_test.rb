@@ -1,9 +1,7 @@
 require 'test_helper'
 
 class MemberTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
   test "generate a random 22 characters remember token" do
     member = members(:member)
     remember_token = member.remember_token
