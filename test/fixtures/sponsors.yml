@@ -1,0 +1,15 @@
+one:
+  name: MyString
+  description: MyString
+  image_link: MyString
+  facebook_link: MyString
+  twitter_link: MyString
+  website_link: MyString
+
+two:
+  name: MyString
+  description: MyString
+  image_link: MyString
+  facebook_link: MyString
+  twitter_link: MyString
+  website_link: MyString
