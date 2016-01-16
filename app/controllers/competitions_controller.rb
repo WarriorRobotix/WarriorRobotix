@@ -10,11 +10,6 @@ class CompetitionsController < ApplicationController
     @previous_competitions = Competition.where('"competitions"."start_date" < ?', Date.today).order(start_date: :DESC).all
   end
 
-  # GET /competitions/1
-  # GET /competitions/1.json
-  def show
-  end
-
   # GET /competitions/new
   def new
     @competition = Competition.new

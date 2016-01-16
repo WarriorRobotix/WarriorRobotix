@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   post 'add_team_member' => 'teams#add_team_member'
   post 'remove_team_member' => 'teams#remove_team_member'
 
-  resources :competitions
+  resources :competitions, except: [:show]
 
   scope :attendances do
     get 'center' => 'attendances#center', as: :attendances_center
