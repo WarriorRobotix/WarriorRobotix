@@ -58,6 +58,9 @@ body.sponsors-index .nav-about{
 body.posts-index .nav-posts{
   @extend .nav-hl;
 }
+body.posts-show .nav-posts{
+  @extend .nav-hl;
+}
 body.videos-index .nav-videos{
   @extend .nav-hl;
 }
