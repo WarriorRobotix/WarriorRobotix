@@ -27,8 +27,6 @@ Rails.application.routes.draw do
 
   resources :sponsors, except: [:show]
 
-  #resources :photos, except: [:show]
-
   resources :videos, except: [:show]
 
   resources :teams

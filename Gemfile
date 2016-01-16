@@ -40,9 +40,6 @@ gem 'materialize-sass'
 # Profiling rails with rack-mini-profiler
 gem 'rack-mini-profiler'
 
-# Use carrierwave for image uploading
-gem 'carrierwave'
-
 # User meta-tags for meta and SEO
 gem 'meta-tags', github: 'EdwGx/meta-tags'
 
