@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   resources :videos, except: [:show]
 
-  resources :teams
+  resources :teams, except: [:show]
 
   post 'add_team_member' => 'teams#add_team_member'
   post 'remove_team_member' => 'teams#remove_team_member'
