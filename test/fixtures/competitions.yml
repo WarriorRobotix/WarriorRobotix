@@ -1,0 +1,17 @@
+one:
+  name: MyString
+  description: MyText
+  location: MyString
+  achievements: MyString
+  cover_image_link: MyString
+  start_date: 2016-01-16
+  end_date: 2016-01-16
+
+two:
+  name: MyString
+  description: MyText
+  location: MyString
+  achievements: MyString
+  cover_image_link: MyString
+  start_date: 2016-01-16
+  end_date: 2016-01-16
