@@ -1,6 +1,8 @@
 # config/initializers/mini_profiler.rb
 
 # If Mini Profiler is included via gem
+=begin
+Mini Profiler is incompatible with Rails 5.0.0.beta1
 if Rails.configuration.respond_to?(:load_mini_profiler) && Rails.configuration.load_mini_profiler
   require 'rack-mini-profiler'
   # initialization is skipped so trigger it
@@ -12,3 +14,4 @@ if defined?(Rack::MiniProfiler)
     Rack::MiniProfiler.config.storage = Rack::MiniProfiler::MemcacheStore
   end
 end
+=end

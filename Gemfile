@@ -38,7 +38,7 @@ gem 'cocoon'
 gem 'materialize-sass'
 
 # Profiling rails with rack-mini-profiler
-gem 'rack-mini-profiler'
+#gem 'rack-mini-profiler' Mini Profiler is incompatible with Rails 5.0.0.beta1
 
 # User meta-tags for meta and SEO
 gem 'meta-tags', github: 'EdwGx/meta-tags'

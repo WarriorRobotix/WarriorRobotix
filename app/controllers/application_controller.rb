@@ -7,11 +7,12 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_admin!
   before_action :set_basic_meta_tags, if: "request.get?"
 
-  before_action do
-    if max_restriction == 3 && current_member.show_debug_profiler
-      Rack::MiniProfiler.authorize_request
-    end
-  end
+  #  Mini Profiler is incompatible with Rails 5.0.0.beta1
+  #  before_action do
+  #    if max_restriction == 3 && current_member.show_debug_profiler
+  #      Rack::MiniProfiler.authorize_request
+  #    end
+  #  end
 
   def redirect_back(options={})
     if params[:from].present?
