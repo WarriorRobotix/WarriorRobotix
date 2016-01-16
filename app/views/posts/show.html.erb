@@ -1,6 +1,10 @@
 <div class="posts-container card-panel">
   <%= render @post %>
 </div>
+<p class="center-align">
+  <br>
+  <a href="/posts"> Show All Posts </a>
+</p>
 <% if member_is_admin? && @post.type == "Poll" %>
   <% cache(['voter_list',@post]) do %>
   <%= render 'polls/voter_list', poll: @post %>
