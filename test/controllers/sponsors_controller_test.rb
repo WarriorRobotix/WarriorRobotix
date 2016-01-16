@@ -24,7 +24,7 @@ class SponsorsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to sponsors_path
   end
 
-  test "should show sponsor" do
+  test "shouldn't show single sponsor" do
     assert_raises(ActionController::RoutingError) do
       get sponsor_url(@sponsor)
     end

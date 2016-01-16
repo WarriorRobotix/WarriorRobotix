@@ -24,7 +24,7 @@ class CompetitionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to competitions_path
   end
 
-  test "should show competition" do
+  test "shouldn't show single competition" do
     assert_raises(ActionController::RoutingError) do
       get competition_url(@competition)
     end
