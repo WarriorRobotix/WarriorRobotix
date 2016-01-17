@@ -7,29 +7,8 @@ class PagesController < ApplicationController
     @latest_posts = Post.where(type: nil, restriction: 0).order(created_at: :DESC).limit(3)
   end
 
-  def website
-  end
-
-  def vex
-  end
-
   def my_attendance
     @attendances = current_member.attendances.all.order(:start_at => :asc)
-  end
-
-  def skills
-  end
-
-  def other_competitions
-  end
-
-  def teams
-  end
-
-  def about_us
-  end
-
-  def member_contract
   end
 
   def team_editor
