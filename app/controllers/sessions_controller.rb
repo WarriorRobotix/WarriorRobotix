@@ -14,7 +14,13 @@ class SessionsController < ApplicationController
       if identifier.present? && password.present?
         if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", identifier, identifier).take.try(:authenticate, password)
           signin_member(member)
-          cookies.permanent[:mtk] = "#{member.id}$#{member.remember_token}" if params[:remember_me] == '1'
+
+          if params[:remember_me] == "1"
+            cookies.permanent[:mtk] = "#{member.id}$#{member.remember_token}" unless cookies[:mtk].present?
+          else
+            cookies.delete :mtk
+          end
+
           format.html { redirect_back notice: "You have successfully signed in" }
           format.json { render json: {access: member.max_restriction} }
           flag = false
