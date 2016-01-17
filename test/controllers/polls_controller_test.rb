@@ -56,7 +56,7 @@ class PollsControllerTest < ActionDispatch::IntegrationTest
   test "should destroy poll and its options" do
     @poll.options.create! [{description: "Ruby"},{description: "Java"},{description: "Python"}]
     options_count = @poll.options.count
-    
+
     assert_difference('Poll.count', -1) do
       assert_difference('Option.count',-options_count) do
         delete poll_url(@poll)
@@ -65,4 +65,41 @@ class PollsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to posts_path
   end
+
+
+  test "should vote for an option" do
+    assert_difference "Ballot.count" do
+      post poll_vote_path(@poll), params: { vote: options(:one_p1).id }
+    end
+    assert_response :success
+  end
+
+  test "should vote for multiple options of a multiple choices poll" do
+    assert_difference "Ballot.count", 2 do
+      post poll_vote_path(polls(:multi_poll_to_member)), params: { vote: { options(:one_p3).id.to_s => '1', options(:two_p3).id.to_s => '1' } }
+    end
+    assert_response :success
+  end
+
+  test "should overwrite vote for multiple options of a multiple choices poll" do
+    assert_difference "Ballot.count" , 1 do
+      post poll_vote_path(polls(:multi_poll_to_member)), params: { vote: { options(:one_p3).id.to_s => '1' } }
+      assert_response :success
+    end
+
+    assert_no_difference "Ballot.count" do
+      post poll_vote_path(polls(:multi_poll_to_member)), params: { vote: { options(:two_p3).id.to_s => '1' } }
+      assert_response :success
+    end
+  end
+
+  test "member shouldn't be able to vote an admin poll" do
+    sign_out
+    sign_in_as_member
+
+    assert_raises Forbidden do
+      post poll_vote_path(polls(:poll_to_admin)), params: { vote: { options(:one_p2).id.to_s => '1' } }
+    end
+  end
+
 end

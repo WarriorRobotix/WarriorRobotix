@@ -35,4 +35,19 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     get contact_url
     assert_response :success
   end
+
+  test "should send contact message" do
+    post contact_url, params: { message: { full_name: "Test Person", email: "test@example.com", body: "An important message" } }
+    assert_redirected_to contact_path
+  end
+
+  test "shouldn't send contact message without full name" do
+    post contact_url, params: { message: { full_name: "", email: "test@example.com", body: "An important message" } }
+    assert_response :success
+  end
+
+  test "shouldn't send contact message without body" do
+    post contact_url, params: { message: { full_name: "Test Person", email: "test@example.com", body: "" } }
+    assert_response :success
+  end
 end

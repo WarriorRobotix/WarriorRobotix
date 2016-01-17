@@ -1,0 +1,23 @@
+one_p1:
+  description: "Option ONE"
+  poll: poll_to_member
+
+two_p1:
+  description: "Option TWO"
+  poll: poll_to_member
+
+one_p2:
+  description: "Option ONE"
+  poll: poll_to_admin
+
+two_p2:
+  description: "Option TWO"
+  poll: poll_to_admin
+
+one_p3:
+  description: "Option ONE"
+  poll: multi_poll_to_member
+
+two_p3:
+  description: "Option TWO"
+  poll: multi_poll_to_member

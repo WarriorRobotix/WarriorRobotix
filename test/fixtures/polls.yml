@@ -3,3 +3,17 @@ poll_to_member:
   title: "Programming Language Poll"
   description: "Hello World!"
   restriction: 1
+
+poll_to_admin:
+  type: Poll
+  title: "Best Compiler Poll"
+  description: "Hello World!"
+  restriction: 3
+
+multi_poll_to_member:
+  type: Poll
+  title: "Programming Language Poll"
+  description: "Hello World!"
+  restriction: 1
+  multiple_choices: true
+  ballots_changeable: true

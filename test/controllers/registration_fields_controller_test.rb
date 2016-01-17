@@ -1,51 +1,110 @@
 require 'test_helper'
 
-class RegistrationFieldsControllerTest < ActionController::TestCase
-=begin
+class RegistrationFieldsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @registration_field = registration_fields(:one)
+    sign_in_as_admin
   end
 
   test "should get index" do
-    get :index
+    get registration_fields_url
     assert_response :success
-    assert_not_nil assigns(:registration_fields)
   end
 
   test "should get new" do
-    get :new
+    get new_registration_field_url
     assert_response :success
   end
 
   test "should create registration_field" do
     assert_difference('RegistrationField.count') do
-      post :create, registration_field: { map_to_model: @registration_field.map_to_model, name: @registration_field.name }
+      post registration_fields_url, params: { registration_field: { title: "What's your favorite complier?", input_type: @registration_field.input_type, optional: @registration_field.optional  } }
     end
 
-    assert_redirected_to registration_field_path(assigns(:registration_field))
+    assert_redirected_to registration_fields_url
   end
 
-  test "should show registration_field" do
-    get :show, id: @registration_field
+  test "shouldn't create registration_field with errors" do
+    assert_no_difference('RegistrationField.count') do
+      post registration_fields_url, params: { registration_field: { optional: @registration_field.optional } }
+    end
+
     assert_response :success
   end
 
+  test "shouldn't show single registration_field" do
+    #The only way to view registration_field should be RegistrationFields#index
+    assert_raises(ActionController::RoutingError) do
+      get registration_field_url(@registration_field)
+    end
+  end
+
   test "should get edit" do
-    get :edit, id: @registration_field
+    get edit_registration_field_url(@registration_field)
     assert_response :success
   end
 
   test "should update registration_field" do
-    patch :update, id: @registration_field, registration_field: { map_to_model: @registration_field.map_to_model, name: @registration_field.name }
-    assert_redirected_to registration_field_path(assigns(:registration_field))
+    patch registration_field_url(@registration_field), params: { registration_field: { title: @registration_field.title, input_type: @registration_field.input_type, optional: @registration_field.optional  } }
+    assert_redirected_to registration_fields_url
+  end
+
+  test "shouldn't update registration_field with errors" do
+    last_updated_at = @registration_field.updated_at
+    patch registration_field_url(@registration_field), params: { registration_field: { title: nil } }
+
+    assert_equal last_updated_at, @registration_field.updated_at
+    assert_response :success
   end
 
   test "should destroy registration_field" do
     assert_difference('RegistrationField.count', -1) do
-      delete :destroy, id: @registration_field
+      delete registration_field_url(@registration_field)
     end
 
     assert_redirected_to registration_fields_path
   end
-=end
+
+  test "should automatically fix the registration fields configuration" do
+    assert_difference('RegistrationField.count', 5) do
+      post fix_registration_fields_url
+    end
+
+    assert_redirected_to registration_fields_path
+  end
+
+  test "show move a registration field up" do
+    RegistrationField.destroy_all
+    post fix_registration_fields_url
+
+    first_id = RegistrationField.order(order: :ASC).first.id
+    assert_no_difference "RegistrationField.find(#{first_id}).order" do
+      post registration_field_up_url(first_id)
+    end
+    assert_redirected_to registration_fields_url
+
+    last_id = RegistrationField.order(order: :ASC).last.id
+    assert_difference "RegistrationField.find(#{last_id}).order", -1 do
+      post registration_field_up_url(last_id)
+    end
+    assert_redirected_to registration_fields_url
+  end
+
+  test "show move a registration field down" do
+    RegistrationField.destroy_all
+    post fix_registration_fields_url
+
+    first_id = RegistrationField.order(order: :ASC).first.id
+    assert_difference "RegistrationField.find(#{first_id}).order", 1 do
+      post registration_field_down_url(first_id)
+    end
+    assert_redirected_to registration_fields_url
+
+    last_id = RegistrationField.order(order: :ASC).last.id
+    assert_no_difference "RegistrationField.find(#{last_id}).order" do
+      post registration_field_down_url(last_id)
+    end
+    assert_redirected_to registration_fields_url
+  end
+
 end
