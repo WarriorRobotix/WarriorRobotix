@@ -41,6 +41,7 @@ module SessionsHelper
   alias_method :member_is_admin?, :is_member_admin?
 
   def signout_member
+    cookies.delete :mtk
     session[:member_id] = @current_member = nil
   end
 

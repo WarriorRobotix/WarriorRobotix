@@ -15,10 +15,8 @@ class SessionsController < ApplicationController
         if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", identifier, identifier).take.try(:authenticate, password)
           signin_member(member)
 
-          if params[:remember_me] == "1"
-            cookies.permanent[:mtk] = "#{member.id}$#{member.remember_token}" unless cookies[:mtk].present?
-          else
-            cookies.delete :mtk
+          if params[:remember_me] == "1" && !cookies[:mtk].present?
+            cookies.permanent[:mtk] = "#{member.id}$#{member.remember_token}"
           end
 
           format.html { redirect_back notice: "You have successfully signed in" }
