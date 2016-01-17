@@ -1,0 +1,7 @@
+member:
+  type: Event
+  title: Title
+  description: Hello World!
+  restriction: 1
+  start_at: 2016-01-01 8:00:00 -5
+  end_at: 2016-01-01 9:00:00 -5
