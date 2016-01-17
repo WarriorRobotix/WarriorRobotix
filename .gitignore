@@ -19,6 +19,9 @@
 # Ignore byebug files
 .byebug_history
 
+# Ignore Coverage folder
+/coverage
+
 # Linux gitignore
 *~
 
