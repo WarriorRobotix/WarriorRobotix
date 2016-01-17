@@ -66,8 +66,6 @@ Rails.application.routes.draw do
   get '/set-password/:record_hex/:reset_token' => 'members#reset_password_edit', type: :set
   post '/set-password/:record_hex/:reset_token' => 'members#reset_password_update', type: :set
 
-  get '/attend' => 'pages#attend'
-  get '/event' => 'pages#event'
   get '/vex' => 'pages#vex'
   get '/skills' => 'pages#skills'
   get '/frc-ceta' => 'pages#other_competitions'
