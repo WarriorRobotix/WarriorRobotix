@@ -28,7 +28,7 @@ class PagesController < ApplicationController
   end
 
   def contact_message
-    @message = params.require(:message).permit(:full_name, :email, :phone_number, :body).to_h.symbolize_keys!
+    @message = params.require(:message).permit(:full_name, :email, :phone_number, :body).to_h.symbolize_keys
     if verify_recaptcha
       if @message[:full_name].blank?
         flash.now[:alert] = 'Please tell us your name.'
