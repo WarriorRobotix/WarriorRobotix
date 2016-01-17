@@ -11,6 +11,25 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get index for vistor" do
+    sign_out
+
+    get posts_url
+    assert_response :success
+  end
+
+  test "should get index for member" do
+    sign_out
+
+    @member = members(:member)
+    @member.team = Team.create!(name: "TeamOne")
+    @member.save!
+    sign_in_as_member(@member)
+
+    get posts_url
+    assert_response :success
+  end
+
   test "should get new" do
     get new_post_url
     assert_response :success
@@ -45,5 +64,19 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to posts_path
+  end
+
+  test "show redirect vistor to sigin in page if post is restricted" do
+    sign_out
+    post_for_member = posts(:post_to_member)
+
+    get post_url(post_for_member)
+    assert_redirected_to signin_path(from: (post_path(post_for_member)))
+
+    get post_url(post_for_member) + "?foo=bar"
+    assert_redirected_to signin_path(from: (post_path(post_for_member) + "?foo=bar"))
+
+    get post_url(post_for_member) + "?from=%2Fposts"
+    assert_redirected_to signin_path(from: post_path(post_for_member))
   end
 end

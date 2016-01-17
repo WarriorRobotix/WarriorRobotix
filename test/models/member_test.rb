@@ -43,4 +43,36 @@ class MemberTest < ActiveSupport::TestCase
     assert_not member.valid_reset_password_token?(reset_password_token), "Incorrect token should be invalid on within 2 days"
   end
 
+  test "abbr_name" do
+    member = members(:member)
+
+    assert_equal("#{member.first_name} #{member.last_name[0]}.", member.abbr_name)
+  end
+
+  test "create_admin" do
+    assert_difference("Member.count") do
+      Member.create_admin({
+        first_name: "New",
+        last_name: "Admin",
+        email: "new.admin@example.com",
+        grade: "12",
+        student_number: "000",
+        password: "123456"
+      })
+    end
+  end
+
+  test "create_admin should failable" do
+    assert_no_difference("Member.count") do
+      Member.create_admin({
+        first_name: "",
+        last_name: "",
+        email: "new.admin@example.com",
+        grade: "12",
+        student_number: "000",
+        password: "123456"
+      })
+    end
+  end
+
 end

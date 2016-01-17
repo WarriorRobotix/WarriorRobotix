@@ -2,3 +2,8 @@ post_to_everyone:
   title: Title
   description: Hello World!
   restriction: 0
+
+post_to_member:
+  title: Title
+  description: Hello World!
+  restriction: 1

@@ -24,6 +24,14 @@ class VideosControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to videos_url
   end
 
+  test "shouldn't create video with errors" do
+    assert_no_difference('Video.count') do
+      post videos_url, params: { video: { upload_date: @video.upload_date } }
+    end
+
+    assert_response :success
+  end
+
   test "shouldn't show single video" do
     #The only way to view video should be Videos#index
     assert_raises(ActionController::RoutingError) do
@@ -39,6 +47,14 @@ class VideosControllerTest < ActionDispatch::IntegrationTest
   test "should update video" do
     patch video_url(@video), params: { video: { author: @video.author, title: @video.title, upload_date: @video.upload_date, youtube_vid: @video.youtube_vid } }
     assert_redirected_to videos_url
+  end
+
+  test "shouldn't update video with errors" do
+    last_updated_at = @video.updated_at
+    patch video_url(@video), params: { video: { title: nil } }
+    
+    assert_equal last_updated_at, @video.updated_at
+    assert_response :success
   end
 
   test "should destroy video" do

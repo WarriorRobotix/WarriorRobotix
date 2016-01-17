@@ -7,6 +7,30 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     @faker = Member.new(student_number: "123", email: "faker@example.com")
   end
 
+  test "should get new" do
+    get signin_path
+    assert_response :success
+  end
+
+  test "should get new redirect if member has already signined" do
+    sign_in_as_member
+
+    get signin_path
+    assert_redirected_to root_path
+  end
+
+  test "should sign out" do
+    sign_in_as_member
+
+    delete signout_path
+    assert_redirected_to root_path
+  end
+
+  test "shouldn't sign out if member never sign in" do
+    delete signout_path
+    assert_redirected_to root_path
+  end
+
   test "should sign in admin" do
     post signin_url, params: { identifier: @admin.student_number, password: '123456' }
     assert_redirected_to root_path

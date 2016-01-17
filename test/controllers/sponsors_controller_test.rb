@@ -24,6 +24,14 @@ class SponsorsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to sponsors_path
   end
 
+  test "shouldn't create sponsor with errors" do
+    assert_no_difference('Sponsor.count') do
+      post sponsors_url, params: { sponsor: { website_link: @sponsor.website_link } }
+    end
+
+    assert_response :success
+  end
+
   test "shouldn't show single sponsor" do
     assert_raises(ActionController::RoutingError) do
       get sponsor_url(@sponsor)
@@ -38,6 +46,14 @@ class SponsorsControllerTest < ActionDispatch::IntegrationTest
   test "should update sponsor" do
     patch sponsor_url(@sponsor), params: { sponsor: { description: @sponsor.description, facebook_link: @sponsor.facebook_link, image_link: @sponsor.image_link, name: @sponsor.name, twitter_link: @sponsor.twitter_link, website_link: @sponsor.website_link } }
     assert_redirected_to sponsors_path
+  end
+
+  test "shouldn't update sponsor with errors" do
+    last_updated_at = @sponsor.updated_at
+    patch sponsor_url(@sponsor), params: { sponsor: { name: nil } }
+
+    assert_equal last_updated_at, @sponsor.updated_at
+    assert_response :success
   end
 
   test "should destroy sponsor" do

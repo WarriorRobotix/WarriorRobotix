@@ -24,6 +24,14 @@ class CompetitionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to competitions_path
   end
 
+  test "shouldn't create competition with errors" do
+    assert_no_difference('Competition.count') do
+      post competitions_url, params: { competition: { location: @competition.location } }
+    end
+
+    assert_response :success
+  end
+
   test "shouldn't show single competition" do
     assert_raises(ActionController::RoutingError) do
       get competition_url(@competition)
@@ -38,6 +46,14 @@ class CompetitionsControllerTest < ActionDispatch::IntegrationTest
   test "should update competition" do
     patch competition_url(@competition), params: { competition: { achievements: @competition.achievements, cover_image_link: @competition.cover_image_link, description: @competition.description, end_date: @competition.end_date, location: @competition.location, name: @competition.name, start_date: @competition.start_date } }
     assert_redirected_to competitions_path
+  end
+
+  test "shouldn't update competition with errors" do
+    last_updated_at = @competition.updated_at
+    patch competition_url(@competition), params: { competition: { name: nil } }
+
+    assert_equal last_updated_at, @competition.updated_at
+    assert_response :success
   end
 
   test "should destroy competition" do

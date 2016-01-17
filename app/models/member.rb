@@ -70,29 +70,31 @@ class Member < ApplicationRecord
     "#{self.first_name} #{self.last_name}"
   end
 
-  def self.create_admin
+  def self.create_admin(attributes = {})
+    slience_puts = attributes.any?
+
     admin = Member.new(admin: true, accepted: true)
-    puts "Create an admin..."
-    puts "First Name:"
-    admin.first_name = gets.chomp
-    puts "Last Name:"
-    admin.last_name = gets.chomp
-    puts "Email:"
-    admin.email = gets.chomp
-    puts "Grade:"
-    admin.grade = gets.chomp
-    puts "Student Number:"
-    admin.student_number = gets.chomp
+    puts "Create an admin..." unless slience_puts
+    puts "First Name:" unless slience_puts
+    admin.first_name = attributes[:first_name] || gets.chomp
+    puts "Last Name:" unless slience_puts
+    admin.last_name = attributes[:last_name] || gets.chomp
+    puts "Email:" unless slience_puts
+    admin.email = attributes[:email] || gets.chomp
+    puts "Grade:" unless slience_puts
+    admin.grade = attributes[:grade] || gets.chomp
+    puts "Student Number:" unless slience_puts
+    admin.student_number = attributes[:student_number] || gets.chomp
     admin.student_number = nil if admin.student_number.blank?
-    puts "Password:"
-    admin.password = gets.chomp
+    puts "Password:" unless slience_puts
+    admin.password = attributes[:password] || gets.chomp
 
     if admin.save
-      puts "Admin #{admin.full_name} has successfully created"
+      puts "Admin #{admin.full_name} has successfully created" unless slience_puts
       admin
     else
-      puts "#{admin.errors.count} #{admin.errors.count == 1 ? "error" : "errors"} prohibited this admin account from being saved:"
-      admin.errors.full_messages.each {|msg| puts msg}
+      puts "#{admin.errors.count} #{admin.errors.count == 1 ? "error" : "errors"} prohibited this admin account from being saved:" unless slience_puts
+      admin.errors.full_messages.each {|msg| puts msg} unless slience_puts
       admin
     end
   end

@@ -46,4 +46,9 @@ class MembersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to members_path
   end
+
+  test "should get index with attendances count" do
+    get members_url(show: "attend")
+    assert_response :success
+  end
 end

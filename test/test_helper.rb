@@ -15,8 +15,12 @@ class ActiveSupport::TestCase
     post "/signin", params: { identifier: admin.student_number, password: '123456' }
   end
 
-  def sign_in_as_member
-    member = members(:member)
+  def sign_in_as_member(member = nil)
+    member ||= members(:member)
     post "/signin", params: { identifier: member.student_number, password: '123456' }
+  end
+
+  def sign_out
+    delete "/signout"
   end
 end
