@@ -1,0 +1,5 @@
+poll_to_member:
+  type: Poll
+  title: "Programming Language Poll"
+  description: "Hello World!"
+  restriction: 1

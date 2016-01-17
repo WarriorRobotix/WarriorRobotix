@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @event = events(:member)
+    @event = events(:event_to_member)
     sign_in_as_admin
   end
 

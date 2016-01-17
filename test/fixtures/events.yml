@@ -1,4 +1,4 @@
-member:
+event_to_member:
   type: Event
   title: Title
   description: Hello World!

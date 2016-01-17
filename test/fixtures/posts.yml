@@ -1,4 +1,4 @@
-everyone:
+post_to_everyone:
   title: Title
   description: Hello World!
   restriction: 0

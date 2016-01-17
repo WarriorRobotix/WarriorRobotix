@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PostsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @post = posts(:everyone)
+    @post = posts(:post_to_everyone)
     sign_in_as_admin
   end
 
