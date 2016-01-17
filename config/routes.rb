@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   get '/events', to: redirect('/posts')
   get '/polls', to: redirect('/posts')
 
-  resources :events, only: [:index, :destroy, :show], controller: :posts, type: "Event"
-  resources :polls, only: [:index, :destroy, :show], controller: :posts, type: "Poll"
+  resources :events, only: [:destroy, :show], controller: :posts, type: "Event"
+  resources :polls, only: [:destroy, :show], controller: :posts, type: "Poll"
 
   resources :sponsors, except: [:show]
 
