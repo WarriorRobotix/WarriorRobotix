@@ -35,13 +35,11 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update post" do
-    session[:member_id] = members(:member).id
     patch post_url(@post), params: { post: { description: @post.description, restriction: @post.restriction, title: @post.title } }
     assert_redirected_to post_path(@post)
   end
 
   test "should destroy post" do
-    session[:member_id] = members(:member).id
     assert_difference('Post.count', -1) do
       delete post_url(@post)
     end
