@@ -10,7 +10,7 @@
   <%= form_tag do %>
     <%= errors_for(@member, "in this registration application") unless @member.nil? %>
     <div class="row">
-    <% cache_unless @form.present?, RegistrationField.cache_key do %>
+    <% cache_unless @form.present?, (@form.present? ? "rf" : RegistrationField.cache_key) do %>
     <% RegistrationField.order(order: :ASC, id: :ASC).all.each do |field| %>
     <% name = field.title %>
     <% title = field.optional ? "#{field.title} (optional)" : field.title %>
