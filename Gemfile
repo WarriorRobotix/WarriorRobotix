@@ -47,7 +47,7 @@ gem 'carrierwave'
 gem 'meta-tags'
 
 # Use recaptcha to avoid spams
-gem "recaptcha", :require => "recaptcha/rails"
+gem 'recaptcha', :require => 'recaptcha/rails'
 
 # Use kaminari for pagination
 gem 'kaminari'
