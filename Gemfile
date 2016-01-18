@@ -38,7 +38,7 @@ gem 'cocoon'
 gem 'materialize-sass'
 
 # Profiling rails with rack-mini-profiler
-gem 'rack-mini-profiler'
+gem 'rack-mini-profiler', github: 'MiniProfiler/rack-mini-profiler'
 
 # Use carrierwave for image uploading
 gem 'carrierwave'
