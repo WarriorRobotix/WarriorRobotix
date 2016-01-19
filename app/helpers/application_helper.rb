@@ -59,6 +59,22 @@ module ApplicationHelper
     raw(MarkdownRender.render(text))
   end
 
+  def markdown_complex(text)
+    m_text = MarkdownRender.render(text)
+    processed_text = []
+    while img_index = m_text.index("<img")
+      processed_text << m_text.slice!(0..img_index)
+
+      src_index = m_text.index(" src=\"")
+      processed_text[-1] += m_text.slice!(0...(src_index + 6))
+
+      src_end_index = m_text.index("\"")
+      processed_text << (">img:#{m_text.slice!(0...src_end_index)}")
+    end
+    processed_text << m_text
+    processed_text
+  end
+
   def hash_modal(prefix, url_format, options={})
     options = options.merge(class: 'hash-modal', id: "hm-#{prefix}", remote: true)
     link_to prefix, url_format, options

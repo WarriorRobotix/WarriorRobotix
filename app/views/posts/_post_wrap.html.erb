@@ -8,8 +8,9 @@
       <% end %>
     </div>
   </div>
-
-  <div class="flow-text body markdown"><%= markdown(post.description) %></div>
+  <div class="flow-text body markdown">
+    <%= raw(markdown_complex(post.description).map { |t| t.start_with?(">img:") ? image_path(t[5..(-1)]) : t }.join) %>
+  </div>
 
   <%= yield %>
 
