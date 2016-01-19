@@ -9,7 +9,7 @@ class PagesController < ApplicationController
 
   def website
   end
-  
+
   def vex
   end
 

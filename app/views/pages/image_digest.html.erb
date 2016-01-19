@@ -1,0 +1,32 @@
+<div class="max6">
+<h1 class="flow-text">Image Digest</h1>
+<div class="card-panel" style="padding-bottom:10px;padding-top:10px;">
+<%= form_tag do %>
+<div class="row large-margin-bottom">
+  <div class="col s12 input-field">
+    <%= label_tag :path, "Path" %>
+    <%= text_field_tag :path, params[:path] %>
+    
+    <% if params[:path].present? %>
+    <br>
+    <p style="word-break:break-all;">
+      <%= image_path(params[:path]) %>
+    </p>
+    <br>
+    <p style="word-break:break-all;">
+      <%= image_url(params[:path]) %>
+    </p>
+    <br>
+    <p style="word-break:break-all;">
+      <%= "#{image_tag(params[:path], alt: 'IMAGE ALT')}" %>
+    </p>
+    <% end %>
+  </div>
+</div>
+
+<div class="actions row">
+  <button type="submit" name="commit" class="btn waves-effect waves-light">Generate</button>
+</div>
+<% end %>
+</div>
+</div>
