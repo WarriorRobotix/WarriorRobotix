@@ -10,3 +10,6 @@ window.ios_ready = ->
     if (`typeof t_next !== 'undefined'` && t_next.is('label'))
       t.before(t_next.detach())
       t.closest('.input-field').removeClass('input-field')
+
+  if window.navigator.userAgent.match(/iPad/i)
+    $('nav').addClass('force-sidenav')

@@ -41,12 +41,12 @@
       <% end %>
       <li>
         <a class="dropdown-button nav-competitions" href="#!" data-activates="competitions_dropdown">
-          Competitions <i class="material-icons right">keyboard_arrow_down</i>
+          Competitions <i class="material-icons arrow-down right">keyboard_arrow_down</i>
         </a>
       </li>
       <li>
         <a class="dropdown-button nav-about" href="#!" data-activates="about_dropdown">
-          About <i class="material-icons right">keyboard_arrow_down</i>
+          About <i class="material-icons arrow-down right">keyboard_arrow_down</i>
         </a>
       </li>
       <li>
@@ -71,7 +71,7 @@
           <%= current_member.first_name %>
         </a>
         <% else %>
-          <%= link_to signin_path, class: 'signin' do %>
+          <%= link_to signin_path, class: 'signin', rel: 'nofollow' do %>
             <i class="material-icons">person_outline</i>
           <% end %>
         <% end %>
@@ -87,7 +87,7 @@
         <% if member_signed_in? %>
           <%= link_to "Sign out", signout_path, method: :delete %>
         <% else %>
-          <%= link_to "Sign in", signin_path, class: 'signin' %>
+          <%= link_to "Sign in", signin_path, class: 'signin', rel: 'nofollow' %>
         <% end %>
       </li>
       <% if member_is_admin? %>
@@ -118,6 +118,9 @@
       </li>
       <li>
         <%= link_to "Teams", teams_path %>
+      </li>
+      <li>
+        <%= link_to "Mentors", mentors_path %>
       </li>
       <li>
         <%= link_to "Sponsors", sponsors_path %>

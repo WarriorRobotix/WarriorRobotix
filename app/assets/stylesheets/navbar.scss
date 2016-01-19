@@ -10,6 +10,31 @@ nav {
       margin-right: -10px;
     }
   }
+  &.force-sidenav {
+    a.button-collapse {
+      display: inline-block;
+    }
+
+    .brand-logo {
+      left: 50%;
+      transform: translateX(-50%);
+
+      &.left, &.right {
+        padding: 0;
+        transform: none;
+      }
+
+      &.left { left: 0.5rem; }
+      &.right {
+        right: 0.5rem;
+        left: auto;
+      }
+    }
+
+    .top-nav {
+      display: none;
+    }
+  }
 }
 
 nav a:hover{

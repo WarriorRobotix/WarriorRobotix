@@ -21,7 +21,11 @@
 Turbolinks.enableProgressBar();
 
 $(function(){
-  if (window.is_ios()) { window.ios_ready(); }
+  if ( window.is_ios() ) {
+    window.ios_ready();
+  } else if ( window.is_ie() ) {
+    window.ie_ready();
+  }
   window.hash_modal.refresh();
 
   $('.datepicker').pickadate({
