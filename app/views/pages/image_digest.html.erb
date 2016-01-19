@@ -6,19 +6,17 @@
   <div class="col s12 input-field">
     <%= label_tag :path, "Path" %>
     <%= text_field_tag :path, params[:path] %>
-    
+
     <% if params[:path].present? %>
-    <br>
-    <p style="word-break:break-all;">
-      <%= image_path(params[:path]) %>
-    </p>
     <br>
     <p style="word-break:break-all;">
       <%= image_url(params[:path]) %>
     </p>
-    <br>
     <p style="word-break:break-all;">
       <%= "#{image_tag(params[:path], alt: 'IMAGE ALT')}" %>
+    </p>
+    <p>
+      <%= image_tag(params[:path], alt: 'IMAGE ALT', style: "width:50%;left:25%;position:relative") %>
     </p>
     <% end %>
   </div>

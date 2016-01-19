@@ -84,8 +84,8 @@ Rails.application.routes.draw do
   get '/search' => 'members#search'
   get '/eventsearch' => 'members#eventsearch'
 
-  get  'img-dig' => 'pages#image_digest'
-  post 'img-dig' => 'pages#image_digest'
+  get  'dig' => 'pages#image_digest'
+  post 'dig' => 'pages#image_digest'
 
   get '/register' => 'registrations#form'
   post '/register' => 'registrations#submit'
