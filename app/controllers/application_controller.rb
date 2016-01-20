@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_admin!
   before_action :set_basic_meta_tags, if: "request.get?"
 
-  force_ssl if: :ssl_compatible?
+  #force_ssl if: :ssl_compatible?
 
   before_action do
     if max_restriction == 3 && current_member.show_debug_profiler
