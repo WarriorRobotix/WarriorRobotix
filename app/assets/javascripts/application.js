@@ -65,11 +65,12 @@ $(function(){
   $("form.checkbox-counter-form").each(function(){
     updateCheckboxCounterForm($(this));
   });
-
-  $(".signin").each(function(){
-    var $t = $(this);
-    $t.attr('href', $t.attr('href') + '?from=' + returnToInfo());
-  });
+  if ( !window.is_ie() ) {
+    $(".signin").each(function(){
+      var $t = $(this);
+      $t.attr('href', $t.attr('href') + '?from=' + returnToInfo());
+    });
+  }
 });
 
 $(window).on('hashchange', function(){
