@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :posts, type: "Post"
+  get '/blog', to: redirect('/posts')
 
   resources :events, only: [:new, :create, :edit, :update] do
     post '/reply' => 'events#reply', :constraints => {:format => :js}
