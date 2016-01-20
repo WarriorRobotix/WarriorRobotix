@@ -61,7 +61,6 @@ Rails.application.configure do
   config.cache_store = :dalli_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = 'http://4659warriors.com.global.prod.fastly.net'
   config.static_cache_control = "max-age=31536000, s-maxage=31536000"
 
   # Ignore bad email addresses and do not raise email delivery errors.
