@@ -7,8 +7,13 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_admin!
   before_action :set_basic_meta_tags, if: "request.get?"
 
+  CLOUD_FLARE_HTTP_VISTOR = "{\"scheme\":\"http\"}".freeze
   before_action do
-    logger.info "CloudFlare Vistor: #{request.headers['Cf-Visitor']} IP:#{request.headers['X-Forwarded-For']} Country: #{request.headers['CF-Ipcountry']}"
+    cf_vistor = request.headers['Cf-Visitor']
+    logger.info "CloudFlare Vistor: #{cf_vistor} IP:#{request.headers['X-Forwarded-For']} Country: #{request.headers['CF-Ipcountry']}"
+    if cf_vistor.present? && cf_vistor == CLOUD_FLARE_HTTP_VISTOR && browser.modern?
+      redirect_to protocol: 'https://', host: request.host, path: request.fullpath
+    end
   end
 
   before_action do
