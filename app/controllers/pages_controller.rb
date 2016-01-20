@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_admin!, only: [:home, :contact, :contact_message, :vex, :skills, :other_competitions, :website, :photos, :mentors, :teams, :about_us, :my_attendance, :member_contract]
+  skip_before_action :authenticate_admin!, only: [:home, :contact, :contact_message, :vex, :skills, :other_competitions, :website, :photos, :mentors, :about_us, :my_attendance, :member_contract]
   before_action :authenticate_member!, only: [:my_attendance]
   def home
     set_meta_tags_for_home
@@ -8,9 +8,11 @@ class PagesController < ApplicationController
   end
 
   def website
+    set_meta_tags description: "At Warrior Robotix, we believe in doing everything by ourselves, that is why we built the website from ground up using Ruby On Rails, HTML, SASS, and Javascript. We applied modern web design principles to let the user get the best experience possible."
   end
 
   def vex
+    set_meta_tags description: "VEX Skyrise was the latest challenge thrust upon us. The premise was fairly simple, putting cubes on to posts that dotted the edges of the arena. However, there were also yellow pegs called skyrises that could be stacked upon to create a 5 foot tall tower!"
   end
 
   def my_attendance
@@ -18,12 +20,15 @@ class PagesController < ApplicationController
   end
 
   def skills
+    set_meta_tags description: "Skills Robotics (Skills Canada) offers students a chance to push the boundaries of engineering by giving students a safe learning environment where they are taught to use machinery and their brains to solve the unique challenges thrown at them."
   end
 
   def other_competitions
+    set_meta_tags description: "Warrior Robotic entered FRC for the first time in 2012-2013 year of school. The competitions at that time was Ultimate Ascent, where robots were tasked with throwing Frisbees at multiple goals and having to be able to climb a pyramid in the middle of the field."
   end
 
-  def teams
+  def mentors
+    set_meta_tags description: "Here at Warrior Robotix we pride ourselves by following our simple motto: Design. Build. Win. and for us it has worked effectively. We are based out of Port Credit Secondary School in Mississauga, Ontario, Canada, and have been competing in tournaments such as VEX and Skills Canada."
   end
 
   def about_us
