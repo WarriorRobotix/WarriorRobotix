@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    @page_title = member_signed_in? ? "Posts" : "Blog"
     case params[:type]
     when "Event"
       post_scope = Event
