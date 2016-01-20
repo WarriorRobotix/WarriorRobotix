@@ -7,7 +7,9 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_admin!
   before_action :set_basic_meta_tags, if: "request.get?"
 
-  #force_ssl if: :ssl_compatible?
+  before_action do
+    logger.info "CloudFlare Vistor: #{request.headers['Cf-Visitor']} IP:#{request.headers['X-Forwarded-For']} Country: #{request.headers['CF-Ipcountry']}"
+  end
 
   before_action do
     if max_restriction == 3 && current_member.show_debug_profiler
@@ -51,8 +53,4 @@ class ApplicationController < ActionController::Base
 
     set_meta_tags fb: {app_id: '843857822394784'}
   end
-
-    def ssl_compatible?
-      !Rails.env.development? && browser.modern?
-    end
 end
