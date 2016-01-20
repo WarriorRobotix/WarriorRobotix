@@ -8,6 +8,7 @@ class CompetitionsController < ApplicationController
   def index
     @upcoming_competitions = Competition.where('"competitions"."start_date" >= ?', Date.today).order(start_date: :ASC).all
     @previous_competitions = Competition.where('"competitions"."start_date" < ?', Date.today).order(start_date: :DESC).all
+    @page_title = "Upcoming & Past"
   end
 
   # GET /competitions/1
