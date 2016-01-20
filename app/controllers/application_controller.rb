@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
     cf_vistor = request.headers['Cf-Visitor']
     logger.info "CloudFlare Vistor: #{cf_vistor} IP:#{request.headers['X-Forwarded-For']} Country: #{request.headers['CF-Ipcountry']}"
     if cf_vistor.present? && cf_vistor == CLOUD_FLARE_HTTP_VISTOR && browser.modern?
-      redirect_to protocol: 'https://', host: request.host, path: request.fullpath
+      secure_url = ActionDispatch::Http::URL.url_for(protocol: 'https://', host: request.host, path: request.fullpath)
+      redirect_to secure_url
     end
   end
 
