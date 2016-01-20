@@ -52,6 +52,9 @@ gem 'recaptcha', :require => 'recaptcha/rails'
 # Use kaminari for pagination
 gem 'kaminari'
 
+# Use browser to detect user agent
+gem 'browser'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
