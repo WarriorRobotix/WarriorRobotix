@@ -1,4 +1,4 @@
-<% cache(['upcoming_competitions',@upcoming_competitions.count, @upcoming_competitions.maximum(:updated_at),member_is_admin?]) do %>
+<% cache(['upcoming_competitions',@upcoming_competitions.count, @upcoming_competitions.maximum(:updated_at)&.utc&.to_s(:nsec),member_is_admin?]) do %>
 <div style="height:30px">
 </div>
 <% unless @upcoming_competitions.empty? %>
@@ -26,7 +26,7 @@
 </div>
 <% end %>
 <% end %>
-<% cache(['previous_competitions',@previous_competitions.count, @previous_competitions.maximum(:updated_at),member_is_admin?]) do %>
+<% cache(['previous_competitions',@previous_competitions.count, @previous_competitions.maximum(:updated_at)&.utc&.to_s(:nsec),member_is_admin?]) do %>
 <% unless @previous_competitions.empty? %>
 <h1 class="flow-text">Previous Competitions</h1>
 <div class="row">

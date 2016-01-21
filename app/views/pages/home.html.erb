@@ -32,7 +32,7 @@
 </div>
 <% end %>
 <% end %>
-<% cache(action: "home", action_suffix: 'main') do %>
+<% cache(['home', @latest_posts.unscope(:select).maximum(:updated_at)&.utc&.to_s(:nsec)]) do %>
 <br>
 <div class="row">
   <div class="col s12 large-margin-bottom">
@@ -85,9 +85,7 @@
   </div>
 </div>
 
-<% cache(['latest_posts', @latest_posts.unscope(:select).maximum(:updated_at).utc.to_s(:nsec)]) do %>
 <%= render 'latest_posts' %>
-<% end %>
 
 <div class="home-info small-margin-top row">
   <div class="col s12 large-margin-bottom">
