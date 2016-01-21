@@ -39,6 +39,9 @@ class PostsController < ApplicationController
         redirect_to signin_path(return_to_info)
       end
     end
+
+    @page_title = @post.title
+    set_meta_tags(description: @post.description_stripdown)
   end
 
   # GET /posts/new

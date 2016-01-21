@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div class="flow-text body markdown"><%= markdown(post.description) %></div>
+  <div class="flow-text body markdown"><%= raw(post.description_markdown) %></div>
 
   <%= yield %>
 
