@@ -127,8 +127,7 @@ class PagesController < ApplicationController
   end
   private
   def set_meta_tags_for_home
-    set_meta_tags canonical: "https://4659warriors.com",
-    og: {
+    set_meta_tags og: {
       title:    'Warrior Robotix',
       type:     'website',
       url:      'https://4659warriors.com',
