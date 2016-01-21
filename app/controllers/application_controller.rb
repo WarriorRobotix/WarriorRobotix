@@ -10,9 +10,9 @@ class ApplicationController < ActionController::Base
   CLOUD_FLARE_HTTP_VISTOR = "{\"scheme\":\"http\"}".freeze
   before_action do
     cf_vistor = request.headers['Cf-Visitor']
-    logger.info "CloudFlare\n    Vistor: #{cf_vistor}\n    IP: #{request.headers['CF-Connecting-IP']}\n    Country: #{request.headers['CF-Ipcountry']}\n    User Agent: #{request.headers['user-agent']}"
+    logger.info "CF VIS: #{cf_vistor} IP: #{request.headers['CF-Connecting-IP']}\n COUNTRY: #{request.headers['CF-Ipcountry']} UA: #{request.headers['user-agent']}"
     if cf_vistor.present? && cf_vistor == CLOUD_FLARE_HTTP_VISTOR && browser.modern?
-      secure_url = ActionDispatch::Http::URL.url_for(protocol: 'https://', host: request.host, path: request.fullpath)
+      secure_url = ActionDispatch::Http::URL.url_for(protocol: 'https://', host: request.host, path: request.fullpath, status: :moved_permanently)
       redirect_to secure_url
     end
   end
