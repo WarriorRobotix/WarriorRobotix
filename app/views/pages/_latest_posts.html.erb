@@ -16,7 +16,9 @@
       <div class="latest-post-box card-content">
         <div class="title"><%= link_to post.title, post_path(post.id) %></div>
         <div class="description markdown">
-          <%= post.description_stripdown%>
+          <p>
+            <%= post.description_stripdown%>
+          </p>
         </div>
         <div class="read-more"><%= link_to "Read More", post_path(post.id) %></div>
       </div>
