@@ -8,8 +8,10 @@ class Post < ActiveRecord::Base
 
   validates :title, presence: true
   validates :description, presence: true
+  validates :description_stripdown, length: { maximum: 250 }
 
   before_save :remove_useless_limited_teams
+  before_save :process_description
 
   def self.valid_restrictions
     restrictions
@@ -48,6 +50,14 @@ class Post < ActiveRecord::Base
       self.restriction.pluralize.capitalize
     end
   end
+
+  def process_description(force = false)
+    if self.description_changed? || force
+      self.description_markdown = MarkdownRender.render(self.description)
+      self.description_stripdown = MarkdownRender.stripdown(self.description.truncate(240)).truncate(250, omission: '')
+    end
+  end
+
   private
   def remove_useless_limited_teams
     if self.restriction_changed? && self.restriction_was == "limited"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160104002048) do
+ActiveRecord::Schema.define(version: 20160121220301) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id",              null: false
@@ -118,17 +118,19 @@ ActiveRecord::Schema.define(version: 20160104002048) do
     t.string   "title"
     t.text     "description"
     t.datetime "start_at"
-    t.integer  "status",             default: 0,     null: false
-    t.boolean  "multiple_choices",   default: false, null: false
-    t.boolean  "ballots_changeable", default: false, null: false
+    t.integer  "status",                default: 0,     null: false
+    t.boolean  "multiple_choices",      default: false, null: false
+    t.boolean  "ballots_changeable",    default: false, null: false
     t.integer  "maximum_choices"
-    t.integer  "ballots_privacy",    default: 0,     null: false
+    t.integer  "ballots_privacy",       default: 0,     null: false
     t.datetime "end_at"
-    t.integer  "restriction",        default: 1,     null: false
+    t.integer  "restriction",           default: 1,     null: false
     t.integer  "author_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.boolean  "disabled",           default: false, null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.boolean  "disabled",              default: false, null: false
+    t.text     "description_markdown"
+    t.string   "description_stripdown"
   end
 
   create_table "posts_teams", id: false, force: :cascade do |t|
