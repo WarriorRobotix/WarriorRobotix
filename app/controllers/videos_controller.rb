@@ -6,6 +6,8 @@ class VideosController < ApplicationController
   # GET /videos.json
   def index
     @videos = Video.order(upload_date: :DESC, title: :ASC).all
+
+    set_meta_tags canonical: "https://4659warriors.com/videos"
   end
 
   # GET /videos/new

@@ -7,6 +7,8 @@ class SponsorsController < ApplicationController
   # GET /sponsors.json
   def index
     @sponsors = Sponsor.order(id: :ASC).all
+
+    set_meta_tags canonical: "https://4659warriors.com/sponsors"
   end
 
   # GET /sponsors/new

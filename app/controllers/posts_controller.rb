@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @page_title = member_signed_in? ? "Posts" : "Blog"
+    set_meta_tags canonical: "https://4659warriors.com/posts"
     case params[:type]
     when "Event"
       post_scope = Event
@@ -41,7 +42,7 @@ class PostsController < ApplicationController
     end
 
     @page_title = @post.title
-    set_meta_tags(description: @post.description_stripdown)
+    set_meta_tags description: @post.description_stripdown, canonical: "https://4659warriors.com/posts/#{@post.id}"
   end
 
   # GET /posts/new

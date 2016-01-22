@@ -6,6 +6,8 @@ class TeamsController < ApplicationController
   # GET /teams.json
   def index
     @teams = Team.order(name: :ASC).all
+
+    set_meta_tags canonical: "https://4659warriors.com/teams"
   end
 
   # GET /teams/1

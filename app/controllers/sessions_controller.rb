@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     redirect_back if member_signed_in?
 
     @page_title = "Login"
-    set_meta_tags noindex: true
+    set_meta_tags noindex: true, nofollow: true
   end
 
   def create
