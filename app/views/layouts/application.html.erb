@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <%= display_meta_tags site: '4659 Warrior Robotix', separator: ' - ', reverse: true %>
   <meta name="google-site-verification" content="qqi6OdQ6UYhS4BlwnOuNhxK-ogqycLqHT4vgEGSi85I" />
   <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
@@ -18,7 +20,6 @@
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 </head>
 <body class="<%= controller_name %>-<%= action_name %>">
 <% cache(['navbar', (member_signed_in? ? current_member : 'visitor')]) do %>
