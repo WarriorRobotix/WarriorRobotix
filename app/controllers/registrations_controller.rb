@@ -1,6 +1,10 @@
 class RegistrationsController < ApplicationController
   skip_before_action :authenticate_admin!, only: [:form, :submit]
   def form
+    @page_title = "Registration"
+    set_meta_tags noindex: true
+    set_meta_tags nofollow: true
+
     @form = Hash.new
     unless RegistrationForm.open?
       render :error
@@ -15,6 +19,7 @@ class RegistrationsController < ApplicationController
   end
 
   def submit
+    @page_title = "Registration"
     @old_member = params[:old].present?
     @member = Member.new(accepted: false)
     if verify_recaptcha(:model => @member, :message => "There is an error with reCAPTCHA") && (params[:form][:allow_emails] == '1') && (params[:form][:agree_contract] == '1')

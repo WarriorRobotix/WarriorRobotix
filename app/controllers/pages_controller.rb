@@ -36,6 +36,7 @@ class PagesController < ApplicationController
   end
 
   def member_contract
+    @page_title = "Member Contract"
   end
 
   def team_editor
@@ -52,9 +53,11 @@ class PagesController < ApplicationController
   def contact
     @message = Hash.new
     @show_side_buttons = true
+    @page_title = "Contact"
   end
 
   def contact_message
+    @page_title = "Contact"
     @message = params.require(:message).permit(:full_name, :email, :phone_number, :body).to_h.symbolize_keys!
     if verify_recaptcha
       if @message[:full_name].blank?

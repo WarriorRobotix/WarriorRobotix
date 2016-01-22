@@ -4,9 +4,13 @@ class SessionsController < ApplicationController
 
   def new
     redirect_back if member_signed_in?
+
+    @page_title = "Login"
+    set_meta_tags noindex: true
   end
 
   def create
+    @page_title = "Login"
     identifier = params[:identifier]
     password = params[:password]
     respond_to do |format|
