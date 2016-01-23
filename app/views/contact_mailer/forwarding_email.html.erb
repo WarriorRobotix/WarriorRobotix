@@ -2,8 +2,8 @@
   <h2 style="text-align:center;"><%= @email[:subject] %></h2>
   <div style="text-align:left;">
     <strong>From:</strong> <%= @email[:from] %><br/>
-    <strong>To:</strong> <%= @email[:to][:full] %><br/>
-    <strong>Timestamp:</strong> <%= Time.zone.now.to_s %><br/>
+    <strong>To:</strong> <%= @email[:to].map{|t| t[:full]}.join(', ') %><br/>
+    <strong>Timestamp:</strong> <%= @email[:timestamp]  %><br/>
   </div>
   <hr/>
   <div>

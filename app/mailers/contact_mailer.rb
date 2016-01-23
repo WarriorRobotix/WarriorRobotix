@@ -10,6 +10,6 @@ class ContactMailer < ApplicationMailer
     original_attachments.each do |original_att|
       attachments[original_att.original_filename] = File.read(original_att.tempfile)
     end
-    mail(to: ENV['FORWARD_EMAIL_TO_ADDRESS'], from: "forward@4659warriors.com", subject: "#{@email[:to][:email]} Forward: #{@email[:subject]}")
+    mail(to: ENV['FORWARD_EMAIL_TO_ADDRESS'], from: "forward@4659warriors.com", subject: "#{@email[:to][0][:email]} Forward: #{@email[:subject]}")
   end
 end
