@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/EdwGx/recaptcha.git
+  revision: d8be305338e093969904401c9348b8bd25e65ed1
+  specs:
+    recaptcha (1.0.2)
+      json
+
+GIT
   remote: git://github.com/MiniProfiler/rack-mini-profiler.git
   revision: 20ff9b296e37fb35e431d0ba8378541be8c7dadb
   specs:
@@ -152,8 +159,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.5.0)
     rdoc (4.2.1)
-    recaptcha (1.0.2)
-      json
     redcarpet (3.3.4)
     sass (3.4.21)
     sass-rails (5.0.4)
@@ -218,7 +223,7 @@ DEPENDENCIES
   rack-mini-profiler!
   rails (= 4.2.5)
   rails_12factor
-  recaptcha
+  recaptcha!
   redcarpet
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
