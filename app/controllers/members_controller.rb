@@ -281,6 +281,7 @@ class MembersController < ApplicationController
   end
 
   def forgot
+    set_meta_tags noindex: true, nofollow: true
   end
 
   def send_reset_token
