@@ -6,7 +6,7 @@ class ContactMailerPreview < ActionMailer::Preview
   end
 
   def forwarding_email
-    email = {from: 'test@example.com', to: {full: 'Warrior Robotix <email@4659warriors.com>', email: 'email@4659warriors.com'}, subject: 'Test Forwarding', body: 'This is the test email\'s body' }
+    email = {from: 'test@example.com', to: [{full: 'Warrior Robotix <email@4659warriors.com>', email: 'email@4659warriors.com'}], subject: 'Test Forwarding', body: 'This is the test email\'s body' }
     attachments = []
     ContactMailer.forwarding_email(email, attachments)
   end
