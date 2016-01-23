@@ -8,7 +8,7 @@ class ContactMailer < ApplicationMailer
   def forwarding_email(email, original_attachments)
     @email = email
     original_attachments.each do |original_att|
-      attachments[original_att.filename] = original_att.data
+      attachments[original_att[:filename]] = original_att[:data]
     end
     mail(to: ENV['FORWARD_EMAIL_TO_ADDRESS'], from: "Forward - Website <forward@4659warriors.com>", subject: "#{@email[:to][0][:email]} forward: #{@email[:subject]}")
   end
