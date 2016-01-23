@@ -102,4 +102,5 @@ Rails.application.routes.draw do
     post '/down' => 'registration_fields#down'
   end
 
+  mount_griddler('/email/3E9A2CE')
 end

@@ -75,6 +75,12 @@ GEM
     execjs (2.6.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    griddler (1.2.1)
+      htmlentities
+      rails (>= 3.2.0)
+    griddler-sendgrid (0.0.1)
+      griddler
+    htmlentities (4.3.4)
     i18n (0.7.0)
     jbuilder (2.4.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -196,6 +202,8 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   dalli
   dotenv-rails
+  griddler
+  griddler-sendgrid
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks

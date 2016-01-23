@@ -55,6 +55,10 @@ gem 'kaminari'
 # Use browser to detect user agent
 gem 'browser'
 
+# Use Griddler to process incoming emails
+gem 'griddler'
+gem 'griddler-sendgrid'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
