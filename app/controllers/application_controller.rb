@@ -8,10 +8,20 @@ class ApplicationController < ActionController::Base
   before_action :set_basic_meta_tags, if: "request.get?"
 
   CLOUD_FLARE_HTTP_VISTOR = "{\"scheme\":\"http\"}".freeze
+  CLOUD_FLARE_HTTPS_VISTOR = "{\"scheme\":\"https\"}".freeze
   before_action do
-    cf_vistor = request.headers['Cf-Visitor']
-    logger.info "CF VIS: #{cf_vistor} IP: #{request.headers['CF-Connecting-IP']}\n COUNTRY: #{request.headers['CF-Ipcountry']} UA: #{request.headers['user-agent']}"
-    if cf_vistor.present? && cf_vistor == CLOUD_FLARE_HTTP_VISTOR && browser.modern?
+    case request.headers['Cf-Visitor']
+    when CLOUD_FLARE_HTTP_VISTOR
+      request_protocol = :http
+    when CLOUD_FLARE_HTTPS_VISTOR
+      request_protocol = :https
+    else
+      request_protocol = :unknown
+    end
+
+    logger.info "CF V:#{request_protocol} C:#{request.headers['CF-Ipcountry'.freeze]} IP:#{request.headers['CF-Connecting-IP'.freeze]} UA:#{request.headers['user-agent'.freeze]}"
+
+    if request_protocol == :http && browser.modern?
       secure_url = ActionDispatch::Http::URL.url_for(protocol: 'https://', host: request.host, path: request.fullpath, status: :moved_permanently)
       redirect_to secure_url
     end
