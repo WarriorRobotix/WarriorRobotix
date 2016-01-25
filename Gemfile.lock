@@ -121,7 +121,7 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
-    nokogiri (1.6.7.2)
+    nokogiri (1.6.7.1)
       mini_portile2 (~> 2.0.0.rc2)
     pg (0.18.4)
     puma (2.15.3)
@@ -218,6 +218,7 @@ DEPENDENCIES
   materialize-sass
   memcachier
   meta-tags
+  nokogiri (= 1.6.7.1)
   pg
   puma
   rack-mini-profiler!
