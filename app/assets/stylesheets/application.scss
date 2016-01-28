@@ -18,6 +18,13 @@ $slider-indicator-color: $secondary-color;
 
 @import "materialize";
 
+html.turbolinks-progress-bar::before {
+  $progress-bar-color: darken($secondary-color, 5%);
+  background-color: $progress-bar-color !important;
+  height: 2px !important;
+  box-shadow: 0 0 10px $progress-bar-color, 0 0 5px $progress-bar-color;
+}
+
 .read-more-box {
   max-height: 400px;
   position: relative;
