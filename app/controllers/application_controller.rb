@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
       request_protocol = :unknown
     end
 
-    logger.info "CF V:#{request_protocol} C:#{request.headers['CF-Ipcountry'.freeze]} IP:#{request.headers['CF-Connecting-IP'.freeze]} UA:#{request.headers['user-agent'.freeze]}"
+    logger.info "CF V:#{request_protocol} C:#{request.headers['CF-Ipcountry'.freeze]} IP:#{request.headers['CF-Connecting-IP'.freeze]} UA:#{request.headers['user-agent'.freeze]} BOT:#{browser.bot?}"
 
     if request_protocol == :http && browser.modern?
       secure_url = ActionDispatch::Http::URL.url_for(protocol: 'https://', host: request.host, path: request.fullpath, status: :moved_permanently)
