@@ -1,3 +1,13 @@
+#Baiduspider
+User-agent: Baiduspider
+Disallow: /
+
+#Yandex
+User-agent: Yandex
+Disallow: /
+
+#Other Bots
 User-agent: *
 Disallow: /signin
+Disallow: /forgot
 Disallow: /register/
