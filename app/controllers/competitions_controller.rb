@@ -9,7 +9,7 @@ class CompetitionsController < ApplicationController
     @upcoming_competitions = Competition.where('"competitions"."start_date" >= ?', Date.today).order(start_date: :ASC).all
     @previous_competitions = Competition.where('"competitions"."start_date" < ?', Date.today).order(start_date: :DESC).all
 
-    set_meta_tags title: "Upcoming & Past",
+    set_meta_tags title: "Upcoming and Past",
     canonical: "https://4659warriors.com/competitions"
   end
 
