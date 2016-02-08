@@ -28,13 +28,13 @@
 <h1 class="flow-text">Checked In</h1>
 <div class="card-panel">
   <div class="row no-margin-bottom">
-    <div class="col s12 m3">
+    <div class="col s12 m6 l3">
       <%= button_to "Check Out 4:30", check_out_path('all'), class: 'btn-bordered', method: :POST, params: { time: "4:30 PM" }, data: { disable_with: nil } %>
     </div>
-    <div class="col s12 m3">
+    <div class="col s12 m6 l3">
       <%= button_to "Check Out Now", check_out_path('all'), class: 'btn-bordered', method: :POST, data: { disable_with: nil } %>
     </div>
-    <div class="col s12 m3">
+    <div class="col s12 m6 l3">
       <%= button_to "Set Check In 3:00", set_check_in_path, class: 'btn-bordered', method: :POST, params: { time: "3:00 PM" }, data: { disable_with: nil } %>
     </div>
   </div>
