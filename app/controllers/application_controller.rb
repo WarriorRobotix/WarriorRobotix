@@ -20,11 +20,11 @@ class ApplicationController < ActionController::Base
     end
 
     if browser.bot?
-      logger.info "CF #{request_protocol} #{request.headers['CF-Ipcountry'.freeze]} #{request.headers['CF-Connecting-IP'.freeze]} BOT:Y UA:#{request.headers['user-agent']}"
+      logger.info "CF #{request.fullpath} #{request_protocol} #{request.headers['CF-Ipcountry'.freeze]} #{request.headers['CF-Connecting-IP'.freeze]} BOT:Y UA:#{request.headers['user-agent']}"
     elsif browser.mobile?
-      logger.info "CF #{request_protocol} #{request.headers['CF-Ipcountry'.freeze]} #{request.headers['CF-Connecting-IP'.freeze]} BOT:N B:#{browser.name}-#{browser.version}-M"
+      logger.info "CF #{request.fullpath} #{request_protocol} #{request.headers['CF-Ipcountry'.freeze]} #{request.headers['CF-Connecting-IP'.freeze]} BOT:N B:#{browser.name}-#{browser.version}-M"
     else
-      logger.info "CF #{request_protocol} #{request.headers['CF-Ipcountry'.freeze]} #{request.headers['CF-Connecting-IP'.freeze]} BOT:N B:#{browser.name}-#{browser.version}"
+      logger.info "CF #{request.fullpath} #{request_protocol} #{request.headers['CF-Ipcountry'.freeze]} #{request.headers['CF-Connecting-IP'.freeze]} BOT:N B:#{browser.name}-#{browser.version}"
     end
 
     if request_protocol == :http && browser.modern?
