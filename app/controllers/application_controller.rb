@@ -19,12 +19,19 @@ class ApplicationController < ActionController::Base
       request_protocol = :unknown
     end
 
-    if browser.bot?
-      logger.info "CF #{request.fullpath} #{request_protocol} #{request.headers['CF-Ipcountry'.freeze]} #{request.headers['CF-Connecting-IP'.freeze]} BOT:Y UA:#{request.headers['user-agent']}"
-    elsif browser.mobile?
-      logger.info "CF #{request.fullpath} #{request_protocol} #{request.headers['CF-Ipcountry'.freeze]} #{request.headers['CF-Connecting-IP'.freeze]} BOT:N B:#{browser.name}-#{browser.version}-M"
+    protocol_description = request_protocol.to_s.rjust(7)
+    request_country = request.headers['CF-Ipcountry'.freeze]
+    request_ip = request.headers['CF-Connecting-IP'.freeze]&.ljust(15)
+    if browser.mobile?
+      browser_description = "Mobile #{browser.name} #{browser.version}".ljust(18)
     else
-      logger.info "CF #{request.fullpath} #{request_protocol} #{request.headers['CF-Ipcountry'.freeze]} #{request.headers['CF-Connecting-IP'.freeze]} BOT:N B:#{browser.name}-#{browser.version}"
+      browser_description = "Desktop #{browser.name} #{browser.version}".ljust(18)
+    end
+
+    if browser.bot?
+      logger.info "CF BOT  | #{protocol_description} | #{request_country} | #{request_ip} | UA:#{request.headers['user-agent']} | #{request.fullpath}"
+    else
+      logger.info "CF USER | #{protocol_description} | #{request_country} | #{request_ip} | #{browser_description} | #{request.fullpath}"
     end
 
     if request_protocol == :http && browser.modern?
