@@ -19,11 +19,11 @@ class ApplicationController < ActionController::Base
       request_protocol = :unknown
     end
 
-    protocol_description = request_protocol.to_s.rjust(7)
+    protocol_description = request_protocol.to_s.ljust(5)
     request_country = request.headers['CF-Ipcountry'.freeze]
     request_ip = request.headers['CF-Connecting-IP'.freeze]&.ljust(15)
     if browser.mobile?
-      browser_description = "Mobile #{browser.name} #{browser.version}".ljust(18)
+      browser_description = "Mobile  #{browser.name} #{browser.version}".ljust(18)
     else
       browser_description = "Desktop #{browser.name} #{browser.version}".ljust(18)
     end
