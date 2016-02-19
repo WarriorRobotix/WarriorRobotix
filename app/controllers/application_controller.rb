@@ -29,12 +29,12 @@ class ApplicationController < ActionController::Base
     end
 
     if browser.bot?
-      logger.info "CF BOT  | #{protocol_description} | #{request_country} | #{request_ip} | UA:#{request.headers['user-agent']} | #{request.fullpath}"
+      logger.info "CF BOT  | #{protocol_description} | #{request_country} | #{request_ip} | UA:#{request.headers['user-agent']} | #{request.method} #{request.fullpath}"
     else
-      logger.info "CF USER | #{protocol_description} | #{request_country} | #{request_ip} | #{browser_description} | #{request.fullpath}"
+      logger.info "CF USER | #{protocol_description} | #{request_country} | #{request_ip} | #{browser_description} | #{request.method} #{request.fullpath}"
     end
 
-    if request_protocol == :http && browser.modern?
+    if request.get? && request_protocol == :http && browser.modern?
       secure_url = ActionDispatch::Http::URL.url_for(protocol: 'https://', host: request.host, path: request.fullpath, status: :moved_permanently)
       redirect_to secure_url
     end
