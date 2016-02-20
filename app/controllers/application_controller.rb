@@ -22,13 +22,20 @@ class ApplicationController < ActionController::Base
     protocol_description = request_protocol.to_s.ljust(5)
     request_country = request.headers['CF-Ipcountry'.freeze]
     request_ip = request.headers['CF-Connecting-IP'.freeze]&.ljust(15)
-    browser_description = "#{browser.platform.to_s.capitalize} #{browser.name} #{browser.version}".ljust(30)
 
     if browser.bot?
-      logger.info "CF BOT  | #{protocol_description} | #{request_country} | #{request_ip} | UA:#{request.headers['user-agent']} | #{request.method.ljust(4)} #{request.fullpath}"
+      client_description = "BOT    "
+      browser_description = request.headers['user-agent']
     else
-      logger.info "CF USER | #{protocol_description} | #{request_country} | #{request_ip} | #{browser_description} | #{request.method.ljust(4)} #{request.fullpath}"
+      if member_signed_in?
+        client_description = "MEMBER "
+      else
+        client_description = "VISITOR"
+      end
+      browser_description = "#{browser.platform.to_s.capitalize} #{browser.name} #{browser.version}".ljust(30)
     end
+
+    logger.info "CF-#{client_description} | #{protocol_description} | #{request_country} | #{request_ip} | #{browser_description} | #{request.method.ljust(4)} #{request.fullpath}"
 
     # if request.get? && request_protocol == :http && browser.modern?
     #   secure_url = ActionDispatch::Http::URL.url_for(protocol: 'https://', host: request.host, path: request.fullpath, status: :moved_permanently)
