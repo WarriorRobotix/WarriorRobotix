@@ -34,10 +34,10 @@ class ApplicationController < ActionController::Base
       logger.info "CF USER | #{protocol_description} | #{request_country} | #{request_ip} | #{browser_description} | #{request.method} #{request.fullpath}"
     end
 
-    if request.get? && request_protocol == :http && browser.modern?
-      secure_url = ActionDispatch::Http::URL.url_for(protocol: 'https://', host: request.host, path: request.fullpath, status: :moved_permanently)
-      redirect_to secure_url
-    end
+    # if request.get? && request_protocol == :http && browser.modern?
+    #   secure_url = ActionDispatch::Http::URL.url_for(protocol: 'https://', host: request.host, path: request.fullpath, status: :moved_permanently)
+    #   redirect_to secure_url
+    # end
   end
 
   before_action do
