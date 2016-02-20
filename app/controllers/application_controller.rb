@@ -22,16 +22,12 @@ class ApplicationController < ActionController::Base
     protocol_description = request_protocol.to_s.ljust(5)
     request_country = request.headers['CF-Ipcountry'.freeze]
     request_ip = request.headers['CF-Connecting-IP'.freeze]&.ljust(15)
-    if browser.mobile?
-      browser_description = "Mobile  #{browser.name} #{browser.version}".ljust(18)
-    else
-      browser_description = "Desktop #{browser.name} #{browser.version}".ljust(18)
-    end
+    browser_description = "#{browser.platform.to_s.capitalize} #{browser.name} #{browser.version}".ljust(30)
 
     if browser.bot?
-      logger.info "CF BOT  | #{protocol_description} | #{request_country} | #{request_ip} | UA:#{request.headers['user-agent']} | #{request.method} #{request.fullpath}"
+      logger.info "CF BOT  | #{protocol_description} | #{request_country} | #{request_ip} | UA:#{request.headers['user-agent']} | #{request.method.ljust(4)} #{request.fullpath}"
     else
-      logger.info "CF USER | #{protocol_description} | #{request_country} | #{request_ip} | #{browser_description} | #{request.method} #{request.fullpath}"
+      logger.info "CF USER | #{protocol_description} | #{request_country} | #{request_ip} | #{browser_description} | #{request.method.ljust(4)} #{request.fullpath}"
     end
 
     # if request.get? && request_protocol == :http && browser.modern?
