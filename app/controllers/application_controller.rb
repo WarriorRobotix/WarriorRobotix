@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
     set_meta_tags keywords: ["warrior robotix", "vex", "vrc", "4659", "robot", "robotics", "club", "port credit secondary school", "mississauga"]
     set_meta_tags icon: '/favicon.ico'
 
-    set_meta_tags "msapplication-TileColor" => "#ffffff", "msapplication-TileImage" => "icons/ms-icon-144x144.png"
+    set_meta_tags "msapplication-TileColor" => "#000000", "msapplication-TileImage" => "icons/ms-icon-144x144.png"
 
     set_meta_tags fb: {app_id: '843857822394784'}
   end
