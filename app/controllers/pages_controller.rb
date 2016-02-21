@@ -6,6 +6,8 @@ class PagesController < ApplicationController
     set_meta_tags_for_home if browser.bot?
     @show_side_buttons = true
     @latest_posts = Post.where(type: nil, restriction: 0).order(created_at: :DESC).limit(3).select(:id, :title, :description_stripdown)
+
+    logger.info "CF-REFERER | #{request.referer || 'N/A'}"
   end
 
   def website
