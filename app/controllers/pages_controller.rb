@@ -7,7 +7,7 @@ class PagesController < ApplicationController
     @show_side_buttons = true
     @latest_posts = Post.where(type: nil, restriction: 0).order(created_at: :DESC).limit(3).select(:id, :title, :description_stripdown)
 
-    logger.info "CF-REFERER | #{request.referer || 'N/A'}"
+    logger.info "CF-REFERER | #{request.referer}" if request.referer.present?
   end
 
   def website
