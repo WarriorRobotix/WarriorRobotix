@@ -69,6 +69,8 @@ gem 'griddler-sendgrid'
 gem 'puma'
 
 group :development do
+  gem 'quiet_assets'
+  
   gem 'letter_opener'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
