@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5.1'
+gem 'rails', '4.2.6'
 gem 'nokogiri', '1.6.7.1'
 
 # Use SCSS for stylesheets
@@ -39,7 +39,7 @@ gem 'cocoon'
 gem 'materialize-sass'
 
 # Profiling rails with rack-mini-profiler
-gem 'rack-mini-profiler', github: 'MiniProfiler/rack-mini-profiler'
+gem 'rack-mini-profiler'
 
 # Use carrierwave for image uploading
 gem 'carrierwave'
