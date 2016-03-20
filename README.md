@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/EdwGx/WarriorRobotix.svg?token=zvtFKy8HZxFXMRFksL1n)](https://travis-ci.com/EdwGx/WarriorRobotix)
+[![Build Status](https://travis-ci.org/EdwGx/WarriorRobotix.svg?branch=master)](https://travis-ci.org/EdwGx/WarriorRobotix)
 
 ## Features List
 Put your name beside each feature you are working on
