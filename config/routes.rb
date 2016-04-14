@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :team_stats
   root 'pages#home'
 
   resources :members do

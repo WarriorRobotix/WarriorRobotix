@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @team_stat.number %>
+</p>
+
+<p>
+  <strong>Team name:</strong>
+  <%= @team_stat.team_name %>
+</p>
+
+<p>
+  <strong>Robot score:</strong>
+  <%= @team_stat.robot_score %>
+</p>
+
+<p>
+  <strong>Robot rank:</strong>
+  <%= @team_stat.robot_rank %>
+</p>
+
+<p>
+  <strong>Programming score:</strong>
+  <%= @team_stat.programming_score %>
+</p>
+
+<p>
+  <strong>Programming rank:</strong>
+  <%= @team_stat.programming_rank %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @team_stat.country %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @team_stat.city %>
+</p>
+
+<p>
+  <strong>Region:</strong>
+  <%= @team_stat.region %>
+</p>
+
+<%= link_to 'Edit', edit_team_stat_path(@team_stat) %> |
+<%= link_to 'Back', team_stats_path %>

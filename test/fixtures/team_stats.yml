@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  team_name: MyString
+  robot_score: 1
+  robot_rank: 1
+  programming_score: 1
+  programming_rank: 1
+  country: MyString
+  city: MyString
+  region: MyString
+
+two:
+  number: MyString
+  team_name: MyString
+  robot_score: 1
+  robot_rank: 1
+  programming_score: 1
+  programming_rank: 1
+  country: MyString
+  city: MyString
+  region: MyString
