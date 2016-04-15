@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Team Stats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Team name</th>
+      <th>Robot score</th>
+      <th>Robot rank</th>
+      <th>Programming score</th>
+      <th>Programming rank</th>
+      <th>Country</th>
+      <th>City</th>
+      <th>Region</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @team_stats.each do |team_stat| %>
+      <tr>
+        <td><%= team_stat.number %></td>
+        <td><%= team_stat.team_name %></td>
+        <td><%= team_stat.robot_score %></td>
+        <td><%= team_stat.robot_rank %></td>
+        <td><%= team_stat.programming_score %></td>
+        <td><%= team_stat.programming_rank %></td>
+        <td><%= team_stat.country %></td>
+        <td><%= team_stat.city %></td>
+        <td><%= team_stat.region %></td>
+        <td><%= link_to 'Show', team_stat %></td>
+        <td><%= link_to 'Edit', edit_team_stat_path(team_stat) %></td>
+        <td><%= link_to 'Destroy', team_stat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Team stat', new_team_stat_path %>

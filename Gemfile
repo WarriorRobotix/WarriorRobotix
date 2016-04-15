@@ -60,6 +60,9 @@ gem 'browser'
 gem 'griddler'
 gem 'griddler-sendgrid'
 
+# Use rest-client for API communication with other web services
+gem 'rest-client'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -70,7 +73,7 @@ gem 'puma'
 
 group :development do
   gem 'quiet_assets'
-  
+
   gem 'letter_opener'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
