@@ -45,5 +45,10 @@
   <%= @team_stat.region %>
 </p>
 
+<p>
+  <strong>Divison:</strong>
+  <%= @team_stat.division&.name %>
+</p>
+
 <%= link_to 'Edit', edit_team_stat_path(@team_stat) %> |
 <%= link_to 'Back', team_stats_path %>

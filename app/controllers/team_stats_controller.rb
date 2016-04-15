@@ -7,7 +7,7 @@ class TeamStatsController < ApplicationController
   # GET /team_stats
   # GET /team_stats.json
   def index
-    @team_stats = TeamStat.all
+    @team_stats = TeamStat.includes(:division).all
   end
 
   # GET /team_stats/1
@@ -67,11 +67,11 @@ class TeamStatsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team_stat
-      @team_stat = TeamStat.find(params[:id])
+      @team_stat = TeamStat.includes(:division).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_stat_params
-      params.require(:team_stat).permit(:number, :team_name, :robot_score, :robot_rank, :programming_score, :programming_rank, :country, :city, :region)
+      params.require(:team_stat).permit(:number, :team_name, :robot_score, :robot_rank, :programming_score, :programming_rank, :country, :city, :region, :division_id)
     end
 end

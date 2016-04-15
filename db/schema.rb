@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414221824) do
+ActiveRecord::Schema.define(version: 20160415004753) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id",              null: false
@@ -48,6 +48,12 @@ ActiveRecord::Schema.define(version: 20160414221824) do
     t.boolean  "count_down",       default: false, null: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+  end
+
+  create_table "divisions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "global_vars", force: :cascade do |t|
@@ -175,7 +181,10 @@ ActiveRecord::Schema.define(version: 20160414221824) do
     t.string   "region"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "division_id"
   end
+
+  add_index "team_stats", ["division_id"], name: "index_team_stats_on_division_id"
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"

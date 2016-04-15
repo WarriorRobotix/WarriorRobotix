@@ -47,6 +47,10 @@
     <%= f.label :region %><br>
     <%= f.text_field :region %>
   </div>
+  <div class="field">
+    <%= f.label :division_id %><br>
+    <%= collection_select(:team_stat, :division_id, Division.all, :id, :name, prompt: true) %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
