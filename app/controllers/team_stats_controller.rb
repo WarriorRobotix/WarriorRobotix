@@ -8,6 +8,9 @@ class TeamStatsController < ApplicationController
   # GET /team_stats.json
   def index
     @team_stats = TeamStat.includes(:division).all
+
+    @team_stats = @team_stats.where(number: params[:number]) if params[:number].present?
+    @team_stats = @team_stats.where(division_id: params[:division_id]) if params[:division_id].present?
   end
 
   # GET /team_stats/1
