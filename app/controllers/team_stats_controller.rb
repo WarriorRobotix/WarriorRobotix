@@ -11,6 +11,8 @@ class TeamStatsController < ApplicationController
 
     @team_stats = @team_stats.where(number: params[:number]) if params[:number].present?
     @team_stats = @team_stats.where(division_id: params[:division_id]) if params[:division_id].present?
+
+    @team_stats = @team_stats.order(actual_order: :ASC)
   end
 
   # GET /team_stats/1
