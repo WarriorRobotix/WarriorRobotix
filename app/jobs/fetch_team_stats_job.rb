@@ -1,11 +1,13 @@
+require 'rest-client'
+
 class FetchTeamStatsJob < ActiveJob::Base
-  queue_as :default
+  queue_as :urgent
 
   def perform(*args)
     teams = Hash.new
 
-    fetch_vex_worlds_teams().each do |raw_team|
-        teams[raw_team["number"]] = raw_team.merge({"robot_score" => 0, "robot_rank" => 500, "programming_score" => 0, "programming_rank" => 500})
+    fetch_vex_worlds_teams().each_with_index do |raw_team, index|
+        teams[raw_team["number"]] = raw_team.merge({"robot_score" => 0, "robot_rank" => 500, "programming_score" => 0, "programming_rank" => 500, "actual_order" => index})
     end
 
     fetch_top_500_robot_skills().each do |result|
@@ -28,23 +30,28 @@ class FetchTeamStatsJob < ActiveJob::Base
       end
     end
 
-    teams.each do |team_number, raw_team|
-      team = TeamStat.find_or_create_by(number: raw_team["number"])
+    ActiveRecord::Base.logger.silence do
+      TeamStat.update_all(actual_order: nil)
+      teams.each do |team_number, raw_team|
+        team = TeamStat.find_or_create_by(number: raw_team["number"])
 
-      team.team_name = raw_team["team_name"]
+        team.team_name = raw_team["team_name"]
 
-      team.robot_score = raw_team["robot_score"]
-      team.robot_rank = raw_team["robot_rank"]
-      team.programming_score = raw_team["programming_score"]
-      team.programming_rank = raw_team["programming_rank"]
+        team.robot_score = raw_team["robot_score"]
+        team.robot_rank = raw_team["robot_rank"]
+        team.programming_score = raw_team["programming_score"]
+        team.programming_rank = raw_team["programming_rank"]
 
-      team.country = raw_team["country"]
-      team.city = raw_team["city"]
-      team.region = raw_team["region"]
+        team.country = raw_team["country"]
+        team.city = raw_team["city"]
+        team.region = raw_team["region"]
 
-      team.save
+        team.actual_order = raw_team["actual_order"]
+
+        team.save
+      end
     end
-
+    
     nil
   end
 

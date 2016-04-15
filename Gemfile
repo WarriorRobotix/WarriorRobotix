@@ -61,7 +61,7 @@ gem 'griddler'
 gem 'griddler-sendgrid'
 
 # Use rest-client for API communication with other web services
-gem 'rest-client'
+gem 'rest-client', require: 'rest-client'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

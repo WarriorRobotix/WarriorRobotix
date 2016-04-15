@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415004753) do
+ActiveRecord::Schema.define(version: 20160415012223) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id",              null: false
@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(version: 20160415004753) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "division_id"
+    t.integer  "actual_order"
   end
 
   add_index "team_stats", ["division_id"], name: "index_team_stats_on_division_id"
