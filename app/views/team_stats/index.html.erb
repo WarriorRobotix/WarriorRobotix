@@ -5,16 +5,17 @@
 <table>
   <thead>
     <tr>
-      <th>Number</th>
-      <th>Team name</th>
-      <th>Robot score</th>
-      <th>Robot rank</th>
-      <th>Programming score</th>
-      <th>Programming rank</th>
-      <th>Country</th>
-      <th>City</th>
-      <th>Region</th>
-      <th>Division</th>
+      <th><%= sortable "number" %></th>
+      <th><%= sortable "team_name" %></th>
+      <th><%= sortable "robot_score" %></th>
+      <th><%= sortable "robot_rank" %></th>
+      <th><%= sortable "programming_score" %></th>
+      <th><%= sortable "programming_rank" %></th>
+      <th><%= sortable "country" %></th>
+      <th><%= sortable "city" %></th>
+      <th><%= sortable "region" %></th>
+      <th><%= sortable "division_id", "Division" %></th>
+      <th><%= sortable "actual_order" %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -32,6 +33,7 @@
         <td><%= team_stat.city %></td>
         <td><%= team_stat.region %></td>
         <td><%= team_stat.division&.name %></td>
+        <td><%= team_stat.actual_order %></td>
         <td><%= link_to 'Show', team_stat %></td>
         <td><%= link_to 'Edit', edit_team_stat_path(team_stat) %></td>
         <td><%= link_to 'Destroy', team_stat, method: :delete, data: { confirm: 'Are you sure?' } %></td>

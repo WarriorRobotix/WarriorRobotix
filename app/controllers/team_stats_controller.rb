@@ -1,4 +1,6 @@
 class TeamStatsController < ApplicationController
+  helper_method :sort_column, :sort_direction
+
   before_action :set_team_stat, only: [:show, :edit, :update, :destroy]
 
   skip_before_action :verify_authenticity_token
@@ -7,12 +9,13 @@ class TeamStatsController < ApplicationController
   # GET /team_stats
   # GET /team_stats.json
   def index
-    @team_stats = TeamStat.includes(:division).all
+    @team_stats = TeamStat.includes(:division)
 
     @team_stats = @team_stats.where(number: params[:number]) if params[:number].present?
     @team_stats = @team_stats.where(division_id: params[:division_id]) if params[:division_id].present?
 
-    @team_stats = @team_stats.order(actual_order: :ASC)
+    @team_stats = @team_stats.order(sort_column + " " + sort_direction).all
+
   end
 
   # GET /team_stats/1
@@ -78,5 +81,13 @@ class TeamStatsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_stat_params
       params.require(:team_stat).permit(:number, :team_name, :robot_score, :robot_rank, :programming_score, :programming_rank, :country, :city, :region, :division_id)
+    end
+
+    def sort_column
+      TeamStat.column_names.include?(params[:sort]) ? params[:sort] : "actual_order"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end
