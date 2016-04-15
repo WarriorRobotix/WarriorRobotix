@@ -9,6 +9,7 @@ class FetchTeamStatsJob < ActiveJob::Base
     fetch_vex_worlds_teams().each_with_index do |raw_team, index|
         teams[raw_team["number"]] = raw_team.merge({"robot_score" => 0, "robot_rank" => 500, "programming_score" => 0, "programming_rank" => 500, "actual_order" => index})
     end
+    logger.info "Fetched #{teams.count} teams from vexdb.io"
 
     fetch_top_500_robot_skills().each do |result|
       team_number = result["team"]
@@ -19,6 +20,7 @@ class FetchTeamStatsJob < ActiveJob::Base
         team["robot_rank"] = result["season_rank"]
       end
     end
+    logger.info "Successfully fetched top 500 robot skills teams from vexdb.io"
 
     fetch_top_500_programming_skills().each do |result|
       team_number = result["team"]
@@ -29,6 +31,7 @@ class FetchTeamStatsJob < ActiveJob::Base
         team["programming_rank"] = result["season_rank"]
       end
     end
+    logger.info "Successfully fetched top 500 programming skills teams from vexdb.io"
 
     ActiveRecord::Base.logger.silence do
       TeamStat.update_all(actual_order: nil)
@@ -51,7 +54,7 @@ class FetchTeamStatsJob < ActiveJob::Base
         team.save
       end
     end
-    
+
     nil
   end
 
