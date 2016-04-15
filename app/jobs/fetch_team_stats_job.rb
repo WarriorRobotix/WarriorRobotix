@@ -9,7 +9,7 @@ class FetchTeamStatsJob < ActiveJob::Base
     fetch_vex_worlds_teams().each_with_index do |raw_team, index|
         teams[raw_team["number"]] = raw_team.merge({"robot_score" => 0, "robot_rank" => 500, "programming_score" => 0, "programming_rank" => 500, "actual_order" => index})
     end
-    logger.info "Fetched #{teams.count} teams from vexdb.io"
+    logger.info "Successfully fetched #{teams.count} teams from vexdb.io"
 
     fetch_top_500_robot_skills().each do |result|
       team_number = result["team"]
