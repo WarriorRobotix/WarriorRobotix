@@ -1,0 +1,65 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team_stat_id: 
+  member_id: 
+  drive_motors: 1
+  drive_motor_type: MyString
+  drive_wheels: 1
+  drive_wheel_type: MyString
+  drive_configuration: MyString
+  drive_clearance: MyString
+  shooter_type: MyString
+  shooter_motors: 1
+  shooter_rpm: 1
+  intake_type: MyString
+  intake_motors: 1
+  intake_motor_type: MyString
+  intake_flip_capacity: MyString
+  lift: MyString
+  lift_motors: 1
+  lift_elevation: MyString
+  lift_works: MyString
+  driver_consistency: MyString
+  driver_intelligence: MyString
+  preloads_capacity: MyString
+  shooter_consistency: MyString
+  shooter_range: MyString
+  autonomous_strategy: MyString
+  autonomous_preload_points: 1
+  autonomous_field_points: 1
+  autonomous_reliability: MyString
+  stalling: MyString
+  connection_issues: MyString
+
+two:
+  team_stat_id: 
+  member_id: 
+  drive_motors: 1
+  drive_motor_type: MyString
+  drive_wheels: 1
+  drive_wheel_type: MyString
+  drive_configuration: MyString
+  drive_clearance: MyString
+  shooter_type: MyString
+  shooter_motors: 1
+  shooter_rpm: 1
+  intake_type: MyString
+  intake_motors: 1
+  intake_motor_type: MyString
+  intake_flip_capacity: MyString
+  lift: MyString
+  lift_motors: 1
+  lift_elevation: MyString
+  lift_works: MyString
+  driver_consistency: MyString
+  driver_intelligence: MyString
+  preloads_capacity: MyString
+  shooter_consistency: MyString
+  shooter_range: MyString
+  autonomous_strategy: MyString
+  autonomous_preload_points: 1
+  autonomous_field_points: 1
+  autonomous_reliability: MyString
+  stalling: MyString
+  connection_issues: MyString
