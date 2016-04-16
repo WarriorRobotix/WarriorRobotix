@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
           signin_member(member)
           cookies.permanent[:mtk] = "#{member.id}$#{member.remember_token}" if params[:remember_me] == '1'
           format.html { redirect_back notice: "You have successfully signed in" }
-          format.json { render json: {access: member.max_restriction} }
+          format.json { render json: {access: member.max_restriction, member_id: member.id} }
           flag = false
         end
       end

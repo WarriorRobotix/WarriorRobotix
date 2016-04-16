@@ -3,11 +3,14 @@ module SessionsHelper
   def signin_member(member)
     session[:member_id] = member.id
     @current_member = member
+
+    return @current_member
   end
 
   def current_member
     if !@current_member.nil?
       return @current_member
+
     elsif member_id = session[:member_id]
       @current_member = Rails.cache.fetch("member/id/#{member_id}", :expires_in => 5.minutes) do
         Member.find_by(:id => member_id)
@@ -17,6 +20,7 @@ module SessionsHelper
       else
         session[:member_id] = nil
       end
+
     elsif remember_cookies = cookies[:mtk]
       member_id, token = remember_cookies.split("$")
       member_id = member_id.to_i
@@ -26,7 +30,13 @@ module SessionsHelper
       else
         cookies.delete :mtk
       end
+
+    elsif params[:api].present? && params[:identifier].present? && params[:password].present?
+      if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", params[:identifier], params[:identifier]).take.try(:authenticate, params[:password])
+        return signin_member(member)
+      end
     end
+
     nil
   end
 
