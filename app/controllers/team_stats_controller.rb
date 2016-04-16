@@ -11,8 +11,14 @@ class TeamStatsController < ApplicationController
   def index
     @team_stats = TeamStat.includes(:division)
 
-    @team_stats = @team_stats.where(number: params[:number]) if params[:number].present?
-    @team_stats = @team_stats.where(division_id: params[:division_id]) if params[:division_id].present?
+    if params[:number].present?
+      @team_stats = @team_stats.where(number: params[:number])
+    elsif params[:division_id].present?
+      @team_stats = @team_stats.where(division_id: params[:division_id])
+    elsif params[:like].present?
+      @team_stats = @team_stats.where("\"team_stats\".\"number\" LIKE ?", "%#{params[:like]}%")
+    end
+
 
     @team_stats = @team_stats.order(sort_column + " " + sort_direction).all
 
