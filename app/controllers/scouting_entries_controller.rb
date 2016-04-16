@@ -1,6 +1,9 @@
 class ScoutingEntriesController < ApplicationController
   before_action :set_scouting_entry, only: [:show, :edit, :update, :destroy]
 
+  skip_before_action :verify_authenticity_token
+  skip_before_action :authenticate_admin!
+  
   # GET /scouting_entries
   # GET /scouting_entries.json
   def index
