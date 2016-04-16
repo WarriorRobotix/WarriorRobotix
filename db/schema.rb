@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415012223) do
+ActiveRecord::Schema.define(version: 20160416013958) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id",              null: false
@@ -157,6 +157,45 @@ ActiveRecord::Schema.define(version: 20160415012223) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
+
+  create_table "scouting_entries", force: :cascade do |t|
+    t.integer  "team_stat_id"
+    t.integer  "member_id"
+    t.text     "extra_note"
+    t.integer  "drive_motors"
+    t.string   "drive_motor_type"
+    t.integer  "drive_wheels"
+    t.string   "drive_wheel_type"
+    t.string   "drive_configuration"
+    t.string   "drive_clearance"
+    t.string   "shooter_type"
+    t.integer  "shooter_motors"
+    t.integer  "shooter_rpm"
+    t.string   "intake_type"
+    t.integer  "intake_motors"
+    t.string   "intake_motor_type"
+    t.string   "intake_flip_capacity"
+    t.string   "lift"
+    t.integer  "lift_motors"
+    t.string   "lift_elevation"
+    t.string   "lift_works"
+    t.string   "driver_consistency"
+    t.string   "driver_intelligence"
+    t.string   "preloads_capacity"
+    t.string   "shooter_consistency"
+    t.string   "shooter_range"
+    t.string   "autonomous_strategy"
+    t.integer  "autonomous_preload_points"
+    t.integer  "autonomous_field_points"
+    t.string   "autonomous_reliability"
+    t.string   "stalling"
+    t.string   "connection_issues"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "scouting_entries", ["member_id"], name: "index_scouting_entries_on_member_id"
+  add_index "scouting_entries", ["team_stat_id"], name: "index_scouting_entries_on_team_stat_id"
 
   create_table "sponsors", force: :cascade do |t|
     t.string   "name"
