@@ -25,6 +25,7 @@ class Member < ActiveRecord::Base
   has_many :ballots, dependent: :destroy
   has_many :options, through: :ballots
   has_many :posts
+  has_many :scouting_entries
 
   belongs_to :team, touch: true
 

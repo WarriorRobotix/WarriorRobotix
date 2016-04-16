@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :scouting_entries
   resources :divisions
   resources :team_stats
   root 'pages#home'

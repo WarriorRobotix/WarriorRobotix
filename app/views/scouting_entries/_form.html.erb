@@ -1,0 +1,141 @@
+<%= form_for(@scouting_entry) do |f| %>
+  <% if @scouting_entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@scouting_entry.errors.count, "error") %> prohibited this scouting_entry from being saved:</h2>
+
+      <ul>
+      <% @scouting_entry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :team_stat_id %><br>
+    <%= f.text_field :team_stat_id %>
+  </div>
+  <div class="field">
+    <%= f.label :member_id %><br>
+    <%= f.text_field :member_id %>
+  </div>
+  <div class="field">
+    <%= f.label :extra_note %><br>
+    <%= f.text_area :extra_note %>
+  </div>
+  <div class="field">
+    <%= f.label :drive_motors %><br>
+    <%= f.number_field :drive_motors %>
+  </div>
+  <div class="field">
+    <%= f.label :drive_motor_type %><br>
+    <%= f.text_field :drive_motor_type %>
+  </div>
+  <div class="field">
+    <%= f.label :drive_wheels %><br>
+    <%= f.number_field :drive_wheels %>
+  </div>
+  <div class="field">
+    <%= f.label :drive_wheel_type %><br>
+    <%= f.text_field :drive_wheel_type %>
+  </div>
+  <div class="field">
+    <%= f.label :drive_configuration %><br>
+    <%= f.text_field :drive_configuration %>
+  </div>
+  <div class="field">
+    <%= f.label :drive_clearance %><br>
+    <%= f.text_field :drive_clearance %>
+  </div>
+  <div class="field">
+    <%= f.label :shooter_type %><br>
+    <%= f.text_field :shooter_type %>
+  </div>
+  <div class="field">
+    <%= f.label :shooter_motors %><br>
+    <%= f.number_field :shooter_motors %>
+  </div>
+  <div class="field">
+    <%= f.label :shooter_rpm %><br>
+    <%= f.number_field :shooter_rpm %>
+  </div>
+  <div class="field">
+    <%= f.label :intake_type %><br>
+    <%= f.text_field :intake_type %>
+  </div>
+  <div class="field">
+    <%= f.label :intake_motors %><br>
+    <%= f.number_field :intake_motors %>
+  </div>
+  <div class="field">
+    <%= f.label :intake_motor_type %><br>
+    <%= f.text_field :intake_motor_type %>
+  </div>
+  <div class="field">
+    <%= f.label :intake_flip_capacity %><br>
+    <%= f.text_field :intake_flip_capacity %>
+  </div>
+  <div class="field">
+    <%= f.label :lift %><br>
+    <%= f.text_field :lift %>
+  </div>
+  <div class="field">
+    <%= f.label :lift_motors %><br>
+    <%= f.number_field :lift_motors %>
+  </div>
+  <div class="field">
+    <%= f.label :lift_elevation %><br>
+    <%= f.text_field :lift_elevation %>
+  </div>
+  <div class="field">
+    <%= f.label :lift_works %><br>
+    <%= f.text_field :lift_works %>
+  </div>
+  <div class="field">
+    <%= f.label :driver_consistency %><br>
+    <%= f.text_field :driver_consistency %>
+  </div>
+  <div class="field">
+    <%= f.label :driver_intelligence %><br>
+    <%= f.text_field :driver_intelligence %>
+  </div>
+  <div class="field">
+    <%= f.label :preloads_capacity %><br>
+    <%= f.text_field :preloads_capacity %>
+  </div>
+  <div class="field">
+    <%= f.label :shooter_consistency %><br>
+    <%= f.text_field :shooter_consistency %>
+  </div>
+  <div class="field">
+    <%= f.label :shooter_range %><br>
+    <%= f.text_field :shooter_range %>
+  </div>
+  <div class="field">
+    <%= f.label :autonomous_strategy %><br>
+    <%= f.text_field :autonomous_strategy %>
+  </div>
+  <div class="field">
+    <%= f.label :autonomous_preload_points %><br>
+    <%= f.number_field :autonomous_preload_points %>
+  </div>
+  <div class="field">
+    <%= f.label :autonomous_field_points %><br>
+    <%= f.number_field :autonomous_field_points %>
+  </div>
+  <div class="field">
+    <%= f.label :autonomous_reliability %><br>
+    <%= f.text_field :autonomous_reliability %>
+  </div>
+  <div class="field">
+    <%= f.label :stalling %><br>
+    <%= f.text_field :stalling %>
+  </div>
+  <div class="field">
+    <%= f.label :connection_issues %><br>
+    <%= f.text_field :connection_issues %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

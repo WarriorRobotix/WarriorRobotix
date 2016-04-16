@@ -1,0 +1,87 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Scouting Entries</h1>
+
+<table style="overflow:scroll;display:block;">
+  <thead>
+    <tr>
+      <th>Team stat</th>
+      <th>Member</th>
+      <th>Extra note</th>
+      <th>Drive motors</th>
+      <th>Drive motor type</th>
+      <th>Drive wheels</th>
+      <th>Drive wheel type</th>
+      <th>Drive configuration</th>
+      <th>Drive clearance</th>
+      <th>Shooter type</th>
+      <th>Shooter motors</th>
+      <th>Shooter rpm</th>
+      <th>Intake type</th>
+      <th>Intake motors</th>
+      <th>Intake motor type</th>
+      <th>Intake flip capacity</th>
+      <th>Lift</th>
+      <th>Lift motors</th>
+      <th>Lift elevation</th>
+      <th>Lift works</th>
+      <th>Driver consistency</th>
+      <th>Driver intelligence</th>
+      <th>Preloads capacity</th>
+      <th>Shooter consistency</th>
+      <th>Shooter range</th>
+      <th>Autonomous strategy</th>
+      <th>Autonomous preload points</th>
+      <th>Autonomous field points</th>
+      <th>Autonomous reliability</th>
+      <th>Stalling</th>
+      <th>Connection issues</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @scouting_entries.each do |scouting_entry| %>
+      <tr>
+        <td><%= scouting_entry.team_stat %></td>
+        <td><%= scouting_entry.member %></td>
+        <td><%= scouting_entry.extra_note %></td>
+        <td><%= scouting_entry.drive_motors %></td>
+        <td><%= scouting_entry.drive_motor_type %></td>
+        <td><%= scouting_entry.drive_wheels %></td>
+        <td><%= scouting_entry.drive_wheel_type %></td>
+        <td><%= scouting_entry.drive_configuration %></td>
+        <td><%= scouting_entry.drive_clearance %></td>
+        <td><%= scouting_entry.shooter_type %></td>
+        <td><%= scouting_entry.shooter_motors %></td>
+        <td><%= scouting_entry.shooter_rpm %></td>
+        <td><%= scouting_entry.intake_type %></td>
+        <td><%= scouting_entry.intake_motors %></td>
+        <td><%= scouting_entry.intake_motor_type %></td>
+        <td><%= scouting_entry.intake_flip_capacity %></td>
+        <td><%= scouting_entry.lift %></td>
+        <td><%= scouting_entry.lift_motors %></td>
+        <td><%= scouting_entry.lift_elevation %></td>
+        <td><%= scouting_entry.lift_works %></td>
+        <td><%= scouting_entry.driver_consistency %></td>
+        <td><%= scouting_entry.driver_intelligence %></td>
+        <td><%= scouting_entry.preloads_capacity %></td>
+        <td><%= scouting_entry.shooter_consistency %></td>
+        <td><%= scouting_entry.shooter_range %></td>
+        <td><%= scouting_entry.autonomous_strategy %></td>
+        <td><%= scouting_entry.autonomous_preload_points %></td>
+        <td><%= scouting_entry.autonomous_field_points %></td>
+        <td><%= scouting_entry.autonomous_reliability %></td>
+        <td><%= scouting_entry.stalling %></td>
+        <td><%= scouting_entry.connection_issues %></td>
+        <td><%= link_to 'Show', scouting_entry %></td>
+        <td><%= link_to 'Edit', edit_scouting_entry_path(scouting_entry) %></td>
+        <td><%= link_to 'Destroy', scouting_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Scouting entry', new_scouting_entry_path %>
