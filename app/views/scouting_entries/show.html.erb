@@ -2,12 +2,12 @@
 
 <p>
   <strong>Team stat:</strong>
-  <%= @scouting_entry.team_stat %>
+  <%= @scouting_entry.team_stat&.number %>
 </p>
 
 <p>
   <strong>Member:</strong>
-  <%= @scouting_entry.member %>
+  <%= @scouting_entry.member&.full_name %>
 </p>
 
 <p>

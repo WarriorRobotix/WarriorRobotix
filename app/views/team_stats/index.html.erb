@@ -1,8 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Team Stats</h1>
-
-<table style="overflow:scroll;display:block;">
+<style>
+  table {
+    overflow: scroll;
+    display: block;
+  }
+  th {
+    min-width: 120px;
+  }
+</style>
+<table>
   <thead>
     <tr>
       <th><%= sortable "number" %></th>

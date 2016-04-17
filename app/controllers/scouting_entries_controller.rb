@@ -7,7 +7,15 @@ class ScoutingEntriesController < ApplicationController
   # GET /scouting_entries
   # GET /scouting_entries.json
   def index
+    @fetched_at = Time.zone.now
     @scouting_entries = ScoutingEntry.all
+
+    if params[:after].present?
+      after = Time.zone.parse(params[:after])
+      if after.present?
+        @scouting_entries = @scouting_entries.where("updated_at > ?", after)
+      end
+    end
   end
 
   # GET /scouting_entries/1
@@ -28,6 +36,11 @@ class ScoutingEntriesController < ApplicationController
   # POST /scouting_entries.json
   def create
     @scouting_entry = ScoutingEntry.new(scouting_entry_params)
+    @scouting_entry.member_id = current_member&.id || 67
+
+    if params[:team_stat_number].present? && !params[:team_stat_id].present?
+      @scouting_entry.team_stat = TeamStat.where(number: params[:team_stat_number]).take
+    end
 
     respond_to do |format|
       if @scouting_entry.save
@@ -37,6 +50,49 @@ class ScoutingEntriesController < ApplicationController
         format.html { render :new }
         format.json { render json: @scouting_entry.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # POST /scouting_entries/mass.json
+  def mass
+    scouting_entries = JSON.parse params[:scouting_entries]
+    success = true
+    number_of_success = 0
+    number_of_failure = 0
+
+    scouting_entries.each do |entry|
+      member_id = current_member&.id || 67
+
+      if entry.key? "team_stat_id"
+        team_stat_id = entry["team_stat_id"]
+      elsif entry.key? "team_stat_number"
+        team_stat_id = TeamStat.where(number: entry["team_stat_number"]).take&.id
+      end
+
+      unless team_stat_id.present?
+        number_of_failure += 1
+        logger.error "ScoutingEntry Error params:#{entry} errors:Invalid or empty team_stat_id/team_stat_number"
+        success = false
+        next
+      end
+
+      acceptable_attribute_set = Set.new(acceptable_attributes)
+      entry.keep_if { |k,v| acceptable_attribute_set.include? k.to_sym }
+
+      scouting_entry = ScoutingEntry.find_or_create_by(team_stat_id: team_stat_id, member_id: member_id)
+      scouting_entry.attributes = entry
+
+      if scouting_entry.save
+        number_of_success += 1
+      else
+        number_of_failure += 1
+        logger.error "ScoutingEntry Error params:#{entry} errors:#{scouting_entry.errors.full_messages.join(' ')}"
+        success = false
+      end
+    end
+
+    respond_to do |format|
+      format.all { render json: {success: success, number_of_success:number_of_success, number_of_failure: number_of_failure} }
     end
   end
 
@@ -72,7 +128,11 @@ class ScoutingEntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def scouting_entry_params
-      params.require(:scouting_entry).permit(:team_stat_id, :member_id, :extra_note, :rating, :drive_motors, :drive_motor_type, :drive_wheels, :drive_wheel_type, :drive_configuration, :drive_clearance, :shooter_type, :shooter_motors, :shooter_rpm, :intake_type, :intake_motors, :intake_motor_type, :intake_flip_capacity,
-      :lift, :lift_motors, :lift_elevation, :lift_works, :driver_consistency, :driver_intelligence, :preloads_capacity, :shooter_consistency, :shooter_range, :autonomous_strategy, :autonomous_preload_points, :autonomous_field_points, :autonomous_reliability, :stalling, :connection_issues)
+      params.require(:scouting_entry).permit(acceptable_attributes)
+    end
+
+    def acceptable_attributes
+      [:team_stat_id, :member_id, :extra_note, :rating, :drive_motors, :drive_motor_type, :drive_wheels, :drive_wheel_type, :drive_configuration, :drive_clearance, :shooter_type, :shooter_motors, :shooter_rpm, :intake_type, :intake_motors, :intake_motor_type, :intake_flip_capacity,
+      :lift, :lift_motors, :lift_elevation, :lift_works, :driver_consistency, :driver_intelligence, :preloads_capacity, :shooter_consistency, :shooter_range, :autonomous_strategy, :autonomous_preload_points, :autonomous_field_points, :autonomous_reliability, :stalling, :connection_issues]
     end
 end

@@ -31,7 +31,7 @@ module SessionsHelper
         cookies.delete :mtk
       end
 
-    elsif params[:api].present? && params[:identifier].present? && params[:password].present?
+    elsif params[:identifier].present? && params[:password].present? && controller_name != "sessions"
       if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", params[:identifier], params[:identifier]).take.try(:authenticate, params[:password])
         return signin_member(member)
       end

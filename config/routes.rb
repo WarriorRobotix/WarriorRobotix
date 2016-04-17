@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :scouting_entries
+  resources :scouting_entries do
+    collection do
+      post '/mass' => 'scouting_entries#mass'
+    end
+  end
   resources :divisions
   resources :team_stats
   root 'pages#home'

@@ -1,8 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Scouting Entries</h1>
-
-<table style="overflow:scroll;display:block;">
+<style>
+  table {
+    overflow: scroll;
+    display: block;
+  }
+  th {
+    min-width: 120px;
+  }
+</style>
+<table>
   <thead>
     <tr>
       <th>Team stat</th>
@@ -44,9 +52,10 @@
   <tbody>
     <% @scouting_entries.each do |scouting_entry| %>
       <tr>
-        <td><%= scouting_entry.team_stat %></td>
-        <td><%= scouting_entry.member %></td>
+        <td><%= scouting_entry.team_stat&.number %></td>
+        <td><%= scouting_entry.member&.full_name %></td>
         <td><%= scouting_entry.extra_note %></td>
+        <td><%= scouting_entry.rating %></td>
         <td><%= scouting_entry.drive_motors %></td>
         <td><%= scouting_entry.drive_motor_type %></td>
         <td><%= scouting_entry.drive_wheels %></td>
