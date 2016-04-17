@@ -12,7 +12,9 @@ class TeamStatsController < ApplicationController
     @fetched_at = Time.zone.now
     @team_stats = TeamStat.includes(:division)
 
-    if params[:after].present? || params[:team_numbers].present?
+    if params[:team_numbers] == ""
+      @team_stats = TeamStat.includes(:division).none
+    elsif params[:team_numbers].present?
       after = Time.zone.parse(params[:after] || "")
       if after.present?
         @team_stats = @team_stats.where("( updated_at > ? ) OR ( number IN (?) )", after, ( params[:team_numbers] || "" ).split(".") )
