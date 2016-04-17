@@ -9,16 +9,23 @@ class TeamStatsController < ApplicationController
   # GET /team_stats
   # GET /team_stats.json
   def index
+    @fetched_at = Time.zone.now
     @team_stats = TeamStat.includes(:division)
 
-    if params[:number].present?
+    if params[:after].present? || params[:team_numbers].present?
+      after = Time.zone.parse(params[:after] || "")
+      if after.present?
+        @team_stats = @team_stats.where("( updated_at > ? ) OR ( number IN (?) )", after, ( params[:team_numbers] || "" ).split(".") )
+      else
+        @team_stats = @team_stats.where(number: (params[:team_numbers] || "" ).split(".") )
+      end
+    elsif params[:number].present?
       @team_stats = @team_stats.where(number: params[:number])
     elsif params[:division_id].present?
       @team_stats = @team_stats.where(division_id: params[:division_id])
     elsif params[:like].present?
       @team_stats = @team_stats.where("\"team_stats\".\"number\" LIKE ?", "%#{params[:like]}%")
     end
-
 
     @team_stats = @team_stats.order(sort_column + " " + sort_direction).all
 
