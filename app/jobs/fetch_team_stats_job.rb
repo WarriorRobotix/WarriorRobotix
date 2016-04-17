@@ -7,7 +7,7 @@ class FetchTeamStatsJob < ActiveJob::Base
     teams = Hash.new
 
     fetch_vex_worlds_teams().each_with_index do |raw_team, index|
-        teams[raw_team["number"]] = raw_team.merge({"robot_score" => 0, "robot_rank" => 500, "programming_score" => 0, "programming_rank" => 500, "actual_order" => index})
+        teams[raw_team["number"]] = raw_team.merge({"robot_score" => 0, "robot_rank" => 5000, "programming_score" => 0, "programming_rank" => 5000, "actual_order" => index})
     end
     logger.info "Successfully fetched #{teams.count} teams from vexdb.io"
 
@@ -34,7 +34,7 @@ class FetchTeamStatsJob < ActiveJob::Base
     logger.info "Successfully fetched top 500 programming skills teams from vexdb.io"
 
     ActiveRecord::Base.logger.silence do
-      TeamStat.update_all(actual_order: nil)
+      TeamStat.all.update_all(actual_order: nil)
       teams.each do |team_number, raw_team|
         team = TeamStat.find_or_create_by(number: raw_team["number"])
 
@@ -89,7 +89,7 @@ private
          type: type,
          season: "Nothing But Net",
          season_rank: "true",
-         limit_number: "500"
+         limit_number: "5000"
        }
     }
 
