@@ -9,7 +9,7 @@ class TeamStatsController < ApplicationController
   # GET /team_stats
   # GET /team_stats.json
   def index
-    @fetched_at = Time.zone.now
+    @fetched_at = Time.zone.now.to_i.to_s
     @team_stats = TeamStat.includes(:division)
 
     if params[:team_numbers] == ""
