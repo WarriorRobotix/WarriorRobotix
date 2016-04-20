@@ -7,7 +7,7 @@ class ScoutingEntriesController < ApplicationController
   # GET /scouting_entries
   # GET /scouting_entries.json
   def index
-    @fetched_at = Time.zone.now.to_i.to_s
+    @fetched_at = Time.zone.now.to_s
     @scouting_entries = ScoutingEntry.all
 
     if params[:after].present?
