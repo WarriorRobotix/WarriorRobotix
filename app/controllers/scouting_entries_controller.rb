@@ -53,9 +53,9 @@ class ScoutingEntriesController < ApplicationController
     end
   end
 
-  # POST /scouting_entries/mass.json
+  # POST-JSON /scouting_entries/mass.json
   def mass
-    scouting_entries = JSON.parse params[:scouting_entries]
+    scouting_entries = params["scouting_entries"]
     success = true
     number_of_success = 0
     number_of_failure = 0
@@ -76,11 +76,11 @@ class ScoutingEntriesController < ApplicationController
         next
       end
 
-      acceptable_attribute_set = Set.new(acceptable_attributes)
+      acceptable_attribute_set = Set.new(acceptable_attributes) - Set.new([:team_stat_id, :member_id])
       entry.keep_if { |k,v| acceptable_attribute_set.include? k.to_sym }
 
       scouting_entry = ScoutingEntry.find_or_create_by(team_stat_id: team_stat_id, member_id: member_id)
-      scouting_entry.attributes = entry
+      scouting_entry.attributes = entry.symbolize_keys
 
       if scouting_entry.save
         number_of_success += 1
