@@ -1,9 +1,9 @@
 class DivisionsController < ApplicationController
-  before_action :set_division, only: [:show, :edit, :update, :destroy]
+  before_action :set_division, only: [:edit, :update, :destroy]
 
   skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_admin!
-  
+
   # GET /divisions
   # GET /divisions.json
   def index
@@ -13,6 +13,7 @@ class DivisionsController < ApplicationController
   # GET /divisions/1
   # GET /divisions/1.json
   def show
+    @division = Division.includes(:team_stats).find(params[:id])
   end
 
   # GET /divisions/new

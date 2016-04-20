@@ -8,7 +8,7 @@ class ScoutingEntriesController < ApplicationController
   # GET /scouting_entries.json
   def index
     @fetched_at = Time.zone.now.to_s
-    @scouting_entries = ScoutingEntry.all
+    @scouting_entries = ScoutingEntry.includes(:team_stat).all
 
     if params[:after].present?
       after = Time.zone.parse(params[:after])
