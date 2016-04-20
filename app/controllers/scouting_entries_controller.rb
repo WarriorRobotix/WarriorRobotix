@@ -56,6 +56,12 @@ class ScoutingEntriesController < ApplicationController
   # POST-JSON /scouting_entries/mass.json
   def mass
     scouting_entries = params["scouting_entries"]
+
+    if scouting_entries == nil
+      render json: {success: false}
+      return
+    end
+
     success = true
     number_of_success = 0
     number_of_failure = 0
