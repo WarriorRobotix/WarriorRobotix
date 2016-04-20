@@ -1,8 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  team_stat_id: 
-  member_id: 
+  team_stat_id:
+  member_id:
   drive_motors: 1
   drive_motor_type: MyString
   drive_wheels: 1
@@ -22,7 +22,7 @@ one:
   lift_works: MyString
   driver_consistency: MyString
   driver_intelligence: MyString
-  preloads_capacity: MyString
+  preloads_capacity: 1
   shooter_consistency: MyString
   shooter_range: MyString
   autonomous_strategy: MyString
@@ -33,8 +33,8 @@ one:
   connection_issues: MyString
 
 two:
-  team_stat_id: 
-  member_id: 
+  team_stat_id:
+  member_id:
   drive_motors: 1
   drive_motor_type: MyString
   drive_wheels: 1
@@ -54,7 +54,7 @@ two:
   lift_works: MyString
   driver_consistency: MyString
   driver_intelligence: MyString
-  preloads_capacity: MyString
+  preloads_capacity: 1
   shooter_consistency: MyString
   shooter_range: MyString
   autonomous_strategy: MyString
