@@ -65,6 +65,7 @@ class ScoutingEntriesController < ApplicationController
     success = true
     number_of_success = 0
     number_of_failure = 0
+    scouting_entry_ids = []
 
     scouting_entries.each do |entry|
       member_id = current_member&.id || 67
@@ -77,6 +78,7 @@ class ScoutingEntriesController < ApplicationController
 
       unless team_stat_id.present?
         number_of_failure += 1
+        scouting_entry_ids.append(nil)
         logger.error "ScoutingEntry Error params:#{entry} errors:Invalid or empty team_stat_id/team_stat_number"
         success = false
         next
@@ -90,15 +92,17 @@ class ScoutingEntriesController < ApplicationController
 
       if scouting_entry.save
         number_of_success += 1
+        scouting_entry_ids.append(scouting_entry.id)
       else
         number_of_failure += 1
+        scouting_entry_ids.append(nil)
         logger.error "ScoutingEntry Error params:#{entry} errors:#{scouting_entry.errors.full_messages.join(' ')}"
         success = false
       end
     end
 
     respond_to do |format|
-      format.all { render json: {success: success, number_of_success:number_of_success, number_of_failure: number_of_failure} }
+      format.all { render json: {success: success, number_of_success:number_of_success, number_of_failure: number_of_failure, scouting_entry_ids: scouting_entry_ids} }
     end
   end
 
