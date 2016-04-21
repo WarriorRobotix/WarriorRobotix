@@ -2,7 +2,3 @@ json.extract! @scouting_entry, :id, :team_stat_id, :member_id, :extra_note, :rat
 
 json.team_stat_number @scouting_entry.team_stat&.number
 json.member_name @scouting_entry.member&.full_name
-
-json.team_stat do
-  json.extract! @scouting_entry.team_stat, :id, :number
-end

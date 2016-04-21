@@ -4,8 +4,4 @@ json.array!(@scouting_entries) do |scouting_entry|
   json.team_stat_number scouting_entry.team_stat&.number
   json.member_name scouting_entry.member&.full_name
   json.fetched_at @fetched_at
-
-  json.team_stat do
-    json.extract! scouting_entry.team_stat, :id, :number
-  end
 end
