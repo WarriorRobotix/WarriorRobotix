@@ -3,7 +3,8 @@ class ScoutingEntriesController < ApplicationController
 
   skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_admin!
-
+  before_action :authenticate_member!
+  
   # GET /scouting_entries
   # GET /scouting_entries.json
   def index

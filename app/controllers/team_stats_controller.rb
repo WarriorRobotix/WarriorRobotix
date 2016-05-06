@@ -5,7 +5,8 @@ class TeamStatsController < ApplicationController
 
   skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_admin!
-
+  before_action :authenticate_member!
+  
   # GET /team_stats
   # GET /team_stats.json
   def index

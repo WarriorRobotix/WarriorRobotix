@@ -3,7 +3,8 @@ class DivisionsController < ApplicationController
 
   skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_admin!
-
+  before_action :authenticate_member!
+  
   # GET /divisions
   # GET /divisions.json
   def index
