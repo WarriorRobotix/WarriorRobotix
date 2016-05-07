@@ -12,9 +12,9 @@ class Member < ActiveRecord::Base
 
   validates :grade, presence: true
 
-  validates :email, presence: true, uniqueness: false, format: { with: /\A.+@.+\.[^\.]+\z/, message: "format is invalid" }
+  validates :email, presence: true, uniqueness: true, format: { with: /\A.+@.+\.[^\.]+\z/, message: "format is invalid" }
 
-  validates :student_number, presence: true, uniqueness: false, numericality: { only_integer: true }
+  validates :student_number, presence: true, uniqueness: true, numericality: { only_integer: true }
 
   validate :extra_info_fields
   validate :admin_must_accpeted

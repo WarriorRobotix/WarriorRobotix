@@ -37,7 +37,7 @@ class RegistrationsController < ApplicationController
           end
         end
       end
-      if @member.valid?
+      if @member.save
         render :confirmation
       elsif @old_member
         @form = params[:form].to_unsafe_h
