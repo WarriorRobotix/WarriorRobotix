@@ -1,0 +1,15 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Members") do |sheet|
+  sheet.add_row ["Full name", "Total Attendances", "Total Hours", "Grade", "Team", "Student number", "Email" ]
+  @current_members.each do |member|
+    sheet.add_row [
+      member.full_name,
+      member.attendances.count,
+      number_with_precision(member.attendances.sum(:duration_float), precision: 2),
+      member.grade,
+      member.team&.name || "N/A",
+      member.student_number,
+      member.email
+    ]
+  end
+end

@@ -6,14 +6,9 @@ class AttendancesController < ApplicationController
   # GET members/1/attendances
   # GET members/1/attendances.json
   def index
-    @attendances = @member.attendances.where.not(status: 0).order(start_at: :ASC).all
+    @attendances = @member.includes(:team).attendances.where.not(status: 0).order(start_at: :ASC).all
 
-    @total_hours = 0.0
-    @attendances.each do |attendance|
-      @total_hours += attendance.duration_float
-    end
-    @total_hours /= 3600.0
-
+    @total_hours = @attendances.sum(:duration_float)
   end
 
   # GET members/1/attendances/1

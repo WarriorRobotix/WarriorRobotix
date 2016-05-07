@@ -8,6 +8,10 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
+    if params[:format] == "xlsx"
+      authenticate_admin!
+    end
+
     @current_members = Member.where(graduated_year: nil).order(team_id: :ASC,first_name: :ASC, last_name: :ASC).all
     if member_is_admin?
       @pending_members = Member.unscoped.where(accepted: false).all

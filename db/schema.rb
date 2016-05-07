@@ -11,18 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420045801) do
+ActiveRecord::Schema.define(version: 20160506231950) do
 
   create_table "attendances", force: :cascade do |t|
-    t.integer  "member_id",              null: false
+    t.integer  "member_id",                    null: false
     t.integer  "event_id"
-    t.integer  "status",     default: 0, null: false
-    t.integer  "reply",      default: 0, null: false
+    t.integer  "status",         default: 0,   null: false
+    t.integer  "reply",          default: 0,   null: false
     t.datetime "start_at"
     t.datetime "end_at"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "duration"
+    t.float    "duration_float", default: 0.0, null: false
   end
 
   add_index "attendances", ["event_id"], name: "index_attendances_on_event_id"

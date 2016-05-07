@@ -1,10 +1,19 @@
 <h3 class="flow-text"><%= local_assigns[:title] || "Members" %></h3>
 <% if local_assigns[:display_show_attend] %>
-<% if local_assigns[:show_attend] %>
-<%= link_to "Show email", members_path %>
-<% else %>
-<%= link_to "Show monthly attendances history", members_path(show: :attend) %>
-<% end %>
+<table style="width:100%">
+  <tr>
+    <td class="left-align">
+      <% if local_assigns[:show_attend] %>
+      <%= link_to "Show email", members_path %>
+      <% else %>
+      <%= link_to "Show attendances history", members_path(show: :attend) %>
+      <% end %>
+    </td>
+    <td class="right-align">
+      <%= link_to "Download excel spreadsheet", members_path(format: :xlsx) %>
+    </td>
+  </tr>
+</table>
 <% end %>
 <div class="card-panel" style="padding:10px;">
   <table class="centered except-last">
@@ -15,6 +24,8 @@
         <th class="hide-on-small-only">Grade</th>
         <% if member_is_admin? %>
         <% if local_assigns[:show_attend] %>
+        <th class="hide-on-med-and-down">Total Count</th>
+        <th class="hide-on-med-and-down">Total Hours</th>
         <th class="hide-on-med-and-down">Last month</th>
         <th class="hide-on-med-and-down">This month</th>
         <% else %>
@@ -22,7 +33,9 @@
         <% end %>
         <th class="hide-on-med-and-down">Student Number</th>
         <th></th>
+        <% unless local_assigns[:show_attend]  %>
         <th colspan="2" class="hide-on-med-and-down"></th>
+        <% end %>
         <% end %>
       </tr>
     </thead>
@@ -36,14 +49,12 @@
           <% else %>
           <td style="padding-bottom:25px;"><%= member.full_name %></td>
           <% end %>
-          <% if !member.team_id.nil? %>
-          <td><%= Team.find(member.team_id).name %></td>
-          <% else %>
-          <td>N/A</td>
-          <% end %>
+          <td><%= member.team&.name || "N/A" %></td>
           <td class="hide-on-small-only"><%= member.grade %></td>
           <% if member_is_admin? %>
           <% if local_assigns[:show_attend]  %>
+          <td class="hide-on-med-and-down"><%= member.attendances.count %></td>
+          <td class="hide-on-med-and-down"><%= number_with_precision member.attendances.sum(:duration_float), precision: 2 %> hrs</td>
           <td class="hide-on-med-and-down"><%= @last_month_attendances[member.id] || 0 %></td>
           <td class="hide-on-med-and-down"><%= @this_month_attendances[member.id] || 0 %></td>
           <% else %>
@@ -51,8 +62,10 @@
           <% end %>
           <td class="hide-on-med-and-down"><%= member.student_number %></td>
           <td><%= link_to 'today', member_attendances_path(member), class: 'material-icons' %></td>
+          <% unless local_assigns[:show_attend]  %>
           <td class="hide-on-med-and-down"><%= link_to 'create', edit_member_path(member), class: 'material-icons' %></td>
           <td class="hide-on-med-and-down"><%= link_to 'delete', member, method: :delete, class: 'material-icons', data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
           <% end %>
         </tr>
         <% end %>

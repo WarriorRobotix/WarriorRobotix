@@ -1,6 +1,8 @@
 <h1 class="flow-text">Listing Attendances</h1>
 
 <div class="card-panel">
+<p><strong>Total Hours:</strong> <%= number_with_precision @total_hours, precision: 2 %> hrs</p>
+<p><strong>Number of Attendances:</strong> <%= @attendances.count %></p>
 <table>
   <thead>
     <tr>

@@ -63,6 +63,9 @@ gem 'griddler-sendgrid'
 # Use rest-client for API communication with other web services
 gem 'rest-client', require: 'rest-client'
 
+# Use axlsx for xlsx generation
+gem 'axlsx_rails'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
