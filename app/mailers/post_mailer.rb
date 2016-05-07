@@ -25,14 +25,16 @@ class PostMailer < ApplicationMailer
   private
   def mail_list
     post = @post || @event || @poll
+
+    list = []
     if post.everyone? || post.member?
-      Member.all.pluck(:email)
+      list = Member.all.pluck(:email)
     elsif post.limited?
-      Member.joins('INNER JOIN "posts_teams" ON "posts_teams"."team_id" = "members"."team_id"').where('"posts_teams"."post_id" = ?', post.id).pluck(:email)
+      list = Member.joins('INNER JOIN "posts_teams" ON "posts_teams"."team_id" = "members"."team_id"').where('"posts_teams"."post_id" = ?', post.id).pluck(:email)
     elsif post.admin?
-      Member.where(admin: true).all.pluck(:email)
-    else
-      []
+      list = Member.where(admin: true).all.pluck(:email)
     end
+
+    list.reject {|email| email.end_with? "@4659warriors.com" }
   end
 end
