@@ -1,12 +1,13 @@
 class AttendancesController < ApplicationController
   before_action :set_attendance, only: [:show, :edit, :update, :destroy]
-  before_action :set_member, except: [:checkout_all, :checkin_group, :checkout_group, :center, :check_in, :check_out, :set_check_in]
+  before_action :set_member, except: [:index, :checkout_all, :checkin_group, :checkout_group, :center, :check_in, :check_out, :set_check_in]
   before_action :authenticate_admin!
 
   # GET members/1/attendances
   # GET members/1/attendances.json
   def index
-    @attendances = @member.includes(:team).attendances.where.not(status: 0).order(start_at: :ASC).all
+    @member = Member.includes(:team).find(params[:member_id])
+    @attendances = @member.attendances.where.not(status: 0).order(start_at: :ASC).all
 
     @total_hours = @attendances.sum(:duration_float)
   end
@@ -19,7 +20,7 @@ class AttendancesController < ApplicationController
   # GET members/1/attendances/new
   def new
     @attendance = Attendance.new
-    @attendance.status = :attending
+    @attendance.status = :attended
   end
 
   # GET members/1/attendances/1/edit
@@ -126,7 +127,7 @@ class AttendancesController < ApplicationController
 
     respond_to do |format|
       if @attendance.save
-        format.html { redirect_to [@member, @attendance], notice: 'Attendance was successfully created.' }
+        format.html { redirect_to member_attendances_path(@member), notice: 'Attendance was successfully created.' }
         format.json { render :show, status: :created, location: @attendance }
       else
         format.html { render :new }
