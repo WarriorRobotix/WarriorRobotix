@@ -32,6 +32,10 @@
 </div>
 <% end %>
 <% end %>
+<div class="home-join-us center-align">
+  <h5 class="flow-text">Become a member!</h5>		
+  <%= link_to 'Register', register_path, class: 'btn' %>
+</div>
 <% cache(['home', @latest_posts.unscope(:select).maximum(:updated_at)&.utc&.to_s(:nsec)]) do %>
 <br>
 <div class="row">
