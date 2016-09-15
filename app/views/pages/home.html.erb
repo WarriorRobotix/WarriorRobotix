@@ -35,7 +35,7 @@
 <div class="home-join-us center-align">
   <h5 class="flow-text">Become a member!</h5>
   <%= link_to 'Register', "https://goo.gl/forms/FPYGFZGbArLweWKo2", class: 'btn' %>
-  <%= link_to 'Download Form', "RoboticsRules.docx", class: 'btn' %>
+  <a href="RoboticsRules.docx" download class = "btn">Download Form</a>
 </div>
 <% cache(['home', @latest_posts.unscope(:select).maximum(:updated_at)&.utc&.to_s(:nsec)]) do %>
 <br>
