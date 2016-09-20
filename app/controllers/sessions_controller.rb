@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
     respond_to do |format|
       flag = true
       if identifier.present? && password.present?
-        if member = Member.where("(student_number = ? AND graduated_year IS NULL) OR email = ?", identifier, identifier).take.try(:authenticate, password)
+        if member = Member.unscoped.where(accepted: true).where("student_number = ? OR email = ?", identifier, identifier).take.try(:authenticate, password)
           signin_member(member)
           cookies.permanent[:mtk] = "#{member.id}$#{member.remember_token}" if params[:remember_me] == '1'
           format.html { redirect_back notice: "You have successfully signed in" }

@@ -13,7 +13,7 @@ module SessionsHelper
 
     elsif member_id = session[:member_id]
       @current_member = Rails.cache.fetch("member/id/#{member_id}", :expires_in => 5.minutes) do
-        Member.find_by(:id => member_id)
+        Member.unscoped.find_by(:id => member_id)
       end
       unless @current_member.nil?
         return @current_member
