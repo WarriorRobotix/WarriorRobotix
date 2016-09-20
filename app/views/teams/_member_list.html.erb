@@ -1,0 +1,18 @@
+<div id="team<%= team_id %>" class="col s12">
+  <% if (image_link.nil? || image_link.empty?) %>
+  <br>
+  <% else %>
+  <div class="col s12 m6 offset-m3 center-align vertical-margin-40">
+    <%= image_tag image_link, class: "materialboxed hover responsive-img" %>
+  </div>
+  <% end %>
+  <% members.each do |member| %>
+  <div class="col s10 m6 l4 offset-s1 center-align">
+    <div class="card">
+      <div class="card-content">
+        <h5 class="member-names"><%= member.full_name %></h5>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

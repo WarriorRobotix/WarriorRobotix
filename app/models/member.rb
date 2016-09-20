@@ -29,7 +29,7 @@ class Member < ActiveRecord::Base
 
   belongs_to :team, touch: true
 
-  default_scope { where(accepted: true) }
+  default_scope { where(accepted: true, graduated_year: nil) }
 
   attr_accessor :reset_password_token
   attr_accessor :old_password

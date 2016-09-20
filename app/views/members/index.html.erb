@@ -12,6 +12,6 @@
 <%= render('pending_members_table', members: @pending_members, title: 'Pending Members') if @pending_members.present? %>
 <% end %>
 <% cache(['graduated_members',@graduated_members.count,@graduated_members.maximum(:updated_at)&.utc&.to_s(:nsec)]) do %>
-<%= render('members_table', members: @graduated_members, title: 'Graduated Members') if @graduated_members.present? %>
+<%= render('members_table', members: @graduated_members, title: 'Graduated Members', show_graduated_year: true) if @graduated_members.present? %>
 <% end %>
 <% end %>

@@ -21,7 +21,11 @@
       <tr>
         <th style="padding-bottom:27px;">Full Name<%= raw(' (<i class="small material-icons inline">supervisor_account</i> admin)') if member_is_admin? %></th>
         <th>Team</th>
+        <% if local_assigns[:show_graduated_year] %>
+        <th class="hide-on-small-only">Graduated</th>
+        <% else %>
         <th class="hide-on-small-only">Grade</th>
+        <% end %>
         <% if member_is_admin? %>
         <% if local_assigns[:show_attend] %>
         <th class="hide-on-med-and-down">Total Count</th>
@@ -50,7 +54,11 @@
           <td style="padding-bottom:25px;"><%= member.full_name %></td>
           <% end %>
           <td><%= member.team&.name || "N/A" %></td>
+          <% if local_assigns[:show_graduated_year] %>
+          <td class="hide-on-small-only"><%= member.graduated_year %></td>
+          <% else %>
           <td class="hide-on-small-only"><%= member.grade %></td>
+          <% end %>
           <% if member_is_admin? %>
           <% if local_assigns[:show_attend]  %>
           <td class="hide-on-med-and-down"><%= member.attendances.count %></td>
