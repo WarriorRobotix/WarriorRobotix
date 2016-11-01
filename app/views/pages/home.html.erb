@@ -9,9 +9,7 @@
             <h3>4659 Warrior Robotix</h3>
             <h5 class="light grey-text text-lighten-3">
               Port Credit<span class="hide-on-small-and-down"> Secondary School</span>
-            </h5>
-             <a href="https://docs.google.com/forms/d/e/1FAIpQLSexA__8wh-0XLbs2fWUgfDKJ8KP3yo2xY0wdx651VkkYdtgmw/viewform">Register</a>
-              
+            </h5>     
           </div>
         </li>
         <li>
@@ -21,7 +19,6 @@
           <%= image_tag 'pages/home/slider_image_2.jpg' %>
           <div class="caption center-align">
             <h3>Vex Worlds Divison Finalist</h3>
-                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSexA__8wh-0XLbs2fWUgfDKJ8KP3yo2xY0wdx651VkkYdtgmw/viewform">Register</a>
           </div>
         </li>
         <li>
@@ -39,9 +36,12 @@
 <% cache(['home', @latest_posts.unscope(:select).maximum(:updated_at)&.utc&.to_s(:nsec)]) do %>
 <br>
 <div class="row">
+  <div class="home-join-us center-align">
+   <h5 class="flow-text">Register for Competition</h5>
+   <%= link_to 'Register', "https://docs.google.com/forms/d/e/1FAIpQLSexA__8wh-0XLbs2fWUgfDKJ8KP3yo2xY0wdx651VkkYdtgmw/viewform", class: 'btn' %>
+  </div>
   <div class="col s12 large-margin-bottom">
     <h5 class="flow-text">Competitions</h5>
-         <a href="https://docs.google.com/forms/d/e/1FAIpQLSexA__8wh-0XLbs2fWUgfDKJ8KP3yo2xY0wdx651VkkYdtgmw/viewform"><button>Register</button></a>
   </div>
   <div class="col s12 m4 l4">
     <div class="card">
