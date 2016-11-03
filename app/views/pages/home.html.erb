@@ -1,15 +1,5 @@
 <% content_for :above_container do %>
 <% cache(action: "home", action_suffix: 'slider') do %>
-<head>
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-</head>
 <div class="row">
     <div class="slider indicators-inside" data-vh-minus="160">
       <ul class="slides">
@@ -45,12 +35,12 @@
 <% cache(['home', @latest_posts.unscope(:select).maximum(:updated_at)&.utc&.to_s(:nsec)]) do %>
 <br>
 <div class="row">
-  <div class="home-join-us">
+  <div class="home-join-us center-align">
    <h5 class="flow-text">Register for Competitions</h5>
-      <div class=".col-sm-5 .col-md-6">
+      <div>
    <%= link_to 'Woburn Collegiate Institute @ November 26', "https://docs.google.com/forms/d/e/1FAIpQLSdq-ZwIxBd8rrXpF2YazPgb0YeC2NhX4LH8vlJsQcwL_7BZsw/viewform", class: 'btn' %>
       </div>
-      <div class=".col-sm-5 .col-sm-offset-2 .col-md-6 .col-md-offset-0">
+      <div>
    <%= link_to 'St. Catharines @ December 10', "https://docs.google.com/forms/d/e/1FAIpQLSdq-ZwIxBd8rrXpF2YazPgb0YeC2NhX4LH8vlJsQcwL_7BZsw/viewform", class: 'btn' %>
       </div>
       
