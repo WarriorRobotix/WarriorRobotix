@@ -35,10 +35,15 @@
 <% cache(['home', @latest_posts.unscope(:select).maximum(:updated_at)&.utc&.to_s(:nsec)]) do %>
 <br>
 <div class="row">
-  <div class="home-join-us" style=" -webkit-column-count:2">
+  <div class="home-join-us">
    <h5 class="flow-text">Register for Competition</h5>
+      <div style=" -webkit-column-count:2">
    <%= link_to 'Register Now', "https://docs.google.com/forms/d/e/1FAIpQLSdq-ZwIxBd8rrXpF2YazPgb0YeC2NhX4LH8vlJsQcwL_7BZsw/viewform", class: 'btn' %>
-  </div>
+      </div>
+      <div style=" -webkit-column-count:2">
+   <%= link_to 'Register Now', "https://docs.google.com/forms/d/e/1FAIpQLSdq-ZwIxBd8rrXpF2YazPgb0YeC2NhX4LH8vlJsQcwL_7BZsw/viewform", class: 'btn' %>
+      </div>
+      </div>
   <div class="col s12 large-margin-bottom">
     <h5 class="flow-text">Competitions</h5>
   </div>
