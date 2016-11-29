@@ -10,6 +10,16 @@ admin.save!
 admins << admin
 
 admin = Member.new(admin: true)
+admin.first_name = 'super'
+admin.last_name = 'user'
+admin.email = 'super.user@example.com'
+admin.grade = 12
+admin.student_number = '777'
+admin.password = '123456'
+admin.save!
+admins << admin
+
+admin = Member.new(admin: true)
 admin.first_name = 'Edward'
 admin.last_name = 'Guo'
 admin.email = 'edward.guo@example.com'
